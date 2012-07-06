@@ -7,6 +7,8 @@
 //
 
 #import "FTAppDelegate.h"
+#import "FTMasterViewController.h"
+#import "FTCollegeListViewController.h"
 
 @implementation FTAppDelegate
 
@@ -14,14 +16,36 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+@synthesize navigationController = _navigationController;
+@synthesize splitViewController = _splitViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+        self.window.rootViewController = self.navigationController;
+        masterViewController.managedObjectContext = self.managedObjectContext;
+    } else {
+        FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+        
+        FTCollegeListViewController *detailViewController = [[FTCollegeListViewController alloc] init];
+        UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    	
+    	masterViewController.detailViewController = detailViewController;
+        
+        self.splitViewController = [[UISplitViewController alloc] init];
+        //SET THE DELEGATE OF SPLITVIEWCONTROLLER HERE
+        self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
+        
+        self.window.rootViewController = self.splitViewController;
+        masterViewController.managedObjectContext = self.managedObjectContext;
+    }
     [self.window makeKeyAndVisible];
-    return YES;
+    
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
