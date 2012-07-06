@@ -39,18 +39,18 @@
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7B62667F15A75DDF00A5879C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7B62668115A75DDF00A5879C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		7B62668515A75DDF00A5879C /* The College App-Info.plist */ = {isa = PBXFileReference; path = "The College App-Info.plist"; sourceTree = "<group>"; };
+		7B62668515A75DDF00A5879C /* The College App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "The College App-Info.plist"; sourceTree = "<group>"; };
 		7B62668715A75DDF00A5879C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B62668915A75DDF00A5879C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7B62668B15A75DDF00A5879C /* The College App-Prefix.pch */ = {isa = PBXFileReference; path = "The College App-Prefix.pch"; sourceTree = "<group>"; };
-		7B62668C15A75DDF00A5879C /* FTAppDelegate.h */ = {isa = PBXFileReference; path = FTAppDelegate.h; sourceTree = "<group>"; };
+		7B62668B15A75DDF00A5879C /* The College App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The College App-Prefix.pch"; sourceTree = "<group>"; };
+		7B62668C15A75DDF00A5879C /* FTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
 		7B62668D15A75DDF00A5879C /* FTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTAppDelegate.m; sourceTree = "<group>"; };
 		7B62669015A75DDF00A5879C /* The_College_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_College_App.xcdatamodel; sourceTree = "<group>"; };
 		7B62669715A75DDF00A5879C /* The College AppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The College AppTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62669815A75DDF00A5879C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		7B6266A115A75DDF00A5879C /* The College AppTests-Info.plist */ = {isa = PBXFileReference; path = "The College AppTests-Info.plist"; sourceTree = "<group>"; };
+		7B6266A115A75DDF00A5879C /* The College AppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "The College AppTests-Info.plist"; sourceTree = "<group>"; };
 		7B6266A315A75DDF00A5879C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7B6266A515A75DDF00A5879C /* The_College_AppTests.h */ = {isa = PBXFileReference; path = The_College_AppTests.h; sourceTree = "<group>"; };
+		7B6266A515A75DDF00A5879C /* The_College_AppTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = The_College_AppTests.h; sourceTree = "<group>"; };
 		7B6266A615A75DDF00A5879C /* The_College_AppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = The_College_AppTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
