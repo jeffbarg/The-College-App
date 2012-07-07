@@ -16,6 +16,7 @@
 		7B51E37115A8E2B0002F2A2E /* toparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B62672915A7781A00A5879C /* toparrow.png */; };
 		7B51E37515A8EAE1002F2A2E /* gradessinglecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */; };
 		7B51E37915A8EDD6002F2A2E /* gradecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E37815A8EDD6002F2A2E /* gradecell.png */; };
+		7B51E37B15A8EF43002F2A2E /* backbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E37A15A8EF43002F2A2E /* backbutton.png */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -107,6 +108,7 @@
 		7B51E36E15A8DD0A002F2A2E /* cumulativegpa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cumulativegpa.png; sourceTree = "<group>"; };
 		7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradessinglecell.png; sourceTree = "<group>"; };
 		7B51E37815A8EDD6002F2A2E /* gradecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradecell.png; sourceTree = "<group>"; };
+		7B51E37A15A8EF43002F2A2E /* backbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backbutton.png; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -405,6 +407,7 @@
 		7B6266D915A76B4800A5879C /* Standard UI */ = {
 			isa = PBXGroup;
 			children = (
+				7B51E37A15A8EF43002F2A2E /* backbutton.png */,
 				7B51E36515A8CAF1002F2A2E /* cancel.png */,
 				7B51E36615A8CAF1002F2A2E /* cancelactive.png */,
 				7B51E36715A8CAF1002F2A2E /* save.png */,
@@ -633,6 +636,7 @@
 				7B51E36F15A8DD0A002F2A2E /* cumulativegpa.png in Resources */,
 				7B51E37515A8EAE1002F2A2E /* gradessinglecell.png in Resources */,
 				7B51E37915A8EDD6002F2A2E /* gradecell.png in Resources */,
+				7B51E37B15A8EF43002F2A2E /* backbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -63,6 +63,8 @@
     [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancelactive.png"] forState:UIControlStateHighlighted    barMetrics:UIBarMetricsDefault];
 
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"backbutton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 14.0, 0.0, 5.0)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    
     self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
@@ -247,6 +249,8 @@
     
     if ([newViewController class] == [self.detailViewController class])
         newViewController = self.detailViewController;
+    
+    if (newViewController == nil) return;
     
     if (INTERFACE_IS_PAD) {        
         UINavigationController *viewNavigationController = [[UINavigationController alloc] initWithRootViewController:newViewController];
