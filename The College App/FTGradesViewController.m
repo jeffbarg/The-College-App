@@ -333,6 +333,15 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        
+        CGRect bounds = cell.backgroundView.bounds;
+        CGRect imgViewRect = CGRectZero;
+        imgViewRect.origin = CGPointZero;
+        imgViewRect.size = bounds.size;
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
+        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        cell.backgroundView = imgView;
+        
     }
     
     cell.backgroundColor = [UIColor colorWithRed:0.890 green:0.918 blue:0.933 alpha:1.000];
@@ -354,30 +363,20 @@
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:indexPath.section];
     
     if (indexPath.row == 0) {
-        CGRect bounds = cell.backgroundView.bounds;
-        CGRect imgViewRect = CGRectZero;
-        imgViewRect.origin = CGPointZero;
-        imgViewRect.size = bounds.size;
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        [imgView setImage:[[UIImage imageNamed:@"gradestopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
-        //[cell.contentView addSubview:imgView];
-        cell.backgroundView = imgView;
-        
-        NSLog(@"%f", cell.backgroundView.frame.size.height);
+        UIImageView *imgView = (UIImageView *) cell.backgroundView;
+        if (indexPath.row == [sectionInfo numberOfObjects] - 1) {
+            [imgView setImage:[[UIImage imageNamed:@"gradessinglecell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
+        } else {
+            [imgView setImage:[[UIImage imageNamed:@"gradestopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];    
+        }
         
     } else if (indexPath.row == [sectionInfo numberOfObjects] - 1) {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"gradesbottomcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
-        //[cell.contentView addSubview:imgView];
-        cell.backgroundView = imgView;
+
     } else {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"gradecell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)]];
-        //[cell.contentView addSubview:imgView];
-        cell.backgroundView = imgView;
     }
     
     Grade *cellGrade = (Grade *)[self.fetchedResultsController objectAtIndexPath:indexPath];

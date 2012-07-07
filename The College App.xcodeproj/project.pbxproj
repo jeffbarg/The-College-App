@@ -14,6 +14,7 @@
 		7B51E36F15A8DD0A002F2A2E /* cumulativegpa.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36E15A8DD0A002F2A2E /* cumulativegpa.png */; };
 		7B51E37015A8E2A2002F2A2E /* popover.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B62672A15A7781A00A5879C /* popover.png */; };
 		7B51E37115A8E2B0002F2A2E /* toparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B62672915A7781A00A5879C /* toparrow.png */; };
+		7B51E37515A8EAE1002F2A2E /* gradessinglecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -104,6 +105,7 @@
 		7B51E36715A8CAF1002F2A2E /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
 		7B51E36815A8CAF1002F2A2E /* saveactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveactive.png; sourceTree = "<group>"; };
 		7B51E36E15A8DD0A002F2A2E /* cumulativegpa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cumulativegpa.png; sourceTree = "<group>"; };
+		7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradessinglecell.png; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -519,6 +521,7 @@
 				7B51E36E15A8DD0A002F2A2E /* cumulativegpa.png */,
 				7B97BD2015A7C14D00EF7906 /* gradeshadow.png */,
 				7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */,
+				7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */,
 				7B97BD2215A7C14D00EF7906 /* gradestopcell.png */,
 				7B97BD2315A7C14D00EF7906 /* aphonors.png */,
 				7B97BD2415A7C14D00EF7906 /* aphonorsactive.png */,
@@ -629,6 +632,7 @@
 				7B51E36B15A8CAF1002F2A2E /* save.png in Resources */,
 				7B51E36C15A8CAF1002F2A2E /* saveactive.png in Resources */,
 				7B51E36F15A8DD0A002F2A2E /* cumulativegpa.png in Resources */,
+				7B51E37515A8EAE1002F2A2E /* gradessinglecell.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
