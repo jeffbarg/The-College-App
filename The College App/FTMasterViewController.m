@@ -64,6 +64,7 @@
     [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancelactive.png"] forState:UIControlStateHighlighted    barMetrics:UIBarMetricsDefault];
 
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"backbutton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 14.0, 0.0, 5.0)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"backselect.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 14.0, 0.0, 5.0)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     
     self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
