@@ -146,6 +146,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 @synthesize editing = _editing;
 @synthesize enableEditOnLongPress;
 @synthesize disableEditOnEmptySpaceTap;
+@synthesize allowsHorizontalReordering;
 
 @synthesize itemsSubviewsCacheIsValid = _itemsSubviewsCacheIsValid;
 @synthesize itemSubviewsCache;
@@ -247,8 +248,10 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     self.style = GMGridViewStyleSwap;
     self.minimumPressDuration = 0.2;
     self.showFullSizeViewWithAlphaWhenTransforming = YES;
+    self.allowsHorizontalReordering = YES;
     self.minEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
     self.clipsToBounds = NO;
+    
     
     _sortFuturePosition = GMGV_INVALID_POSITION;
     _itemSize = CGSizeZero;
@@ -613,7 +616,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
                 [self.sortingDelegate GMGridView:self updatedMovingCell:_sortMovingItem withGestureRecognizer: panGesture];
             }
             
-            _sortMovingItem.transform = CGAffineTransformMakeTranslation(offset.x, offset.y);
+            _sortMovingItem.transform = CGAffineTransformMakeTranslation(allowsHorizontalReordering?offset.x:0.0, offset.y);
             [self sortingMoveDidContinueToPoint:locationInScroll];
             
             break;

@@ -20,7 +20,7 @@
     
 }
 
-@property (nonatomic, strong) UIView *containerView;
+@property (nonatomic, strong) UIScrollView *containerView;
 @property (nonatomic, strong) UIView *headerView;
 
 @property (nonatomic, strong) UITextField *subjectTextField;
@@ -77,6 +77,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //SET UP KEYBOARD NOTIFICATIONS
+    
+    if (INTERFACE_IS_PHONE) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWasShown:)
+                                                     name:UIKeyboardDidShowNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillBeHidden:)
+                                                     name:UIKeyboardWillHideNotification object:nil];
+    }
     
     //SET UP GRADE TO MODIFY
     
@@ -243,7 +255,7 @@
 }
 
 - (void)viewDidLayoutSubviews {
-    [((UIScrollView *) _containerView) setContentSize:CGSizeMake(self.view.frame.size.width, 440.0)];
+    [_containerView setContentSize:CGSizeMake(self.view.frame.size.width, 444.0)];
     
     [_containerView setFrame:self.view.bounds];
     [_headerView setFrame:CGRectMake(-1.0, -1.0, self.view.frame.size.width + 2.0, 61.0)];
@@ -376,6 +388,39 @@
         [_fullCreditButton setTitleColor:textColor forState:UIControlStateNormal];
     }
 }
+
+#pragma mark -
+#pragma mark Keyboard Notifications
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    
+    _containerView.contentInset = contentInsets;
+    _containerView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    //    CGRect aRect = self.view.frame;
+    //    aRect.size.height -= kbSize.height;
+    //    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+    //        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height);
+    //        [scrollView setContentOffset:scrollPoint animated:YES];
+    //    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _containerView.contentInset = contentInsets;
+    _containerView.scrollIndicatorInsets = contentInsets;
+}
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -75,7 +75,7 @@
     _gmGridView.actionDelegate = self;
     _gmGridView.sortingDelegate = self;
     _gmGridView.dataSource = self;
-    
+    _gmGridView.allowsHorizontalReordering = NO;
 
     [self.view addSubview:gmGridView];
     
@@ -170,6 +170,7 @@
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"EXTRACURRICULARS_CACHE"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
+    [self.fetchedResultsController setDelegate:self];
     
 	NSError *error = nil;
 	if (![self.fetchedResultsController performFetch:&error]) {
@@ -181,6 +182,68 @@
     
     return _fetchedResultsController;
 }   
+
+/*
+ NSFetchedResultsController delegate methods to respond to additions, removals and so on.
+ */
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{    
+
+    
+
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+//            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+//            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+
+            
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+}
+
 
 //////////////////////////////////////////////////////////////
 #pragma mark GMGridViewDataSource
@@ -405,9 +468,7 @@
     NSLog(@"%i %i", index1, index2);
     [object1 setIndex:[NSNumber numberWithInteger:index2]];
     [object2 setIndex:[NSNumber numberWithInteger:index1]];    
-    
-    [self.managedObjectContext save:nil];
-    _fetchedResultsController = nil;
+
 }
 
 #pragma mark - Split view

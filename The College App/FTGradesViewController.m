@@ -38,6 +38,7 @@
 {
     [super viewDidLoad];
 
+    self.title = @"Grades";
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -54,6 +55,29 @@
     [addButton setStyle:UIBarButtonItemStylePlain];
     
     [self.navigationItem setRightBarButtonItem:addButton];
+    
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 85.0)];
+    [headerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin];
+    [self.tableView setTableHeaderView:headerView];
+    
+    CGFloat spacing = INTERFACE_IS_PAD? 41.0: 10.0;
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(spacing, 18.0, self.tableView.frame.size.width - 2 * spacing, 54.0)];
+    [imgView setImage:[[UIImage imageNamed:@"cumulativegpa.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
+    [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+
+    [headerView addSubview:imgView];
+    
+    UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(spacing + 10.0, 18.0, self.tableView.frame.size.width - 2 * spacing - 10.0, 54.0)];
+    [headerView setAutoresizingMask: UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin];
+
+    [textLabel setText:@"Your Cumulative GPA is"];
+    [textLabel setTextColor:[UIColor colorWithWhite:0.827 alpha:1.000]];
+    [textLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
+    [textLabel setTextAlignment:UITextAlignmentLeft];
+    [textLabel setBackgroundColor:[UIColor clearColor]];
+    [headerView addSubview:textLabel];
+    
 }
 
 
@@ -118,10 +142,10 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
-    //NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fullCredit" ascending:NO];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"subject" ascending:YES];
+
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, sortDescriptor2, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -161,39 +185,29 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {    
-    UITableView *tableView = self.tableView;
+    /* FOR THIS WHOLE METHOD:
+     
+     TABLEVIEW HAS NOT UPDATED YET - IT IS IN EDITING MODE
+     INDICES FROM TABLEVIEW WILL NOT CHANGE.
+     
+     SELF.MANAGEDOBJECTCONTEXT IS FULLY UP-TO-DATE.  OBJECTS HAVE CORRECT INDICES AFTER DELETION IN COREDATA
+    */
     
-    NSInteger row = indexPath.row;
-    NSInteger section = indexPath.section;
-    NSArray *sections = nil;
-    int sectionsCount = 0;
+    UITableView *tableView = self.tableView;
     
     switch(type) {
             
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            if (newIndexPath.row != 0) {
-                NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:newIndexPath.row - 1 inSection:newIndexPath.section];
-                [self configureCell:[tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
-            }
+            
+            [self configureCellsForInsertion:newIndexPath];
+            
             break;
             
         case NSFetchedResultsChangeDelete:
-
-            sections = [self.fetchedResultsController sections];
-            sectionsCount = [sections count];
             
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            if (row == 0) {
-                if ([tableView numberOfSections] > sectionsCount) return;
-                
-                NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:1 inSection:section];
-                [self configureCell:[self.tableView cellForRowAtIndexPath:firstIndexPath] atIndexPath:indexPath];
-
-            } else {
-                NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:row - 1 inSection:section];
-                [self configureCell:[tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
-            }
+            [self configureCellsForDeletion:indexPath];
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -203,25 +217,42 @@
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            //COMBINATION OF INSERTION AND DELETION
-            if (newIndexPath.row != 0) {
-                NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:newIndexPath.row - 1 inSection:newIndexPath.section];
-                [self configureCell:[tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
-                [[tableView cellForRowAtIndexPath:possibleLastIndexPath] setBackgroundView:nil];
-            }
             
-            if (indexPath.row == 0) {
-                if ([sections count] <= 1) return;
-                id <NSFetchedResultsSectionInfo> sectionInfo = [sections objectAtIndex:indexPath.section];
-                if (sectionInfo == nil) return;
-                
-                NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:1 inSection:section];
-                [self configureCell:[self.tableView cellForRowAtIndexPath:firstIndexPath] atIndexPath:indexPath];
-                
-            } else {
-                NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
-                [self configureCell:[tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
-            }
+            //COMBINATION OF INSERTION AND DELETION
+            
+            //INSERTION
+
+            [self configureCellsForInsertion:newIndexPath];
+            
+//            if (newIndexPath.row == 0) {
+//                if ([tableView numberOfSections] < sectionsCount) return;
+//                
+//                NSIndexPath *secondIndexPath = [NSIndexPath indexPathForRow:1 inSection:newIndexPath.section];
+//                [self configureCell:[tableView cellForRowAtIndexPath:newIndexPath] atIndexPath:secondIndexPath];
+//                
+//            } else {
+//                NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:newIndexPath.row - 1 inSection:newIndexPath.section];
+//                [self configureCell:[tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
+//            }
+                            
+
+            //DELETION
+
+            [self configureCellsForDeletion:indexPath];
+            
+//            sections = [self.fetchedResultsController sections];
+//            sectionsCount = [sections count];
+//            
+//            if (indexPath.row == 0) {
+//                if ([tableView numberOfSections] > sectionsCount) return;
+//
+//                NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:1 inSection:section];
+//                [self configureCell:[self.tableView cellForRowAtIndexPath:firstIndexPath] atIndexPath:indexPath];
+//                
+//            } else {
+//                NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+//                [self configureCell:[tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
+//            }
             
             break;
         default:
@@ -229,6 +260,37 @@
     }
 }
 
+- (void) configureCellsForInsertion:(NSIndexPath *) indexPath {
+    NSArray * sections = [self.fetchedResultsController sections];
+    NSInteger sectionsCount = [sections count];
+    
+    if (indexPath.row == 0) {
+        if ([self.tableView numberOfSections] < sectionsCount) return;
+        
+        NSIndexPath *secondIndexPath = [NSIndexPath indexPathForRow:1 inSection:indexPath.section];
+        [self configureCell:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:secondIndexPath];
+        
+    } else {
+        NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+        [self configureCell:[self.tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
+    }
+}
+
+- (void) configureCellsForDeletion:(NSIndexPath *) indexPath {
+    NSArray * sections = [self.fetchedResultsController sections];
+    NSInteger sectionsCount = [sections count];
+    
+    if (indexPath.row == 0) {
+        if ([self.tableView numberOfSections] > sectionsCount) return;
+        
+        NSIndexPath *firstIndexPath = [NSIndexPath indexPathForRow:1 inSection:indexPath.section];
+        [self configureCell:[self.tableView cellForRowAtIndexPath:firstIndexPath] atIndexPath:indexPath];
+        
+    } else {
+        NSIndexPath * possibleLastIndexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+        [self configureCell:[self.tableView cellForRowAtIndexPath:possibleLastIndexPath] atIndexPath:possibleLastIndexPath];
+    }
+}
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {    

@@ -60,6 +60,9 @@
                                                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset
                                                                       , nil]];
     
+    [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancelactive.png"] forState:UIControlStateHighlighted    barMetrics:UIBarMetricsDefault];
+
     self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
@@ -97,6 +100,13 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        CGRect bounds = cell.backgroundView.bounds;
+        CGRect imgViewRect = CGRectZero;
+        imgViewRect.origin = CGPointZero;
+        imgViewRect.size = bounds.size;
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
+        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        cell.backgroundView = imgView;
     }
     
     //Configure Cell
@@ -139,29 +149,17 @@
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
     
+    
     // Configure the cell...
     if (indexPath.row == 0) {
-        CGRect bounds = cell.backgroundView.bounds;
-        CGRect imgViewRect = CGRectZero;
-        imgViewRect.origin = CGPointZero;
-        imgViewRect.size = bounds.size;
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"navtopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-        cell.backgroundView = imgView;
-        
-        NSLog(@"%f", cell.backgroundView.frame.size.height);
-        
     } else if (indexPath.row == ([tableView numberOfRowsInSection:indexPath.section] - 1)) {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"navbottom.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-        cell.backgroundView = imgView;
     } else {
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:cell.bounds];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"navcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-        cell.backgroundView = imgView;
     }
     
     [cell.textLabel setTextColor:[UIColor colorWithWhite:0.820 alpha:1.000]];
