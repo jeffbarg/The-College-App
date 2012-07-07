@@ -7,6 +7,9 @@
 //
 
 #import "FTMasterViewController.h"
+#import "FTExtracurriclarsViewController.h"
+#import "FTCollegeListViewController.h"
+#import "FTGradesViewController.h"
 
 @interface FTMasterViewController ()
 
@@ -51,8 +54,12 @@
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];    
-    [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.5f green:0.0f blue:0.0f alpha:1.0f]];
-
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor], UITextAttributeTextColor,
+                                                                     [UIColor colorWithWhite:0.1 alpha:1.0], UITextAttributeTextShadowColor,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset
+                                                                      , nil]];
+    
     self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
@@ -164,6 +171,10 @@
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return section == 0? @"My College Profile":@"Colleges";
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -207,13 +218,86 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    UIViewController<UISplitViewControllerDelegate> *newViewController = nil;
+    
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            
+        } else if (indexPath.row == 1) {
+
+        } else if (indexPath.row == 2) {
+            FTExtracurricularsViewController *extracurricularViewController = [[FTExtracurricularsViewController alloc] init];
+            [extracurricularViewController setManagedObjectContext:self.managedObjectContext];
+            
+            newViewController = (UIViewController<UISplitViewControllerDelegate> *) extracurricularViewController;
+            
+        } else if (indexPath.row == 3) {
+            FTGradesViewController *gradesViewController = [[FTGradesViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [gradesViewController setManagedObjectContext:self.managedObjectContext];
+            
+            newViewController = (UIViewController<UISplitViewControllerDelegate> *) gradesViewController;
+        } else {
+            
+        }
+    } else {
+        if (indexPath.row == 0) {
+            
+        } else {
+            
+        }
+    }
+    
+    if ([newViewController class] == [self.detailViewController class])
+        newViewController = self.detailViewController;
+    
+    if (INTERFACE_IS_PAD) {        
+        UINavigationController *viewNavigationController = [[UINavigationController alloc] initWithRootViewController:newViewController];
+        [viewNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
+
+        [self.splitViewController setViewControllers:[NSArray arrayWithObjects:self.navigationController,viewNavigationController, nil]];
+        [self.splitViewController setDelegate:newViewController];
+    } else {
+        [self.navigationController pushViewController:newViewController animated:YES];
+    }
+    
+    newViewController.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
+    
+    self.detailViewController = newViewController;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 34.0f;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger) section {
+    return 0.0f;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
+{
+	// create the parent view that will hold header Label
+	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 34.0)];
+	
+	// create the button object
+	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+	headerLabel.backgroundColor = [UIColor clearColor];
+	headerLabel.opaque = NO;
+	headerLabel.textColor = [UIColor colorWithRed:161.0/255.0 green:161.0/255.0 blue:161.0/255.0 alpha:1.0];
+    headerLabel.shadowColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.08 alpha:1.0];
+    
+	headerLabel.highlightedTextColor = [UIColor whiteColor];
+	headerLabel.font = [UIFont boldSystemFontOfSize:16];
+    headerLabel.shadowOffset = CGSizeMake(0, 1);
+    headerLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0];
+	headerLabel.frame = CGRectMake(20.0, 0.0, 280.0, 34.0);
+    
+	// If you want to align the header text as centered
+	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
+    
+	headerLabel.text = [self tableView:tableView titleForHeaderInSection:section]; // i.e. array element
+	[customView addSubview:headerLabel];
+    
+	return customView;
 }
 
 @end

@@ -11,6 +11,6 @@
 @interface FTMasterViewController : UITableViewController
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) UIViewController *detailViewController;
+@property (nonatomic, strong) UIViewController<UISplitViewControllerDelegate> *detailViewController;
 
 @end

@@ -39,6 +39,8 @@
         
         self.splitViewController = [[UISplitViewController alloc] init];
         //SET THE DELEGATE OF SPLITVIEWCONTROLLER HERE
+        [self.splitViewController setDelegate:detailViewController];
+        
         self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
         
         self.window.rootViewController = self.splitViewController;
@@ -46,6 +48,7 @@
     }
     [self.window makeKeyAndVisible];
     
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

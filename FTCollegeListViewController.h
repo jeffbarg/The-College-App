@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FTCollegeListViewController : UIViewController
+@interface FTCollegeListViewController : UIViewController <UISplitViewControllerDelegate>
 
 @end
