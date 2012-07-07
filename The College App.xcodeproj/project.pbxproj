@@ -15,6 +15,7 @@
 		7B51E37015A8E2A2002F2A2E /* popover.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B62672A15A7781A00A5879C /* popover.png */; };
 		7B51E37115A8E2B0002F2A2E /* toparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B62672915A7781A00A5879C /* toparrow.png */; };
 		7B51E37515A8EAE1002F2A2E /* gradessinglecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */; };
+		7B51E37915A8EDD6002F2A2E /* gradecell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E37815A8EDD6002F2A2E /* gradecell.png */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -75,7 +76,6 @@
 		7B62674515A77FE400A5879C /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62671415A7746400A5879C /* GMGridViewLayoutStrategies.m */; };
 		7B62674615A781D200A5879C /* FTExtracurricularCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62670515A773DC00A5879C /* FTExtracurricularCellView.m */; };
 		7B97BD1D15A7C0A100EF7906 /* FTGradesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B97BD1C15A7C0A100EF7906 /* FTGradesViewController.m */; };
-		7B97BD2915A7C14D00EF7906 /* gradeshadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2015A7C14D00EF7906 /* gradeshadow.png */; };
 		7B97BD2A15A7C14D00EF7906 /* gradesbottomcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */; };
 		7B97BD2B15A7C14D00EF7906 /* gradestopcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2215A7C14D00EF7906 /* gradestopcell.png */; };
 		7B97BD2C15A7C14D00EF7906 /* aphonors.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2315A7C14D00EF7906 /* aphonors.png */; };
@@ -106,6 +106,7 @@
 		7B51E36815A8CAF1002F2A2E /* saveactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saveactive.png; sourceTree = "<group>"; };
 		7B51E36E15A8DD0A002F2A2E /* cumulativegpa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cumulativegpa.png; sourceTree = "<group>"; };
 		7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradessinglecell.png; sourceTree = "<group>"; };
+		7B51E37815A8EDD6002F2A2E /* gradecell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradecell.png; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,7 +191,6 @@
 		7B62673C15A779ED00A5879C /* Extracurricular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Extracurricular.m; sourceTree = "<group>"; };
 		7B97BD1B15A7C0A100EF7906 /* FTGradesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGradesViewController.h; sourceTree = "<group>"; };
 		7B97BD1C15A7C0A100EF7906 /* FTGradesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGradesViewController.m; sourceTree = "<group>"; };
-		7B97BD2015A7C14D00EF7906 /* gradeshadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradeshadow.png; sourceTree = "<group>"; };
 		7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradesbottomcell.png; sourceTree = "<group>"; };
 		7B97BD2215A7C14D00EF7906 /* gradestopcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradestopcell.png; sourceTree = "<group>"; };
 		7B97BD2315A7C14D00EF7906 /* aphonors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aphonors.png; sourceTree = "<group>"; };
@@ -519,10 +519,10 @@
 			isa = PBXGroup;
 			children = (
 				7B51E36E15A8DD0A002F2A2E /* cumulativegpa.png */,
-				7B97BD2015A7C14D00EF7906 /* gradeshadow.png */,
 				7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */,
 				7B51E37415A8EAE1002F2A2E /* gradessinglecell.png */,
 				7B97BD2215A7C14D00EF7906 /* gradestopcell.png */,
+				7B51E37815A8EDD6002F2A2E /* gradecell.png */,
 				7B97BD2315A7C14D00EF7906 /* aphonors.png */,
 				7B97BD2415A7C14D00EF7906 /* aphonorsactive.png */,
 				7B97BD2515A7C14D00EF7906 /* aphonorsactivetapped.png */,
@@ -618,7 +618,6 @@
 				7B62672115A7760C00A5879C /* menu.png in Resources */,
 				7B62672315A7762800A5879C /* menu@2x.png in Resources */,
 				7B62673A15A7785100A5879C /* close_x.png in Resources */,
-				7B97BD2915A7C14D00EF7906 /* gradeshadow.png in Resources */,
 				7B97BD2A15A7C14D00EF7906 /* gradesbottomcell.png in Resources */,
 				7B97BD2B15A7C14D00EF7906 /* gradestopcell.png in Resources */,
 				7B97BD2C15A7C14D00EF7906 /* aphonors.png in Resources */,
@@ -633,6 +632,7 @@
 				7B51E36C15A8CAF1002F2A2E /* saveactive.png in Resources */,
 				7B51E36F15A8DD0A002F2A2E /* cumulativegpa.png in Resources */,
 				7B51E37515A8EAE1002F2A2E /* gradessinglecell.png in Resources */,
+				7B51E37915A8EDD6002F2A2E /* gradecell.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
