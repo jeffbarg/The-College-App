@@ -12,7 +12,8 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface FTAddExtracurricularViewController () {
-    BOOL _saved;
+    NSNumber * _gradesInvolved;
+
 }
 
 @property (nonatomic, strong) UIScrollView *containerView;
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) UITextField *weeksPerYearTextField;
 
 @property (nonatomic, strong) Extracurricular * activity;
+
 
 @end
 
@@ -94,10 +96,8 @@
     
     //SET UP EXTRACURRICULAR TO MODIFY
     
-    self.activity = [NSEntityDescription insertNewObjectForEntityForName:@"Extracurricular" inManagedObjectContext:self.managedObjectContext];
-    [self.activity setGradesInvolved:[NSNumber numberWithInt:0]];
+    _gradesInvolved = [NSNumber numberWithInteger:0];
     
-    _saved = FALSE;
     
     //VIEW BACKGROUND
     
@@ -255,16 +255,6 @@
     
 }
 
-- (void) viewWillDisappear:(BOOL)animated {
-    if (_saved) return;
-    
-    [self.managedObjectContext deleteObject:self.activity];
-    NSError *err = nil;
-    [self.managedObjectContext save:&err];
-    if (err != nil) {
-        NSLog(@"%@", [err localizedDescription]);
-    }   
-}
 
 #pragma mark -
 #pragma mark Buttons
@@ -272,13 +262,13 @@
 - (void) yearButton:(UIButton *) yearButton {
     NSInteger yearMask = 1 << [_yearButtons indexOfObject:yearButton];
     
-    self.activity.gradesInvolved = [NSNumber numberWithInteger:[self.activity.gradesInvolved integerValue] ^ yearMask];
+    _gradesInvolved = [NSNumber numberWithInteger:[_gradesInvolved integerValue] ^ yearMask];
     UIColor *textColor = [UIColor colorWithHue:0.583 saturation:0.049 brightness:0.322 alpha:1.000];
     UIColor *purpleTextColor = [UIColor colorWithRed:0.545 green:0.000 blue:0.694 alpha:1.000];
 
-    NSLog(@"%i", [self.activity.gradesInvolved integerValue]);
+    NSLog(@"%i", [_gradesInvolved integerValue]);
 
-    if ((yearMask & [self.activity.gradesInvolved integerValue]) == 0) {
+    if ((yearMask & [_gradesInvolved integerValue]) == 0) {
         [yearButton setTitleColor:textColor forState:UIControlStateNormal];
     } else {
         [yearButton setTitleColor:purpleTextColor forState:UIControlStateNormal];
@@ -290,7 +280,12 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void) saveEntry:(UIBarButtonItem *) barButtonItem {    
+- (void) saveEntry:(UIBarButtonItem *) barButtonItem { 
+    
+    self.activity = [NSEntityDescription insertNewObjectForEntityForName:@"Extracurricular" inManagedObjectContext:self.managedObjectContext];
+    
+    
+    [self.activity setGradesInvolved:_gradesInvolved];
     [self.activity setName:[_activityTextField text]];
     [self.activity setPosition:[_positionTextField text]];
     [self.activity setWeeks:[NSNumber numberWithInteger:5]];
@@ -317,9 +312,7 @@
     if (err != nil) {
         NSLog(@"%@", [err localizedDescription]);
     }
-    
-    _saved = YES;
-    
+        
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{}];
 }
 

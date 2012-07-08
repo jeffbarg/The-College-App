@@ -13,4 +13,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) UIViewController<UISplitViewControllerDelegate> *detailViewController;
 
+- (void) initializeData;
+
 @end

@@ -12,6 +12,7 @@
 #import "FTExtracurricularCellView.h"
 #import "Extracurricular.h"
 #import "GMGridView.h"
+#import "KSCustomPopoverBackgroundView.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -202,7 +203,7 @@
             
         case NSFetchedResultsChangeInsert:
 //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-
+            [_gmGridView insertObjectAtIndex:newIndexPath.row animated:YES];
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -477,6 +478,7 @@
 {
     barButtonItem.image = [UIImage imageNamed:@"menu.png"];//NSLocalizedString(@"Master", @"Master");
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+    [popoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
     self.masterPopoverController = popoverController;
 }
 

@@ -15,7 +15,10 @@
 
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 
+@property (nonatomic, strong) UILabel *gpaLabel;
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
+- (void) recalculateGPA;
 
 @end
 
@@ -24,6 +27,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize gpaLabel = _gpaLabel;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -62,14 +66,14 @@
     [self.tableView setTableHeaderView:headerView];
     
     CGFloat spacing = INTERFACE_IS_PAD? 41.0: 10.0;
+    
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(spacing, 18.0, self.tableView.frame.size.width - 2 * spacing, 54.0)];
     [imgView setImage:[[UIImage imageNamed:@"cumulativegpa.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
     [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
-
     [headerView addSubview:imgView];
     
     UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(spacing + 10.0, 18.0, self.tableView.frame.size.width - 2 * spacing - 10.0, 54.0)];
-    [headerView setAutoresizingMask: UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin];
+    [headerView setAutoresizingMask: UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
 
     [textLabel setText:@"Your Cumulative GPA is"];
     [textLabel setTextColor:[UIColor colorWithWhite:0.827 alpha:1.000]];
@@ -78,6 +82,20 @@
     [textLabel setBackgroundColor:[UIColor clearColor]];
     [headerView addSubview:textLabel];
     
+    UILabel *gpaLabel = [[UILabel alloc] initWithFrame:CGRectMake(headerView.frame.size.width - spacing - 100.0 - 10.0, 18.0, 100.0, 54.0)];
+    [gpaLabel setAutoresizingMask: UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin];
+    [gpaLabel setText:@"N/A"];
+    [gpaLabel setTextColor:[UIColor colorWithWhite:0.827 alpha:1.000]];
+    [gpaLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
+    [gpaLabel setTextAlignment:UITextAlignmentRight];
+    [gpaLabel setBackgroundColor:[UIColor clearColor]]; 
+    [headerView addSubview:gpaLabel];
+    
+    self.gpaLabel = gpaLabel;
+
+    
+    //SET UP CUMULATIVE DATA "PREFERENCE"
+    [self recalculateGPA];
 }
 
 
@@ -86,6 +104,33 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void) recalculateGPA {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Grade" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *err = nil;
+    
+    NSArray *gradeList = [self.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+    
+    if (err != nil) {
+        NSLog(@"%@", [err localizedDescription]);
+    }
+        
+    CGFloat sum = 0;
+    CGFloat gpaArray[12] = {0.0, 0.0, 1.0, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3,};
+    for (Grade *grade in gradeList) {
+        NSInteger score = [[grade score] integerValue];
+        sum += gpaArray[score + 1];
+        
+    }
+    
+
+    [self.gpaLabel setText:[NSString stringWithFormat:@"%.2f", sum / [gradeList count]]];
+
 }
 
 #pragma mark - 
@@ -202,6 +247,12 @@
             
             [self configureCellsForInsertion:newIndexPath];
             
+            if (INTERFACE_IS_PAD) {
+                if (self.masterPopoverController != nil) {
+                    [self.masterPopoverController dismissPopoverAnimated:YES];
+                }
+            }
+            
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -311,6 +362,8 @@
 {
     // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
     [self.tableView endUpdates];
+    
+    [self recalculateGPA];
 }
 
 #pragma mark - Table view data source

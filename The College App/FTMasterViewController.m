@@ -69,7 +69,8 @@
     self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
-
+    
+    [self initializeData];
 }
 
 - (void)viewDidUnload
@@ -77,6 +78,10 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void) initializeData {
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -168,6 +173,7 @@
     [cell.textLabel setTextColor:[UIColor colorWithWhite:0.820 alpha:1.000]];
     [cell.textLabel setShadowColor:[UIColor blackColor]];
     [cell.textLabel setShadowOffset:CGSizeMake(0, -1)];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }

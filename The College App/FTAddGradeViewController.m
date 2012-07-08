@@ -301,6 +301,8 @@
 }
 
 - (void) saveEntry:(UIBarButtonItem *) barButtonItem { 
+    if (_year == nil) return;
+    
     self.nGrade = [NSEntityDescription insertNewObjectForEntityForName:@"Grade" inManagedObjectContext:self.managedObjectContext];
     
     [self.nGrade setDateCreated:[NSDate date]];
