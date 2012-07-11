@@ -24,6 +24,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameAlias" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="onlineApplicationInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="openAdmissionPolicy" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="readingSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="readingSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>

@@ -8,6 +8,9 @@
 
 #import "FTCollegeCellView.h"
 
+#define X_MARGIN 15
+#define Y_MARGIN 10
+
 @interface FTCollegeCellView () {
     CGGradientRef _backgroundGradient;
 }
@@ -77,19 +80,19 @@
         _locationIndicatorView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _locationIndicatorView.contentMode = UIViewContentModeRight;
         [self addSubview:self.locationIndicatorView];
+    
     }
     return self;
 }
 
 - (void) layoutSubviews {
-    [self.titleLabel    setFrame:CGRectMake(20.0, 7.0f, self.bounds.size.width - 2 * 15.0f, 34.0f)];
+    [self.titleLabel    setFrame:CGRectMake(X_MARGIN, Y_MARGIN, self.bounds.size.width - 2 * 15.0f, 20.0)];
     
-    [self.locationIndicatorView setFrame:CGRectMake(20.0, 26.0, 11.0, 34.0f)];
-    [self.subtitleLabel setFrame:CGRectMake(20.0 + 11.0, 26.0f, self.bounds.size.width - 2 * 15.0f, 34.0f)];
+    [self.locationIndicatorView setFrame:CGRectMake(X_MARGIN, Y_MARGIN + 20.0, 11.0, 20.0)];
+    [self.subtitleLabel setFrame:CGRectMake(X_MARGIN + 11.0, Y_MARGIN + 20.0, self.bounds.size.width - 2 * 15.0f, 20)];
     
     [self.satScore setFrame:CGRectMake(self.frame.size.width - 70.0 - 100.0, 82.0, 100.0, 20.0)];
     [self.actScore setFrame:CGRectMake(self.frame.size.width - 70.0 - 100.0, 97.0, 100.0, 20.0)];
-
 }
 
 

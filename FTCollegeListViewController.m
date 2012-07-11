@@ -9,9 +9,10 @@
 #import "FTCollegeListViewController.h"
 #import "FTCollegeCellView.h"
 #import "KSCustomPopoverBackgroundView.h"
-#import "FTCollegeDetailViewController.h"
+#import "FTCollegeInfoViewController.h"
 #import "College.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FTRangeIndicator.h"
 
 @interface FTCollegeListViewController () {
     NSInteger _lastDeleteItemIndexAsked;   
@@ -111,7 +112,7 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"combinedSATAverage" ascending:NO];
     //NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
@@ -294,12 +295,28 @@
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)index {
     NSLog(@"Did tap at index %d", index);
     
-    FTCollegeDetailViewController *detailViewController = [[FTCollegeDetailViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+    College *school = (College *) [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    FTCollegeInfoViewController *infoViewController = [[FTCollegeInfoViewController alloc] initWithNibName:@"FTCollegeInfoViewController" bundle:[NSBundle mainBundle]];
+    
+    [infoViewController setSchool:school];
+    [infoViewController setManagedObjectContext:self.managedObjectContext];
+    
+    UINavigationController *infoNavController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
+    [infoNavController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
 
-    [navController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
-    [navController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [self presentModalViewController:navController animated:YES];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"modaltab.png"]];
+    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"activetab.png"]];
+
+    [tabBarController setViewControllers:[NSArray arrayWithObjects:infoNavController, nil]];
+    [tabBarController setSelectedViewController:infoNavController];
+    
+    [tabBarController setModalPresentationStyle:UIModalPresentationFormSheet];
+    
+    [self presentModalViewController:tabBarController animated:YES];
+    NSLog(@"%@", [school name]);
+
 }
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView

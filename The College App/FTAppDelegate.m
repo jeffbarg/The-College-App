@@ -54,7 +54,7 @@
     }
     [self.window makeKeyAndVisible];
     
-    [self initializeData];
+    //[self initializeData];
     
     return YES;
 }
@@ -150,6 +150,11 @@
         [school setWritingSAT25:extractIntegerFromDict(@"ic2011.satwr25:VL-SAT Writing 25th percentile score", dict)];
         [school setWritingSAT75:extractIntegerFromDict(@"ic2011.satwr75:VL-SAT Writing 75th percentile score", dict)];
         
+        [school setCalendarSystem:extractStringFromDict(@"ic2011.calsys:VL-Calendar system", dict)];
+        
+        [school setHasROTC:extractBooleanFromDict(@"ic2011.slo5:VL-ROTC", dict)];
+        [school setOpenAdmissionPolicy:extractBooleanFromDict(@"ic2011.openadmp:VL-Open admission policy", dict)];
+        
         NSInteger sum = 0;
         sum += [[school mathSAT25] integerValue] + [[school mathSAT75] integerValue];
         sum += [[school readingSAT25] integerValue] + [[school readingSAT75] integerValue];
@@ -170,6 +175,12 @@ NSNumber * extractIntegerFromDict(NSString *key, NSDictionary * dict) {
     NSInteger val = [[dict valueForKey:key] integerValue];
     return [[NSNumber alloc] initWithInteger:val];
 }
+
+NSNumber * extractBooleanFromDict (NSString *key, NSDictionary * dict) {
+    BOOL val = [[dict valueForKey:key] boolValue];
+    return [[NSNumber alloc] initWithBool:val];
+}
+
 
 NSString * extractStringFromDict(NSString *key, NSDictionary * dict) {
     NSObject *obj = (NSObject *)[dict objectForKey:key];

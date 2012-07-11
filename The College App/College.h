@@ -2,7 +2,7 @@
 //  College.h
 //  The College App
 //
-//  Created by Jeffrey Barg on 7/10/12.
+//  Created by Jeffrey Barg on 7/11/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSNumber * applicationFee;
 @property (nonatomic, retain) NSString * calendarSystem;
 @property (nonatomic, retain) NSString * city;
+@property (nonatomic, retain) NSNumber * combinedSATAverage;
 @property (nonatomic, retain) NSNumber * compositeACT25;
 @property (nonatomic, retain) NSNumber * compositeACT75;
 @property (nonatomic, retain) NSNumber * enrolledMen;
@@ -48,6 +49,6 @@
 @property (nonatomic, retain) NSNumber * writingSAT25;
 @property (nonatomic, retain) NSNumber * writingSAT75;
 @property (nonatomic, retain) NSNumber * zipcode;
-@property (nonatomic, retain) NSNumber * combinedSATAverage;
+@property (nonatomic, retain) NSNumber * openAdmissionPolicy;
 
 @end

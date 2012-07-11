@@ -267,9 +267,9 @@
         UINavigationController *viewNavigationController = [[UINavigationController alloc] initWithRootViewController:newViewController];
         [viewNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
 
+        
         [self.splitViewController setViewControllers:[NSArray arrayWithObjects:self.navigationController,viewNavigationController, nil]];
         [self.splitViewController setDelegate:newViewController];
-    
     } else {
         [self.navigationController pushViewController:newViewController animated:YES];
     }       

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class FTRangeIndicator;
+
 @interface FTCollegeCellView : UIView
 
 @property (nonatomic, strong) UILabel       * titleLabel;
