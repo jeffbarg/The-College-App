@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GMGridView.h"
 
-@interface FTCollegeListViewController : UIViewController <UISplitViewControllerDelegate>
+@interface FTCollegeListViewController : UIViewController <UISplitViewControllerDelegate, NSFetchedResultsControllerDelegate, GMGridViewDataSource, GMGridViewActionDelegate, GMGridViewSortingDelegate>
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+@property (nonatomic) BOOL isCollegeList;
 
 @end

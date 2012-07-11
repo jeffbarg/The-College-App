@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B12D18A15ACE10200DB7E5E /* College.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B12D18915ACE10200DB7E5E /* College.m */; };
+		7B201CF815ACC68600D78D23 /* The_College_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */; };
 		7B51E36915A8CAF1002F2A2E /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36515A8CAF1002F2A2E /* cancel.png */; };
 		7B51E36A15A8CAF1002F2A2E /* cancelactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36615A8CAF1002F2A2E /* cancelactive.png */; };
 		7B51E36B15A8CAF1002F2A2E /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36715A8CAF1002F2A2E /* save.png */; };
@@ -26,6 +28,22 @@
 		7B51E38E15A9009F002F2A2E /* grades.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38615A9009F002F2A2E /* grades.png */; };
 		7B51E38F15A9009F002F2A2E /* nearme.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38715A9009F002F2A2E /* nearme.png */; };
 		7B51E39015A9009F002F2A2E /* standardized.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38815A9009F002F2A2E /* standardized.png */; };
+		7B51E5A015AA4C46002F2A2E /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266DD15A76BB200A5879C /* NSObject+SBJson.m */; };
+		7B51E5A115AA4C46002F2A2E /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E015A76BB200A5879C /* SBJsonParser.m */; };
+		7B51E5A215AA4C46002F2A2E /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E215A76BB200A5879C /* SBJsonStreamParser.m */; };
+		7B51E5A315AA4C46002F2A2E /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E415A76BB200A5879C /* SBJsonStreamParserAccumulator.m */; };
+		7B51E5A415AA4C46002F2A2E /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E615A76BB200A5879C /* SBJsonStreamParserAdapter.m */; };
+		7B51E5A515AA4C46002F2A2E /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E815A76BB200A5879C /* SBJsonStreamParserState.m */; };
+		7B51E5A615AA4C46002F2A2E /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266EA15A76BB200A5879C /* SBJsonStreamWriter.m */; };
+		7B51E5A715AA4C46002F2A2E /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266EC15A76BB200A5879C /* SBJsonStreamWriterAccumulator.m */; };
+		7B51E5A815AA4C46002F2A2E /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266EE15A76BB200A5879C /* SBJsonStreamWriterState.m */; };
+		7B51E5A915AA4C46002F2A2E /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266F015A76BB200A5879C /* SBJsonTokeniser.m */; };
+		7B51E5AA15AA4C46002F2A2E /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266F215A76BB200A5879C /* SBJsonUTF8Stream.m */; };
+		7B51E5AB15AA4C46002F2A2E /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266F415A76BB200A5879C /* SBJsonWriter.m */; };
+		7B51E5E715AB2A92002F2A2E /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E5E615AB2A92002F2A2E /* more.png */; };
+		7B51E5E915AB2A99002F2A2E /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E5E815AB2A99002F2A2E /* web.png */; };
+		7B51E5EB15AB2AAE002F2A2E /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E5EA15AB2AAE002F2A2E /* view.png */; };
+		7B51E5F315AB357B002F2A2E /* FTCollegeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -33,7 +51,6 @@
 		7B62668815A75DDF00A5879C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B62668615A75DDF00A5879C /* InfoPlist.strings */; };
 		7B62668A15A75DDF00A5879C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62668915A75DDF00A5879C /* main.m */; };
 		7B62668E15A75DDF00A5879C /* FTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62668D15A75DDF00A5879C /* FTAppDelegate.m */; };
-		7B62669115A75DDF00A5879C /* The_College_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B62668F15A75DDF00A5879C /* The_College_App.xcdatamodeld */; };
 		7B62669915A75DDF00A5879C /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62669815A75DDF00A5879C /* SenTestingKit.framework */; };
 		7B62669A15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62669B15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
@@ -85,6 +102,10 @@
 		7B62674415A77FE400A5879C /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62671215A7746400A5879C /* GMGridViewCell.m */; };
 		7B62674515A77FE400A5879C /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62671415A7746400A5879C /* GMGridViewLayoutStrategies.m */; };
 		7B62674615A781D200A5879C /* FTExtracurricularCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62670515A773DC00A5879C /* FTExtracurricularCellView.m */; };
+		7B75DEBE15AC83CC005A4233 /* collegedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEBD15AC83CC005A4233 /* collegedata.json */; };
+		7B75DEC815AC8F1A005A4233 /* FTCollegeDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B75DEC715AC8F1A005A4233 /* FTCollegeDetailViewController.m */; };
+		7B75DECA15AC91DA005A4233 /* modaltab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEC915AC91DA005A4233 /* modaltab.png */; };
+		7B75DED615ACB0E5005A4233 /* shitty.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DED515ACB0E5005A4233 /* shitty.png */; };
 		7B97BD1D15A7C0A100EF7906 /* FTGradesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B97BD1C15A7C0A100EF7906 /* FTGradesViewController.m */; };
 		7B97BD2A15A7C14D00EF7906 /* gradesbottomcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */; };
 		7B97BD2B15A7C14D00EF7906 /* gradestopcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2215A7C14D00EF7906 /* gradestopcell.png */; };
@@ -110,6 +131,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B12D18815ACE10200DB7E5E /* College.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = College.h; sourceTree = "<group>"; };
+		7B12D18915ACE10200DB7E5E /* College.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = College.m; sourceTree = "<group>"; };
+		7B201CF715ACC68600D78D23 /* The_College_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_College_App.xcdatamodel; sourceTree = "<group>"; };
 		7B51E36515A8CAF1002F2A2E /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		7B51E36615A8CAF1002F2A2E /* cancelactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelactive.png; sourceTree = "<group>"; };
 		7B51E36715A8CAF1002F2A2E /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
@@ -127,6 +151,11 @@
 		7B51E38615A9009F002F2A2E /* grades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grades.png; sourceTree = "<group>"; };
 		7B51E38715A9009F002F2A2E /* nearme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearme.png; sourceTree = "<group>"; };
 		7B51E38815A9009F002F2A2E /* standardized.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standardized.png; sourceTree = "<group>"; };
+		7B51E5E615AB2A92002F2A2E /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		7B51E5E815AB2A99002F2A2E /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
+		7B51E5EA15AB2AAE002F2A2E /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
+		7B51E5F115AB357B002F2A2E /* FTCollegeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeCellView.h; sourceTree = "<group>"; };
+		7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeCellView.m; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -138,7 +167,6 @@
 		7B62668B15A75DDF00A5879C /* The College App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "The College App-Prefix.pch"; sourceTree = "<group>"; };
 		7B62668C15A75DDF00A5879C /* FTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FTAppDelegate.h; sourceTree = "<group>"; };
 		7B62668D15A75DDF00A5879C /* FTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FTAppDelegate.m; sourceTree = "<group>"; };
-		7B62669015A75DDF00A5879C /* The_College_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_College_App.xcdatamodel; sourceTree = "<group>"; };
 		7B62669715A75DDF00A5879C /* The College AppTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "The College AppTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62669815A75DDF00A5879C /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		7B6266A115A75DDF00A5879C /* The College AppTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "The College AppTests-Info.plist"; sourceTree = "<group>"; };
@@ -209,6 +237,11 @@
 		7B62673915A7785100A5879C /* close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_x.png; sourceTree = "<group>"; };
 		7B62673B15A779EC00A5879C /* Extracurricular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Extracurricular.h; sourceTree = "<group>"; };
 		7B62673C15A779ED00A5879C /* Extracurricular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Extracurricular.m; sourceTree = "<group>"; };
+		7B75DEBD15AC83CC005A4233 /* collegedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedata.json; sourceTree = "<group>"; };
+		7B75DEC615AC8F1A005A4233 /* FTCollegeDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeDetailViewController.h; sourceTree = "<group>"; };
+		7B75DEC715AC8F1A005A4233 /* FTCollegeDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeDetailViewController.m; sourceTree = "<group>"; };
+		7B75DEC915AC91DA005A4233 /* modaltab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modaltab.png; sourceTree = "<group>"; };
+		7B75DED515ACB0E5005A4233 /* shitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shitty.png; sourceTree = "<group>"; };
 		7B97BD1B15A7C0A100EF7906 /* FTGradesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGradesViewController.h; sourceTree = "<group>"; };
 		7B97BD1C15A7C0A100EF7906 /* FTGradesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGradesViewController.m; sourceTree = "<group>"; };
 		7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradesbottomcell.png; sourceTree = "<group>"; };
@@ -267,6 +300,18 @@
 			name = Glyphish;
 			sourceTree = "<group>";
 		};
+		7B51E5E415AB2945002F2A2E /* College Search / View */ = {
+			isa = PBXGroup;
+			children = (
+				7B75DED515ACB0E5005A4233 /* shitty.png */,
+				7B75DEC915AC91DA005A4233 /* modaltab.png */,
+				7B51E5E815AB2A99002F2A2E /* web.png */,
+				7B51E5E615AB2A92002F2A2E /* more.png */,
+				7B51E5EA15AB2AAE002F2A2E /* view.png */,
+			);
+			name = "College Search / View";
+			sourceTree = "<group>";
+		};
 		7B62666C15A75DDF00A5879C = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +367,7 @@
 		7B62668415A75DDF00A5879C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7B75DEBD15AC83CC005A4233 /* collegedata.json */,
 				7B62668515A75DDF00A5879C /* The College App-Info.plist */,
 				7B62668615A75DDF00A5879C /* InfoPlist.strings */,
 				7B62668915A75DDF00A5879C /* main.m */,
@@ -352,6 +398,7 @@
 		7B6266B015A75E9E00A5879C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				7B51E5E415AB2945002F2A2E /* College Search / View */,
 				7B97BD1E15A7C10D00EF7906 /* Grade View */,
 				7B6266D915A76B4800A5879C /* Standard UI */,
 				7B6266CB15A7616C00A5879C /* Master Navigation View */,
@@ -381,6 +428,10 @@
 			children = (
 				7B6266CC15A7635F00A5879C /* FTCollegeListViewController.h */,
 				7B6266CD15A7635F00A5879C /* FTCollegeListViewController.m */,
+				7B51E5F115AB357B002F2A2E /* FTCollegeCellView.h */,
+				7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */,
+				7B75DEC615AC8F1A005A4233 /* FTCollegeDetailViewController.h */,
+				7B75DEC715AC8F1A005A4233 /* FTCollegeDetailViewController.m */,
 			);
 			name = "College Search / List View";
 			sourceTree = "<group>";
@@ -544,7 +595,9 @@
 		7B62673E15A779F800A5879C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				7B62668F15A75DDF00A5879C /* The_College_App.xcdatamodeld */,
+				7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */,
+				7B12D18815ACE10200DB7E5E /* College.h */,
+				7B12D18915ACE10200DB7E5E /* College.m */,
 				7B97BD3615A7C4B900EF7906 /* Grade.h */,
 				7B97BD3715A7C4B900EF7906 /* Grade.m */,
 				7B62673B15A779EC00A5879C /* Extracurricular.h */,
@@ -681,6 +734,12 @@
 				7B51E38E15A9009F002F2A2E /* grades.png in Resources */,
 				7B51E38F15A9009F002F2A2E /* nearme.png in Resources */,
 				7B51E39015A9009F002F2A2E /* standardized.png in Resources */,
+				7B51E5E715AB2A92002F2A2E /* more.png in Resources */,
+				7B51E5E915AB2A99002F2A2E /* web.png in Resources */,
+				7B51E5EB15AB2AAE002F2A2E /* view.png in Resources */,
+				7B75DEBE15AC83CC005A4233 /* collegedata.json in Resources */,
+				7B75DECA15AC91DA005A4233 /* modaltab.png in Resources */,
+				7B75DED615ACB0E5005A4233 /* shitty.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,6 +776,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B51E5A015AA4C46002F2A2E /* NSObject+SBJson.m in Sources */,
+				7B51E5A115AA4C46002F2A2E /* SBJsonParser.m in Sources */,
+				7B51E5A215AA4C46002F2A2E /* SBJsonStreamParser.m in Sources */,
+				7B51E5A315AA4C46002F2A2E /* SBJsonStreamParserAccumulator.m in Sources */,
+				7B51E5A415AA4C46002F2A2E /* SBJsonStreamParserAdapter.m in Sources */,
+				7B51E5A515AA4C46002F2A2E /* SBJsonStreamParserState.m in Sources */,
+				7B51E5A615AA4C46002F2A2E /* SBJsonStreamWriter.m in Sources */,
+				7B51E5A715AA4C46002F2A2E /* SBJsonStreamWriterAccumulator.m in Sources */,
+				7B51E5A815AA4C46002F2A2E /* SBJsonStreamWriterState.m in Sources */,
+				7B51E5A915AA4C46002F2A2E /* SBJsonTokeniser.m in Sources */,
+				7B51E5AA15AA4C46002F2A2E /* SBJsonUTF8Stream.m in Sources */,
+				7B51E5AB15AA4C46002F2A2E /* SBJsonWriter.m in Sources */,
 				7B97BD3515A7C41F00EF7906 /* FTAddGradeViewController.m in Sources */,
 				7B62674615A781D200A5879C /* FTExtracurricularCellView.m in Sources */,
 				7B62674115A77FE400A5879C /* UIGestureRecognizer+GMGridViewAdditions.m in Sources */,
@@ -728,13 +799,16 @@
 				7B62673F15A77E9D00A5879C /* FTAddExtracurricularViewController.m in Sources */,
 				7B62668A15A75DDF00A5879C /* main.m in Sources */,
 				7B62668E15A75DDF00A5879C /* FTAppDelegate.m in Sources */,
-				7B62669115A75DDF00A5879C /* The_College_App.xcdatamodeld in Sources */,
 				7B6266CA15A7614900A5879C /* FTMasterViewController.m in Sources */,
 				7B6266CE15A7635F00A5879C /* FTCollegeListViewController.m in Sources */,
 				7B62670315A76E8400A5879C /* FTExtracurriclarsViewController.m in Sources */,
 				7B62673D15A779ED00A5879C /* Extracurricular.m in Sources */,
 				7B97BD1D15A7C0A100EF7906 /* FTGradesViewController.m in Sources */,
 				7B97BD3815A7C4B900EF7906 /* Grade.m in Sources */,
+				7B51E5F315AB357B002F2A2E /* FTCollegeCellView.m in Sources */,
+				7B75DEC815AC8F1A005A4233 /* FTCollegeDetailViewController.m in Sources */,
+				7B201CF815ACC68600D78D23 /* The_College_App.xcdatamodeld in Sources */,
+				7B12D18A15ACE10200DB7E5E /* College.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,12 +1009,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7B62668F15A75DDF00A5879C /* The_College_App.xcdatamodeld */ = {
+		7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				7B62669015A75DDF00A5879C /* The_College_App.xcdatamodel */,
+				7B201CF715ACC68600D78D23 /* The_College_App.xcdatamodel */,
 			);
-			currentVersion = 7B62669015A75DDF00A5879C /* The_College_App.xcdatamodel */;
+			currentVersion = 7B201CF715ACC68600D78D23 /* The_College_App.xcdatamodel */;
 			path = The_College_App.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

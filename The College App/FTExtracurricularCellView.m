@@ -273,7 +273,7 @@
     UIColor* color2 = [UIColor colorWithRed: 0.68 green: 0.73 blue: 0.77 alpha: 1];
     UIColor* gradientColor = [UIColor colorWithRed: 0.95 green: 0.98 blue: 0.98 alpha: 1];
     UIColor* color3 = [UIColor colorWithRed: 0.56 green: 0.58 blue: 0.59 alpha: 1];
-    UIColor* gradeIndicatorColor = [UIColor colorWithHue:0.771 saturation:1.000 brightness:0.765 alpha:0.13];
+    UIColor* gradeIndicatorColor = [UIColor colorWithHue:0.771 saturation:1.000 brightness:0.765 alpha:0.11]; // Purple Glow Color 0.13 Alpha
     UIColor* gradeIndicatorTextColor = [UIColor colorWithHue:0.819 saturation:1.000 brightness:0.416 alpha:1.000];
     UIColor* borderColor = [UIColor colorWithRed: 0.68 green: 0.72 blue: 0.75 alpha: 0.5];
     UIColor* cellIndexColor = [UIColor colorWithHue:0.600 saturation:0.023 brightness:0.835 alpha:1.000];
@@ -291,7 +291,7 @@
                                      (id)[UIColor clearColor].CGColor,
                                      (id)[UIColor clearColor].CGColor,
                                      (id)gradeIndicatorColor.CGColor, nil];
-    CGFloat gradeIndicatorGradientLocations[] = {0, 0.35, 1};
+    CGFloat gradeIndicatorGradientLocations[] = {0, 0.45, 1};
     CGGradientRef gradeIndicatorGradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradeIndicatorColors, gradeIndicatorGradientLocations);
     
     //// Shadow Declarations

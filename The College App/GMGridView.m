@@ -147,6 +147,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 @synthesize enableEditOnLongPress;
 @synthesize disableEditOnEmptySpaceTap;
 @synthesize allowsHorizontalReordering;
+@synthesize allowsAutoscrolling;
 
 @synthesize itemsSubviewsCacheIsValid = _itemsSubviewsCacheIsValid;
 @synthesize itemSubviewsCache;
@@ -249,6 +250,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     self.minimumPressDuration = 0.2;
     self.showFullSizeViewWithAlphaWhenTransforming = YES;
     self.allowsHorizontalReordering = YES;
+    self.allowsAutoscrolling = YES;
     self.minEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
     self.clipsToBounds = NO;
     
@@ -600,7 +602,9 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
         case UIGestureRecognizerStateBegan:
         {            
             _autoScrollActive = YES;
-            //[self sortingAutoScrollMovementCheck];
+            
+            if (self.allowsAutoscrolling)
+                [self sortingAutoScrollMovementCheck];
             
             break;
         }

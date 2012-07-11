@@ -18,6 +18,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+- (void) initializeData;
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UISplitViewController *splitViewController;

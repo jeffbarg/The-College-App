@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="College" representedClassName="College" syncable="YES">
+        <attribute name="admissionsInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="admissionsTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="applicantsTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="applicationFee" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="calendarSystem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="combinedSATAverage" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="compositeACT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="compositeACT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="enrolledMen" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="enrolledTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="enrolledWomen" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="financialAidInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasROTC" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="institutionControl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="internetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mathSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="mathSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="missionStatement" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="missionStatementInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameAlias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="onlineApplicationInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phoneNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="readingSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="readingSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="reportingPeriod" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stateAbbreviation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="streetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalPriceInState" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalPriceOutState" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="tuitionAndFees" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="undergraduatePopulation" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="writingSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="writingSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="zipcode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Extracurricular" representedClassName="Extracurricular" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="gradesInvolved" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
@@ -19,6 +58,7 @@
         <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
+        <element name="College" positionX="160" positionY="192" width="128" height="585"/>
         <element name="Extracurricular" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Grade" positionX="160" positionY="192" width="128" height="135"/>
     </elements>

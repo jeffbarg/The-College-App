@@ -60,8 +60,8 @@
 
 - (void) loadView {
     [super loadView];
-    self.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
-    
+    //self.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
+
     NSInteger spacing = INTERFACE_IS_PHONE ? 0 : 20;
     
     GMGridView *gmGridView = [[GMGridView alloc] initWithFrame:self.view.bounds];
@@ -93,11 +93,16 @@
     [self.navigationItem setRightBarButtonItem:addButton];
     
     _gmGridView.mainSuperView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
+}
 
+- (void) viewDidLayoutSubviews {
+    [_gmGridView setFrame:self.view.bounds];
 }
 
 - (void)viewDidUnload
 {
+    _gmGridView = nil;
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -274,11 +279,12 @@
     {
         if (UIInterfaceOrientationIsLandscape(orientation)) 
         {
-            return CGSizeMake(663.0, 132.0);
+            //return CGSizeMake(663.0, 132.0);
+            return CGSizeMake(983.0, 132.0);
         }
         else
         {
-            return CGSizeMake(718.0, 132.0);
+            return CGSizeMake(728.0, 132.0);
         }
     }
 }

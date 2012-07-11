@@ -9,6 +9,9 @@
 #import "FTAppDelegate.h"
 #import "FTMasterViewController.h"
 #import "FTCollegeListViewController.h"
+#import "SBJson.h"
+
+#import "College.h"
 
 @implementation FTAppDelegate
 
@@ -33,20 +36,25 @@
         UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
         
         FTCollegeListViewController *detailViewController = [[FTCollegeListViewController alloc] init];
+        [detailViewController setManagedObjectContext:self.managedObjectContext];
+        
         UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-    	
+
     	masterViewController.detailViewController = detailViewController;
         
         self.splitViewController = [[UISplitViewController alloc] init];
-        //SET THE DELEGATE OF SPLITVIEWCONTROLLER HERE
+        self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
+
         [self.splitViewController setDelegate:detailViewController];
         
-        self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
         
         self.window.rootViewController = self.splitViewController;
+    
         masterViewController.managedObjectContext = self.managedObjectContext;
     }
     [self.window makeKeyAndVisible];
+    
+    [self initializeData];
     
     return YES;
 }
@@ -93,6 +101,85 @@
     }
 }
 
+#pragma mark - Data Initialization
+
+- (void) initializeData {
+    
+    SBJsonParser *parser = [[SBJsonParser alloc] init];
+    
+    NSError *err = nil;
+    NSString *str = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"collegedata" ofType:@"json"] encoding:NSUTF8StringEncoding error:&err];
+    if(err) {
+        NSLog(@"%@", [err description]);
+    }
+    NSArray *objects = (NSArray *)[parser objectWithString:str];
+    NSLog(@"%@", [objects objectAtIndex:0]);
+    
+    for (NSDictionary *dict in objects) {
+        
+        if ([extractStringFromDict(@"instnm", dict) isEqualToString:@""] || [[dict valueForKey:@"year"] isEqual:@"0"] || [[dict valueForKey:@"year"] isEqual:@""]) continue;
+        
+        if([[extractStringFromDict(@"instnm", dict) stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0) 
+            continue;
+        
+        College *school = [NSEntityDescription insertNewObjectForEntityForName:@"College" inManagedObjectContext:self.managedObjectContext];
+        
+        [school setUndergraduatePopulation:extractIntegerFromDict(@"drvef122011.undupug:VL-12-month unduplicated headcount- undergraduate: 2010-11", dict)];
+        [school setTuitionAndFees:extractIntegerFromDict(@"drvic2011.tufeyr3:VL-Tuition and fees- 2011-12", dict)];
+        [school setStreetAddress:extractStringFromDict(@"hd2011.addr:VL-Street address or post office box", dict)];
+        [school setTotalPriceInState:extractIntegerFromDict(@"drvic2011.cinson:VL-Total price for in-state students living on campus 2011-12", dict)];
+        [school setTotalPriceOutState:extractIntegerFromDict(@"drvic2011.cotson:VL-Total price for out-of-state students living on campus 2011-12", dict)];
+
+        [school setAdmissionsInternetAddress:extractStringFromDict(@"hd2011.adminurl:VL-Admissions office web address", dict)];
+        [school setInternetAddress:extractStringFromDict(@"hd2011.webaddr:VL-Institution^s internet website address", dict)];
+        [school setFinancialAidInternetAddress:extractStringFromDict(@"hd2011.faidurl:VL-Financial aid office web address", dict)];
+        [school setOnlineApplicationInternetAddress:extractStringFromDict(@"hd2011.applurl:VL-Online application web address", dict)];
+        [school setMissionStatementInternetAddress:extractStringFromDict(@"ic2011mission.missionurl:VL-Mission statement URL (if mission statement not provided)", dict)];
+        
+        [school setName:extractStringFromDict(@"instnm", dict)];
+        [school setCity:extractStringFromDict(@"hd2011.city:VL-City location of institution", dict)];
+        [school setStateAbbreviation:extractStringFromDict(@"hd2011.stabbr:VL-State abbreviation", dict)];
+        
+        [school setCompositeACT25:extractIntegerFromDict(@"ic2011.actcm25:VL-ACT Composite 25th percentile score", dict)];
+        [school setCompositeACT75:extractIntegerFromDict(@"ic2011.actcm75:VL-ACT Composite 75th percentile score", dict)];
+        
+        [school setMathSAT25:extractIntegerFromDict(@"ic2011.satmt25:VL-SAT Math 25th percentile score", dict)];
+        [school setMathSAT75:extractIntegerFromDict(@"ic2011.satmt75:VL-SAT Math 75th percentile score", dict)];
+        [school setReadingSAT25:extractIntegerFromDict(@"ic2011.satvr25:VL-SAT Critical Reading 25th percentile score", dict)];
+        [school setReadingSAT75:extractIntegerFromDict(@"ic2011.satvr75:VL-SAT Critical Reading 75th percentile score", dict)];
+        [school setWritingSAT25:extractIntegerFromDict(@"ic2011.satwr25:VL-SAT Writing 25th percentile score", dict)];
+        [school setWritingSAT75:extractIntegerFromDict(@"ic2011.satwr75:VL-SAT Writing 75th percentile score", dict)];
+        
+        NSInteger sum = 0;
+        sum += [[school mathSAT25] integerValue] + [[school mathSAT75] integerValue];
+        sum += [[school readingSAT25] integerValue] + [[school readingSAT75] integerValue];
+        sum += [[school writingSAT25] integerValue] + [[school writingSAT75] integerValue];
+        
+        [school setCombinedSATAverage:[NSNumber numberWithInteger:sum/2]];
+    }
+    
+    err = nil;
+    [self.managedObjectContext save:&err];
+    
+    if (err) {
+        NSLog(@"%@", [err localizedDescription]);
+    }
+}
+
+NSNumber * extractIntegerFromDict(NSString *key, NSDictionary * dict) {
+    NSInteger val = [[dict valueForKey:key] integerValue];
+    return [[NSNumber alloc] initWithInteger:val];
+}
+
+NSString * extractStringFromDict(NSString *key, NSDictionary * dict) {
+    NSObject *obj = (NSObject *)[dict objectForKey:key];
+
+    if (obj == [NSNull null])
+        return @"";
+    
+    return [((NSString *)obj) copy];
+}
+                                                    
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.
@@ -133,6 +220,17 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"The_College_App.sqlite"];
     
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // If the expected store doesn’t exist, copy the default store.
+    if (![fileManager fileExistsAtPath:[storeURL absoluteString]]) {
+
+        
+        //        NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"CoreData" ofType:@"sqlite"];
+//        if (defaultStorePath) {
+//            [fileManager copyItemAtPath:defaultStorePath toPath:[storeURL absoluteString] error:NULL];
+//        }
+    }
+    
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
@@ -159,6 +257,7 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
+
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    

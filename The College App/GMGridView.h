@@ -87,6 +87,7 @@ typedef enum
 @property (nonatomic) BOOL enableEditOnLongPress;                     // Default is NO
 @property (nonatomic) BOOL disableEditOnEmptySpaceTap;                // Default is NO
 @property (nonatomic) BOOL allowsHorizontalReordering;
+@property (nonatomic) BOOL allowsAutoscrolling;
 
 @property (nonatomic, readonly) UIScrollView *scrollView __attribute__((deprecated)); // The grid now inherits directly from UIScrollView
 

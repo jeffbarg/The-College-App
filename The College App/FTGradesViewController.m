@@ -52,7 +52,8 @@
     
     [self.tableView setSeparatorColor:[UIColor colorWithWhite:0.604 alpha:1.000]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
+    
     [self.tableView setRowHeight:64.0];
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addGrade:)];
@@ -93,7 +94,6 @@
     
     self.gpaLabel = gpaLabel;
 
-    
     //SET UP CUMULATIVE DATA "PREFERENCE"
     [self recalculateGPA];
 }
@@ -121,15 +121,18 @@
     }
         
     CGFloat sum = 0;
+    NSInteger count = 0;
+    
     CGFloat gpaArray[12] = {0.0, 0.0, 1.0, 1.7, 2.0, 2.3, 2.7, 3.0, 3.3, 3.7, 4.0, 4.3,};
     for (Grade *grade in gradeList) {
         NSInteger score = [[grade score] integerValue];
         sum += gpaArray[score + 1];
-        
+        if (score != -1) 
+            count ++;
     }
     
 
-    [self.gpaLabel setText:[NSString stringWithFormat:@"%.2f", sum / [gradeList count]]];
+    [self.gpaLabel setText:[NSString stringWithFormat:@"%.2f", sum / count]];
 
 }
 
@@ -187,10 +190,12 @@
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"fullCredit" ascending:NO];
-    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"subject" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"year" ascending:NO];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"fullCredit" ascending:NO];
+    NSSortDescriptor *sortDescriptor3 = [[NSSortDescriptor alloc] initWithKey:@"subject" ascending:YES];
+    
 
-    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, sortDescriptor2, nil];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, sortDescriptor2, sortDescriptor3, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
@@ -397,7 +402,6 @@
         
     }
     
-    cell.backgroundColor = [UIColor colorWithRed:0.890 green:0.918 blue:0.933 alpha:1.000];
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
     

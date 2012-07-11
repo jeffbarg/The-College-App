@@ -70,7 +70,6 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
     
-    [self initializeData];
 }
 
 - (void)viewDidUnload
@@ -247,11 +246,16 @@
             
         }
     } else {
+        FTCollegeListViewController *collegeListViewController = [[FTCollegeListViewController alloc] init];
+        [collegeListViewController setManagedObjectContext:self.managedObjectContext];
+
         if (indexPath.row == 0) {
             
         } else {
             
-        }
+        } 
+        
+        newViewController = (UIViewController<UISplitViewControllerDelegate> *) collegeListViewController;
     }
     
     if ([newViewController class] == [self.detailViewController class])
@@ -265,10 +269,10 @@
 
         [self.splitViewController setViewControllers:[NSArray arrayWithObjects:self.navigationController,viewNavigationController, nil]];
         [self.splitViewController setDelegate:newViewController];
+    
     } else {
         [self.navigationController pushViewController:newViewController animated:YES];
-    }
-    
+    }       
     newViewController.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
     
     self.detailViewController = newViewController;
