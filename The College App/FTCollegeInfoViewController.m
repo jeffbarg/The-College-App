@@ -114,19 +114,28 @@
 #pragma mark - Buttons
 
 - (IBAction)applicationWebsite:(id)sender {
-
+    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)missionStatementWebsite:(id)sender {
+    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)collegeWebsite:(id)sender {
+    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)financialAidWebsite:(id)sender {
+    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)openInMaps:(id)sender {
+    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 - (void) doneButton:(UIBarButtonItem *) barButtonItem {
