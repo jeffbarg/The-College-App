@@ -16,8 +16,10 @@
 
 @interface FTCollegeInfoViewController ()
 
-@property(retain) IBOutletCollection(UIView) NSArray *whiteViews;
+@property(strong) IBOutletCollection(UIView) NSArray *whiteViews;
+@property(strong) IBOutletCollection(UIButton) NSArray *urlButtons;
 
+@property (weak, nonatomic) IBOutlet UIScrollView *containerView;
 @property (weak, nonatomic) IBOutlet UIButton *openInMapsButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
@@ -30,6 +32,8 @@
 
 @implementation FTCollegeInfoViewController
 @synthesize whiteViews = _whiteViews;
+@synthesize urlButtons = _urlButtons;
+@synthesize containerView = _containerView;
 
 @synthesize openInMapsButton = _openInMapsButton;
 @synthesize mapView = _mapView;
@@ -55,7 +59,8 @@
 {
     [super viewDidLoad];
     
-    
+    self.title = [self.school name];
+
 	// Do any additional setup after loading the view.
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton:)];
@@ -71,7 +76,6 @@
                                                        nil] forState:UIControlStateSelected];
     
     
-    self.title = [self.school name];
     
 //    FTRangeIndicator *mathIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(20.0, 20.0, 500.0, 60.0)];
 //    [mathIndicator setMaxValue:[[self.school mathSAT75] floatValue]];
@@ -100,14 +104,22 @@
 //    [self.view addSubview:mathIndicator];
 //    [self.view addSubview:readingIndicator];
 //    [self.view addSubview:writingIndicator];
+   
     for (UIView *whiteView in self.whiteViews) {
         [whiteView.layer setCornerRadius:5.0];
         [whiteView.layer setShadowOffset:CGSizeMake(0, 1)];
-        [whiteView.layer setShadowColor:[UIColor blackColor].CGColor];
-        [whiteView.layer setShadowOpacity:0.4];
+        [whiteView.layer setShadowColor:[UIColor colorWithWhite:0.4 alpha:1.0].CGColor];
+        [whiteView.layer setShadowOpacity:1.0];
     }
 
+    for (UIButton *urlButton in self.urlButtons) {
+        [urlButton setContentEdgeInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
+        [urlButton.titleLabel setNumberOfLines:0];
+        [urlButton.titleLabel setTextAlignment:UITextAlignmentCenter];
+        [urlButton setTitleColor:[UIColor colorWithWhite:91.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    }
     
+    [self.containerView setContentSize:CGSizeMake(540.0, 1200.0)];
     
 }
 
@@ -148,10 +160,12 @@
     [self setMapView:nil];
     [self setLocationLabel:nil];
     [self setWhiteViews:nil];
+    [self setUrlButtons:nil];
     [self setApplicationFeeLabel:nil];
     [self setEarlyDeadlineLabel:nil];
     [self setRegularDeadlineLabel:nil];
     [self setApplicationWebsiteLabel:nil];
+    [self setContainerView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
