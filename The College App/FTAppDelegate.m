@@ -108,12 +108,12 @@
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     
     NSError *err = nil;
-    NSString *str = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"collegedata" ofType:@"json"] encoding:NSUTF8StringEncoding error:&err];
+    NSString *str = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"collegedatajuly12" ofType:@"json"] encoding:NSUTF8StringEncoding error:&err];
     if(err) {
         NSLog(@"%@", [err description]);
     }
     NSArray *objects = (NSArray *)[parser objectWithString:str];
-    NSLog(@"%@", [objects objectAtIndex:0]);
+    NSLog(@"%@", [objects objectAtIndex:500]);
     
     for (NSDictionary *dict in objects) {
         
@@ -123,6 +123,10 @@
             continue;
         
         College *school = [NSEntityDescription insertNewObjectForEntityForName:@"College" inManagedObjectContext:self.managedObjectContext];
+        
+        [school setName:extractStringFromDict(@"instnm", dict)];
+        [school setUnitID:extractIntegerFromDict(@"unitid", dict)];
+
         
         [school setUndergraduatePopulation:extractIntegerFromDict(@"drvef122011.undupug:VL-12-month unduplicated headcount- undergraduate: 2010-11", dict)];
         [school setTuitionAndFees:extractIntegerFromDict(@"drvic2011.tufeyr3:VL-Tuition and fees- 2011-12", dict)];
@@ -136,7 +140,7 @@
         [school setOnlineApplicationInternetAddress:extractStringFromDict(@"hd2011.applurl:VL-Online application web address", dict)];
         [school setMissionStatementInternetAddress:extractStringFromDict(@"ic2011mission.missionurl:VL-Mission statement URL (if mission statement not provided)", dict)];
         
-        [school setName:extractStringFromDict(@"instnm", dict)];
+
         [school setCity:extractStringFromDict(@"hd2011.city:VL-City location of institution", dict)];
         [school setStateAbbreviation:extractStringFromDict(@"hd2011.stabbr:VL-State abbreviation", dict)];
         
@@ -154,6 +158,10 @@
         
         [school setHasROTC:extractBooleanFromDict(@"ic2011.slo5:VL-ROTC", dict)];
         [school setOpenAdmissionPolicy:extractBooleanFromDict(@"ic2011.openadmp:VL-Open admission policy", dict)];
+        
+        [school setLat:extractDoubleFromDict(@"hd2011.latitude:VL-Latitude location of institution", dict)];
+        [school setLon:extractDoubleFromDict(@"hd2011.longitud:VL-Longitude location of institution", dict)];
+        
         
         NSInteger sum = 0;
         sum += [[school mathSAT25] integerValue] + [[school mathSAT75] integerValue];
@@ -174,6 +182,11 @@
 NSNumber * extractIntegerFromDict(NSString *key, NSDictionary * dict) {
     NSInteger val = [[dict valueForKey:key] integerValue];
     return [[NSNumber alloc] initWithInteger:val];
+}
+
+NSNumber * extractDoubleFromDict (NSString *key, NSDictionary * dict) {
+    double val = [[dict valueForKey:key] doubleValue];
+    return [[NSNumber alloc] initWithDouble:val];
 }
 
 NSNumber * extractBooleanFromDict (NSString *key, NSDictionary * dict) {

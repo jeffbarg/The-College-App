@@ -273,7 +273,7 @@
     } else {
         [self.navigationController pushViewController:newViewController animated:YES];
     }       
-    newViewController.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
+    newViewController.view.backgroundColor = kViewBackgroundColor;
     
     self.detailViewController = newViewController;
 }

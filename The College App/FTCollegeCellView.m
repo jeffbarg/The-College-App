@@ -80,7 +80,6 @@
         _locationIndicatorView = [[UIImageView alloc] initWithFrame:CGRectZero];
         _locationIndicatorView.contentMode = UIViewContentModeRight;
         [self addSubview:self.locationIndicatorView];
-    
     }
     return self;
 }
@@ -119,7 +118,6 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef ctx        = UIGraphicsGetCurrentContext();
-    
     
     
     //Add rounded corners with a clip path

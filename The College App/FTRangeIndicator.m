@@ -46,7 +46,7 @@
     CGRect fullRect = CGRectMake(0.5, 20.5, self.frame.size.width - 1.0, self.frame.size.height - 40.0 - 1.0);
     UIBezierPath *rectPath = [UIBezierPath bezierPathWithRect:fullRect];
     [[UIColor blackColor] setFill];
-    [[UIColor purpleColor] setStroke];
+    [[UIColor colorWithWhite:0.3 alpha:1.0] setStroke];
     
     [rectPath fill];
     

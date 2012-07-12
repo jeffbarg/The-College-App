@@ -2,7 +2,7 @@
 //  College.h
 //  The College App
 //
-//  Created by Jeffrey Barg on 7/11/12.
+//  Created by Jeffrey Barg on 7/12/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
@@ -35,6 +35,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * nameAlias;
 @property (nonatomic, retain) NSString * onlineApplicationInternetAddress;
+@property (nonatomic, retain) NSNumber * openAdmissionPolicy;
 @property (nonatomic, retain) NSNumber * phoneNumber;
 @property (nonatomic, retain) NSNumber * readingSAT25;
 @property (nonatomic, retain) NSNumber * readingSAT75;
@@ -49,6 +50,8 @@
 @property (nonatomic, retain) NSNumber * writingSAT25;
 @property (nonatomic, retain) NSNumber * writingSAT75;
 @property (nonatomic, retain) NSNumber * zipcode;
-@property (nonatomic, retain) NSNumber * openAdmissionPolicy;
+@property (nonatomic, retain) NSNumber * lat;
+@property (nonatomic, retain) NSNumber * lon;
+@property (nonatomic, retain) NSNumber * unitID;
 
 @end

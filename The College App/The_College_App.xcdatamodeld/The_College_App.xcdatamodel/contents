@@ -17,6 +17,8 @@
         <attribute name="hasROTC" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="institutionControl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="internetAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="mathSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="mathSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="missionStatement" optional="YES" attributeType="String" syncable="YES"/>
@@ -36,6 +38,7 @@
         <attribute name="totalPriceOutState" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="tuitionAndFees" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="undergraduatePopulation" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="unitID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="writingSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="writingSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>

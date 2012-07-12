@@ -2,7 +2,7 @@
 //  College.m
 //  The College App
 //
-//  Created by Jeffrey Barg on 7/11/12.
+//  Created by Jeffrey Barg on 7/12/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
@@ -34,6 +34,7 @@
 @dynamic name;
 @dynamic nameAlias;
 @dynamic onlineApplicationInternetAddress;
+@dynamic openAdmissionPolicy;
 @dynamic phoneNumber;
 @dynamic readingSAT25;
 @dynamic readingSAT75;
@@ -48,6 +49,8 @@
 @dynamic writingSAT25;
 @dynamic writingSAT75;
 @dynamic zipcode;
-@dynamic openAdmissionPolicy;
+@dynamic lat;
+@dynamic lon;
+@dynamic unitID;
 
 @end
