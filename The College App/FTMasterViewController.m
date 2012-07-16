@@ -14,6 +14,9 @@
 #import "FTCollegeVisitNotesViewController.h"
 #import "FTCollegeVisitRatingsViewController.h"
 #import "FTCollegeVisitPhotosViewController.h"
+#import "ECSlidingViewController.h"
+#import "FTNavigationCell.h"
+#import "FTNavigationHeader.h"
 @interface FTMasterViewController ()
 
 @end
@@ -53,7 +56,25 @@
 {
     [super viewDidLoad];
     
-    [self.tableView setBackgroundView:nil];
+    UIView *titleView = [[UIView alloc] initWithFrame:self.navigationController.navigationBar.bounds];
+    [titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0, 270.0, 44.0)];
+    [titleLabel setTextAlignment:UITextAlignmentCenter];
+    [titleLabel setBackgroundColor:[UIColor clearColor]];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setShadowColor:[UIColor blackColor]];
+    [titleLabel setShadowOffset:CGSizeMake(0, -1)];
+    [titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont labelFontSize]]];
+     
+    [titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
+    
+    [titleView addSubview:titleLabel];
+    [titleLabel setText:@"The College App"];
+    
+    [self.navigationItem setTitleView:titleView];
+    
+    
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]];
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];    
@@ -73,6 +94,7 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
     
+    [self.tableView setRowHeight:64.0];
 }
 
 - (void)viewDidUnload
@@ -80,10 +102,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (void) initializeData {
-
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -109,21 +127,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    FTNavigationCell *cell = (FTNavigationCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        CGRect bounds = cell.backgroundView.bounds;
-        CGRect imgViewRect = CGRectZero;
-        imgViewRect.origin = CGPointZero;
-        imgViewRect.size = bounds.size;
-        UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
-        [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        cell.backgroundView = imgView;
-        
-        UIImageView *selImgView = [[UIImageView alloc] initWithFrame:imgViewRect];
-        [selImgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        cell.selectedBackgroundView = selImgView;
+        cell = [[FTNavigationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     //Configure Cell
@@ -171,32 +178,15 @@
         }
     }
     
+    [cell.textLabel setFont:[UIFont boldSystemFontOfSize:14.0]];
+    cell.selectedBackgroundView = [[UIView alloc] initWithFrame:CGRectZero]; 
+    
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
-    
-    
-    // Configure the cell...
-    if (indexPath.row == 0) {
-        UIImageView *imgView = (UIImageView *) cell.backgroundView;
-        [imgView setImage:[[UIImage imageNamed:@"navtopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
-        [selImgView setImage:[[UIImage imageNamed:@"navtopcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-    } else if (indexPath.row == ([tableView numberOfRowsInSection:indexPath.section] - 1)) {
-        UIImageView *imgView = (UIImageView *) cell.backgroundView;
-        [imgView setImage:[[UIImage imageNamed:@"navbottom.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
-        [selImgView setImage:[[UIImage imageNamed:@"navbottomactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-    } else {
-        UIImageView *imgView = (UIImageView *) cell.backgroundView;
-        [imgView setImage:[[UIImage imageNamed:@"navcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
-        [selImgView setImage:[[UIImage imageNamed:@"navcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
-    }
     
     [cell.textLabel setTextColor:[UIColor colorWithWhite:0.820 alpha:1.000]];
     [cell.textLabel setShadowColor:[UIColor blackColor]];
     [cell.textLabel setShadowOffset:CGSizeMake(0, -1)];
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -208,44 +198,6 @@
     else return @"College Visits";
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -308,23 +260,39 @@
     
     if (newViewController == nil) return;
     
-    if (INTERFACE_IS_PAD) {        
-        UINavigationController *viewNavigationController = [[UINavigationController alloc] initWithRootViewController:newViewController];
+     
+    UINavigationController *viewNavigationController = [[UINavigationController alloc] initWithRootViewController:newViewController];
+    
+    if (INTERFACE_IS_PAD)    
         [viewNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
 
+    [UIView animateWithDuration:0.1 animations:^{
+        CGRect frame = self.slidingViewController.topViewController.view.frame;
+        frame = CGRectOffset(frame, 10, 0);
+        self.slidingViewController.topViewController.view.frame = frame;
+
+    } completion:^(BOOL finished) {
+        CGRect frame = self.slidingViewController.topViewController.view.frame;
+        self.slidingViewController.topViewController = viewNavigationController;
+        self.slidingViewController.topViewController.view.frame = frame;
+        [self.slidingViewController resetTopView];
         
-        [self.splitViewController setViewControllers:[NSArray arrayWithObjects:self.navigationController,viewNavigationController, nil]];
-        [self.splitViewController setDelegate:(UIViewController<UISplitViewControllerDelegate> *)newViewController];
-    } else {
-        [self.navigationController pushViewController:newViewController animated:YES];
-    }       
-    newViewController.view.backgroundColor = kViewBackgroundColor;
+        newViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(slideLeft)];
+        
+        viewNavigationController.view.backgroundColor = kViewBackgroundColor;
+        viewNavigationController.view.layer.shadowOpacity = 0.75f;
+        viewNavigationController.view.layer.shadowRadius = 10.0f;
+        viewNavigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+        [viewNavigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];   
+    }];
+    
+
     
     self.detailViewController = newViewController;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 34.0f;
+    return 30.0f;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger) section {
@@ -333,29 +301,16 @@
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section 
 {
-	// create the parent view that will hold header Label
-	UIView* customView = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 320.0, 34.0)];
-	
-	// create the button object
-	UILabel * headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-	headerLabel.backgroundColor = [UIColor clearColor];
-	headerLabel.opaque = NO;
-	headerLabel.textColor = [UIColor colorWithRed:161.0/255.0 green:161.0/255.0 blue:161.0/255.0 alpha:1.0];
-    headerLabel.shadowColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.08 alpha:1.0];
+    FTNavigationHeader *header = [[FTNavigationHeader alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30.0)];
+    [header setTitle:[self tableView:self.tableView titleForHeaderInSection:section]];
     
-	headerLabel.highlightedTextColor = [UIColor whiteColor];
-	headerLabel.font = [UIFont boldSystemFontOfSize:16];
-    headerLabel.shadowOffset = CGSizeMake(0, 1);
-    headerLabel.shadowColor = [UIColor colorWithWhite:0.0 alpha:1.0];
-	headerLabel.frame = CGRectMake(20.0, 0.0, 280.0, 34.0);
-    
-	// If you want to align the header text as centered
-	// headerLabel.frame = CGRectMake(150.0, 0.0, 300.0, 44.0);
-    
-	headerLabel.text = [self tableView:tableView titleForHeaderInSection:section]; // i.e. array element
-	[customView addSubview:headerLabel];
-    
-	return customView;
+	return header;
+}
+
+#pragma mark - ECSlidingViewController Stuff
+
+- (void) slideLeft {
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 @end

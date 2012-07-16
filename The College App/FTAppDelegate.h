@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
 @interface FTAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -22,5 +23,6 @@
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UISplitViewController *splitViewController;
+@property (nonatomic, strong) ECSlidingViewController *slidingViewController;
 
 @end

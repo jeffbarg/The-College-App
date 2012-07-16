@@ -13,6 +13,7 @@
 #import "Extracurricular.h"
 #import "GMGridView.h"
 #import "KSCustomPopoverBackgroundView.h"
+#import "ECSlidingViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -98,6 +99,7 @@
 - (void) viewDidLayoutSubviews {
     [_gmGridView setFrame:self.view.bounds];
 }
+
 
 - (void)viewDidUnload
 {

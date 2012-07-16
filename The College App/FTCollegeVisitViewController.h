@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface FTCollegeVisitViewController : UIViewController<UISplitViewControllerDelegate, CLLocationManagerDelegate>
+@interface FTCollegeVisitViewController : UIViewController<CLLocationManagerDelegate>
 
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;

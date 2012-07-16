@@ -9,6 +9,8 @@
 #import "FTGradesViewController.h"
 #import "KSCustomPopoverBackgroundView.h"
 #import "FTAddGradeViewController.h"
+#import "ECSlidingViewController.h"
+
 #import "Grade.h"
 
 @interface FTGradesViewController ()
@@ -97,6 +99,7 @@
     //SET UP CUMULATIVE DATA "PREFERENCE"
     [self recalculateGPA];
 }
+
 
 
 - (void)viewDidUnload

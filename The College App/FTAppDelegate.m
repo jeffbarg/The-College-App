@@ -10,6 +10,7 @@
 #import "FTMasterViewController.h"
 #import "FTCollegeSearchViewController.h"
 #import "SBJson.h"
+#import "InitialSlidingViewController.h"
 
 #import "College.h"
 
@@ -21,40 +22,47 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize navigationController = _navigationController;
 @synthesize splitViewController = _splitViewController;
+@synthesize slidingViewController = _slidingViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-        self.window.rootViewController = self.navigationController;
-        masterViewController.managedObjectContext = self.managedObjectContext;
-    } else {
-        FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
-        UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-        
-        FTCollegeSearchViewController *detailViewController = [[FTCollegeSearchViewController alloc] init];
-        [detailViewController setManagedObjectContext:self.managedObjectContext];
-        
-        UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
-
-    	masterViewController.detailViewController = detailViewController;
-        
-        self.splitViewController = [[UISplitViewController alloc] init];
-        self.splitViewController.viewControllers = [NSArray arrayWithObjects:masterNavigationController, detailNavigationController, nil];
-
-        [self.splitViewController setDelegate:detailViewController];
-        
-        
-        self.window.rootViewController = self.splitViewController;
     
-        masterViewController.managedObjectContext = self.managedObjectContext;
-    }
+    FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+    
+    FTCollegeSearchViewController *detailViewController = [[FTCollegeSearchViewController alloc] init];
+    [detailViewController setManagedObjectContext:self.managedObjectContext];
+    
+    UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
+
+    masterViewController.detailViewController = detailViewController;
+    
+    self.slidingViewController = [[InitialSlidingViewController alloc] init];
+    self.slidingViewController.topViewController = detailNavigationController;
+
+    
+    self.window.rootViewController = self.slidingViewController;
+
+    masterViewController.managedObjectContext = self.managedObjectContext;
+    
+    //[self initializeData];
     [self.window makeKeyAndVisible];
+
+    self.slidingViewController.underLeftViewController = masterNavigationController;
+
+    [self.slidingViewController setAnchorRightRevealAmount:INTERFACE_IS_PAD?280:260];
+    self.slidingViewController.underLeftWidthLayout = ECFullWidth;
     
-    [self initializeData];
+    
+    detailViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:masterViewController action:@selector(slideLeft)];
+    
+    detailNavigationController.view.backgroundColor = kViewBackgroundColor;
+    detailNavigationController.view.layer.shadowOpacity = 0.75f;
+    detailNavigationController.view.layer.shadowRadius = 10.0f;
+    detailNavigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+    [detailNavigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];   
     
     return YES;
 }

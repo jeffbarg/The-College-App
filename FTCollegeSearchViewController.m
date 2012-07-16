@@ -13,6 +13,7 @@
 #import "College.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FTRangeIndicator.h"
+#import "ECSlidingViewController.h"
 
 @interface FTCollegeSearchViewController () {
     NSInteger _lastDeleteItemIndexAsked;   
@@ -75,9 +76,8 @@
     [super viewDidLoad];
     self.title = @"College List";
     self.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
-    
-	// Do any additional setup after loading the view.
-    
+    // Do any additional setup after loading the view.
+
     _gmGridView.mainSuperView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     
 }

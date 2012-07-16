@@ -8,6 +8,8 @@
 
 #import "FTCollegeVisitViewController.h"
 #import "KSCustomPopoverBackgroundView.h"
+#import "ECSlidingViewController.h"
+
 #import "College.h"
 
 #import "FTCollegeVisitNotesViewController.h"
@@ -359,31 +361,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
-}
-
-
-#pragma mark - Split view
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-    barButtonItem.image = [UIImage imageNamed:@"menu.png"];//NSLocalizedString(@"Master", @"Master");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    [popoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
-    self.masterPopoverController = popoverController;
-}
-
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    if (self.masterPopoverController != nil && [self.masterPopoverController isPopoverVisible])
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    self.masterPopoverController = nil;
-}
-
--(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation 
-{ 
-    return YES; 
 }
 
 @end

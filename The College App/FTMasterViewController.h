@@ -13,4 +13,6 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) UIViewController *detailViewController;
 
+- (void) slideLeft;
+
 @end

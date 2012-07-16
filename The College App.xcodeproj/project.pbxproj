@@ -83,7 +83,6 @@
 		7B6266D315A764B100A5879C /* navcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D015A764B100A5879C /* navcell.png */; };
 		7B6266D415A764B100A5879C /* navbottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D115A764B100A5879C /* navbottom.png */; };
 		7B6266D715A76B4500A5879C /* whitenavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D515A76B4500A5879C /* whitenavbar.png */; };
-		7B6266D815A76B4500A5879C /* blacknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D615A76B4500A5879C /* blacknavbar.png */; };
 		7B6266F515A76BB200A5879C /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266DD15A76BB200A5879C /* NSObject+SBJson.m */; };
 		7B6266F615A76BB200A5879C /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E015A76BB200A5879C /* SBJsonParser.m */; };
 		7B6266F715A76BB200A5879C /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E215A76BB200A5879C /* SBJsonStreamParser.m */; };
@@ -148,6 +147,13 @@
 		7BCB88A915B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88A715B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib */; };
 		7BCB88BB15B4B08F008BA15C /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88B815B4B08F008BA15C /* ECSlidingViewController.m */; };
 		7BCB88BC15B4B08F008BA15C /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88BA15B4B08F008BA15C /* UIImage+ImageWithUIView.m */; };
+		7BCB88BD15B4B20E008BA15C /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88B815B4B08F008BA15C /* ECSlidingViewController.m */; };
+		7BCB88BE15B4B20E008BA15C /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88BA15B4B08F008BA15C /* UIImage+ImageWithUIView.m */; };
+		7BCB88C115B4B2A3008BA15C /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88C015B4B2A3008BA15C /* InitialSlidingViewController.m */; };
+		7BCB88C215B4B2FA008BA15C /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88C015B4B2A3008BA15C /* InitialSlidingViewController.m */; };
+		7BCB88C515B4B7C5008BA15C /* FTNavigationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88C415B4B7C5008BA15C /* FTNavigationCell.m */; };
+		7BCB88C815B4BF44008BA15C /* FTNavigationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88C715B4BF44008BA15C /* FTNavigationHeader.m */; };
+		7BCB88CA15B4C7A3008BA15C /* blacknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88C915B4C7A3008BA15C /* blacknavbar.png */; };
 		7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */; };
 /* End PBXBuildFile section */
 
@@ -238,7 +244,6 @@
 		7B6266D015A764B100A5879C /* navcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navcell.png; sourceTree = "<group>"; };
 		7B6266D115A764B100A5879C /* navbottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbottom.png; sourceTree = "<group>"; };
 		7B6266D515A76B4500A5879C /* whitenavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitenavbar.png; sourceTree = "<group>"; };
-		7B6266D615A76B4500A5879C /* blacknavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacknavbar.png; sourceTree = "<group>"; };
 		7B6266DC15A76BB200A5879C /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		7B6266DD15A76BB200A5879C /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		7B6266DE15A76BB200A5879C /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -328,6 +333,13 @@
 		7BCB88B815B4B08F008BA15C /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		7BCB88B915B4B08F008BA15C /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
 		7BCB88BA15B4B08F008BA15C /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		7BCB88BF15B4B2A3008BA15C /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialSlidingViewController.h; sourceTree = "<group>"; };
+		7BCB88C015B4B2A3008BA15C /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialSlidingViewController.m; sourceTree = "<group>"; };
+		7BCB88C315B4B7C5008BA15C /* FTNavigationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNavigationCell.h; sourceTree = "<group>"; };
+		7BCB88C415B4B7C5008BA15C /* FTNavigationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNavigationCell.m; sourceTree = "<group>"; };
+		7BCB88C615B4BF44008BA15C /* FTNavigationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNavigationHeader.h; sourceTree = "<group>"; };
+		7BCB88C715B4BF44008BA15C /* FTNavigationHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNavigationHeader.m; sourceTree = "<group>"; };
+		7BCB88C915B4C7A3008BA15C /* blacknavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacknavbar.png; sourceTree = "<group>"; };
 		7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneicon2x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -497,6 +509,10 @@
 			children = (
 				7B6266C815A7614900A5879C /* FTMasterViewController.h */,
 				7B6266C915A7614900A5879C /* FTMasterViewController.m */,
+				7BCB88C615B4BF44008BA15C /* FTNavigationHeader.h */,
+				7BCB88C715B4BF44008BA15C /* FTNavigationHeader.m */,
+				7BCB88C315B4B7C5008BA15C /* FTNavigationCell.h */,
+				7BCB88C415B4B7C5008BA15C /* FTNavigationCell.m */,
 			);
 			name = "Master Navigation View";
 			sourceTree = "<group>";
@@ -598,7 +614,7 @@
 				7B51E36715A8CAF1002F2A2E /* save.png */,
 				7B51E36815A8CAF1002F2A2E /* saveactive.png */,
 				7B6266D515A76B4500A5879C /* whitenavbar.png */,
-				7B6266D615A76B4500A5879C /* blacknavbar.png */,
+				7BCB88C915B4C7A3008BA15C /* blacknavbar.png */,
 			);
 			name = "Standard UI";
 			sourceTree = "<group>";
@@ -757,6 +773,8 @@
 		7BCB88B215B4AFBC008BA15C /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
+				7BCB88BF15B4B2A3008BA15C /* InitialSlidingViewController.h */,
+				7BCB88C015B4B2A3008BA15C /* InitialSlidingViewController.m */,
 				7BCB88B715B4B08F008BA15C /* ECSlidingViewController.h */,
 				7BCB88B815B4B08F008BA15C /* ECSlidingViewController.m */,
 				7BCB88B915B4B08F008BA15C /* UIImage+ImageWithUIView.h */,
@@ -844,7 +862,6 @@
 				7B6266D315A764B100A5879C /* navcell.png in Resources */,
 				7B6266D415A764B100A5879C /* navbottom.png in Resources */,
 				7B6266D715A76B4500A5879C /* whitenavbar.png in Resources */,
-				7B6266D815A76B4500A5879C /* blacknavbar.png in Resources */,
 				7B62672115A7760C00A5879C /* menu.png in Resources */,
 				7B62672315A7762800A5879C /* menu@2x.png in Resources */,
 				7B62673A15A7785100A5879C /* close_x.png in Resources */,
@@ -897,6 +914,7 @@
 				7BCB88A415B49D2B008BA15C /* visitsectionheader.png in Resources */,
 				7BCB88A815B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib in Resources */,
 				7BCB88A915B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib in Resources */,
+				7BCB88CA15B4C7A3008BA15C /* blacknavbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,6 +953,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BCB88C215B4B2FA008BA15C /* InitialSlidingViewController.m in Sources */,
+				7BCB88BD15B4B20E008BA15C /* ECSlidingViewController.m in Sources */,
+				7BCB88BE15B4B20E008BA15C /* UIImage+ImageWithUIView.m in Sources */,
 				7B51E5A015AA4C46002F2A2E /* NSObject+SBJson.m in Sources */,
 				7B51E5A115AA4C46002F2A2E /* SBJsonParser.m in Sources */,
 				7B51E5A215AA4C46002F2A2E /* SBJsonStreamParser.m in Sources */,
@@ -977,6 +998,8 @@
 				7B2C583E15B0BD8C00D3845B /* FTCollegeVisitView.m in Sources */,
 				7B7B327A15B47B6300625FA6 /* FTStandardizedTestingViewController.m in Sources */,
 				7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */,
+				7BCB88C515B4B7C5008BA15C /* FTNavigationCell.m in Sources */,
+				7BCB88C815B4BF44008BA15C /* FTNavigationHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,6 +1031,7 @@
 				7B97BD3415A7C2F900EF7906 /* FTAddGradeViewController.m in Sources */,
 				7BCB88BB15B4B08F008BA15C /* ECSlidingViewController.m in Sources */,
 				7BCB88BC15B4B08F008BA15C /* UIImage+ImageWithUIView.m in Sources */,
+				7BCB88C115B4B2A3008BA15C /* InitialSlidingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
