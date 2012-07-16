@@ -36,9 +36,9 @@
         [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
         [self.view.layer setBorderWidth:1.0];
         
-        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
-        [self.view.layer setShadowColor:[UIColor blackColor].CGColor];
-        [self.view.layer setShadowOpacity:0.15];
+//        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
+//        [self.view.layer setShadowColor:[UIColor blackColor].CGColor];
+//        [self.view.layer setShadowOpacity:0.15];
     }
 }
 

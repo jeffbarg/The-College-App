@@ -38,9 +38,9 @@
         [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
         [self.view.layer setBorderWidth:1.0];
         
-        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
-        [self.view.layer setShadowColor:[UIColor blackColor].CGColor];
-        [self.view.layer setShadowOpacity:0.15];
+//        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
+//        [self.view.layer setShadowColor:[UIColor blackColor].CGColor];
+//        [self.view.layer setShadowOpacity:0.15];
     }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -86,7 +86,8 @@
     
     [cell.contentView setBackgroundColor:[UIColor colorWithWhite:0.925 alpha:1.000]];
     // Configure the cell...
-    
+    cell.textLabel.text = @"Notes";
+    cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];
     return cell;
 }
 

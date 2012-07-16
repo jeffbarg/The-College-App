@@ -21,9 +21,9 @@
 #define kLonRadius 0.5
 
 #define MARGIN_X 15
-#define MARGIN_Y 15
+#define MARGIN_Y 12
 
-#define MARGIN_HEADER 15
+#define MARGIN_HEADER 12
 
 #define HEADER_HEIGHT 30
 
@@ -88,6 +88,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:nil action:nil];
+//    
+//    UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
+//    
+//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:backButton, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], nil];
+//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], cameraItem, nil];
+    
+    UIImageView *titleView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]];
+                         
+
+    [titleView setFrame:CGRectMake(0, 0, 150.0, 30)];                           
+    self.navigationItem.titleView = titleView;
+    
 	// Do any additional setup after loading the view.
     CLLocationManager *manager = [[CLLocationManager alloc] init];
 
@@ -134,6 +147,7 @@
         
         
         UIColor *textColor = [UIColor colorWithWhite:0.322 alpha:1.000];
+        UIFont *textFont = [UIFont boldSystemFontOfSize:14.0];
         
         ratingsButton = [[UIButton alloc] initWithFrame:CGRectZero];
         photosButton = [[UIButton alloc] initWithFrame:CGRectZero];
@@ -144,34 +158,49 @@
         [self.view addSubview:notesButton];
         
         [ratingsButton setTitleColor:textColor forState:UIControlStateNormal];
-        [ratingsButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [ratingsButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+        [ratingsButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [ratingsButton.titleLabel setShadowOffset:CGSizeMake(0, 0)];
+        [ratingsButton.titleLabel setFont:textFont];
+        [ratingsButton.titleLabel setTextAlignment:UITextAlignmentLeft];
+        [ratingsButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [ratingsButton setContentEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 0.0)];
+        [ratingsButton setTitle:@"Ratings" forState:UIControlStateNormal];
         
-        [ratingsButton.layer setShadowOpacity:0.1];
-        [ratingsButton.layer setShadowColor:[UIColor blackColor].CGColor];
-        [ratingsButton.layer setShadowOffset:CGSizeMake(0, 1)];
+//        [ratingsButton.layer setShadowOpacity:0.1];
+//        [ratingsButton.layer setShadowColor:[UIColor blackColor].CGColor];
+//        [ratingsButton.layer setShadowOffset:CGSizeMake(0, 1)];
         
         [ratingsButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
         [ratingsButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
          
         [photosButton setTitleColor:textColor forState:UIControlStateNormal];
-        [photosButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [photosButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+        [photosButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [photosButton.titleLabel setShadowOffset:CGSizeMake(0, 0)];
+        [photosButton.titleLabel setFont:textFont];
+        [photosButton.titleLabel setTextAlignment:UITextAlignmentLeft];
+        [photosButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [photosButton setContentEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 0.0)];
+        [photosButton setTitle:@"Photos" forState:UIControlStateNormal];
         
-        [photosButton.layer setShadowOpacity:0.1];
-        [photosButton.layer setShadowColor:[UIColor blackColor].CGColor];
-        [photosButton.layer setShadowOffset:CGSizeMake(0, 1)];
+//        [photosButton.layer setShadowOpacity:0.1];
+//        [photosButton.layer setShadowColor:[UIColor blackColor].CGColor];
+//        [photosButton.layer setShadowOffset:CGSizeMake(0, 1)];
         
         [photosButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
         [photosButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
         
         [notesButton setTitleColor:textColor forState:UIControlStateNormal];
-        [notesButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [notesButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+        [notesButton setTitleShadowColor:[UIColor clearColor] forState:UIControlStateNormal];
+        [notesButton.titleLabel setShadowOffset:CGSizeMake(0, 0)];
+        [notesButton.titleLabel setFont:textFont];
+        [notesButton.titleLabel setTextAlignment:UITextAlignmentLeft];
+        [notesButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+        [notesButton setContentEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 0.0)];
+        [notesButton setTitle:@"Notes" forState:UIControlStateNormal];
         
-        [notesButton.layer setShadowOpacity:0.1];
-        [notesButton.layer setShadowColor:[UIColor blackColor].CGColor];
-        [notesButton.layer setShadowOffset:CGSizeMake(0, 1)];
+//        [notesButton.layer setShadowOpacity:0.1];
+//        [notesButton.layer setShadowColor:[UIColor blackColor].CGColor];
+//        [notesButton.layer setShadowOffset:CGSizeMake(0, 1)];
         
         [notesButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
         [notesButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
