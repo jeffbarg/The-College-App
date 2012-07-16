@@ -582,7 +582,7 @@
 											<object class="IBUILabel" id="35559585">
 												<reference key="NSNextResponder" ref="216634288"/>
 												<int key="NSvFlags">292</int>
-												<string key="NSFrame">{{185, 16}, {42, 21}}</string>
+												<string key="NSFrame">{{74, 16}, {153, 21}}</string>
 												<reference key="NSSuperview" ref="216634288"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="330103714"/>
@@ -595,6 +595,7 @@
 												<string key="IBUIText">Label</string>
 												<nil key="IBUIHighlightedColor"/>
 												<int key="IBUIBaselineAdjustment">0</int>
+												<int key="IBUITextAlignment">2</int>
 												<reference key="IBUIFontDescription" ref="201976711"/>
 												<reference key="IBUIFont" ref="603570546"/>
 												<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -602,7 +603,7 @@
 											<object class="IBUILabel" id="231958435">
 												<reference key="NSNextResponder" ref="216634288"/>
 												<int key="NSvFlags">292</int>
-												<string key="NSFrame">{{185, 52}, {42, 21}}</string>
+												<string key="NSFrame">{{83, 52}, {144, 21}}</string>
 												<reference key="NSSuperview" ref="216634288"/>
 												<reference key="NSWindow"/>
 												<reference key="NSNextKeyView" ref="368406890"/>
@@ -619,6 +620,7 @@
 												</object>
 												<nil key="IBUIHighlightedColor"/>
 												<int key="IBUIBaselineAdjustment">0</int>
+												<int key="IBUITextAlignment">2</int>
 												<reference key="IBUIFontDescription" ref="201976711"/>
 												<reference key="IBUIFont" ref="603570546"/>
 												<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
@@ -642,7 +644,6 @@
 										<string key="NSFrame">{{20, 737}, {500, 360}}</string>
 										<reference key="NSSuperview" ref="112387982"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor">
 											<int key="NSColorSpace">3</int>
@@ -901,6 +902,22 @@
 						<reference key="destination" ref="350827921"/>
 					</object>
 					<int key="connectionID">70</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tuitionLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="35559585"/>
+					</object>
+					<int key="connectionID">72</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">totalPriceLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="231958435"/>
+					</object>
+					<int key="connectionID">74</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1224,7 +1241,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">70</int>
+			<int key="maxID">74</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1241,6 +1258,8 @@
 						<string key="openInMapsButton">UIButton</string>
 						<string key="regularDeadlineLabel">UILabel</string>
 						<string key="standardizedTestingContainerView">UIView</string>
+						<string key="totalPriceLabel">UILabel</string>
+						<string key="tuitionLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="applicationFeeLabel">
@@ -1278,6 +1297,14 @@
 						<object class="IBToOneOutletInfo" key="standardizedTestingContainerView">
 							<string key="name">standardizedTestingContainerView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="totalPriceLabel">
+							<string key="name">totalPriceLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tuitionLabel">
+							<string key="name">tuitionLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toManyOutletInfosByName">

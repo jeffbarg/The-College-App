@@ -1,21 +1,18 @@
 //
-//  FTCollegeVisitRatingsViewController.m
+//  FTStandardizedTestingViewController.m
 //  The College App
 //
-//  Created by Jeffrey Barg on 7/13/12.
+//  Created by Jeffrey Barg on 7/16/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
-#import "FTCollegeVisitRatingsViewController.h"
-#import "FTRatingsCell.h"
+#import "FTStandardizedTestingViewController.h"
 
-#import <QuartzCore/QuartzCore.h>
-
-@interface FTCollegeVisitRatingsViewController ()
+@interface FTStandardizedTestingViewController ()
 
 @end
 
-@implementation FTCollegeVisitRatingsViewController
+@implementation FTStandardizedTestingViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,18 +27,6 @@
 {
     [super viewDidLoad];
 
-    self.tableView.backgroundColor = [UIColor colorWithWhite:0.925 alpha:1.000];
-    self.tableView.separatorColor = [UIColor brownColor];
-
-    if (INTERFACE_IS_PAD) {
-        [self.view.layer setCornerRadius:5.0];
-        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
-        [self.view.layer setBorderWidth:1.0];
-        
-        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
-        [self.view.layer setShadowColor:[UIColor blackColor].CGColor];
-        [self.view.layer setShadowOpacity:0.15];
-    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -58,33 +43,30 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
+	return YES;
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 8;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    FTRatingsCell *cell = (FTRatingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (cell == nil) {
-        cell = [[FTRatingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
-    }
-    
-    [cell.contentView setBackgroundColor:[UIColor colorWithWhite:0.925 alpha:1.000]];
     // Configure the cell...
     
     return cell;

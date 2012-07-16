@@ -11,7 +11,9 @@
 #import "FTCollegeSearchViewController.h"
 #import "FTGradesViewController.h"
 #import "FTCollegeVisitViewController.h"
-
+#import "FTCollegeVisitNotesViewController.h"
+#import "FTCollegeVisitRatingsViewController.h"
+#import "FTCollegeVisitPhotosViewController.h"
 @interface FTMasterViewController ()
 
 @end
@@ -249,7 +251,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIViewController<UISplitViewControllerDelegate> *newViewController = nil;
+    UIViewController *newViewController = nil;
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
@@ -260,13 +262,13 @@
             FTExtracurricularsViewController *extracurricularViewController = [[FTExtracurricularsViewController alloc] init];
             [extracurricularViewController setManagedObjectContext:self.managedObjectContext];
             
-            newViewController = (UIViewController<UISplitViewControllerDelegate> *) extracurricularViewController;
+            newViewController = (UIViewController *) extracurricularViewController;
             
         } else if (indexPath.row == 3) {
             FTGradesViewController *gradesViewController = [[FTGradesViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [gradesViewController setManagedObjectContext:self.managedObjectContext];
             
-            newViewController = (UIViewController<UISplitViewControllerDelegate> *) gradesViewController;
+            newViewController = (UIViewController *) gradesViewController;
         } else {
             
         }
@@ -280,13 +282,24 @@
             
         } 
         
-        newViewController = (UIViewController<UISplitViewControllerDelegate> *) collegeListViewController;
+        newViewController = (UIViewController *) collegeListViewController;
     } else {
         if (indexPath.row == 0) {
-            FTCollegeVisitViewController *collegeVisitViewController = [[FTCollegeVisitViewController alloc] init];
-            [collegeVisitViewController setManagedObjectContext:self.managedObjectContext];
-            
-            newViewController = (UIViewController<UISplitViewControllerDelegate> *) collegeVisitViewController;
+            if (INTERFACE_IS_PAD || INTERFACE_IS_PHONE) {                
+                FTCollegeVisitViewController *collegeVisitViewController = [[FTCollegeVisitViewController alloc] init];
+                [collegeVisitViewController setManagedObjectContext:self.managedObjectContext];
+                
+                newViewController = (UIViewController *)collegeVisitViewController;
+            } else {
+                UITabBarController *tabBarController = [[UITabBarController alloc] init];
+                FTCollegeVisitPhotosViewController * photosViewController   = [[FTCollegeVisitPhotosViewController alloc] init];
+                FTCollegeVisitRatingsViewController * ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                FTCollegeVisitNotesViewController * notesViewController     = [[FTCollegeVisitNotesViewController alloc] init];
+                
+                [tabBarController setViewControllers:[NSArray arrayWithObjects:photosViewController, ratingsViewController, notesViewController, nil]];
+                
+                newViewController = tabBarController;
+            }
         }
     }
     
@@ -301,7 +314,7 @@
 
         
         [self.splitViewController setViewControllers:[NSArray arrayWithObjects:self.navigationController,viewNavigationController, nil]];
-        [self.splitViewController setDelegate:newViewController];
+        [self.splitViewController setDelegate:(UIViewController<UISplitViewControllerDelegate> *)newViewController];
     } else {
         [self.navigationController pushViewController:newViewController animated:YES];
     }       

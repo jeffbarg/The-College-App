@@ -53,7 +53,7 @@
 @dynamic lon;
 @dynamic unitID;
 
-- (NSString *) description {
-    return [NSString stringWithFormat:@"%@: %@", self.name, self.streetAddress];
-}
+//- (NSString *) description {
+//    return [NSString stringWithFormat:@"%@: %@", self.name, self.streetAddress];
+//}
 @end

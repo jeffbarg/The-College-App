@@ -54,7 +54,7 @@
     }
     [self.window makeKeyAndVisible];
     
-     //[self initializeData];
+    [self initializeData];
     
     return YES;
 }
@@ -143,10 +143,6 @@
         [school setOnlineApplicationInternetAddress:extractStringFromDict(@"hd2011.applurl:VL-Online application web address", dict)];
         [school setMissionStatementInternetAddress:extractStringFromDict(@"ic2011mission.missionurl:VL-Mission statement URL (if mission statement not provided)", dict)];
         
-
-        [school setCity:extractStringFromDict(@"hd2011.city:VL-City location of institution", dict)];
-        [school setStateAbbreviation:extractStringFromDict(@"hd2011.stabbr:VL-State abbreviation", dict)];
-        
         [school setCompositeACT25:extractIntegerFromDict(@"ic2011.actcm25:VL-ACT Composite 25th percentile score", dict)];
         [school setCompositeACT75:extractIntegerFromDict(@"ic2011.actcm75:VL-ACT Composite 75th percentile score", dict)];
         
@@ -165,6 +161,12 @@
         [school setLat:extractDoubleFromDict(@"hd2011.latitude:VL-Latitude location of institution", dict)];
         [school setLon:extractDoubleFromDict(@"hd2011.longitud:VL-Longitude location of institution", dict)];
         
+        [school setCity:extractStringFromDict(@"hd2011.city:VL-City location of institution", dict)];
+        [school setStateAbbreviation:extractStringFromDict(@"hd2011.stabbr:VL-State abbreviation", dict)];
+        [school setZipcode:extractIntegerFromDict(@"hd2011.zip:VL-ZIP code", dict)];
+        
+        
+        //Calculated Values
         
         NSInteger sum = 0;
         sum += [[school mathSAT25] integerValue] + [[school mathSAT75] integerValue];

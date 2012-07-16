@@ -32,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *earlyDeadlineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *regularDeadlineLabel;
 @property (weak, nonatomic) IBOutlet UIButton *applicationWebsiteLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *tuitionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+
 @end
 
 @implementation FTCollegeInfoViewController
@@ -47,6 +51,8 @@
 @synthesize earlyDeadlineLabel = _earlyDeadlineLabel;
 @synthesize regularDeadlineLabel = _regularDeadlineLabel;
 @synthesize applicationWebsiteLabel = _applicationWebsiteLabel;
+@synthesize tuitionLabel = _tuitionLabel;
+@synthesize totalPriceLabel = _totalPriceLabel;
 
 @synthesize school = _school;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -63,22 +69,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    NSLog(@"%@", self.school);
     self.title = [self.school name];
 
 	// Do any additional setup after loading the view.
     
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton:)];
     self.navigationItem.leftBarButtonItem = doneButton;
-    
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
-    self.tabBarItem = tabBarItem;
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor colorWithWhite:0.2 alpha:1.0], UITextAttributeTextColor,
+                                                                     [UIColor whiteColor], UITextAttributeTextShadowColor,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
+                                                                     nil]];
     
     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                        [UIColor colorWithRed:0.031 green:0.333 blue:0.643 alpha:1.000], UITextAttributeTextColor,
                                                        [UIColor whiteColor], UITextAttributeTextShadowColor,
                                                        [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
                                                        nil] forState:UIControlStateSelected];
+    
+    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
+    self.tabBarItem = tabBarItem;
+    
+
     
     
     UIColor *textColor = [UIColor colorWithWhite:84.0/255.0 alpha:1.000];
@@ -173,22 +186,44 @@
     [self.standardizedTestingContainerView addSubview:writingLabel];
     [self.standardizedTestingContainerView addSubview:actIndicator];
     [self.standardizedTestingContainerView addSubview:actLabel];
+
+    if (INTERFACE_IS_PAD) {
+        CGRect mapFrame = self.mapView.superview.frame;
+        UIView *supersuperview = self.mapView.superview.superview;
+        [self.mapView removeFromSuperview];
+        [supersuperview addSubview:self.mapView];
+        [self.mapView setFrame:mapFrame];
         
-    CGRect mapFrame = self.mapView.superview.frame;
-    UIView *supersuperview = self.mapView.superview.superview;
-    [self.mapView removeFromSuperview];
-    [supersuperview addSubview:self.mapView];
-    [self.mapView setFrame:mapFrame];
+        [self.mapView.layer setCornerRadius:5.0];
+
+        
+        [self.mapView setMapType:MKMapTypeHybrid];
+    } else {
+        [self.mapView setMapType:MKMapTypeStandard];
+    }
     
-    [self.mapView.layer setCornerRadius:5.0];
-    [self.mapView.layer setShadowRadius:0.0];
-    [self.mapView.layer setShadowColor:[UIColor whiteColor].CGColor];
+    [self.mapView.layer setShadowColor:[UIColor blackColor].CGColor];
     [self.mapView.layer setShadowOffset:CGSizeMake(0, 1)];
     [self.mapView.layer setShadowOpacity:1.0];
     
-    [self.mapView setMapType:MKMapTypeHybrid];
+    CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
     
-    [self.mapView setRegion:MKCoordinateRegionMake(CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]), MKCoordinateSpanMake(0.01, 0.01)) animated:YES];
+    [self.mapView setRegion:MKCoordinateRegionMake(schoolLocation, MKCoordinateSpanMake(0.01, 0.01)) animated:YES];
+    MKPointAnnotation *schoolAnnotation = [[MKPointAnnotation alloc] init];
+    [schoolAnnotation setCoordinate:schoolLocation];
+    [schoolAnnotation setTitle:self.school.name];
+    [schoolAnnotation setSubtitle:[NSString stringWithFormat:@"%@, %@ %@", self.school.streetAddress, self.school.stateAbbreviation, self.school.zipcode]];
+
+    [self.mapView addAnnotation:schoolAnnotation];
+    [self.mapView selectAnnotation:schoolAnnotation animated:YES];
+
+    // Create formatter
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    [self.applicationFeeLabel setText:[NSString stringWithFormat:@"$%@", [self.school applicationFee]]];
+    [self.tuitionLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school totalPriceOutState]]]];
     
     for (UIView *whiteView in self.whiteViews) {
 //        [whiteView.layer setCornerRadius:5.0];
@@ -218,28 +253,49 @@
     [self.openInMapsButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
     [self.containerView setContentSize:CGSizeMake(540.0, 1115.0)];
     
+
     
 }
 
 #pragma mark - Buttons
 
 - (IBAction)applicationWebsite:(id)sender {
-    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    NSString *internetAddress = [self.school onlineApplicationInternetAddress];
+    if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
+        internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
+    }
+    NSURL *url = [NSURL URLWithString:internetAddress];
+    
     [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)missionStatementWebsite:(id)sender {
-    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    NSString *internetAddress = [self.school missionStatementInternetAddress];
+    if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
+        internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
+    }
+    NSURL *url = [NSURL URLWithString:internetAddress];
+    
     [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)collegeWebsite:(id)sender {
-    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    NSString *internetAddress = [self.school internetAddress];
+    if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
+        internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
+    }
+    NSURL *url = [NSURL URLWithString:internetAddress];
+    
     [[UIApplication sharedApplication] openURL:url];
 }
 
 - (IBAction)financialAidWebsite:(id)sender {
-    NSURL *url = [NSURL URLWithString:[self.school internetAddress]];
+    NSString *internetAddress = [self.school financialAidInternetAddress];
+    if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
+        internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
+    }
+    NSURL *url = [NSURL URLWithString:internetAddress];
+    
     [[UIApplication sharedApplication] openURL:url];
 }
 
@@ -254,6 +310,9 @@
 
 - (void)viewDidUnload
 {
+    [self setTuitionLabel:nil];
+    [self setTotalPriceLabel:nil];
+
     [self setOpenInMapsButton:nil];
     [self setMapView:nil];
     [self setLocationLabel:nil];
@@ -273,5 +332,6 @@
 {
 	return YES;
 }
+
 
 @end

@@ -15,9 +15,17 @@
 #import "FTCollegeVisitRatingsViewController.h"
 
 #import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
 
 #define kLatRadius 0.5
 #define kLonRadius 0.5
+
+#define MARGIN_X 15
+#define MARGIN_Y 15
+
+#define MARGIN_HEADER 15
+
+#define HEADER_HEIGHT 30
 
 @interface FTCollegeVisitViewController () {
     
@@ -32,6 +40,10 @@
 @property (nonatomic, strong) UIView *notesView;
 @property (nonatomic, strong) UIView *photosView;
 @property (nonatomic, strong) UIView *ratingsView;
+
+@property (nonatomic, strong) UIButton *notesButton;
+@property (nonatomic, strong) UIButton *photosButton;
+@property (nonatomic, strong) UIButton *ratingsButton;
 
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *bestEffortAtLocation;
@@ -54,6 +66,10 @@
 @synthesize photosView = _photosView;
 @synthesize ratingsView = _ratingsView;
 @synthesize notesView = _notesView;
+
+@synthesize photosButton;
+@synthesize notesButton;
+@synthesize ratingsButton;
 
 @synthesize bestEffortAtLocation;
 @synthesize locationManager;
@@ -86,52 +102,119 @@
     _ratingsView = [[UIView alloc] initWithFrame:CGRectZero];
     _notesView = [[UIView alloc] initWithFrame:CGRectZero];
 
-    [self.view addSubview:self.photosView];
-    [self.view addSubview:self.ratingsView];
-    [self.view addSubview:self.notesView];
-    
+    [self.view addSubview:_photosView];
+    [self.view addSubview:_ratingsView];
+    [self.view addSubview:_notesView];
     
     _photosViewController = [[FTCollegeVisitPhotosViewController alloc] init];
-    [self.photosViewController willMoveToParentViewController:self];
-    [self addChildViewController:self.photosViewController];
-    [self.photosView addSubview:self.photosViewController.view];
-    [self.photosViewController.view setFrame:CGRectZero];
-    [self.photosViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    [self.photosViewController didMoveToParentViewController:self];
-    
     _ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self.ratingsViewController willMoveToParentViewController:self];
-    [self addChildViewController:self.ratingsViewController];
-    [self.ratingsView addSubview:self.ratingsViewController.tableView];
-    [self.ratingsViewController.view setFrame:CGRectZero];
-    //[self.ratingsViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    [self.ratingsViewController didMoveToParentViewController:self];
-
-    _ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] init];
-    [self.ratingsViewController willMoveToParentViewController:self];
-    [self addChildViewController:self.ratingsViewController];
-    [self.ratingsView addSubview:self.ratingsViewController.view];
-    [self.ratingsViewController.view setFrame:CGRectZero];
-    [self.ratingsViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    [self.ratingsViewController didMoveToParentViewController:self];
-    
     _notesViewController = [[FTCollegeVisitNotesViewController alloc] init];
-    [self.notesViewController willMoveToParentViewController:self];
-    [self addChildViewController:self.notesViewController];
-    [self.notesView addSubview:self.notesViewController.view];
-    [self.notesViewController.view setFrame:CGRectZero];
-    [self.notesViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-    [self.notesViewController didMoveToParentViewController:self];
+    
+    if (INTERFACE_IS_PAD) {
+        [self.photosViewController willMoveToParentViewController:self];
+        [self addChildViewController:self.photosViewController];
+        [self.photosView addSubview:self.photosViewController.view];
+        [self.photosViewController.view setFrame:CGRectZero];
+        [self.photosViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        [self.photosViewController didMoveToParentViewController:self];
+        
+        [self.ratingsViewController willMoveToParentViewController:self];
+        [self addChildViewController:self.ratingsViewController];
+        [self.ratingsView addSubview:self.ratingsViewController.tableView];
+        [self.ratingsViewController.view setFrame:CGRectZero];
+        [self.ratingsViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        [self.ratingsViewController didMoveToParentViewController:self];
+        
+        [self.notesViewController willMoveToParentViewController:self];
+        [self addChildViewController:self.notesViewController];
+        [self.notesView addSubview:self.notesViewController.view];
+        [self.notesViewController.view setFrame:CGRectZero];
+        [self.notesViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        [self.notesViewController didMoveToParentViewController:self];
+        
+        
+        UIColor *textColor = [UIColor colorWithWhite:0.322 alpha:1.000];
+        
+        ratingsButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        photosButton = [[UIButton alloc] initWithFrame:CGRectZero];
+        notesButton = [[UIButton alloc] initWithFrame:CGRectZero];
+
+        [self.view addSubview:ratingsButton];
+        [self.view addSubview:photosButton];
+        [self.view addSubview:notesButton];
+        
+        [ratingsButton setTitleColor:textColor forState:UIControlStateNormal];
+        [ratingsButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [ratingsButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+        
+        [ratingsButton.layer setShadowOpacity:0.1];
+        [ratingsButton.layer setShadowColor:[UIColor blackColor].CGColor];
+        [ratingsButton.layer setShadowOffset:CGSizeMake(0, 1)];
+        
+        [ratingsButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
+        [ratingsButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
+         
+        [photosButton setTitleColor:textColor forState:UIControlStateNormal];
+        [photosButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [photosButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+        
+        [photosButton.layer setShadowOpacity:0.1];
+        [photosButton.layer setShadowColor:[UIColor blackColor].CGColor];
+        [photosButton.layer setShadowOffset:CGSizeMake(0, 1)];
+        
+        [photosButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
+        [photosButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
+        
+        [notesButton setTitleColor:textColor forState:UIControlStateNormal];
+        [notesButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [notesButton.titleLabel setShadowOffset:CGSizeMake(0, 1)];
+        
+        [notesButton.layer setShadowOpacity:0.1];
+        [notesButton.layer setShadowColor:[UIColor blackColor].CGColor];
+        [notesButton.layer setShadowOffset:CGSizeMake(0, 1)];
+        
+        [notesButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
+        [notesButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
+
+        
+    } else {
+        UITabBarController *tabBarController = [[UITabBarController alloc] init];
+
+        
+        [tabBarController setViewControllers:[NSArray arrayWithObjects:_photosViewController, _ratingsViewController, _notesViewController, nil]];
+        
+        [tabBarController.view setFrame:self.view.bounds];
+        [tabBarController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+        [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"iphonetab.png"]];
+        
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(floorf(self.view.frame.size.width / 3.0) + 2, 50.0), YES, 0.0);
+        [[[UIImage imageNamed:@"iphoneactivetab.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(24.0, 13.0, 24.0, 13.0)] drawInRect:CGRectMake(0, 0, floorf(self.view.frame.size.width / 3.0) + 2, 50.0)];
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [tabBarController.tabBar setSelectionIndicatorImage:img];
+
+        [tabBarController willMoveToParentViewController:self];
+        [self addChildViewController:tabBarController];
+        [self.view addSubview:tabBarController.view];
+        [tabBarController didMoveToParentViewController:self];
+    }
 }
 
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     
-    [self.photosView setFrame:CGRectMake(0.0, 100.0, self.view.frame.size.width - 320, self.view.frame.size.height - 100.0)];
+    //Let's hope to god I don't have to rewrite this.  just change defines.
+    [self.photosView setFrame:CGRectMake(MARGIN_X,  MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER, self.view.frame.size.width - 320 - 3 * MARGIN_X, self.view.frame.size.height - (2 * MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER))];
     
-    [self.ratingsView setFrame:CGRectMake(self.view.frame.size.width - 320, 100.0, 320, self.view.frame.size.height / 2.0 - 50.0)];
+    [self.ratingsView setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2*  MARGIN_Y) / 2.0)];
 
-    [self.notesView setFrame:CGRectMake(self.view.frame.size.width - 320, self.view.frame.size.height / 2.0 + 50.0, 320, self.view.frame.size.height / 2.0 - 50.0)];
+    [self.notesView setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, CGRectGetMaxY(self.ratingsView.frame) + 2 * MARGIN_HEADER + HEADER_HEIGHT, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2 * MARGIN_Y) / 2.0)];
+
+    [self.photosButton setFrame:CGRectMake(MARGIN_X, MARGIN_Y, CGRectGetWidth(self.photosView.frame), HEADER_HEIGHT)];
+    [self.ratingsButton setFrame:CGRectMake(CGRectGetMaxX(self.photosView.frame) + MARGIN_X, MARGIN_Y, CGRectGetWidth(self.ratingsView.frame), HEADER_HEIGHT)];
+    [self.notesButton setFrame:CGRectMake(CGRectGetMaxX(self.photosView.frame) + MARGIN_X, MARGIN_HEADER + CGRectGetMaxY(self.ratingsView.frame), CGRectGetWidth(self.ratingsView.frame), HEADER_HEIGHT)];    
+
 }
 
 #pragma mark Location Manager Interactions 
@@ -195,36 +278,31 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"unitID" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
     
-    NSError *err = nil;
-    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&err];
-    NSLog(@"%i", [objects count]);
-    if (err != nil) {
-        NSLog(@"%@", [err localizedDescription]);
-    }
-    NSLog(@"%@", objects);
-    NSArray *sortedObjs = [objects sortedArrayWithOptions:NSSortConcurrent | NSSortStable usingComparator:^NSComparisonResult(id obj1, id obj2) {
-        College *school1 = (College *) obj1;
-        College *school2 = (College *) obj2;
-        
-        CLLocation *loc = [[CLLocation alloc] initWithLatitude:[[school1 lat] doubleValue] longitude:[[school1 lon] doubleValue]];
-        CLLocationDistance dist1 = [self.bestEffortAtLocation distanceFromLocation:loc];
-        loc = [[CLLocation alloc] initWithLatitude:[[school2 lat] doubleValue] longitude:[[school2 lon] doubleValue]];
-        CLLocationDistance dist2 = [self.bestEffortAtLocation distanceFromLocation:loc];
-        
-        if (dist1 > dist2) return NSOrderedDescending;
-        if (dist1 < dist2) return NSOrderedAscending;
-        else return NSOrderedSame;
-    }];
-    
-    self.nearbySchools = [sortedObjs subarrayWithRange:NSMakeRange(0, 10)];
-    NSLog(@"%@", sortedObjs);
-    NSLog(@"%@", self.nearbySchools);
-    
+//    NSError *err = nil;
+//    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&err];
+//    if (err != nil) {
+//        NSLog(@"%@", [err localizedDescription]);
+//    }
+//    NSArray *sortedObjs = [objects sortedArrayWithOptions:NSSortConcurrent | NSSortStable usingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        College *school1 = (College *) obj1;
+//        College *school2 = (College *) obj2;
+//        
+//        CLLocation *loc = [[CLLocation alloc] initWithLatitude:[[school1 lat] doubleValue] longitude:[[school1 lon] doubleValue]];
+//        CLLocationDistance dist1 = [self.bestEffortAtLocation distanceFromLocation:loc];
+//        loc = [[CLLocation alloc] initWithLatitude:[[school2 lat] doubleValue] longitude:[[school2 lon] doubleValue]];
+//        CLLocationDistance dist2 = [self.bestEffortAtLocation distanceFromLocation:loc];
+//        
+//        if (dist1 > dist2) return NSOrderedDescending;
+//        if (dist1 < dist2) return NSOrderedAscending;
+//        else return NSOrderedSame;
+//    }];
+//    
+//    self.nearbySchools = [sortedObjs subarrayWithRange:NSMakeRange(0, 10)];
+     
     [self updateNearbySchoolsView];
 }
 
 - (void) updateNearbySchoolsView {
-    UIView *schoolContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120.0, 64.0)];
     
     
 }

@@ -123,6 +123,10 @@
 		7B75DEBE15AC83CC005A4233 /* collegedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEBD15AC83CC005A4233 /* collegedata.json */; };
 		7B75DECA15AC91DA005A4233 /* modaltab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEC915AC91DA005A4233 /* modaltab.png */; };
 		7B75DED615ACB0E5005A4233 /* shitty.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DED515ACB0E5005A4233 /* shitty.png */; };
+		7B7B327A15B47B6300625FA6 /* FTStandardizedTestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7B327915B47B6300625FA6 /* FTStandardizedTestingViewController.m */; };
+		7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7B327C15B47C7700625FA6 /* FTRatingsCell.m */; };
+		7B7B327F15B485B400625FA6 /* iphonetab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7B327E15B485B400625FA6 /* iphonetab.png */; };
+		7B7B328215B48AF100625FA6 /* iphoneactivetab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7B328115B48AF100625FA6 /* iphoneactivetab.png */; };
 		7B97BD1D15A7C0A100EF7906 /* FTGradesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B97BD1C15A7C0A100EF7906 /* FTGradesViewController.m */; };
 		7B97BD2A15A7C14D00EF7906 /* gradesbottomcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */; };
 		7B97BD2B15A7C14D00EF7906 /* gradestopcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B97BD2215A7C14D00EF7906 /* gradestopcell.png */; };
@@ -141,6 +145,7 @@
 		7BB663C215AF39F300428A64 /* iconipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663C115AF39F300428A64 /* iconipad.png */; };
 		7BB663C515AF3A8100428A64 /* College.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB663C415AF3A8100428A64 /* College.m */; };
 		7BB663CB15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663CA15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib */; };
+		7BCB88A415B49D2B008BA15C /* visitsectionheader.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88A315B49D2B008BA15C /* visitsectionheader.png */; };
 		7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */; };
 /* End PBXBuildFile section */
 
@@ -226,7 +231,7 @@
 		7B6266BB15A75F1500A5879C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7B6266C815A7614900A5879C /* FTMasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTMasterViewController.h; sourceTree = "<group>"; };
 		7B6266C915A7614900A5879C /* FTMasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTMasterViewController.m; sourceTree = "<group>"; };
-		7B6266CC15A7635F00A5879C /* FTCollegeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = FTCollegeSearchViewController.h; path = ../FTCollegeSearchViewController.h; sourceTree = "<group>"; };
+		7B6266CC15A7635F00A5879C /* FTCollegeSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTCollegeSearchViewController.h; path = ../FTCollegeSearchViewController.h; sourceTree = "<group>"; };
 		7B6266CD15A7635F00A5879C /* FTCollegeSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTCollegeSearchViewController.m; path = ../FTCollegeSearchViewController.m; sourceTree = "<group>"; };
 		7B6266CF15A764B100A5879C /* navtopcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navtopcell.png; sourceTree = "<group>"; };
 		7B6266D015A764B100A5879C /* navcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navcell.png; sourceTree = "<group>"; };
@@ -288,6 +293,12 @@
 		7B75DEBD15AC83CC005A4233 /* collegedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedata.json; sourceTree = "<group>"; };
 		7B75DEC915AC91DA005A4233 /* modaltab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modaltab.png; sourceTree = "<group>"; };
 		7B75DED515ACB0E5005A4233 /* shitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shitty.png; sourceTree = "<group>"; };
+		7B7B327815B47B6300625FA6 /* FTStandardizedTestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStandardizedTestingViewController.h; sourceTree = "<group>"; };
+		7B7B327915B47B6300625FA6 /* FTStandardizedTestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStandardizedTestingViewController.m; sourceTree = "<group>"; };
+		7B7B327B15B47C7700625FA6 /* FTRatingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRatingsCell.h; sourceTree = "<group>"; };
+		7B7B327C15B47C7700625FA6 /* FTRatingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRatingsCell.m; sourceTree = "<group>"; };
+		7B7B327E15B485B400625FA6 /* iphonetab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphonetab.png; sourceTree = "<group>"; };
+		7B7B328115B48AF100625FA6 /* iphoneactivetab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneactivetab.png; sourceTree = "<group>"; };
 		7B97BD1B15A7C0A100EF7906 /* FTGradesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTGradesViewController.h; sourceTree = "<group>"; };
 		7B97BD1C15A7C0A100EF7906 /* FTGradesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTGradesViewController.m; sourceTree = "<group>"; };
 		7B97BD2115A7C14D00EF7906 /* gradesbottomcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradesbottomcell.png; sourceTree = "<group>"; };
@@ -310,6 +321,7 @@
 		7BB663C315AF3A8100428A64 /* College.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = College.h; sourceTree = "<group>"; };
 		7BB663C415AF3A8100428A64 /* College.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = College.m; sourceTree = "<group>"; };
 		7BB663CA15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~iphone.xib"; sourceTree = "<group>"; };
+		7BCB88A315B49D2B008BA15C /* visitsectionheader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visitsectionheader.png; sourceTree = "<group>"; };
 		7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneicon2x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -464,6 +476,7 @@
 		7B6266B015A75E9E00A5879C /* images */ = {
 			isa = PBXGroup;
 			children = (
+				7B7B328015B485C300625FA6 /* College Visiting */,
 				7B51E5E415AB2945002F2A2E /* College Search / View */,
 				7B97BD1E15A7C10D00EF7906 /* Grade View */,
 				7B6266D915A76B4800A5879C /* Standard UI */,
@@ -485,6 +498,8 @@
 		7B6266B215A75EB100A5879C /* Standardized Testing View */ = {
 			isa = PBXGroup;
 			children = (
+				7B7B327815B47B6300625FA6 /* FTStandardizedTestingViewController.h */,
+				7B7B327915B47B6300625FA6 /* FTStandardizedTestingViewController.m */,
 			);
 			name = "Standardized Testing View";
 			sourceTree = "<group>";
@@ -568,6 +583,8 @@
 		7B6266D915A76B4800A5879C /* Standard UI */ = {
 			isa = PBXGroup;
 			children = (
+				7B7B328115B48AF100625FA6 /* iphoneactivetab.png */,
+				7B7B327E15B485B400625FA6 /* iphonetab.png */,
 				7B51E37E15A8F4C8002F2A2E /* backselect.png */,
 				7B51E37A15A8EF43002F2A2E /* backbutton.png */,
 				7B51E36515A8CAF1002F2A2E /* cancel.png */,
@@ -682,6 +699,14 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		7B7B328015B485C300625FA6 /* College Visiting */ = {
+			isa = PBXGroup;
+			children = (
+				7BCB88A315B49D2B008BA15C /* visitsectionheader.png */,
+			);
+			name = "College Visiting";
+			sourceTree = "<group>";
+		};
 		7B97BD1E15A7C10D00EF7906 /* Grade View */ = {
 			isa = PBXGroup;
 			children = (
@@ -712,6 +737,8 @@
 				7B2C583D15B0BD8C00D3845B /* FTCollegeVisitView.m */,
 				7B2C583915B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.h */,
 				7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */,
+				7B7B327B15B47C7700625FA6 /* FTRatingsCell.h */,
+				7B7B327C15B47C7700625FA6 /* FTRatingsCell.m */,
 				7B2C582D15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.h */,
 				7B2C582E15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m */,
 				7B2C583015B0AF2A00D3845B /* FTCollegeVisitNotesViewController.h */,
@@ -849,6 +876,9 @@
 				7B2C584015B0BE5500D3845B /* gradesbottomcellactive.png in Resources */,
 				7B2C584215B0BE5D00D3845B /* gradestopcellactive.png in Resources */,
 				7B2C584415B0BE6500D3845B /* gradecellactive.png in Resources */,
+				7B7B327F15B485B400625FA6 /* iphonetab.png in Resources */,
+				7B7B328215B48AF100625FA6 /* iphoneactivetab.png in Resources */,
+				7BCB88A415B49D2B008BA15C /* visitsectionheader.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -927,6 +957,8 @@
 				7B2C583215B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m in Sources */,
 				7B2C583B15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m in Sources */,
 				7B2C583E15B0BD8C00D3845B /* FTCollegeVisitView.m in Sources */,
+				7B7B327A15B47B6300625FA6 /* FTStandardizedTestingViewController.m in Sources */,
+				7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "FTCollegeVisitNotesViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface FTCollegeVisitNotesViewController ()
 
@@ -27,6 +28,16 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor yellowColor]];
+    
+    if (INTERFACE_IS_PAD) {
+        [self.view.layer setCornerRadius:5.0];
+        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
+        [self.view.layer setBorderWidth:1.0];
+        
+        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
+        [self.view.layer setShadowColor:[UIColor blackColor].CGColor];
+        [self.view.layer setShadowOpacity:0.15];
+    }
     
 	// Do any additional setup after loading the view.
 }
