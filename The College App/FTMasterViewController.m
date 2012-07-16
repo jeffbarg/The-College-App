@@ -8,8 +8,9 @@
 
 #import "FTMasterViewController.h"
 #import "FTExtracurriclarsViewController.h"
-#import "FTCollegeListViewController.h"
+#import "FTCollegeSearchViewController.h"
 #import "FTGradesViewController.h"
+#import "FTCollegeVisitViewController.h"
 
 @interface FTMasterViewController ()
 
@@ -92,12 +93,15 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return section == 0?5:2;
+    if (section == 0) return 5;
+    else if (section == 1) return 2;
+    else return 1;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -114,6 +118,10 @@
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
         [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         cell.backgroundView = imgView;
+        
+        UIImageView *selImgView = [[UIImageView alloc] initWithFrame:imgViewRect];
+        [selImgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        cell.selectedBackgroundView = selImgView;
     }
     
     //Configure Cell
@@ -153,6 +161,14 @@
         }
         
     }
+    
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            [cell.textLabel setText:@"Colleges Near Me"];
+            [cell.imageView setImage:[UIImage imageNamed:@"nearme.png"]];
+        }
+    }
+    
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
     [cell.detailTextLabel setBackgroundColor:[UIColor clearColor]];
     
@@ -161,12 +177,18 @@
     if (indexPath.row == 0) {
         UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"navtopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
+        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
+        [selImgView setImage:[[UIImage imageNamed:@"navtopcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
     } else if (indexPath.row == ([tableView numberOfRowsInSection:indexPath.section] - 1)) {
         UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"navbottom.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
+        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
+        [selImgView setImage:[[UIImage imageNamed:@"navbottomactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
     } else {
         UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"navcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
+        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
+        [selImgView setImage:[[UIImage imageNamed:@"navcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)]];
     }
     
     [cell.textLabel setTextColor:[UIColor colorWithWhite:0.820 alpha:1.000]];
@@ -178,7 +200,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return section == 0? @"My College Profile":@"Colleges";
+    
+    if (section == 0) return @"My Profile";
+    else if (section == 1) return @"Colleges";
+    else return @"College Visits";
 }
 
 /*
@@ -245,8 +270,8 @@
         } else {
             
         }
-    } else {
-        FTCollegeListViewController *collegeListViewController = [[FTCollegeListViewController alloc] init];
+    } else if (indexPath.section == 1) {
+        FTCollegeSearchViewController *collegeListViewController = [[FTCollegeSearchViewController alloc] init];
         [collegeListViewController setManagedObjectContext:self.managedObjectContext];
 
         if (indexPath.row == 0) {
@@ -256,6 +281,13 @@
         } 
         
         newViewController = (UIViewController<UISplitViewControllerDelegate> *) collegeListViewController;
+    } else {
+        if (indexPath.row == 0) {
+            FTCollegeVisitViewController *collegeVisitViewController = [[FTCollegeVisitViewController alloc] init];
+            [collegeVisitViewController setManagedObjectContext:self.managedObjectContext];
+            
+            newViewController = (UIViewController<UISplitViewControllerDelegate> *) collegeVisitViewController;
+        }
     }
     
     if ([newViewController class] == [self.detailViewController class])

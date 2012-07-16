@@ -19,3 +19,5 @@
 #define INTERFACE_IS_PORTRAIT   (UIInterfaceOrientationIsPortrait( [[UIApplication sharedApplication] statusBarOrientation]))
 
 #define kViewBackgroundColor [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000]
+
+#define yeah YES

@@ -399,7 +399,9 @@
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:imgViewRect];
         [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         cell.backgroundView = imgView;
-        
+        UIImageView *selImgView = [[UIImageView alloc] initWithFrame:imgViewRect];
+        [selImgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        cell.selectedBackgroundView = selImgView;        
     }
     
     [cell.textLabel setBackgroundColor:[UIColor clearColor]];
@@ -421,19 +423,27 @@
     
     if (indexPath.row == 0) {
         UIImageView *imgView = (UIImageView *) cell.backgroundView;
+        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
         if (indexPath.row == [sectionInfo numberOfObjects] - 1) {
             [imgView setImage:[[UIImage imageNamed:@"gradessinglecell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
+
+            [selImgView setImage:[[UIImage imageNamed:@"gradesbottomcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
         } else {
-            [imgView setImage:[[UIImage imageNamed:@"gradestopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];    
+            [imgView setImage:[[UIImage imageNamed:@"gradestopcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];   
+            [selImgView setImage:[[UIImage imageNamed:@"gradestopcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
         }
         
     } else if (indexPath.row == [sectionInfo numberOfObjects] - 1) {
         UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"gradesbottomcell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
+        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
+        [selImgView setImage:[[UIImage imageNamed:@"gradesbottomcellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 9.0, 0.0, 9.0)]];
 
     } else {
         UIImageView *imgView = (UIImageView *) cell.backgroundView;
         [imgView setImage:[[UIImage imageNamed:@"gradecell.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)]];
+        UIImageView *selImgView = (UIImageView *) cell.selectedBackgroundView;
+        [selImgView setImage:[[UIImage imageNamed:@"gradecellactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 10.0)]];
     }
     
     Grade *cellGrade = (Grade *)[self.fetchedResultsController objectAtIndexPath:indexPath];

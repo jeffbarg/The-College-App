@@ -8,7 +8,7 @@
 
 #import "FTAppDelegate.h"
 #import "FTMasterViewController.h"
-#import "FTCollegeListViewController.h"
+#import "FTCollegeSearchViewController.h"
 #import "SBJson.h"
 
 #import "College.h"
@@ -35,7 +35,7 @@
         FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStyleGrouped];
         UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
         
-        FTCollegeListViewController *detailViewController = [[FTCollegeListViewController alloc] init];
+        FTCollegeSearchViewController *detailViewController = [[FTCollegeSearchViewController alloc] init];
         [detailViewController setManagedObjectContext:self.managedObjectContext];
         
         UINavigationController *detailNavigationController = [[UINavigationController alloc] initWithRootViewController:detailViewController];
@@ -54,7 +54,7 @@
     }
     [self.window makeKeyAndVisible];
     
-    //[self initializeData];
+     //[self initializeData];
     
     return YES;
 }
@@ -129,6 +129,9 @@
 
         
         [school setUndergraduatePopulation:extractIntegerFromDict(@"drvef122011.undupug:VL-12-month unduplicated headcount- undergraduate: 2010-11", dict)];
+        
+        [school setApplicationFee:extractIntegerFromDict(@"ic2011.applfeeu:VL-Undergraduate application fee", dict)];
+        
         [school setTuitionAndFees:extractIntegerFromDict(@"drvic2011.tufeyr3:VL-Tuition and fees- 2011-12", dict)];
         [school setStreetAddress:extractStringFromDict(@"hd2011.addr:VL-Street address or post office box", dict)];
         [school setTotalPriceInState:extractIntegerFromDict(@"drvic2011.cinson:VL-Total price for in-state students living on campus 2011-12", dict)];
