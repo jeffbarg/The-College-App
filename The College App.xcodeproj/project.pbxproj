@@ -26,7 +26,6 @@
 		7B35F90915AE274F00EFFFE8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B35F90815AE274F00EFFFE8 /* MapKit.framework */; };
 		7B35F90D15AE276E00EFFFE8 /* photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F90C15AE276E00EFFFE8 /* photos.png */; };
 		7B35F90F15AE277B00EFFFE8 /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F90E15AE277A00EFFFE8 /* notes.png */; };
-		7B35F91115AE28F100EFFFE8 /* FTCollegeInfoViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F91015AE28F100EFFFE8 /* FTCollegeInfoViewController~ipad.xib */; };
 		7B35F92115AE303F00EFFFE8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F91915AE303F00EFFFE8 /* Icon.png */; };
 		7B35F92315AE303F00EFFFE8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F91B15AE303F00EFFFE8 /* iTunesArtwork */; };
 		7B51E36915A8CAF1002F2A2E /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36515A8CAF1002F2A2E /* cancel.png */; };
@@ -144,8 +143,9 @@
 		7BB663BE15AF376A00428A64 /* collegedatajuly12.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663BD15AF376A00428A64 /* collegedatajuly12.json */; };
 		7BB663C215AF39F300428A64 /* iconipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663C115AF39F300428A64 /* iconipad.png */; };
 		7BB663C515AF3A8100428A64 /* College.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB663C415AF3A8100428A64 /* College.m */; };
-		7BB663CB15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663CA15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib */; };
 		7BCB88A415B49D2B008BA15C /* visitsectionheader.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88A315B49D2B008BA15C /* visitsectionheader.png */; };
+		7BCB88A815B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88A615B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib */; };
+		7BCB88A915B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88A715B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib */; };
 		7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */; };
 /* End PBXBuildFile section */
 
@@ -186,7 +186,6 @@
 		7B35F90815AE274F00EFFFE8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B35F90C15AE276E00EFFFE8 /* photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos.png; sourceTree = "<group>"; };
 		7B35F90E15AE277A00EFFFE8 /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
-		7B35F91015AE28F100EFFFE8 /* FTCollegeInfoViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~ipad.xib"; sourceTree = "<group>"; };
 		7B35F91915AE303F00EFFFE8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		7B35F91B15AE303F00EFFFE8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		7B51E36515A8CAF1002F2A2E /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
@@ -320,8 +319,9 @@
 		7BB663C115AF39F300428A64 /* iconipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconipad.png; sourceTree = "<group>"; };
 		7BB663C315AF3A8100428A64 /* College.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = College.h; sourceTree = "<group>"; };
 		7BB663C415AF3A8100428A64 /* College.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = College.m; sourceTree = "<group>"; };
-		7BB663CA15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~iphone.xib"; sourceTree = "<group>"; };
 		7BCB88A315B49D2B008BA15C /* visitsectionheader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visitsectionheader.png; sourceTree = "<group>"; };
+		7BCB88A615B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~ipad.xib"; sourceTree = "<group>"; };
+		7BCB88A715B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~iphone.xib"; sourceTree = "<group>"; };
 		7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneicon2x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -513,8 +513,8 @@
 				7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */,
 				7B35F8F815ADEE6800EFFFE8 /* FTCollegeInfoViewController.h */,
 				7B35F8F915ADEE6900EFFFE8 /* FTCollegeInfoViewController.m */,
-				7B35F91015AE28F100EFFFE8 /* FTCollegeInfoViewController~ipad.xib */,
-				7BB663CA15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib */,
+				7BCB88A615B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib */,
+				7BCB88A715B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib */,
 				7B35F8FF15ADEFA400EFFFE8 /* FTRangeIndicator.h */,
 				7B35F90015ADEFA400EFFFE8 /* FTRangeIndicator.m */,
 				7B12408815AF10DA006913C3 /* FTWhiteShadowView.h */,
@@ -865,10 +865,8 @@
 				7B35F90715AE0B8500EFFFE8 /* info.png in Resources */,
 				7B35F90D15AE276E00EFFFE8 /* photos.png in Resources */,
 				7B35F90F15AE277B00EFFFE8 /* notes.png in Resources */,
-				7B35F91115AE28F100EFFFE8 /* FTCollegeInfoViewController~ipad.xib in Resources */,
 				7BB663BE15AF376A00428A64 /* collegedatajuly12.json in Resources */,
 				7BB663C215AF39F300428A64 /* iconipad.png in Resources */,
-				7BB663CB15AF4CB400428A64 /* FTCollegeInfoViewController~iphone.xib in Resources */,
 				7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */,
 				7B2C583415B0B80500D3845B /* navcellactive.png in Resources */,
 				7B2C583615B0B81600D3845B /* navtopcellactive.png in Resources */,
@@ -879,6 +877,8 @@
 				7B7B327F15B485B400625FA6 /* iphonetab.png in Resources */,
 				7B7B328215B48AF100625FA6 /* iphoneactivetab.png in Resources */,
 				7BCB88A415B49D2B008BA15C /* visitsectionheader.png in Resources */,
+				7BCB88A815B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib in Resources */,
+				7BCB88A915B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
