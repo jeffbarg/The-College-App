@@ -78,7 +78,10 @@
     _gmGridView.sortingDelegate = self;
     _gmGridView.dataSource = self;
     _gmGridView.allowsHorizontalReordering = NO;
-
+    
+    _gmGridView.alwaysBounceVertical = yeah;
+    _gmGridView.bounces = hellzyeah;
+    
     [self.view addSubview:gmGridView];
     
 }

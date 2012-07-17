@@ -9,6 +9,7 @@
 #import "FTCollegeVisitViewController.h"
 #import "KSCustomPopoverBackgroundView.h"
 #import "ECSlidingViewController.h"
+#import "UIImage+ProportionalFill.h"
 
 #import "College.h"
 
@@ -284,15 +285,20 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
-    UIImage *campusImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *campusImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];    
+    UIImageWriteToSavedPhotosAlbum(campusImage, nil, nil, nil);
+
+    UIImage *croppedImage = [campusImage imageToFitSize:CGSizeMake(185.0, 132.0) method:MGImageResizeScale];
+                             
     CampusPhoto *photoObject = [NSEntityDescription insertNewObjectForEntityForName:@"CampusPhoto" inManagedObjectContext:self.managedObjectContext];
-    [photoObject setImage:campusImage];
+    [photoObject setImage:croppedImage];
     [photoObject setDateCreated:[NSDate date]];
     
     NSError *err = nil;
     if (![self.managedObjectContext save:&err]) {
         NSLog(@"%@", [err localizedDescription]);
     }
+    
     
     [self.masterPopoverController dismissPopoverAnimated:YES];
 }

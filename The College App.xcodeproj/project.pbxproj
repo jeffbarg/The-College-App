@@ -63,6 +63,8 @@
 		7B51E5E915AB2A99002F2A2E /* web.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E5E815AB2A99002F2A2E /* web.png */; };
 		7B51E5EB15AB2AAE002F2A2E /* view.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E5EA15AB2AAE002F2A2E /* view.png */; };
 		7B51E5F315AB357B002F2A2E /* FTCollegeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */; };
+		7B55D08615B5E38500947B2E /* UIImage+ProportionalFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D08515B5E38500947B2E /* UIImage+ProportionalFill.m */; };
+		7B55D08715B5E38D00947B2E /* UIImage+ProportionalFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D08515B5E38500947B2E /* UIImage+ProportionalFill.m */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -222,6 +224,8 @@
 		7B51E5EA15AB2AAE002F2A2E /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
 		7B51E5F115AB357B002F2A2E /* FTCollegeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeCellView.h; sourceTree = "<group>"; };
 		7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeCellView.m; sourceTree = "<group>"; };
+		7B55D08415B5E38500947B2E /* UIImage+ProportionalFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ProportionalFill.h"; sourceTree = "<group>"; };
+		7B55D08515B5E38500947B2E /* UIImage+ProportionalFill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ProportionalFill.m"; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -721,9 +725,9 @@
 		7B62673E15A779F800A5879C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */,
 				7B6AF4AE15B5CA5F00BE330F /* CampusPhoto.h */,
 				7B6AF4AF15B5CA5F00BE330F /* CampusPhoto.m */,
-				7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */,
 				7B6AF49E15B5BF9C00BE330F /* Visit.h */,
 				7B6AF49F15B5BF9C00BE330F /* Visit.m */,
 				7BB663C315AF3A8100428A64 /* College.h */,
@@ -734,6 +738,8 @@
 				7B62673C15A779ED00A5879C /* Extracurricular.m */,
 				7B6AF4A715B5C0AC00BE330F /* UIImageToDataTransformer.h */,
 				7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */,
+				7B55D08415B5E38500947B2E /* UIImage+ProportionalFill.h */,
+				7B55D08515B5E38500947B2E /* UIImage+ProportionalFill.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -969,6 +975,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B55D08715B5E38D00947B2E /* UIImage+ProportionalFill.m in Sources */,
 				7B6AF4AD15B5C12100BE330F /* UIImageToDataTransformer.m in Sources */,
 				7BCB88C215B4B2FA008BA15C /* InitialSlidingViewController.m in Sources */,
 				7BCB88BD15B4B20E008BA15C /* ECSlidingViewController.m in Sources */,
@@ -1052,6 +1059,7 @@
 				7BCB88BC15B4B08F008BA15C /* UIImage+ImageWithUIView.m in Sources */,
 				7BCB88C115B4B2A3008BA15C /* InitialSlidingViewController.m in Sources */,
 				7B6AF4A915B5C0AC00BE330F /* UIImageToDataTransformer.m in Sources */,
+				7B55D08615B5E38500947B2E /* UIImage+ProportionalFill.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

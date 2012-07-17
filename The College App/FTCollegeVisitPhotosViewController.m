@@ -56,6 +56,9 @@
     _gmGridView.dataSource = self;
     _gmGridView.allowsHorizontalReordering = YES;
 
+    _gmGridView.alwaysBounceVertical = yeah;
+    _gmGridView.bounces = hellzyeah;
+    
     [self.view addSubview:gmGridView];
 }
 
