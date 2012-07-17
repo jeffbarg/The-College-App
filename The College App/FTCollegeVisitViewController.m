@@ -19,6 +19,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 
+#import "Visit.h"
+#import "CampusPhoto.h"
+
 #define kLatRadius 0.5
 #define kLonRadius 0.5
 
@@ -29,7 +32,7 @@
 
 #define HEADER_HEIGHT 30
 
-@interface FTCollegeVisitViewController () {
+@interface FTCollegeVisitViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     
 }
 
@@ -90,12 +93,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:nil action:nil];
-//    
-//    UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:nil action:nil];
-//    
-//    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:backButton, [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], nil];
-//    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil], cameraItem, nil];
+    
+    UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto:)];
+  
+    self.navigationItem.rightBarButtonItem = cameraItem;
+    
     
     UIImageView *titleView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]];
                          
@@ -116,7 +118,10 @@
     _photosView = [[UIView alloc] initWithFrame:CGRectZero];
     _ratingsView = [[UIView alloc] initWithFrame:CGRectZero];
     _notesView = [[UIView alloc] initWithFrame:CGRectZero];
-
+    [_photosView setClipsToBounds:YES];
+    [_ratingsView setClipsToBounds:YES];
+    [_notesView setClipsToBounds:YES];
+    
     [self.view addSubview:_photosView];
     [self.view addSubview:_ratingsView];
     [self.view addSubview:_notesView];
@@ -125,11 +130,14 @@
     _ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] initWithStyle:UITableViewStylePlain];
     _notesViewController = [[FTCollegeVisitNotesViewController alloc] init];
     
+    [_photosViewController setManagedObjectContext:self.managedObjectContext];
+    
     if (INTERFACE_IS_PAD) {
         [self.photosViewController willMoveToParentViewController:self];
         [self addChildViewController:self.photosViewController];
         [self.photosView addSubview:self.photosViewController.view];
         [self.photosViewController.view setFrame:CGRectZero];
+
         [self.photosViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
         [self.photosViewController didMoveToParentViewController:self];
         
@@ -248,6 +256,46 @@
 
 }
 
+#pragma mark - Buttons
+
+- (void) takePhoto:(UIBarButtonItem *) barButtonItem {
+    UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+    [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+    [pickerController setDelegate:self];
+    
+    if (INTERFACE_IS_PAD) {
+        if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible]) { //MORE STUFF
+            [self.masterPopoverController dismissPopoverAnimated:YES];
+            self.masterPopoverController = nil;
+        }
+        
+        self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
+        [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+        
+        [self.masterPopoverController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        
+    } else {
+        [self presentViewController:pickerController animated:YES completion:^{}];
+    }
+    
+}
+
+#pragma mark - UIImagePickerController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *campusImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+    CampusPhoto *photoObject = [NSEntityDescription insertNewObjectForEntityForName:@"CampusPhoto" inManagedObjectContext:self.managedObjectContext];
+    [photoObject setImage:campusImage];
+    [photoObject setDateCreated:[NSDate date]];
+    
+    NSError *err = nil;
+    if (![self.managedObjectContext save:&err]) {
+        NSLog(@"%@", [err localizedDescription]);
+    }
+    
+    [self.masterPopoverController dismissPopoverAnimated:YES];
+}
 #pragma mark Location Manager Interactions 
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {

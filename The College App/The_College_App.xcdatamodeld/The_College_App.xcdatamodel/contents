@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CampusPhoto" representedClassName="CampusPhoto" syncable="YES">
+        <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="UIImageToDataTransformer" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="visit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="campusPhotos" inverseEntity="Visit" syncable="YES"/>
+    </entity>
+    <entity name="CampusRating" syncable="YES">
+        <attribute name="prompt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="visit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="campusRatings" inverseEntity="Visit" syncable="YES"/>
+    </entity>
     <entity name="College" representedClassName="College" syncable="YES">
         <attribute name="admissionsInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="admissionsTotal" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -42,6 +55,7 @@
         <attribute name="writingSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="writingSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visit" inverseName="college" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <entity name="Extracurricular" representedClassName="Extracurricular" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -61,9 +75,19 @@
         <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
+    <entity name="Visit" representedClassName="Visit" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="campusPhotos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CampusPhoto" inverseName="visit" inverseEntity="CampusPhoto" syncable="YES"/>
+        <relationship name="campusRatings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CampusRating" inverseName="visit" inverseEntity="CampusRating" syncable="YES"/>
+        <relationship name="college" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="College" inverseName="visits" inverseEntity="College" syncable="YES"/>
+    </entity>
     <elements>
+        <element name="CampusPhoto" positionX="-243" positionY="663" width="128" height="135"/>
+        <element name="CampusRating" positionX="-378" positionY="657" width="128" height="90"/>
         <element name="College" positionX="160" positionY="192" width="128" height="585"/>
         <element name="Extracurricular" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Grade" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
     </elements>
 </model>

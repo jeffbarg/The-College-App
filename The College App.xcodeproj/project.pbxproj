@@ -118,6 +118,10 @@
 		7B62674415A77FE400A5879C /* GMGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62671215A7746400A5879C /* GMGridViewCell.m */; };
 		7B62674515A77FE400A5879C /* GMGridViewLayoutStrategies.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62671415A7746400A5879C /* GMGridViewLayoutStrategies.m */; };
 		7B62674615A781D200A5879C /* FTExtracurricularCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62670515A773DC00A5879C /* FTExtracurricularCellView.m */; };
+		7B6AF4A015B5BF9C00BE330F /* Visit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AF49F15B5BF9C00BE330F /* Visit.m */; };
+		7B6AF4A915B5C0AC00BE330F /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */; };
+		7B6AF4AD15B5C12100BE330F /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */; };
+		7B6AF4B015B5CA5F00BE330F /* CampusPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AF4AF15B5CA5F00BE330F /* CampusPhoto.m */; };
 		7B75DEBE15AC83CC005A4233 /* collegedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEBD15AC83CC005A4233 /* collegedata.json */; };
 		7B75DECA15AC91DA005A4233 /* modaltab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEC915AC91DA005A4233 /* modaltab.png */; };
 		7B75DED615ACB0E5005A4233 /* shitty.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DED515ACB0E5005A4233 /* shitty.png */; };
@@ -296,6 +300,12 @@
 		7B62673915A7785100A5879C /* close_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_x.png; sourceTree = "<group>"; };
 		7B62673B15A779EC00A5879C /* Extracurricular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Extracurricular.h; sourceTree = "<group>"; };
 		7B62673C15A779ED00A5879C /* Extracurricular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Extracurricular.m; sourceTree = "<group>"; };
+		7B6AF49E15B5BF9C00BE330F /* Visit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visit.h; sourceTree = "<group>"; };
+		7B6AF49F15B5BF9C00BE330F /* Visit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visit.m; sourceTree = "<group>"; };
+		7B6AF4A715B5C0AC00BE330F /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
+		7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
+		7B6AF4AE15B5CA5F00BE330F /* CampusPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampusPhoto.h; sourceTree = "<group>"; };
+		7B6AF4AF15B5CA5F00BE330F /* CampusPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampusPhoto.m; sourceTree = "<group>"; };
 		7B75DEBD15AC83CC005A4233 /* collegedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedata.json; sourceTree = "<group>"; };
 		7B75DEC915AC91DA005A4233 /* modaltab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modaltab.png; sourceTree = "<group>"; };
 		7B75DED515ACB0E5005A4233 /* shitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shitty.png; sourceTree = "<group>"; };
@@ -711,13 +721,19 @@
 		7B62673E15A779F800A5879C /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				7B6AF4AE15B5CA5F00BE330F /* CampusPhoto.h */,
+				7B6AF4AF15B5CA5F00BE330F /* CampusPhoto.m */,
 				7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */,
+				7B6AF49E15B5BF9C00BE330F /* Visit.h */,
+				7B6AF49F15B5BF9C00BE330F /* Visit.m */,
 				7BB663C315AF3A8100428A64 /* College.h */,
 				7BB663C415AF3A8100428A64 /* College.m */,
 				7B97BD3615A7C4B900EF7906 /* Grade.h */,
 				7B97BD3715A7C4B900EF7906 /* Grade.m */,
 				7B62673B15A779EC00A5879C /* Extracurricular.h */,
 				7B62673C15A779ED00A5879C /* Extracurricular.m */,
+				7B6AF4A715B5C0AC00BE330F /* UIImageToDataTransformer.h */,
+				7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -953,6 +969,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B6AF4AD15B5C12100BE330F /* UIImageToDataTransformer.m in Sources */,
 				7BCB88C215B4B2FA008BA15C /* InitialSlidingViewController.m in Sources */,
 				7BCB88BD15B4B20E008BA15C /* ECSlidingViewController.m in Sources */,
 				7BCB88BE15B4B20E008BA15C /* UIImage+ImageWithUIView.m in Sources */,
@@ -1000,6 +1017,8 @@
 				7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */,
 				7BCB88C515B4B7C5008BA15C /* FTNavigationCell.m in Sources */,
 				7BCB88C815B4BF44008BA15C /* FTNavigationHeader.m in Sources */,
+				7B6AF4A015B5BF9C00BE330F /* Visit.m in Sources */,
+				7B6AF4B015B5CA5F00BE330F /* CampusPhoto.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,6 +1051,7 @@
 				7BCB88BB15B4B08F008BA15C /* ECSlidingViewController.m in Sources */,
 				7BCB88BC15B4B08F008BA15C /* UIImage+ImageWithUIView.m in Sources */,
 				7BCB88C115B4B2A3008BA15C /* InitialSlidingViewController.m in Sources */,
+				7B6AF4A915B5C0AC00BE330F /* UIImageToDataTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

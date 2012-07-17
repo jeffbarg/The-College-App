@@ -65,7 +65,7 @@
     detailNavigationController.view.layer.shadowOpacity = 0.75f;
     detailNavigationController.view.layer.shadowRadius = 10.0f;
     detailNavigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-    [detailNavigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];   
+    [detailNavigationController.view addGestureRecognizer:self.slidingViewController.panGesture];   
     
     return YES;
 }

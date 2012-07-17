@@ -17,6 +17,9 @@
 
 @implementation FTCollegeVisitRatingsViewController
 
+@synthesize visit = _visit;
+@synthesize managedObjectContext;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
