@@ -20,6 +20,7 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 - (void) initializeData;
+- (void) configureAppearance;
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) UISplitViewController *splitViewController;

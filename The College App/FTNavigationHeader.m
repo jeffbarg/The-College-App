@@ -25,9 +25,9 @@ CGGradientRef _backgroundGradient;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self.layer setShadowOffset:CGSizeMake(0, 1)];
-        [self.layer setShadowOpacity:0.3];
-        [self.layer setShadowColor:[UIColor blackColor].CGColor];
+//        [self.layer setShadowOffset:CGSizeMake(0, 1)];
+//        [self.layer setShadowOpacity:0.3];
+//        [self.layer setShadowColor:[UIColor blackColor].CGColor];
     }
     return self;
 }
@@ -61,9 +61,13 @@ CGGradientRef _backgroundGradient;
 
     //Draw gradient
     //// Gradient Declarations
+    
+    UIColor *topColor = [UIColor colorWithRed:0.451 green:0.000 blue:0.737 alpha:1.000];
+    UIColor *bottomColor = [UIColor colorWithRed:0.557 green:0.000 blue:0.792 alpha:1.000];
+    
     NSArray* gradientColors = [NSArray arrayWithObjects: 
-                               (id)[UIColor colorWithRed:0.161 green:0.161 blue:0.169 alpha:1.000].CGColor, 
-                               (id)[UIColor colorWithRed:0.200 green:0.204 blue:0.212 alpha:1.000].CGColor, nil];
+                               (id)topColor.CGColor, 
+                               (id)bottomColor.CGColor, nil];
     CGFloat gradientLocations[] = {0, 1};
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
     

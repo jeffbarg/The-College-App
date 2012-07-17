@@ -249,12 +249,14 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     self.initialHoizontalCenter = self.topView.center.x;
   } else if (recognizer.state == UIGestureRecognizerStateChanged) {
     CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
+      
     CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
-    
+
+
     if ((newCenterPosition < self.resettedCenter && self.anchorLeftTopViewCenter == NSNotFound) || (newCenterPosition > self.resettedCenter && self.anchorRightTopViewCenter == NSNotFound)) {
-      newCenterPosition = self.resettedCenter;
+    newCenterPosition = self.resettedCenter;
     }
-    
+
     [self topViewHorizontalCenterWillChange:newCenterPosition];
     [self updateTopViewHorizontalCenter:newCenterPosition];
     [self topViewHorizontalCenterDidChange:newCenterPosition];
@@ -262,9 +264,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
     
-    if ([self underLeftShowing] && currentVelocityX > 100) {
+    if ([self underLeftShowing] && currentVelocityX > 1000) {
       [self anchorTopViewTo:ECRight];
-    } else if ([self underRightShowing] && currentVelocityX < 100) {
+    } else if ([self underRightShowing] && currentVelocityX < 1000) {
       [self anchorTopViewTo:ECLeft];
     } else {
       [self resetTopView];

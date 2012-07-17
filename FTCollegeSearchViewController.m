@@ -67,6 +67,7 @@
     _gmGridView.sortingDelegate = self;
     _gmGridView.dataSource = self;
     _gmGridView.allowsHorizontalReordering = YES;
+    _gmGridView.scrollsToTop = YES;
     
     [self.view addSubview:gmGridView];
 }

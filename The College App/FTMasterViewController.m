@@ -17,7 +17,10 @@
 #import "ECSlidingViewController.h"
 #import "FTNavigationCell.h"
 #import "FTNavigationHeader.h"
+
 @interface FTMasterViewController ()
+
+@property (nonatomic, strong) UIBarButtonItem *backItem;
 
 @end
 
@@ -25,6 +28,7 @@
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize detailViewController = _detailViewController;
+@synthesize backItem = _backItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -77,24 +81,20 @@
     
     [self.tableView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0]];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];    
+
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor whiteColor], UITextAttributeTextColor,
                                                                      [UIColor colorWithWhite:0.1 alpha:1.0], UITextAttributeTextShadowColor,
                                                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset
                                                                       , nil]];
     
-    [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancel.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setBackgroundImage:[UIImage imageNamed:@"cancelactive.png"] forState:UIControlStateHighlighted    barMetrics:UIBarMetricsDefault];
 
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"backbutton.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 14.0, 0.0, 5.0)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"backselect.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 14.0, 0.0, 5.0)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     
     self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
     
-    [self.tableView setRowHeight:64.0];
+    [self.tableView setRowHeight:INTERFACE_IS_PAD?64.0:50.0];
 }
 
 - (void)viewDidUnload
@@ -261,7 +261,7 @@
     if (newViewController == nil) return;
     
      
-    UINavigationController *viewNavigationController = [[UINavigationController alloc] initWithRootViewController:newViewController];
+    UINavigationController *viewNavigationController = ((UINavigationController *)self.slidingViewController.topViewController);
     
     if (INTERFACE_IS_PAD)    
         [viewNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
@@ -273,17 +273,18 @@
 
     } completion:^(BOOL finished) {
         CGRect frame = self.slidingViewController.topViewController.view.frame;
-        self.slidingViewController.topViewController = viewNavigationController;
+        [viewNavigationController setViewControllers:[NSArray arrayWithObject:newViewController] animated:NO];
+        
         self.slidingViewController.topViewController.view.frame = frame;
         [self.slidingViewController resetTopView];
         
-        newViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(slideLeft)];
+        newViewController.navigationItem.leftBarButtonItem = self.backItem;
         
         viewNavigationController.view.backgroundColor = kViewBackgroundColor;
         viewNavigationController.view.layer.shadowOpacity = 0.75f;
         viewNavigationController.view.layer.shadowRadius = 10.0f;
         viewNavigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
-        [viewNavigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];   
+        [viewNavigationController.view addGestureRecognizer:self.slidingViewController.panGesture];   
     }];
     
 
@@ -313,4 +314,12 @@
     [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
+- (UIBarButtonItem *) backItem {
+    if (_backItem != nil)
+        return _backItem;
+    
+    _backItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(slideLeft)];
+                 
+    return _backItem;
+}
 @end
