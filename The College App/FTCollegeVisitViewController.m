@@ -288,10 +288,10 @@
     UIImage *campusImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];    
     UIImageWriteToSavedPhotosAlbum(campusImage, nil, nil, nil);
 
-    UIImage *croppedImage = [campusImage imageToFitSize:CGSizeMake(185.0, 132.0) method:MGImageResizeScale];
-                             
+    UIImage *thumb = processImage(campusImage);
+    
     CampusPhoto *photoObject = [NSEntityDescription insertNewObjectForEntityForName:@"CampusPhoto" inManagedObjectContext:self.managedObjectContext];
-    [photoObject setImage:croppedImage];
+    [photoObject setThumbnailImage:thumb];
     [photoObject setDateCreated:[NSDate date]];
     
     NSError *err = nil;
@@ -299,8 +299,77 @@
         NSLog(@"%@", [err localizedDescription]);
     }
     
+    //Dismiss Image Picker
+    if (INTERFACE_IS_PAD)
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    else [self dismissViewControllerAnimated:YES completion:^{}];
     
-    [self.masterPopoverController dismissPopoverAnimated:YES];
+}
+
+UIImage *processImage(UIImage *campusImage) {
+    
+    CGSize ctxSize = CGSizeMake(186.0, 145.0);
+    
+    CGFloat imgWidth = campusImage.size.width;
+    CGFloat imgHeight = campusImage.size.height;
+    
+    CGRect fullRect = CGRectMake(0, 0, ctxSize.width, ctxSize.height);
+    
+    CGRect sourceRect = CGRectZero;
+    CGRect destRect = CGRectInset(fullRect, 10.0, 10.0);
+    
+    CGFloat widthScale = (destRect.size.width / imgWidth);
+    CGFloat heightScale = (destRect.size.height / imgHeight);
+    
+    if (widthScale < heightScale) {
+        sourceRect = CGRectMake((imgWidth-destRect.size.width/heightScale) / 2.0, 0, destRect.size.width / heightScale, imgHeight); // Top Middle Crop when horiz>vertical
+    } else {
+        sourceRect = CGRectMake(0, 0, imgWidth, imgHeight / widthScale); // Top Center crop
+    }
+    
+    UIGraphicsBeginImageContextWithOptions(ctxSize, NO, 0.0); // 0.0 for scale means "correct scale for device's main screen".
+    [[UIColor whiteColor] setFill];
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(destRect, -5, -5) byRoundingCorners:0 cornerRadii:CGSizeMake(4.0, 4.0)];
+    CGContextSaveGState(ctx); {
+        CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 3.0, [UIColor lightGrayColor].CGColor);
+        
+        [roundedRect fill];
+    } CGContextRestoreGState(ctx);
+    
+    CGImageRef sourceImg = CGImageCreateWithImageInRect([campusImage CGImage], sourceRect); // cropping happens here.
+    UIImage *thumb = [UIImage imageWithCGImage:sourceImg scale:0.0 orientation:campusImage.imageOrientation]; // create cropped UIImage.
+    [thumb drawInRect:destRect]; // the actual scaling happens here, and orientation is taken care of automatically.
+    CGImageRelease(sourceImg);
+    
+    CGContextSaveGState(ctx); {
+        [roundedRect addClip];
+        CGContextTranslateCTM(ctx, ctxSize.width * 5.0 / 6.0, -ctxSize.height/1.5);
+        CGContextRotateCTM(ctx, degreesToRadians(45));
+        
+        //Draw Gloss
+        
+        //// Gradient Declarations
+        [[UIBezierPath bezierPathWithRect:fullRect] addClip];
+        
+        NSArray* gradientColors = [NSArray arrayWithObjects: 
+                                   (id)[UIColor colorWithWhite:1.0 alpha:0.20].CGColor, 
+                                   (id)[UIColor colorWithWhite:1.0 alpha:0.075].CGColor, nil];
+        CGFloat gradientLocations[] = {0, 1};
+        CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
+        
+        CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, 0), CGPointMake(fullRect.size.width, 0), 0);
+        
+        
+    } CGContextRestoreGState(ctx);
+    
+    thumb = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return thumb;
 }
 #pragma mark Location Manager Interactions 
 

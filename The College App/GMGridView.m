@@ -140,7 +140,8 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 @synthesize itemSpacing = _itemSpacing;
 @synthesize style = _style;
 @synthesize minimumPressDuration;
-@synthesize centerGrid = _centerGrid;
+@synthesize centerGridHorizontally = _centerGridHorizontally;
+
 @synthesize minEdgeInsets = _minEdgeInsets;
 @synthesize showFullSizeViewWithAlphaWhenTransforming;
 @synthesize editing = _editing;
@@ -257,7 +258,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     
     _sortFuturePosition = GMGV_INVALID_POSITION;
     _itemSize = CGSizeZero;
-    _centerGrid = YES;
+    _centerGridHorizontally = YES;
     
     _lastScale = 1.0;
     _lastRotation = 0.0;
@@ -410,9 +411,9 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
     [self setNeedsLayout];
 }
 
-- (void)setCenterGrid:(BOOL)centerGrid
+- (void)setCenterGridHorizontally:(BOOL)centerGridHorizontally
 {
-    _centerGrid = centerGrid;
+    _centerGridHorizontally = centerGridHorizontally;
     [self setNeedsLayout];
 }
 
@@ -1278,7 +1279,7 @@ static const UIViewAnimationOptions kDefaultAnimationOptions = UIViewAnimationOp
 
 - (void)recomputeSizeAnimated:(BOOL)animated
 {
-    [self.layoutStrategy setupItemSize:_itemSize andItemSpacing:self.itemSpacing withMinEdgeInsets:self.minEdgeInsets andCenteredGrid:self.centerGrid];
+    [self.layoutStrategy setupItemSize:_itemSize andItemSpacing:self.itemSpacing withMinEdgeInsets:self.minEdgeInsets andCenteredGrid:self.centerGridHorizontally];
     [self.layoutStrategy rebaseWithItemCount:_numberTotalItems insideOfBounds:self.bounds];
     
     CGSize contentSize = [self.layoutStrategy contentSize];

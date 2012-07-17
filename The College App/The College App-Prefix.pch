@@ -20,5 +20,8 @@
 
 #define kViewBackgroundColor [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000]
 
+#define degreesToRadians(x) (M_PI * x / 180.0)
+
 #define yeah YES
 #define hellzyeah yeah
+

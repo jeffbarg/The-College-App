@@ -10,4 +10,6 @@
 
 @interface FTCollegeVisitNotesViewController : UIViewController
 
+@property (nonatomic, strong) UITextView *textView;
+
 @end

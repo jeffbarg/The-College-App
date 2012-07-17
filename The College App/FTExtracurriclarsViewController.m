@@ -73,7 +73,7 @@
     _gmGridView.style = GMGridViewStyleSwap;
     _gmGridView.itemSpacing = spacing;
     _gmGridView.minEdgeInsets = UIEdgeInsetsMake(spacing, spacing, spacing, spacing);
-    _gmGridView.centerGrid = NO;
+    _gmGridView.centerGridHorizontally = YES;
     _gmGridView.actionDelegate = self;
     _gmGridView.sortingDelegate = self;
     _gmGridView.dataSource = self;

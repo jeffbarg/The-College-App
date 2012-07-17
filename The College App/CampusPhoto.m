@@ -7,18 +7,19 @@
 //
 
 #import "CampusPhoto.h"
+#import "PhotoData.h"
 #import "Visit.h"
-
 #import "UIImageToDataTransformer.h"
 
 @implementation CampusPhoto
 
 @dynamic caption;
+@dynamic dateCreated;
+@dynamic thumbnailImage;
 @dynamic latitude;
 @dynamic longitude;
-@dynamic image;
-@dynamic dateCreated;
 @dynamic visit;
+@dynamic photoData;
 
 + (void)initialize {
 	if (self == [CampusPhoto class]) {

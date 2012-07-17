@@ -48,16 +48,17 @@
     gmGridView.backgroundColor = [UIColor clearColor];
     _gmGridView = gmGridView;
     
-    _gmGridView.style = GMGridViewStyleSwap;
+    _gmGridView.style = GMGridViewStylePush;
     _gmGridView.itemSpacing = spacing;
     _gmGridView.minEdgeInsets = UIEdgeInsetsMake(spacing, minInsets, spacing, minInsets);
-    _gmGridView.centerGrid = YES;
+    _gmGridView.centerGridHorizontally = YES;
     _gmGridView.actionDelegate = self;
     _gmGridView.dataSource = self;
     _gmGridView.allowsHorizontalReordering = YES;
 
     _gmGridView.alwaysBounceVertical = yeah;
     _gmGridView.bounces = hellzyeah;
+    _gmGridView.enableEditOnLongPress = hellzyeah;
     
     [self.view addSubview:gmGridView];
 }
@@ -159,7 +160,7 @@
             
         case NSFetchedResultsChangeInsert:
             //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [_gmGridView insertObjectAtIndex:newIndexPath.row animated:YES];
+            [_gmGridView insertObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -214,7 +215,7 @@
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    return CGSizeMake(185.0, 132.0);
+    return CGSizeMake(186.0, 145.0);
     //return INTERFACE_IS_PHONE ? CGSizeMake(284.0, 204.0f) : CGSizeMake(304.0, 204.0);
 }
 
@@ -234,7 +235,7 @@
         cell.deleteButtonOffset = CGPointMake(-15, -15);
         
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        [imgView setContentMode:UIViewContentModeScaleToFill];
+        [imgView setContentMode:UIViewContentModeScaleAspectFit];
         
         [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         cell.contentView = imgView;
@@ -246,7 +247,7 @@
     
     CampusPhoto *photo = (CampusPhoto *) [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     
-    [imgView setImage:[photo image]];
+    [imgView setImage:[photo thumbnailImage]];
     
     
     [cell setHidden:NO];
@@ -271,6 +272,8 @@
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView
 {
     NSLog(@"Tap on empty space");
+    [_gmGridView setEditing:NO animated:hellzyeah];
+    
 }
 
 - (void)GMGridView:(GMGridView *)gridView processDeleteActionForItemAtIndex:(NSInteger)index
@@ -288,6 +291,13 @@
     {
         //TODO: Delete Item from Data Source
         //[_currentData removeObjectAtIndex:_lastDeleteItemIndexAsked];
+        NSManagedObject *objectToBeDeleted = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:_lastDeleteItemIndexAsked inSection:0]];
+        [self.managedObjectContext deleteObject:objectToBeDeleted];
+        NSError *err = nil;
+        if (![self.managedObjectContext save:&err]) {
+            NSLog(@"%@", [err localizedDescription]);
+        }
+        
         [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked withAnimation:GMGridViewItemAnimationFade];
     }
 }

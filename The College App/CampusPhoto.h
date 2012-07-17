@@ -9,15 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Visit;
+@class PhotoData, Visit;
 
 @interface CampusPhoto : NSManagedObject
 
 @property (nonatomic, retain) NSString * caption;
+@property (nonatomic, retain) NSDate * dateCreated;
+@property (nonatomic, retain) UIImage * thumbnailImage;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) UIImage * image;
-@property (nonatomic, retain) NSDate * dateCreated;
 @property (nonatomic, retain) Visit *visit;
+@property (nonatomic, retain) PhotoData *photoData;
 
 @end
