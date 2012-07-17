@@ -41,9 +41,12 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
 
     if (self.highlighted || self.selected) {
+        UIColor *topColor = [UIColor colorWithRed:0.557 green:0.000 blue:0.792 alpha:1.000];
+        UIColor *bottomColor = [UIColor colorWithRed:0.329 green:0.000 blue:0.529 alpha:1.000];//[UIColor colorWithRed:0.451 green:0.000 blue:0.737 alpha:1.000];
+        
         NSArray* gradientColors = [NSArray arrayWithObjects: 
-                                   (id)[UIColor colorWithRed:0.310 green:0.631 blue:0.000 alpha:1.000].CGColor, 
-                                   (id)[UIColor colorWithRed:0.090 green:0.376 blue:0.000 alpha:1.000].CGColor, nil];
+                                   (id)topColor.CGColor, 
+                                   (id)bottomColor.CGColor, nil];
         CGFloat gradientLocations[] = {0, 1};
         CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
         

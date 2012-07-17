@@ -67,7 +67,6 @@
     _gmGridView.sortingDelegate = self;
     _gmGridView.dataSource = self;
     _gmGridView.allowsHorizontalReordering = YES;
-    _gmGridView.scrollsToTop = YES;
     
     [self.view addSubview:gmGridView];
 }
@@ -110,7 +109,7 @@
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
+    [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"combinedSATAverage" ascending:NO];
@@ -244,7 +243,7 @@
         //        view.layer.masksToBounds = NO;
         //        view.layer.cornerRadius = 8;
         //        
-        [view setBackgroundColor:[UIColor clearColor]];
+
         cell.contentView = view;
     }
     
@@ -353,6 +352,10 @@
     [cell.layer setShadowOffset:CGSizeMake(0, 1)];
     [cell.layer setShadowColor:[UIColor grayColor].CGColor];
     [cell.layer setShadowOpacity:0.5];
+    UIBezierPath *clipPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5 , 0.5, cell .frame.size.width - 1.0, cell.frame.size.height - 1.0)
+                                                   byRoundingCorners:UIRectCornerAllCorners
+                                                         cornerRadii:CGSizeMake(5.0f, 5.0f)];
+    [cell.layer setShadowPath:clipPath.CGPath];
 }
 
 - (void)GMGridView:(GMGridView *)gridView didEndMovingCell:(GMGridViewCell *)cell {

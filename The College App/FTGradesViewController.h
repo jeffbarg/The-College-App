@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FTGradesViewController : UITableViewController<UISplitViewControllerDelegate, NSFetchedResultsControllerDelegate>
+@interface FTGradesViewController : UITableViewController<NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;

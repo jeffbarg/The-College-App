@@ -60,10 +60,12 @@
 {
     [super viewDidLoad];
     
+    self.tableView.scrollsToTop = YES;
+    
     UIView *titleView = [[UIView alloc] initWithFrame:self.navigationController.navigationBar.bounds];
     [titleView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0, 270.0, 44.0)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0, 0, INTERFACE_IS_PAD? 270.0:250.0, 44.0)];
     [titleLabel setTextAlignment:UITextAlignmentCenter];
     [titleLabel setBackgroundColor:[UIColor clearColor]];
     [titleLabel setTextColor:[UIColor whiteColor]];
@@ -71,7 +73,7 @@
     [titleLabel setShadowOffset:CGSizeMake(0, -1)];
     [titleLabel setFont:[UIFont boldSystemFontOfSize:[UIFont labelFontSize]]];
      
-    [titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
+    [titleLabel setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight];
     
     [titleView addSubview:titleLabel];
     [titleLabel setText:@"The College App"];
@@ -90,11 +92,13 @@
     
 
     
-    self.clearsSelectionOnViewWillAppear = YES;
+//    self.clearsSelectionOnViewWillAppear = YES;
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setSeparatorColor:[UIColor blackColor]];    
     
     [self.tableView setRowHeight:INTERFACE_IS_PAD?64.0:50.0];
+    
+    self.tableView.scrollsToTop = NO;
 }
 
 - (void)viewDidUnload
@@ -219,6 +223,7 @@
         } else if (indexPath.row == 3) {
             FTGradesViewController *gradesViewController = [[FTGradesViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [gradesViewController setManagedObjectContext:self.managedObjectContext];
+            [gradesViewController.tableView setBackgroundColor:kViewBackgroundColor];
             
             newViewController = (UIViewController *) gradesViewController;
         } else {
@@ -306,6 +311,23 @@
     [header setTitle:[self tableView:self.tableView titleForHeaderInSection:section]];
     
 	return header;
+}
+
+#pragma mark - UIScrollView Delegate Methods
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView {
+    NSLog(@"%@", @"ok");
+    if ([self.slidingViewController underLeftShowing]) return YES;
+    
+    else {
+        if ([self.detailViewController respondsToSelector:@selector(gmGridView)]) {
+            GMGridView *gmGridView = [self.detailViewController performSelector:@selector(gmGridView)];
+            
+            [gmGridView scrollToObjectAtIndex:0 atScrollPosition:GMGridViewScrollPositionTop animated:YES];
+        }
+        
+        return YES;
+    }
 }
 
 #pragma mark - ECSlidingViewController Stuff

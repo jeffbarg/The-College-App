@@ -33,6 +33,9 @@
     if (self) {
         // Initialization code
         
+        self.opaque = NO;
+        self.backgroundColor = [UIColor clearColor];
+        
         UIColor *greenColor = [UIColor colorWithRed:0.157 green:0.490 blue:0.000 alpha:1.000];
         
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];

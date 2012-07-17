@@ -61,13 +61,11 @@ CGGradientRef _backgroundGradient;
 
     //Draw gradient
     //// Gradient Declarations
-    
-    UIColor *topColor = [UIColor colorWithRed:0.451 green:0.000 blue:0.737 alpha:1.000];
-    UIColor *bottomColor = [UIColor colorWithRed:0.557 green:0.000 blue:0.792 alpha:1.000];
-    
+
     NSArray* gradientColors = [NSArray arrayWithObjects: 
-                               (id)topColor.CGColor, 
-                               (id)bottomColor.CGColor, nil];
+                               (id)[UIColor colorWithRed:0.161 green:0.161 blue:0.169 alpha:1.000].CGColor, 
+                               (id)[UIColor colorWithRed:0.200 green:0.204 blue:0.212 alpha:1.000].CGColor, nil];
+    
     CGFloat gradientLocations[] = {0, 1};
     CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
     
@@ -132,7 +130,7 @@ CGGradientRef _backgroundGradient;
     CGContextSaveGState(ctx); {
         [[UIColor colorWithRed:0.510 green:0.514 blue:0.518 alpha:1.000] setFill];
         CGContextSetShadowWithColor(ctx, CGSizeMake(0, -1), 0.0, [UIColor blackColor].CGColor);
-        [self.title drawInRect:CGRectMake(10.0, 5.0, 300.0, self.bounds.size.height - 10.0) withFont:[UIFont boldSystemFontOfSize:14.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentLeft];
+        [self.title drawInRect:CGRectMake(10.0, 6.0, 300.0, self.bounds.size.height - 10.0) withFont:[UIFont boldSystemFontOfSize:14.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentLeft];
         
     } CGContextRestoreGState(ctx);
     

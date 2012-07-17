@@ -264,9 +264,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
     
-    if ([self underLeftShowing] && currentVelocityX > 1000) {
+    if ([self underLeftShowing] && currentVelocityX > 500) {
       [self anchorTopViewTo:ECRight];
-    } else if ([self underRightShowing] && currentVelocityX < 1000) {
+    } else if ([self underRightShowing] && currentVelocityX < 500) {
       [self anchorTopViewTo:ECLeft];
     } else {
       [self resetTopView];

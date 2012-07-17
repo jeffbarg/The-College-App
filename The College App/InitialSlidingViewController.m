@@ -10,9 +10,9 @@
 
 @implementation InitialSlidingViewController
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  return YES;
+	return (INTERFACE_IS_PAD)?YES:(interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end
