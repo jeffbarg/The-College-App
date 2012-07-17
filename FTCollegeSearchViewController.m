@@ -356,11 +356,16 @@
                                                    byRoundingCorners:UIRectCornerAllCorners
                                                          cornerRadii:CGSizeMake(5.0f, 5.0f)];
     [cell.layer setShadowPath:clipPath.CGPath];
+    
+    [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)GMGridView:(GMGridView *)gridView didEndMovingCell:(GMGridViewCell *)cell {
     [cell.layer setShadowOffset:CGSizeZero];
     [cell.layer setShadowOpacity:0.0];
+    
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+
 }
 
 - (BOOL)GMGridView:(GMGridView *)gridView shouldLetCell:(GMGridViewCell *)cell returnToPositionWithTouchLocation:(CGPoint) loc {
