@@ -34,7 +34,7 @@
         [self.textView setTextColor:textColor];
         [self.textView setBackgroundColor:self.view.backgroundColor];
         [self.textView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-        [self.textView setEditable:YES];
+        [self.textView setEditable:NO];
         [self.textView setDataDetectorTypes:UIDataDetectorTypeAll];
         [self.textView setAlwaysBounceVertical:hellzyeah];
         [self.textView setDelegate:self];
@@ -64,16 +64,19 @@
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
-    if (INTERFACE_IS_PAD) {
-        [self.textView setFont:[UIFont boldSystemFontOfSize:17.0]];
-        [self.view.layer setCornerRadius:5.0];
-        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
-        [self.view.layer setBorderWidth:1.0];
-    } else {
-        [self.textView setFont:[UIFont boldSystemFontOfSize:12.0]];
+    if (INTERFACE_IS_PAD && self.presentingViewController != nil) {
+        [self.textView setFont:[UIFont boldSystemFontOfSize:20.0]];
+        
         [self.view.layer setCornerRadius:0.0];
         [self.view.layer setBorderColor:nil];
         [self.view.layer setBorderWidth:0.0];
+        [self.textView setEditable:YES];
+    } else {
+        [self.textView setFont:[UIFont boldSystemFontOfSize:14.0]];
+        [self.view.layer setCornerRadius:5.0];
+        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
+        [self.view.layer setBorderWidth:1.0];
+        [self.textView setEditable:NO];
     }    
 }
 
@@ -85,10 +88,12 @@
 
 
 - (void) returnToVisit:(UIBarButtonItem *)doneButton {
-    if (self.visitViewController != nil)
-        [self.visitViewController unfocusNotepad];
     
-    [self dismissModalViewControllerAnimated:YES];
+    
+    [self dismissViewControllerAnimated:YES completion:^{
+        if (self.visitViewController != nil)
+            [self.visitViewController unfocusNotepad];   
+    }];
     
 }
 

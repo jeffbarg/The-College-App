@@ -498,10 +498,13 @@ UIImage *processImage(UIImage *campusImage) {
         [self.notesButton setFrame:CGRectOffset(self.notesButton.frame, 0, self.view.bounds.size.height - CGRectGetMinY(self.notesButton.frame) + 20)];
         
     }completion:^(BOOL completed) {
-        FTCollegeVisitNotesViewController *newViewController = [[FTCollegeVisitNotesViewController alloc] init];
-        [newViewController setVisitViewController:self];
+//        FTCollegeVisitNotesViewController *newViewController = [[FTCollegeVisitNotesViewController alloc] init];
+//        [newViewController setVisitViewController:self];
+            
+        [self.notesViewController removeFromParentViewController];
+        [self.notesViewController.view removeFromSuperview];
         
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:newViewController];
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.notesViewController];
         [navController setModalPresentationStyle:UIModalPresentationPageSheet];
         
         [self presentModalViewController:navController animated:YES];
@@ -511,12 +514,12 @@ UIImage *processImage(UIImage *campusImage) {
 - (void) unfocusNotepad {
     self.isNotepadFocused = FALSE;
 
-//    [self.notesViewController willMoveToParentViewController:self];
-//    [self addChildViewController:self.notesViewController];
-//
-//    [self.notesViewController.view setFrame:self.notesView.bounds];
-//    [self.notesViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-//    [self.notesViewController didMoveToParentViewController:self];
+    [self.notesViewController willMoveToParentViewController:self];
+    [self addChildViewController:self.notesViewController];
+    [self.notesView addSubview:self.notesViewController.view];
+    [self.notesViewController.view setFrame:self.notesView.bounds];
+    [self.notesViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+    [self.notesViewController didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.4 animations:^{
         [self viewWillLayoutSubviews];
