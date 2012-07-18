@@ -552,6 +552,7 @@
     
     //// Cleanup
     CGGradientRelease(gradient);
+    CGGradientRelease(gradeIndicatorGradient);
     CGColorSpaceRelease(colorSpace);
     
     ////Simple UIKit Stuff

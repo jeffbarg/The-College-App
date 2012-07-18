@@ -50,7 +50,9 @@
         CGFloat gradientLocations[] = {0, 1};
         CGGradientRef gradient = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)gradientColors, gradientLocations);
         
-        CGContextDrawLinearGradient(ctx, gradient,CGPointMake(0, 0), CGPointMake(0, self.bounds.size.height),  0); 
+        CGContextDrawLinearGradient(ctx, gradient,CGPointMake(0, 0), CGPointMake(0, self.bounds.size.height),  0);
+        
+        CGGradientRelease(gradient);
     } else {
         [backgroundColor setFill];
         CGContextFillRect(ctx, self.bounds);   
@@ -77,6 +79,10 @@
     [darkColor setStroke];
     [darkLine setLineWidth:1.0];
     [darkLine stroke];
+    
+    //Cleanup
+    
+    CGColorSpaceRelease(colorSpace);
     
 }
 

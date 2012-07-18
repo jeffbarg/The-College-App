@@ -9,7 +9,6 @@
 #import "FTCollegeVisitViewController.h"
 #import "KSCustomPopoverBackgroundView.h"
 #import "ECSlidingViewController.h"
-#import "UIImage+ProportionalFill.h"
 
 #import "College.h"
 
@@ -93,6 +92,12 @@
 
 - (void)viewDidLoad
 {
+//    //GIVE THIS ITS OWN MANAGED CONTEXT -- NO IDEA IF THIS WILL WORK
+//    NSPersistentStoreCoordinator *coordinator = self.managedObjectContext.persistentStoreCoordinator;
+//    NSManagedObjectContext *newContext = [[NSManagedObjectContext alloc] init];
+//    [newContext setPersistentStoreCoordinator:coordinator];
+//    self.managedObjectContext = newContext;
+    
     [super viewDidLoad];
     
     self.isNotepadFocused = FALSE;
@@ -109,6 +114,7 @@
     
     [titleButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
     [titleButton addTarget:self action:@selector(showNearbyCollegesSelector:) forControlEvents:UIControlEventTouchUpInside];
+    [titleButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
     self.titleButton = titleButton;
     
@@ -116,7 +122,7 @@
     [infoButton addTarget:self action:@selector(showInfo:) forControlEvents:UIControlEventTouchUpInside];
     
     [titleView addSubview:infoButton];
-    [titleView setFrame:CGRectMake(0, 0, 200.0, 30)];                           
+    [titleView setFrame:CGRectMake(0, 0, INTERFACE_IS_PHONE?200.0:320.0, 30)];                           
     
     [infoButton setCenter:CGPointMake(20, 15)];
     
@@ -229,7 +235,6 @@
         [notesButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
         [notesButton setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
 
-        
     } else {
         UITabBarController *tabBarController = [[UITabBarController alloc] init];
 
@@ -289,6 +294,23 @@
         [self.notesView  setTransform:CGAffineTransformMakeRotation(degreesToRadians(0))];
 
     }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [self showNearbyCollegesSelector:self.titleButton];
+}
+- (void)viewDidUnload
+{
+    self.visit = nil;
+    
+    
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
 #pragma mark - Buttons
@@ -374,6 +396,7 @@
     CampusPhoto *photoObject = [NSEntityDescription insertNewObjectForEntityForName:@"CampusPhoto" inManagedObjectContext:self.managedObjectContext];
     [photoObject setThumbnailImage:thumb];
     [photoObject setDateCreated:[NSDate date]];
+    [photoObject setVisit:self.visit];
     
     NSError *err = nil;
     if (![self.managedObjectContext save:&err]) {
@@ -445,7 +468,7 @@ UIImage *processImage(UIImage *campusImage) {
         CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, 0), CGPointMake(fullRect.size.width, 0), 0);
         
         CGGradientRelease(gradient);
-        
+        CGColorSpaceRelease(colorSpace);
     } CGContextRestoreGState(ctx);
     
     thumb = UIGraphicsGetImageFromCurrentImageContext();
@@ -454,23 +477,20 @@ UIImage *processImage(UIImage *campusImage) {
     return thumb;
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
-}
 
 #pragma mark - Custom Properties
 
 - (void) setSchool:(College *)school {
     if (school == _school) return;
+    self.visit = nil;
     if (_school == nil) {
         _school = school;
+        
+        self.photosViewController.visit = self.visit;
+        self.notesViewController.visit = self.visit;
+        self.ratingsViewController.visit = self.visit;
+        
         [UIView animateWithDuration:0.6 animations:^{
             [self viewWillLayoutSubviews];
         }];
@@ -479,7 +499,12 @@ UIImage *processImage(UIImage *campusImage) {
         [UIView animateWithDuration:0.4 animations:^{
             [self viewWillLayoutSubviews];
         } completion:^(BOOL completed) {
-            _school = school;
+            self.school = school;
+            
+            self.photosViewController.visit = self.visit;
+            self.notesViewController.visit = self.visit;
+            self.ratingsViewController.visit = self.visit;
+            
             [UIView animateWithDuration:0.5 animations:^{
                 [self viewWillLayoutSubviews];
             }];
@@ -489,11 +514,70 @@ UIImage *processImage(UIImage *campusImage) {
     [self.titleButton setTitle:school.name forState:UIControlStateNormal];
 }
 
+- (Visit *) visit {
+    if (_visit != nil) {
+        return _visit;
+    } 
+    
+    if (self.school == nil) return nil;
+    
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+    
+    [components setHour:-[components hour]];
+    [components setMinute:-[components minute]];
+    [components setSecond:-[components second]];
+    NSDate *startDay = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0]; //This variable should now be pointing at a date object that is the start of today (midnight);
+    
+    
+    [components setHour:24];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *endDay = [cal dateByAddingComponents:components toDate: startDay options:0];
+ 
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(dateCreated >= %@) AND (dateCreated <= %@) AND college = %@", startDay, endDay, self.school];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Visit"];
+    [fetchRequest setPredicate:predicate];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+    
+    NSError *err = nil;
+    NSArray *possibleVisits = [self.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+    if (err != nil) {
+        NSLog(@"%@", [err localizedDescription]);
+    }
+    
+    if ([possibleVisits count] == 0) {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Visit" inManagedObjectContext:self.managedObjectContext];
+        _visit = [[Visit alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+        _visit.college = self.school;
+        _visit.dateCreated = [NSDate date];
+
+    } else {
+        _visit = (Visit *)[possibleVisits lastObject];
+    }
+    
+    return _visit;
+}
+
+- (void) setVisit:(Visit *)visit {
+    //Check if old visit is worth saving -- else delete.
+    Visit *oldVisit = _visit;
+    _visit = visit;
+    
+    if (oldVisit == nil) return;
+    
+    if ([oldVisit notes] == nil && [oldVisit campusPhotos] == nil && [oldVisit campusRatings] == nil) {
+        [self.managedObjectContext deleteObject:oldVisit];
+    } 
+}
+
 #pragma mark - Quasi-Delegate Stuff
 
 - (void) bringFocusToNotepad {
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self.notesView setFrame:CGRectOffset(self.notesView.frame, 0, self.view.bounds.size.height - CGRectGetMinY(self.notesView.frame) + HEADER_HEIGHT + MARGIN_HEADER + 20)];
         [self.notesButton setFrame:CGRectOffset(self.notesButton.frame, 0, self.view.bounds.size.height - CGRectGetMinY(self.notesButton.frame) + 20)];
         
@@ -521,7 +605,7 @@ UIImage *processImage(UIImage *campusImage) {
     [self.notesViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
     [self.notesViewController didMoveToParentViewController:self];
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         [self viewWillLayoutSubviews];
     }];
 }

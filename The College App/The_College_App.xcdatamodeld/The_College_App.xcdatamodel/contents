@@ -81,7 +81,7 @@
         <relationship name="campusPhoto" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CampusPhoto" inverseName="photoData" inverseEntity="CampusPhoto" syncable="YES"/>
     </entity>
     <entity name="Visit" representedClassName="Visit" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="campusPhotos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CampusPhoto" inverseName="visit" inverseEntity="CampusPhoto" syncable="YES"/>
         <relationship name="campusRatings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CampusRating" inverseName="visit" inverseEntity="CampusRating" syncable="YES"/>
@@ -93,7 +93,7 @@
         <element name="College" positionX="160" positionY="192" width="128" height="585"/>
         <element name="Extracurricular" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Grade" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
         <element name="PhotoData" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
     </elements>
 </model>

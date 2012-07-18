@@ -71,6 +71,7 @@ CGGradientRef _backgroundGradient;
     
     CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, self.bounds.size.height), CGPointMake(0, 0), 0);
     
+
     CGContextSetAllowsAntialiasing(ctx, NO);
     
     
@@ -133,6 +134,11 @@ CGGradientRef _backgroundGradient;
         [self.title drawInRect:CGRectMake(10.0, 6.0, 300.0, self.bounds.size.height - 10.0) withFont:[UIFont boldSystemFontOfSize:14.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentLeft];
         
     } CGContextRestoreGState(ctx);
+    
+    // Cleanup
+    
+    CGGradientRelease(gradient);
+    CGColorSpaceRelease(colorSpace);
     
 }
 

@@ -29,6 +29,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext;
 @synthesize visitViewController = _visitViewController;
+@synthesize visit = _visit;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -103,6 +104,8 @@
         return _fetchedResultsController;
     }
     
+    if (self.visit == nil) return nil;
+    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"CampusPhoto" inManagedObjectContext:self.managedObjectContext];
@@ -121,8 +124,8 @@
     
     //Edit the Filter Predicates
     
-    //    NSPredicate *combinedPredicate = [NSPredicate predicateWithFormat:@"inCollegeList == %@", self.isCollegeList];
-    //    [fetchRequest setPredicate:combinedPredicate];
+    NSPredicate *combinedPredicate = [NSPredicate predicateWithFormat:@"visit == %@", self.visit];
+    [fetchRequest setPredicate:combinedPredicate];
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
@@ -168,7 +171,8 @@
         case NSFetchedResultsChangeDelete:
             
             //            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            
+//            [_gmGridView removeObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
+
             break;
             
         case NSFetchedResultsChangeUpdate:
@@ -302,6 +306,19 @@
         
         [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked withAnimation:GMGridViewItemAnimationFade];
     }
+}
+
+#pragma mark - Custom Properties
+
+- (void) setVisit:(Visit *)visit {
+    _visit = visit;
+    _fetchedResultsController = nil;
+    NSError *err = nil;
+
+    if (err != nil) {
+        NSLog(@"%@", [err localizedDescription]);
+    }
+    [_gmGridView reloadData];
 }
 
 @end

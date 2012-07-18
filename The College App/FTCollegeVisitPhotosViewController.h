@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "FTCollegeVisitViewController.h"
+
+#import "Visit.h"
+
 @interface FTCollegeVisitPhotosViewController : UIViewController
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-
+@property (nonatomic, strong) Visit *visit;
 @property (nonatomic, strong) FTCollegeVisitViewController * visitViewController;
 
 @end
