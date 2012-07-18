@@ -36,7 +36,6 @@
 #define HEADER_HEIGHT 30
 
 @interface FTCollegeVisitViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
-    
 }
 
 @property (nonatomic, strong) FTNearbyCollegesViewController * nearbyCollegesViewController;
@@ -79,6 +78,9 @@
 @synthesize titleButton = _titleButton;
 
 @synthesize school = _school;
+@synthesize visit = _visit;
+
+@synthesize isNotepadFocused = _isNotepadFocused;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -92,6 +94,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.isNotepadFocused = FALSE;
     
     UIBarButtonItem *cameraItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(takePhoto:)];
   
@@ -131,9 +135,14 @@
     [self.view addSubview:_ratingsView];
     [self.view addSubview:_notesView];
     
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bringFocusToNotepad)];
+    [_notesView addGestureRecognizer:tapGestureRecognizer];
+    
     _photosViewController = [[FTCollegeVisitPhotosViewController alloc] init];
     _ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] initWithStyle:UITableViewStylePlain];
     _notesViewController = [[FTCollegeVisitNotesViewController alloc] init];
+    
+    [_notesViewController setVisitViewController:self];
     
     [_photosViewController setManagedObjectContext:self.managedObjectContext];
     
@@ -435,6 +444,7 @@ UIImage *processImage(UIImage *campusImage) {
         
         CGContextDrawLinearGradient(ctx, gradient, CGPointMake(0, 0), CGPointMake(fullRect.size.width, 0), 0);
         
+        CGGradientRelease(gradient);
         
     } CGContextRestoreGState(ctx);
     
@@ -477,6 +487,40 @@ UIImage *processImage(UIImage *campusImage) {
     }
     
     [self.titleButton setTitle:school.name forState:UIControlStateNormal];
+}
+
+#pragma mark - Quasi-Delegate Stuff
+
+- (void) bringFocusToNotepad {
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.notesView setFrame:CGRectOffset(self.notesView.frame, 0, self.view.bounds.size.height - CGRectGetMinY(self.notesView.frame) + HEADER_HEIGHT + MARGIN_HEADER + 20)];
+        [self.notesButton setFrame:CGRectOffset(self.notesButton.frame, 0, self.view.bounds.size.height - CGRectGetMinY(self.notesButton.frame) + 20)];
+        
+    }completion:^(BOOL completed) {
+        FTCollegeVisitNotesViewController *newViewController = [[FTCollegeVisitNotesViewController alloc] init];
+        [newViewController setVisitViewController:self];
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:newViewController];
+        [navController setModalPresentationStyle:UIModalPresentationPageSheet];
+        
+        [self presentModalViewController:navController animated:YES];
+    }];
+}
+
+- (void) unfocusNotepad {
+    self.isNotepadFocused = FALSE;
+
+//    [self.notesViewController willMoveToParentViewController:self];
+//    [self addChildViewController:self.notesViewController];
+//
+//    [self.notesViewController.view setFrame:self.notesView.bounds];
+//    [self.notesViewController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+//    [self.notesViewController didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        [self viewWillLayoutSubviews];
+    }];
 }
 
 @end

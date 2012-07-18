@@ -28,6 +28,7 @@
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize managedObjectContext;
+@synthesize visitViewController = _visitViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

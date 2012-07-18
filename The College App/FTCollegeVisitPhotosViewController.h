@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FTCollegeVisitViewController.h"
 @interface FTCollegeVisitPhotosViewController : UIViewController
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic, strong) FTCollegeVisitViewController * visitViewController;
 
 @end

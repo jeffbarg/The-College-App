@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FTCollegeVisitViewController.h"
+
+#import "Visit.h"
+
 @interface FTCollegeVisitNotesViewController : UIViewController
 
 @property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) FTCollegeVisitViewController *visitViewController;
+
+@property (nonatomic, strong) Visit *visit;
 
 @end

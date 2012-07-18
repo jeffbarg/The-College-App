@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class College;
+@class Visit;
 
 @interface FTCollegeVisitViewController : UIViewController
 
@@ -16,5 +17,12 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
+
+@property (nonatomic, strong) Visit *visit;
+
+@property (nonatomic) BOOL isNotepadFocused;
+
+- (void) bringFocusToNotepad;
+- (void) unfocusNotepad;
 
 @end

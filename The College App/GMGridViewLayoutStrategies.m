@@ -93,16 +93,13 @@
 {
     if (self.centeredGrid)
     {
-        NSInteger widthSpace, heightSpace;        
+        NSInteger widthSpace;        
         NSInteger top, left, bottom, right;
         
         widthSpace  = floor((self.gridBounds.size.width  - actualContentSize.width)  / 2.0);
-        heightSpace = floor((self.gridBounds.size.height - actualContentSize.height) / 2.0);
         
         left   = MAX(widthSpace,  self.minEdgeInsets.left);
         right  = MAX(widthSpace,  self.minEdgeInsets.right);
-        top    = MAX(heightSpace, self.minEdgeInsets.top);
-        bottom = MAX(heightSpace, self.minEdgeInsets.bottom);
         
         top = self.minEdgeInsets.top;
         bottom = self.minEdgeInsets.bottom;
