@@ -215,7 +215,7 @@
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    return CGSizeMake(186.0, 145.0);
+    return INTERFACE_IS_PAD? CGSizeMake(186.0, 145.0) : CGSizeMake(300.0, 230.0);
     //return INTERFACE_IS_PHONE ? CGSizeMake(284.0, 204.0f) : CGSizeMake(304.0, 204.0);
 }
 

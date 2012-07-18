@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <CoreLocation/CoreLocation.h>
 
-@interface FTCollegeVisitViewController : UIViewController<CLLocationManagerDelegate>
+@class College;
 
+@interface FTCollegeVisitViewController : UIViewController
 
+@property (nonatomic, strong) College *school;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

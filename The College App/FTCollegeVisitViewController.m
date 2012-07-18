@@ -13,11 +13,13 @@
 
 #import "College.h"
 
+#import "FTNearbyCollegesViewController.h"
+
 #import "FTCollegeVisitNotesViewController.h"
 #import "FTCollegeVisitPhotosViewController.h"
 #import "FTCollegeVisitRatingsViewController.h"
 
-#import <CoreLocation/CoreLocation.h>
+
 #import <QuartzCore/QuartzCore.h>
 
 #import "Visit.h"
@@ -39,6 +41,8 @@
 
 @property (nonatomic, strong) UIPopoverController *masterPopoverController;
 
+@property (nonatomic, strong) FTNearbyCollegesViewController * nearbyCollegesViewController;
+
 @property (nonatomic, strong) FTCollegeVisitNotesViewController *notesViewController;
 @property (nonatomic, strong) FTCollegeVisitPhotosViewController *photosViewController;
 @property (nonatomic, strong) FTCollegeVisitRatingsViewController *ratingsViewController;
@@ -50,13 +54,6 @@
 @property (nonatomic, strong) UIButton *notesButton;
 @property (nonatomic, strong) UIButton *photosButton;
 @property (nonatomic, strong) UIButton *ratingsButton;
-
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, strong) CLLocation *bestEffortAtLocation;
-
-@property (nonatomic, strong) NSArray *nearbySchools;
-
-- (void)stopUpdatingLocation:(NSString *)state;
 
 @end
 
@@ -77,10 +74,7 @@
 @synthesize notesButton;
 @synthesize ratingsButton;
 
-@synthesize bestEffortAtLocation;
-@synthesize locationManager;
-
-@synthesize nearbySchools = _nearbySchools;
+@synthesize school;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -100,21 +94,19 @@
     self.navigationItem.rightBarButtonItem = cameraItem;
     
     
-    UIImageView *titleView = [[UIImageView alloc] initWithImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)]];
-                         
-
-    [titleView setFrame:CGRectMake(0, 0, 150.0, 30)];                           
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectZero];  
+    UIButton *titleButton = [[UIButton alloc] initWithFrame:CGRectZero];
+    [titleButton setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+    [titleView addSubview:titleButton];
+    
+    [titleButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
+    [titleButton addTarget:self action:@selector(showNearbyCollegesSelector:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [titleView setFrame:CGRectMake(0, 0, 200.0, 30)];                           
     self.navigationItem.titleView = titleView;
     
-	// Do any additional setup after loading the view.
-    CLLocationManager *manager = [[CLLocationManager alloc] init];
-
-    manager.delegate = self;
-    manager.desiredAccuracy = kCLLocationAccuracyBest;
-
-    self.locationManager = manager;
     
-    [locationManager startUpdatingLocation];
     
     _photosView = [[UIView alloc] initWithFrame:CGRectZero];
     _ratingsView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -259,17 +251,44 @@
 
 #pragma mark - Buttons
 
+- (void) showNearbyCollegesSelector:(UIButton *) titleButton {
+
+    if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible] && (self.masterPopoverController.contentViewController.class != [FTNearbyCollegesViewController class])) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+        self.masterPopoverController = nil;
+    }
+    
+    FTNearbyCollegesViewController *nearbySchoolsViewController = [[FTNearbyCollegesViewController alloc] initWithStyle:UITableViewStylePlain];
+    [nearbySchoolsViewController setManagedObjectContext:self.managedObjectContext];
+    
+    if (INTERFACE_IS_PAD) {
+        self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:nearbySchoolsViewController];
+        [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+
+        [self.masterPopoverController presentPopoverFromRect:[titleButton.superview convertRect:titleButton.frame toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+    } else {
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nearbySchoolsViewController];
+        [self presentViewController:navController animated:YES completion:^{}];
+        
+        [nearbySchoolsViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)]];
+    }
+}
+- (void) dismissViewController {
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
 - (void) takePhoto:(UIBarButtonItem *) barButtonItem {
     UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
     [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
     [pickerController setDelegate:self];
     
     if (INTERFACE_IS_PAD) {
-        if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible]) { //MORE STUFF
+        if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible] && (self.masterPopoverController.contentViewController.class != [UIImagePickerController class])) {
             [self.masterPopoverController dismissPopoverAnimated:YES];
             self.masterPopoverController = nil;
         }
-        
+
         self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
         [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
         
@@ -308,7 +327,7 @@
 
 UIImage *processImage(UIImage *campusImage) {
     
-    CGSize ctxSize = CGSizeMake(186.0, 145.0);
+    CGSize ctxSize = INTERFACE_IS_PAD? CGSizeMake(186.0, 145.0) : CGSizeMake(300.0, 230.0);
     
     CGFloat imgWidth = campusImage.size.width;
     CGFloat imgHeight = campusImage.size.height;
@@ -370,109 +389,6 @@ UIImage *processImage(UIImage *campusImage) {
     UIGraphicsEndImageContext();
     
     return thumb;
-}
-#pragma mark Location Manager Interactions 
-
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    
-}
-
-
-/*
- * We want to get and store a location measurement that meets the desired accuracy. For this example, we are
- *      going to use horizontal accuracy as the deciding factor. In other cases, you may wish to use vertical
- *      accuracy, or both together.
- */
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    // test the age of the location measurement to determine if the measurement is cached
-    // in most cases you will not want to rely on cached measurements
-    NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
-    if (locationAge > 5.0) return;
-    // test that the horizontal accuracy does not indicate an invalid measurement
-    if (newLocation.horizontalAccuracy < 0) return;
-    // test the measurement to see if it is more accurate than the previous measurement
-    if (bestEffortAtLocation == nil || bestEffortAtLocation.horizontalAccuracy > newLocation.horizontalAccuracy) {
-        // store the location as the "best effort"
-        self.bestEffortAtLocation = newLocation;
-        // test the measurement to see if it meets the desired accuracy
-        //
-        // IMPORTANT!!! kCLLocationAccuracyBest should not be used for comparison with location coordinate or altitidue 
-        // accuracy because it is a negative value. Instead, compare against some predetermined "real" measure of 
-        // acceptable accuracy, or depend on the timeout to stop updating. This sample depends on the timeout.
-        //
-        if (newLocation.horizontalAccuracy <= locationManager.desiredAccuracy) {
-            // we have a measurement that meets our requirements, so we can stop updating the location
-            // 
-            // IMPORTANT!!! Minimize power usage by stopping the location manager as soon as possible.
-            //
-            [self stopUpdatingLocation:NSLocalizedString(@"Acquired Location", @"Acquired Location")];
-            // we can also cancel our previous performSelector:withObject:afterDelay: - it's no longer necessary
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(stopUpdatingLocation:) object:nil];
-        }
-    }
-    
-    // update the display with the new location data
-    CGFloat lat = [self.bestEffortAtLocation coordinate].latitude;
-    CGFloat lon = [self.bestEffortAtLocation coordinate].longitude;
-    
-    NSLog(@"%f, %f", lon, lat);
-    CGFloat latMax = lat + kLatRadius;
-    CGFloat latMin = lat - kLatRadius;
-    CGFloat lngMax = lon + kLonRadius;
-    CGFloat lngMin = lon - kLonRadius;
-    
-    NSPredicate *predicate = [NSPredicate
-                              predicateWithFormat:@"lat > %f and lat < %f and lon > %f and lon < %f",
-                              latMin, latMax, lngMin, lngMax];
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"College"];
-    [request setPredicate:predicate];
-    
-    [request setFetchLimit:0];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"unitID" ascending:YES];
-    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
-    
-//    NSError *err = nil;
-//    NSArray *objects = [self.managedObjectContext executeFetchRequest:request error:&err];
-//    if (err != nil) {
-//        NSLog(@"%@", [err localizedDescription]);
-//    }
-//    NSArray *sortedObjs = [objects sortedArrayWithOptions:NSSortConcurrent | NSSortStable usingComparator:^NSComparisonResult(id obj1, id obj2) {
-//        College *school1 = (College *) obj1;
-//        College *school2 = (College *) obj2;
-//        
-//        CLLocation *loc = [[CLLocation alloc] initWithLatitude:[[school1 lat] doubleValue] longitude:[[school1 lon] doubleValue]];
-//        CLLocationDistance dist1 = [self.bestEffortAtLocation distanceFromLocation:loc];
-//        loc = [[CLLocation alloc] initWithLatitude:[[school2 lat] doubleValue] longitude:[[school2 lon] doubleValue]];
-//        CLLocationDistance dist2 = [self.bestEffortAtLocation distanceFromLocation:loc];
-//        
-//        if (dist1 > dist2) return NSOrderedDescending;
-//        if (dist1 < dist2) return NSOrderedAscending;
-//        else return NSOrderedSame;
-//    }];
-//    
-//    self.nearbySchools = [sortedObjs subarrayWithRange:NSMakeRange(0, 10)];
-     
-    [self updateNearbySchoolsView];
-}
-
-- (void) updateNearbySchoolsView {
-    
-    
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    // The location "unknown" error simply means the manager is currently unable to get the location.
-    // We can ignore this error for the scenario of getting a single location fix, because we already have a 
-    // timeout that will stop the location manager to save power.
-    if ([error code] != kCLErrorLocationUnknown) {
-        [self stopUpdatingLocation:NSLocalizedString(@"Error", @"Error")];
-    }
-}
-
-- (void)stopUpdatingLocation:(NSString *)state {
-    [locationManager stopUpdatingLocation];
-    locationManager.delegate = nil;
 }
 
 - (void)viewDidUnload

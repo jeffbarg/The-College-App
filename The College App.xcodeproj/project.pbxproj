@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B0FA10615B62651005C787B /* FTNearbyCollegeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FA10515B62651005C787B /* FTNearbyCollegeCell.m */; };
+		7B0FA10915B6311C005C787B /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		7B10147B15B674A500D6A04E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A215B6247A00947B2E /* grayArrow.png */; };
+		7B10147C15B674A500D6A04E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A315B6247A00947B2E /* grayArrow@2x.png */; };
+		7B10147D15B674A500D6A04E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A415B6247A00947B2E /* blackArrow.png */; };
+		7B10147E15B674A500D6A04E /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A515B6247A00947B2E /* blackArrow@2x.png */; };
+		7B10147F15B674A500D6A04E /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A615B6247A00947B2E /* blueArrow.png */; };
+		7B10148015B674A500D6A04E /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A715B6247A00947B2E /* blueArrow@2x.png */; };
+		7B10148115B674A500D6A04E /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A815B6247A00947B2E /* whiteArrow.png */; };
+		7B10148215B674A500D6A04E /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */; };
 		7B12408A15AF10DA006913C3 /* FTWhiteShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B12408915AF10DA006913C3 /* FTWhiteShadowView.m */; };
 		7B201CF815ACC68600D78D23 /* The_College_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */; };
 		7B2C582F15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C582E15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m */; };
@@ -15,7 +25,6 @@
 		7B2C583615B0B81600D3845B /* navtopcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583515B0B81600D3845B /* navtopcellactive.png */; };
 		7B2C583815B0B82A00D3845B /* navbottomactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583715B0B82A00D3845B /* navbottomactive.png */; };
 		7B2C583B15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */; };
-		7B2C583E15B0BD8C00D3845B /* FTCollegeVisitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C583D15B0BD8C00D3845B /* FTCollegeVisitView.m */; };
 		7B2C584015B0BE5500D3845B /* gradesbottomcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583F15B0BE5500D3845B /* gradesbottomcellactive.png */; };
 		7B2C584215B0BE5D00D3845B /* gradestopcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C584115B0BE5D00D3845B /* gradestopcellactive.png */; };
 		7B2C584415B0BE6500D3845B /* gradecellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C584315B0BE6500D3845B /* gradecellactive.png */; };
@@ -67,6 +76,16 @@
 		7B55D08715B5E38D00947B2E /* UIImage+ProportionalFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D08515B5E38500947B2E /* UIImage+ProportionalFill.m */; };
 		7B55D08E15B5E9B200947B2E /* PhotoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D08D15B5E9B200947B2E /* PhotoData.m */; };
 		7B55D09115B5E9B300947B2E /* CampusPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D09015B5E9B300947B2E /* CampusPhoto.m */; };
+		7B55D09C15B6210300947B2E /* FTNearbyCollegesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D09B15B6210200947B2E /* FTNearbyCollegesViewController.m */; };
+		7B55D0AC15B6247A00947B2E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A215B6247A00947B2E /* grayArrow.png */; };
+		7B55D0AD15B6247A00947B2E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A315B6247A00947B2E /* grayArrow@2x.png */; };
+		7B55D0AE15B6247A00947B2E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A415B6247A00947B2E /* blackArrow.png */; };
+		7B55D0AF15B6247A00947B2E /* blackArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A515B6247A00947B2E /* blackArrow@2x.png */; };
+		7B55D0B015B6247A00947B2E /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A615B6247A00947B2E /* blueArrow.png */; };
+		7B55D0B115B6247A00947B2E /* blueArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A715B6247A00947B2E /* blueArrow@2x.png */; };
+		7B55D0B215B6247A00947B2E /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A815B6247A00947B2E /* whiteArrow.png */; };
+		7B55D0B315B6247A00947B2E /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */; };
+		7B55D0B415B6247A00947B2E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -175,6 +194,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B0FA10415B62651005C787B /* FTNearbyCollegeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNearbyCollegeCell.h; sourceTree = "<group>"; };
+		7B0FA10515B62651005C787B /* FTNearbyCollegeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegeCell.m; sourceTree = "<group>"; };
 		7B12408815AF10DA006913C3 /* FTWhiteShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWhiteShadowView.h; sourceTree = "<group>"; };
 		7B12408915AF10DA006913C3 /* FTWhiteShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWhiteShadowView.m; sourceTree = "<group>"; };
 		7B201CF715ACC68600D78D23 /* The_College_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_College_App.xcdatamodel; sourceTree = "<group>"; };
@@ -187,8 +208,6 @@
 		7B2C583715B0B82A00D3845B /* navbottomactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbottomactive.png; sourceTree = "<group>"; };
 		7B2C583915B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTCollegeVisitRatingsViewController.h; path = ../FTCollegeVisitRatingsViewController.h; sourceTree = "<group>"; };
 		7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTCollegeVisitRatingsViewController.m; path = ../FTCollegeVisitRatingsViewController.m; sourceTree = "<group>"; };
-		7B2C583C15B0BD8C00D3845B /* FTCollegeVisitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitView.h; sourceTree = "<group>"; };
-		7B2C583D15B0BD8C00D3845B /* FTCollegeVisitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitView.m; sourceTree = "<group>"; };
 		7B2C583F15B0BE5500D3845B /* gradesbottomcellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradesbottomcellactive.png; sourceTree = "<group>"; };
 		7B2C584115B0BE5D00D3845B /* gradestopcellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradestopcellactive.png; sourceTree = "<group>"; };
 		7B2C584315B0BE6500D3845B /* gradecellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradecellactive.png; sourceTree = "<group>"; };
@@ -231,6 +250,18 @@
 		7B55D08D15B5E9B200947B2E /* PhotoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoData.m; sourceTree = "<group>"; };
 		7B55D08F15B5E9B300947B2E /* CampusPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampusPhoto.h; sourceTree = "<group>"; };
 		7B55D09015B5E9B300947B2E /* CampusPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampusPhoto.m; sourceTree = "<group>"; };
+		7B55D09A15B6210200947B2E /* FTNearbyCollegesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNearbyCollegesViewController.h; sourceTree = "<group>"; };
+		7B55D09B15B6210200947B2E /* FTNearbyCollegesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegesViewController.m; sourceTree = "<group>"; };
+		7B55D0A215B6247A00947B2E /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
+		7B55D0A315B6247A00947B2E /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
+		7B55D0A415B6247A00947B2E /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
+		7B55D0A515B6247A00947B2E /* blackArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackArrow@2x.png"; sourceTree = "<group>"; };
+		7B55D0A615B6247A00947B2E /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		7B55D0A715B6247A00947B2E /* blueArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueArrow@2x.png"; sourceTree = "<group>"; };
+		7B55D0A815B6247A00947B2E /* whiteArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteArrow.png; sourceTree = "<group>"; };
+		7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
+		7B55D0AA15B6247A00947B2E /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -389,6 +420,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B0FA10815B62662005C787B /* Nearby Colleges View */ = {
+			isa = PBXGroup;
+			children = (
+				7B55D09A15B6210200947B2E /* FTNearbyCollegesViewController.h */,
+				7B55D09B15B6210200947B2E /* FTNearbyCollegesViewController.m */,
+				7B0FA10415B62651005C787B /* FTNearbyCollegeCell.h */,
+				7B0FA10515B62651005C787B /* FTNearbyCollegeCell.m */,
+			);
+			name = "Nearby Colleges View";
+			sourceTree = "<group>";
+		};
 		7B51E38015A9008E002F2A2E /* Glyphish */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,6 +460,23 @@
 				7B51E5EA15AB2AAE002F2A2E /* view.png */,
 			);
 			name = "College Search / View";
+			sourceTree = "<group>";
+		};
+		7B55D0A115B6246D00947B2E /* Twitter-Style Refresh Control */ = {
+			isa = PBXGroup;
+			children = (
+				7B55D0A215B6247A00947B2E /* grayArrow.png */,
+				7B55D0A315B6247A00947B2E /* grayArrow@2x.png */,
+				7B55D0A415B6247A00947B2E /* blackArrow.png */,
+				7B55D0A515B6247A00947B2E /* blackArrow@2x.png */,
+				7B55D0A615B6247A00947B2E /* blueArrow.png */,
+				7B55D0A715B6247A00947B2E /* blueArrow@2x.png */,
+				7B55D0A815B6247A00947B2E /* whiteArrow.png */,
+				7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */,
+				7B55D0AA15B6247A00947B2E /* EGORefreshTableHeaderView.h */,
+				7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */,
+			);
+			name = "Twitter-Style Refresh Control";
 			sourceTree = "<group>";
 		};
 		7B62666C15A75DDF00A5879C = {
@@ -679,6 +738,7 @@
 		7B62670A15A7744C00A5879C /* UI Elements */ = {
 			isa = PBXGroup;
 			children = (
+				7B55D0A115B6246D00947B2E /* Twitter-Style Refresh Control */,
 				7BCB88B215B4AFBC008BA15C /* ECSlidingViewController */,
 				7B62672715A777FD00A5879C /* Custom Popover */,
 				7B62670B15A7745200A5879C /* GMGridView */,
@@ -781,10 +841,9 @@
 		7BB663AF15AF235E00428A64 /* College Visiting */ = {
 			isa = PBXGroup;
 			children = (
+				7B0FA10815B62662005C787B /* Nearby Colleges View */,
 				7BB663B015AF237A00428A64 /* FTCollegeVisitViewController.h */,
 				7BB663B115AF237A00428A64 /* FTCollegeVisitViewController.m */,
-				7B2C583C15B0BD8C00D3845B /* FTCollegeVisitView.h */,
-				7B2C583D15B0BD8C00D3845B /* FTCollegeVisitView.m */,
 				7B2C583915B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.h */,
 				7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */,
 				7B7B327B15B47C7700625FA6 /* FTRatingsCell.h */,
@@ -882,6 +941,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B10147B15B674A500D6A04E /* grayArrow.png in Resources */,
+				7B10147C15B674A500D6A04E /* grayArrow@2x.png in Resources */,
+				7B10147D15B674A500D6A04E /* blackArrow.png in Resources */,
+				7B10147E15B674A500D6A04E /* blackArrow@2x.png in Resources */,
+				7B10147F15B674A500D6A04E /* blueArrow.png in Resources */,
+				7B10148015B674A500D6A04E /* blueArrow@2x.png in Resources */,
+				7B10148115B674A500D6A04E /* whiteArrow.png in Resources */,
+				7B10148215B674A500D6A04E /* whiteArrow@2x.png in Resources */,
 				7B51E37115A8E2B0002F2A2E /* toparrow.png in Resources */,
 				7B51E37015A8E2A2002F2A2E /* popover.png in Resources */,
 				7B62668815A75DDF00A5879C /* InfoPlist.strings in Resources */,
@@ -954,6 +1021,14 @@
 				7B62672E15A7781A00A5879C /* popover.png in Resources */,
 				7B35F92115AE303F00EFFFE8 /* Icon.png in Resources */,
 				7B35F92315AE303F00EFFFE8 /* iTunesArtwork in Resources */,
+				7B55D0AC15B6247A00947B2E /* grayArrow.png in Resources */,
+				7B55D0AD15B6247A00947B2E /* grayArrow@2x.png in Resources */,
+				7B55D0AE15B6247A00947B2E /* blackArrow.png in Resources */,
+				7B55D0AF15B6247A00947B2E /* blackArrow@2x.png in Resources */,
+				7B55D0B015B6247A00947B2E /* blueArrow.png in Resources */,
+				7B55D0B115B6247A00947B2E /* blueArrow@2x.png in Resources */,
+				7B55D0B215B6247A00947B2E /* whiteArrow.png in Resources */,
+				7B55D0B315B6247A00947B2E /* whiteArrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,6 +1055,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0FA10915B6311C005C787B /* EGORefreshTableHeaderView.m in Sources */,
 				7B55D08715B5E38D00947B2E /* UIImage+ProportionalFill.m in Sources */,
 				7B6AF4AD15B5C12100BE330F /* UIImageToDataTransformer.m in Sources */,
 				7BCB88C215B4B2FA008BA15C /* InitialSlidingViewController.m in Sources */,
@@ -1024,7 +1100,6 @@
 				7B2C582F15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m in Sources */,
 				7B2C583215B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m in Sources */,
 				7B2C583B15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m in Sources */,
-				7B2C583E15B0BD8C00D3845B /* FTCollegeVisitView.m in Sources */,
 				7B7B327A15B47B6300625FA6 /* FTStandardizedTestingViewController.m in Sources */,
 				7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */,
 				7BCB88C515B4B7C5008BA15C /* FTNavigationCell.m in Sources */,
@@ -1032,6 +1107,8 @@
 				7B6AF4A015B5BF9C00BE330F /* Visit.m in Sources */,
 				7B55D08E15B5E9B200947B2E /* PhotoData.m in Sources */,
 				7B55D09115B5E9B300947B2E /* CampusPhoto.m in Sources */,
+				7B55D09C15B6210300947B2E /* FTNearbyCollegesViewController.m in Sources */,
+				7B0FA10615B62651005C787B /* FTNearbyCollegeCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1143,7 @@
 				7BCB88C115B4B2A3008BA15C /* InitialSlidingViewController.m in Sources */,
 				7B6AF4A915B5C0AC00BE330F /* UIImageToDataTransformer.m in Sources */,
 				7B55D08615B5E38500947B2E /* UIImage+ProportionalFill.m in Sources */,
+				7B55D0B415B6247A00947B2E /* EGORefreshTableHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
