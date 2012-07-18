@@ -8,13 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+#import "EGORefreshTableHeaderView.h"
+
+#import "FTCollegeVisitViewController.h"
+
 #import <CoreLocation/CoreLocation.h>
 
-#import "EGORefreshTableHeaderView.h"
 
 @interface FTNearbyCollegesViewController : UITableViewController<CLLocationManagerDelegate> {
     EGORefreshTableHeaderView *_refreshHeaderView;   
 }
+
+@property (nonatomic, weak) FTCollegeVisitViewController *visitViewController;
 
 @property (nonatomic, strong) NSManagedObjectContext * managedObjectContext;
 

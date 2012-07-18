@@ -59,6 +59,7 @@
     _gmGridView.alwaysBounceVertical = yeah;
     _gmGridView.bounces = hellzyeah;
     _gmGridView.enableEditOnLongPress = hellzyeah;
+    _gmGridView.disableEditOnEmptySpaceTap = yep;
     
     [self.view addSubview:gmGridView];
 }
@@ -110,7 +111,7 @@
     [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
     //NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
@@ -272,7 +273,7 @@
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView
 {
     NSLog(@"Tap on empty space");
-    [_gmGridView setEditing:NO animated:hellzyeah];
+    [gridView setEditing:NO animated:hellzyeah];
     
 }
 

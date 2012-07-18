@@ -39,24 +39,16 @@
     CGContextSetShouldAntialias(ctx, NO);
     CGContextSetInterpolationQuality(ctx, kCGInterpolationHigh);
 
-    UIColor *darkColor = [UIColor colorWithWhite:0.500 alpha:1.000];
-    UIColor *lightColor = [UIColor whiteColor];
+    UIColor *darkColor = [[UIColor colorWithWhite:0.710 alpha:1.000] colorWithAlphaComponent:0.8];
+    UIColor *lightColor = [[UIColor whiteColor] colorWithAlphaComponent:0.8];
     
-    UIBezierPath *lightLine = [UIBezierPath bezierPath];
-    [lightLine moveToPoint:CGPointMake(0, 0.0)];
-    [lightLine addLineToPoint:CGPointMake(self.bounds.size.width, 0.0)];
+    UIBezierPath *lightPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.bounds.size.width, 0.5)];
+    [lightColor setFill];
+    [lightPath fill];
     
-    [lightColor setStroke];
-    [lightLine setLineWidth:1.0];
-    [lightLine stroke];
-    
-    UIBezierPath *darkLine = [UIBezierPath bezierPath];
-    [darkLine moveToPoint:CGPointMake(0, self.bounds.size.height - 1.0)];
-    [darkLine addLineToPoint:CGPointMake(self.bounds.size.width, self.bounds.size.height - 1.0)];
-    
-    [darkColor setStroke];
-    [darkLine setLineWidth:1.0];
-    [darkLine stroke];
+    UIBezierPath *darkPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, self.bounds.size.height - 0.5, self.bounds.size.width, 0.5)];
+    [darkColor setFill];
+    [darkPath fill];
 }
 
 

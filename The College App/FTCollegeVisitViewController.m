@@ -18,7 +18,7 @@
 #import "FTCollegeVisitNotesViewController.h"
 #import "FTCollegeVisitPhotosViewController.h"
 #import "FTCollegeVisitRatingsViewController.h"
-
+#import "FTCollegeInfoViewController.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -39,8 +39,6 @@
     
 }
 
-@property (nonatomic, strong) UIPopoverController *masterPopoverController;
-
 @property (nonatomic, strong) FTNearbyCollegesViewController * nearbyCollegesViewController;
 
 @property (nonatomic, strong) FTCollegeVisitNotesViewController *notesViewController;
@@ -55,12 +53,16 @@
 @property (nonatomic, strong) UIButton *photosButton;
 @property (nonatomic, strong) UIButton *ratingsButton;
 
+@property (nonatomic, strong) UIButton *titleButton;
+
 @end
 
 @implementation FTCollegeVisitViewController
 
 @synthesize managedObjectContext;
 @synthesize masterPopoverController = _masterPopoverController;
+
+@synthesize nearbyCollegesViewController = _nearbyCollegesViewController;
 
 @synthesize notesViewController = _notesViewController;
 @synthesize photosViewController = _photosViewController;
@@ -74,7 +76,9 @@
 @synthesize notesButton;
 @synthesize ratingsButton;
 
-@synthesize school;
+@synthesize titleButton = _titleButton;
+
+@synthesize school = _school;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -102,8 +106,16 @@
     [titleButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
     [titleButton addTarget:self action:@selector(showNearbyCollegesSelector:) forControlEvents:UIControlEventTouchUpInside];
     
+    self.titleButton = titleButton;
     
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    [infoButton addTarget:self action:@selector(showInfo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [titleView addSubview:infoButton];
     [titleView setFrame:CGRectMake(0, 0, 200.0, 30)];                           
+    
+    [infoButton setCenter:CGPointMake(20, 15)];
+    
     self.navigationItem.titleView = titleView;
     
     
@@ -247,19 +259,62 @@
     [self.ratingsButton setFrame:CGRectMake(CGRectGetMaxX(self.photosView.frame) + MARGIN_X, MARGIN_Y, CGRectGetWidth(self.ratingsView.frame), HEADER_HEIGHT)];
     [self.notesButton setFrame:CGRectMake(CGRectGetMaxX(self.photosView.frame) + MARGIN_X, MARGIN_HEADER + CGRectGetMaxY(self.ratingsView.frame), CGRectGetWidth(self.ratingsView.frame), HEADER_HEIGHT)];    
 
+    
+    if (self.school == nil) {
+        [self.photosView setFrame:CGRectOffset(self.photosView.frame, -CGRectGetMaxX(self.photosView.frame) - 20, 0)];        
+        [self.photosButton setFrame:CGRectOffset(self.photosButton.frame, -CGRectGetMaxX(self.photosButton.frame), 0)];        
+        
+        [self.ratingsView setFrame:CGRectOffset(self.ratingsView.frame, self.view.bounds.size.width - CGRectGetMinX(self.ratingsView.frame) + 20, 0)];
+        [self.ratingsButton setFrame:CGRectOffset(self.ratingsButton.frame, self.view.bounds.size.width - CGRectGetMinX(self.ratingsButton.frame), 0)];
+        
+        [self.notesView setFrame:CGRectOffset(self.notesView.frame, self.view.bounds.size.width - CGRectGetMinX(self.notesView.frame) + 20, 0)];
+        [self.notesButton setFrame:CGRectOffset(self.notesButton.frame, self.view.bounds.size.width - CGRectGetMinX(self.notesButton.frame), 0)];
+
+//        [self.photosView setTransform:CGAffineTransformMakeRotation(degreesToRadians(-30))];
+//        [self.ratingsView setTransform:CGAffineTransformMakeRotation(degreesToRadians(25))];
+//        [self.notesView setTransform:CGAffineTransformMakeRotation(degreesToRadians(35))];        
+
+    } else {
+        [self.photosView setTransform:CGAffineTransformMakeRotation(degreesToRadians(0))];
+        [self.ratingsView  setTransform:CGAffineTransformMakeRotation(degreesToRadians(0))];
+        [self.notesView  setTransform:CGAffineTransformMakeRotation(degreesToRadians(0))];
+
+    }
 }
 
 #pragma mark - Buttons
+- (void) showInfo:(UIButton *) infoButton {
+    College *school = self.school;
+    
+    FTCollegeInfoViewController *infoViewController = [[FTCollegeInfoViewController alloc] initWithNibName:@"FTCollegeInfoViewController" bundle:[NSBundle mainBundle]];
+    
+    [infoViewController setSchool:school];
+    [infoViewController setManagedObjectContext:self.managedObjectContext];
+    
+    UINavigationController *infoNavController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
+    [infoNavController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"modaltab.png"]];
+    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"activetab.png"]];
+    
+    [tabBarController setViewControllers:[NSArray arrayWithObjects:infoNavController, nil]];
+    [tabBarController setSelectedViewController:infoNavController];
+    
+    [tabBarController setModalPresentationStyle:UIModalPresentationFormSheet];
+    
+    [self presentModalViewController:tabBarController animated:YES];
+    NSLog(@"%@", [school name]);
+
+}
 
 - (void) showNearbyCollegesSelector:(UIButton *) titleButton {
 
-    if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible] && (self.masterPopoverController.contentViewController.class != [FTNearbyCollegesViewController class])) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-        self.masterPopoverController = nil;
-    }
+    if (self.masterPopoverController != nil && [self.masterPopoverController isPopoverVisible] && [self.masterPopoverController.contentViewController class] != [FTNearbyCollegesViewController class]) return;
     
     FTNearbyCollegesViewController *nearbySchoolsViewController = [[FTNearbyCollegesViewController alloc] initWithStyle:UITableViewStylePlain];
     [nearbySchoolsViewController setManagedObjectContext:self.managedObjectContext];
+    [nearbySchoolsViewController setVisitViewController:self];
     
     if (INTERFACE_IS_PAD) {
         self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:nearbySchoolsViewController];
@@ -279,16 +334,14 @@
 }
 
 - (void) takePhoto:(UIBarButtonItem *) barButtonItem {
+    
+    if (self.masterPopoverController != nil && [self.masterPopoverController isPopoverVisible] && [self.masterPopoverController.contentViewController class] == [UIImagePickerController class]) return;
+    
     UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
     [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
     [pickerController setDelegate:self];
     
     if (INTERFACE_IS_PAD) {
-        if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible] && (self.masterPopoverController.contentViewController.class != [UIImagePickerController class])) {
-            [self.masterPopoverController dismissPopoverAnimated:YES];
-            self.masterPopoverController = nil;
-        }
-
         self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
         [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
         
@@ -400,6 +453,30 @@ UIImage *processImage(UIImage *campusImage) {
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
+}
+
+#pragma mark - Custom Properties
+
+- (void) setSchool:(College *)school {
+    if (school == _school) return;
+    if (_school == nil) {
+        _school = school;
+        [UIView animateWithDuration:0.6 animations:^{
+            [self viewWillLayoutSubviews];
+        }];
+    } else {
+        _school = nil;
+        [UIView animateWithDuration:0.4 animations:^{
+            [self viewWillLayoutSubviews];
+        } completion:^(BOOL completed) {
+            _school = school;
+            [UIView animateWithDuration:0.5 animations:^{
+                [self viewWillLayoutSubviews];
+            }];
+        }];
+    }
+    
+    [self.titleButton setTitle:school.name forState:UIControlStateNormal];
 }
 
 @end

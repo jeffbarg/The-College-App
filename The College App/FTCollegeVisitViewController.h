@@ -15,4 +15,6 @@
 @property (nonatomic, strong) College *school;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
+@property (nonatomic, strong) UIPopoverController *masterPopoverController;
+
 @end

@@ -107,7 +107,7 @@
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:10];
+    [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"combinedSATAverage" ascending:NO];

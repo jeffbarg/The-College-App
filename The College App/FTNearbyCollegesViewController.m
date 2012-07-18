@@ -29,6 +29,8 @@
 
 @implementation FTNearbyCollegesViewController
 
+@synthesize visitViewController = _visitViewController;
+
 @synthesize managedObjectContext;
 
 @synthesize bestEffortAtLocation;
@@ -79,6 +81,7 @@
     
     [_refreshHeaderView setBackgroundColor:[UIColor colorWithWhite:0.898 alpha:1.000]];
     [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.898 alpha:1.000]];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     //  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
@@ -89,6 +92,9 @@
 
 - (void)viewDidUnload
 {
+    if (self.locationManager) 
+        [self.locationManager stopUpdatingLocation];
+    self.locationManager = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -301,8 +307,7 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
@@ -310,6 +315,18 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    
+    College *school = (College *)[self.managedObjectContext objectWithID:((NSManagedObjectID *)[self.nearbySchoolsIDs objectAtIndex:indexPath.row])];
+    
+    if (self.visitViewController) {
+        [self.visitViewController setSchool:school];
+        
+        if (INTERFACE_IS_PAD) {
+            [self.visitViewController.masterPopoverController dismissPopoverAnimated:YES];
+        } else {
+            
+        }
+     }
 }
 
 #pragma mark -
@@ -351,6 +368,7 @@
         return (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:@"LAST_UPDATED"];
     }
 	
+    
 }
 
 #pragma mark -

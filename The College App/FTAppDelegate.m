@@ -48,7 +48,7 @@
     masterViewController.managedObjectContext = self.managedObjectContext;
     
     
-    [self initializeData];
+    //[self initializeData];
     [self configureAppearance];
     
     [self.window makeKeyAndVisible];
