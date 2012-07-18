@@ -77,6 +77,9 @@
 		
 	}
     
+    [_refreshHeaderView setBackgroundColor:[UIColor colorWithWhite:0.898 alpha:1.000]];
+    [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.898 alpha:1.000]];
+    
     //  update the last update date
 	[_refreshHeaderView refreshLastUpdatedDate];
     
