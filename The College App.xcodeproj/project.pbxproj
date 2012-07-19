@@ -186,6 +186,8 @@
 		7BDDDABD15B7DB5B00941281 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */; };
 		7BDDDABF15B7DB7200941281 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */; };
 		7BDDDACE15B7E69800941281 /* FTAmazonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDACD15B7E69800941281 /* FTAmazonConstants.m */; };
+		7BE3A68D15B7F0D500739725 /* S3RequestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */; };
+		7BE3A68F15B7F35D00739725 /* S3RequestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */; };
 		7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */; };
 /* End PBXBuildFile section */
 
@@ -402,6 +404,8 @@
 		7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		7BDDDACC15B7E69700941281 /* FTAmazonConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAmazonConstants.h; sourceTree = "<group>"; };
 		7BDDDACD15B7E69800941281 /* FTAmazonConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAmazonConstants.m; sourceTree = "<group>"; };
+		7BE3A68B15B7F0D500739725 /* S3RequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S3RequestDelegate.h; sourceTree = "<group>"; };
+		7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S3RequestDelegate.m; sourceTree = "<group>"; };
 		7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneicon2x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -823,6 +827,8 @@
 				7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */,
 				7BDDDACC15B7E69700941281 /* FTAmazonConstants.h */,
 				7BDDDACD15B7E69800941281 /* FTAmazonConstants.m */,
+				7BE3A68B15B7F0D500739725 /* S3RequestDelegate.h */,
+				7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -1095,6 +1101,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BE3A68F15B7F35D00739725 /* S3RequestDelegate.m in Sources */,
 				7BDDDABF15B7DB7200941281 /* NSData+Base64.m in Sources */,
 				7BDDDABA15B7CDB000941281 /* UIImage+UIImage_StandardFeatures.m in Sources */,
 				7B0FA10915B6311C005C787B /* EGORefreshTableHeaderView.m in Sources */,
@@ -1188,6 +1195,7 @@
 				7B55D0B415B6247A00947B2E /* EGORefreshTableHeaderView.m in Sources */,
 				7BDDDAB915B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m in Sources */,
 				7BDDDABD15B7DB5B00941281 /* NSData+Base64.m in Sources */,
+				7BE3A68D15B7F0D500739725 /* S3RequestDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

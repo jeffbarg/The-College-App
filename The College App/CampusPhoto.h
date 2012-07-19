@@ -21,4 +21,5 @@
 @property (nonatomic, retain) Visit *visit;
 @property (nonatomic, retain) PhotoData *photoData;
 
+
 @end

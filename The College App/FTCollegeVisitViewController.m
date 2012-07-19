@@ -297,11 +297,12 @@
         [self.notesView  setTransform:CGAffineTransformMakeRotation(degreesToRadians(0))];
 
     }
+    
+    [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
 }
 
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
 }
 - (void)viewDidUnload
 {

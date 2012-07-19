@@ -14,6 +14,11 @@
 
 #import "College.h"
 
+#import <AWSiOSSDK/AmazonLogger.h>
+
+#define kUUIDKeyDefaults @"FT_DEVICE_UNIQUE_IDENTIFIER"
+
+
 @implementation FTAppDelegate
 
 @synthesize window = _window;
@@ -26,6 +31,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self setupAmazon];
+    //[self initializeData];
+    [self configureAppearance];
+    [self setupUUID];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
@@ -48,8 +58,7 @@
     masterViewController.managedObjectContext = self.managedObjectContext;
     
     
-    //[self initializeData];
-    [self configureAppearance];
+
     
     [self.window makeKeyAndVisible];
 
@@ -123,6 +132,30 @@
 }
 
 #pragma mark - Data Initialization
+
+- (void) setupAmazon {
+    // Logging Control - Do NOT use logging for non-development builds.
+#ifdef DEBUG
+    [AmazonLogger verboseLogging];
+#else
+    [AmazonLogger turnLoggingOff];
+#endif
+}
+
+- (void) setupUUID {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([defaults objectForKey:kUUIDKeyDefaults] == nil) {
+        CFUUIDRef theUUID = CFUUIDCreate(NULL);
+        CFStringRef string = CFUUIDCreateString(NULL, theUUID);
+        CFRelease(theUUID);
+        NSString * newUUID =  (__bridge_transfer NSString *)string;
+        
+        [defaults setValue:newUUID forKey:kUUIDKeyDefaults];
+        
+        [defaults synchronize];
+    }
+}
 
 - (void) initializeData {
     

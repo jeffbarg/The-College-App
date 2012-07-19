@@ -19,6 +19,8 @@
 #define CREDENTIALS_MESSAGE    @"AWS Credentials not configured correctly.  Please review the README file."
 
 
+@class AmazonS3Client;
+
 @interface FTAmazonConstants : NSObject
 
 
@@ -36,6 +38,8 @@
 
 
 +(UIAlertView *)credentialsAlert;
+ 
++ (AmazonS3Client *) s3Client;
 
 @end
 

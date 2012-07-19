@@ -7,6 +7,7 @@
 //
 
 #import "FTAmazonConstants.h"
+#import <AWSiOSSDK/S3/AmazonS3Client.h>
 
 @implementation FTAmazonConstants
 
@@ -23,6 +24,19 @@
 +(UIAlertView *)credentialsAlert
 {
     return [[UIAlertView alloc] initWithTitle:@"Missing Credentials" message:CREDENTIALS_MESSAGE delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+}
+
++ (AmazonS3Client *) s3Client {
+    // Persistent instance.
+    static AmazonS3Client *_client = nil;
+    
+    if (_client == nil)
+    {
+        _client = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
+
+    }
+    
+    return _client;
 }
 
 @end
