@@ -14,6 +14,8 @@
  */
 
 #import <AWSiOSSDK/AmazonServiceResponse.h>
+#import "CampusPhoto.h"
+
 
 @interface S3RequestDelegate:NSObject<AmazonServiceRequestDelegate>
 {
@@ -31,6 +33,8 @@
 @property (nonatomic, readonly) NSException           *exception;
 @property (nonatomic, retain)   UILabel               *bytesIn;
 @property (nonatomic, retain)   UILabel               *bytesOut;
+
+@property (nonatomic, strong) CampusPhoto *campusPhoto;
 
 -(bool)isFinishedOrFailed;
 -(void)request:(AmazonServiceRequest *)request didReceiveResponse:(NSURLResponse *)response;

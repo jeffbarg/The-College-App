@@ -18,8 +18,9 @@
 @property (nonatomic, retain) UIImage * thumbnailImage;
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
+@property (nonatomic, retain) NSNumber * uploaded;
+
 @property (nonatomic, retain) Visit *visit;
 @property (nonatomic, retain) PhotoData *photoData;
-
 
 @end

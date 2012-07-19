@@ -260,6 +260,8 @@
         [self.view addSubview:tabBarController.view];
         [tabBarController didMoveToParentViewController:self];
     }
+    
+    [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
 }
 
 - (void) viewWillLayoutSubviews {
@@ -298,7 +300,7 @@
 
     }
     
-    [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
+
 }
 
 - (void) viewDidAppear:(BOOL)animated {
@@ -353,7 +355,10 @@
     [nearbySchoolsViewController setVisitViewController:self];
     
     if (INTERFACE_IS_PAD) {
-        self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:nearbySchoolsViewController];
+        UIPopoverController *pController = [[UIPopoverController alloc] initWithContentViewController:nearbySchoolsViewController];
+        
+        self.masterPopoverController = pController;
+        
         [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
 
         [self.masterPopoverController presentPopoverFromRect:[titleButton.superview convertRect:titleButton.frame toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];

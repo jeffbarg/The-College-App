@@ -23,6 +23,8 @@
 @synthesize bytesIn;
 @synthesize bytesOut;
 
+@synthesize campusPhoto = _campusPhoto;
+
 -(id)init
 {
     self = [super init];
@@ -51,6 +53,7 @@
 {
     NSLog(@"didCompleteWithResponse : %@", aResponse);
     response = aResponse;
+    [self.campusPhoto setUploaded:[NSNumber numberWithBool:YES]];
 }
 
 -(void)request:(AmazonServiceRequest *)request didReceiveData:(NSData *)data
@@ -71,6 +74,7 @@
 
 -(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)theError
 {
+    [self.campusPhoto setUploaded:[NSNumber numberWithBool:NO]];
     NSLog(@"didFailWithError : %@", theError);
     error = theError;
 }

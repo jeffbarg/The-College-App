@@ -9,6 +9,8 @@
 #import "CampusPhoto.h"
 #import "PhotoData.h"
 #import "Visit.h"
+#import "College.h"
+
 #import "UIImageToDataTransformer.h"
 
 #import "SBJson.h"
@@ -32,6 +34,7 @@
 @dynamic longitude;
 @dynamic visit;
 @dynamic photoData;
+@dynamic uploaded;
 
 @synthesize s3Delegate = _s3Delegate;
 
@@ -42,6 +45,11 @@
 	}
 }
 
+- (void)awakeFromFetch {
+    if (![self.uploaded boolValue]) {
+        [self attemptUploadToCloud];
+    }
+}
             
 - (void)setPhotoData:(PhotoData *)photoData {
     [self willChangeValueForKey:@"photoData"];
@@ -59,12 +67,20 @@
         
     AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
         
-    NSString *keyName    = [NSString stringWithFormat:@"File%@", [[NSDate date] description]];
+    NSString * FTDeviceUUID = [[NSUserDefaults standardUserDefaults] objectForKey:kUUIDKeyDefaults];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"MM|dd|yyyy-hh:mma"];
+    [formatter setCalendar:[NSCalendar currentCalendar]];
+    
+    NSString *keyName    = [NSString stringWithFormat:@"%@/%@@%@", [self.visit.college.unitID description], FTDeviceUUID, [formatter stringFromDate:[NSDate date]]];
 
     
     // Put the file as an object in the bucket.
     S3PutObjectRequest * putObjectRequest          = [[S3PutObjectRequest alloc] initWithKey:keyName inBucket:PICTURE_BUCKET];
     putObjectRequest.data = imageData;
+    putObjectRequest.expires = 1000.0 * 20.0;
+    
     [putObjectRequest setDelegate:self.s3Delegate];
     
     // When using delegates the return is nil.
@@ -84,7 +100,7 @@
     if (_s3Delegate) return _s3Delegate;
     
     _s3Delegate = [[S3RequestDelegate alloc] init];
-    
+    [_s3Delegate setCampusPhoto:self];
     return _s3Delegate;
 }
 

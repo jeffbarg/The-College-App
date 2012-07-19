@@ -16,9 +16,6 @@
 
 #import <AWSiOSSDK/AmazonLogger.h>
 
-#define kUUIDKeyDefaults @"FT_DEVICE_UNIQUE_IDENTIFIER"
-
-
 @implementation FTAppDelegate
 
 @synthesize window = _window;
@@ -32,7 +29,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAmazon];
-    //[self initializeData];
+    [self initializeData];
     [self configureAppearance];
     [self setupUUID];
     
@@ -158,6 +155,9 @@
 }
 
 - (void) initializeData {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"College"];
+    if ([self.managedObjectContext countForFetchRequest:fetchRequest error:nil] != 0) return;
     
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     
