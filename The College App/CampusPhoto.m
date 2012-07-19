@@ -11,6 +11,12 @@
 #import "Visit.h"
 #import "UIImageToDataTransformer.h"
 
+#import "SBJson.h"
+
+@interface CampusPhoto ()
+
+@end
+
 @implementation CampusPhoto
 
 @dynamic caption;
@@ -26,6 +32,17 @@
 		UIImageToDataTransformer *transformer = [[UIImageToDataTransformer alloc] init];
 		[NSValueTransformer setValueTransformer:transformer forName:@"UIImageToDataTransformer"];
 	}
+}
+
+- (void) attemptUploadToCloud {
+    
+}
+
+- (NSData *) dataRepresentation {
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    
+    [dict setObject:UIImageJPEGRepresentation(self.photoData.image, 1.0) forKey:@"image"];
+    
 }
 
 @end

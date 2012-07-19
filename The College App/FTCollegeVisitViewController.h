@@ -11,7 +11,7 @@
 @class College;
 @class Visit;
 
-@interface FTCollegeVisitViewController : UIViewController
+@interface FTCollegeVisitViewController : UIViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) College *school;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;

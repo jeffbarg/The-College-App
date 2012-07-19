@@ -84,6 +84,7 @@
 		7B55D0B215B6247A00947B2E /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A815B6247A00947B2E /* whiteArrow.png */; };
 		7B55D0B315B6247A00947B2E /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */; };
 		7B55D0B415B6247A00947B2E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */; };
+		7B5837BD15B7E7F100AE9837 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5837BC15B7E7F100AE9837 /* AWSiOSSDK.framework */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -178,6 +179,13 @@
 		7BCB88C815B4BF44008BA15C /* FTNavigationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB88C715B4BF44008BA15C /* FTNavigationHeader.m */; };
 		7BCB88CA15B4C7A3008BA15C /* blacknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88C915B4C7A3008BA15C /* blacknavbar.png */; };
 		7BDDDA9615B764FC00941281 /* Visit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDA9515B764FC00941281 /* Visit.m */; };
+		7BDDDA9B15B778C900941281 /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BDDDA9A15B778C900941281 /* addphoto.png */; };
+		7BDDDA9E15B77F4E00941281 /* FTCampusImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDA9D15B77F4D00941281 /* FTCampusImageViewController.m */; };
+		7BDDDAB915B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */; };
+		7BDDDABA15B7CDB000941281 /* UIImage+UIImage_StandardFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */; };
+		7BDDDABD15B7DB5B00941281 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */; };
+		7BDDDABF15B7DB7200941281 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */; };
+		7BDDDACE15B7E69800941281 /* FTAmazonConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDACD15B7E69800941281 /* FTAmazonConstants.m */; };
 		7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */; };
 /* End PBXBuildFile section */
 
@@ -258,6 +266,7 @@
 		7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		7B55D0AA15B6247A00947B2E /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		7B5837BC15B7E7F100AE9837 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -384,6 +393,15 @@
 		7BCB88C915B4C7A3008BA15C /* blacknavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blacknavbar.png; sourceTree = "<group>"; };
 		7BDDDA9415B764FC00941281 /* Visit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visit.h; sourceTree = "<group>"; };
 		7BDDDA9515B764FC00941281 /* Visit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visit.m; sourceTree = "<group>"; };
+		7BDDDA9A15B778C900941281 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
+		7BDDDA9C15B77F4D00941281 /* FTCampusImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCampusImageViewController.h; sourceTree = "<group>"; };
+		7BDDDA9D15B77F4D00941281 /* FTCampusImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCampusImageViewController.m; sourceTree = "<group>"; };
+		7BDDDAB715B7C9C700941281 /* UIImage+UIImage_StandardFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_StandardFeatures.h"; sourceTree = "<group>"; };
+		7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_StandardFeatures.m"; sourceTree = "<group>"; };
+		7BDDDABB15B7DB5A00941281 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		7BDDDACC15B7E69700941281 /* FTAmazonConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAmazonConstants.h; sourceTree = "<group>"; };
+		7BDDDACD15B7E69800941281 /* FTAmazonConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAmazonConstants.m; sourceTree = "<group>"; };
 		7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneicon2x.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -399,6 +417,7 @@
 				7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */,
 				7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */,
 				7B62668215A75DDF00A5879C /* CoreData.framework in Frameworks */,
+				7B5837BD15B7E7F100AE9837 /* AWSiOSSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -479,6 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB663C115AF39F300428A64 /* iconipad.png */,
+				7B5837BC15B7E7F100AE9837 /* AWSiOSSDK.framework */,
 				7BB663AC15AF220200428A64 /* CoreLocation.framework */,
 				7B35F90815AE274F00EFFFE8 /* MapKit.framework */,
 				7B6266BB15A75F1500A5879C /* QuartzCore.framework */,
@@ -694,6 +714,8 @@
 		7B6266DA15A76BA300A5879C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				7BDDDABE15B7DB5E00941281 /* Base64 */,
+				7BDDDAAD15B7C4A800941281 /* Image Utilities */,
 				7B6266DB15A76BA800A5879C /* SBJSON */,
 			);
 			name = Tools;
@@ -799,6 +821,8 @@
 				7B62673C15A779ED00A5879C /* Extracurricular.m */,
 				7B6AF4A715B5C0AC00BE330F /* UIImageToDataTransformer.h */,
 				7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */,
+				7BDDDACC15B7E69700941281 /* FTAmazonConstants.h */,
+				7BDDDACD15B7E69800941281 /* FTAmazonConstants.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -806,6 +830,7 @@
 		7B7B328015B485C300625FA6 /* College Visiting */ = {
 			isa = PBXGroup;
 			children = (
+				7BDDDA9A15B778C900941281 /* addphoto.png */,
 				7BCB88A315B49D2B008BA15C /* visitsectionheader.png */,
 			);
 			name = "College Visiting";
@@ -846,6 +871,8 @@
 				7B2C582E15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m */,
 				7B2C583015B0AF2A00D3845B /* FTCollegeVisitNotesViewController.h */,
 				7B2C583115B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m */,
+				7BDDDA9C15B77F4D00941281 /* FTCampusImageViewController.h */,
+				7BDDDA9D15B77F4D00941281 /* FTCampusImageViewController.m */,
 			);
 			name = "College Visiting";
 			sourceTree = "<group>";
@@ -861,6 +888,24 @@
 				7BCB88BA15B4B08F008BA15C /* UIImage+ImageWithUIView.m */,
 			);
 			name = ECSlidingViewController;
+			sourceTree = "<group>";
+		};
+		7BDDDAAD15B7C4A800941281 /* Image Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7BDDDAB715B7C9C700941281 /* UIImage+UIImage_StandardFeatures.h */,
+				7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */,
+			);
+			name = "Image Utilities";
+			sourceTree = "<group>";
+		};
+		7BDDDABE15B7DB5E00941281 /* Base64 */ = {
+			isa = PBXGroup;
+			children = (
+				7BDDDABB15B7DB5A00941281 /* NSData+Base64.h */,
+				7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */,
+			);
+			name = Base64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1003,6 +1048,7 @@
 				7BCB88A815B4A21F008BA15C /* FTCollegeInfoViewController~ipad.xib in Resources */,
 				7BCB88A915B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib in Resources */,
 				7BCB88CA15B4C7A3008BA15C /* blacknavbar.png in Resources */,
+				7BDDDA9B15B778C900941281 /* addphoto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1049,6 +1095,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BDDDABF15B7DB7200941281 /* NSData+Base64.m in Sources */,
+				7BDDDABA15B7CDB000941281 /* UIImage+UIImage_StandardFeatures.m in Sources */,
 				7B0FA10915B6311C005C787B /* EGORefreshTableHeaderView.m in Sources */,
 				7B6AF4AD15B5C12100BE330F /* UIImageToDataTransformer.m in Sources */,
 				7BCB88C215B4B2FA008BA15C /* InitialSlidingViewController.m in Sources */,
@@ -1102,6 +1150,8 @@
 				7B55D09C15B6210300947B2E /* FTNearbyCollegesViewController.m in Sources */,
 				7B0FA10615B62651005C787B /* FTNearbyCollegeCell.m in Sources */,
 				7BDDDA9615B764FC00941281 /* Visit.m in Sources */,
+				7BDDDA9E15B77F4E00941281 /* FTCampusImageViewController.m in Sources */,
+				7BDDDACE15B7E69800941281 /* FTAmazonConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1136,6 +1186,8 @@
 				7BCB88C115B4B2A3008BA15C /* InitialSlidingViewController.m in Sources */,
 				7B6AF4A915B5C0AC00BE330F /* UIImageToDataTransformer.m in Sources */,
 				7B55D0B415B6247A00947B2E /* EGORefreshTableHeaderView.m in Sources */,
+				7BDDDAB915B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m in Sources */,
+				7BDDDABD15B7DB5B00941281 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,6 +1271,10 @@
 		7B6266AB15A75DDF00A5879C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "The College App/The College App-Prefix.pch";
 				INFOPLIST_FILE = "The College App/The College App-Info.plist";
@@ -1231,6 +1287,10 @@
 		7B6266AC15A75DDF00A5879C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "The College App/The College App-Prefix.pch";
 				INFOPLIST_FILE = "The College App/The College App-Info.plist";

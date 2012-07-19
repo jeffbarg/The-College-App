@@ -167,7 +167,7 @@
     [actLabel setTextAlignment:UITextAlignmentLeft];
     [actLabel setTextColor:textColor];
     [actLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
-    
+
     FTRangeIndicator *actIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 280.0, 460.0, 60.0)];
     [actIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
 

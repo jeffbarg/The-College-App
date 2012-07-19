@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "FTCollegeVisitViewController.h"
+#import "FTCampusImageViewController.h"
 
 #import "Visit.h"
 

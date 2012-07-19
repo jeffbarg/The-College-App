@@ -9,6 +9,7 @@
 #import "FTCollegeVisitPhotosViewController.h"
 #import "GMGridView.h"
 #import "ECSlidingViewController.h"
+#import "KSCustomPopoverBackgroundView.h"
 
 #import "Visit.h"
 #import "CampusPhoto.h"
@@ -115,7 +116,7 @@
     [fetchRequest setFetchBatchSize:10];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
     //NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
@@ -165,7 +166,7 @@
             
         case NSFetchedResultsChangeInsert:
             //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [_gmGridView insertObjectAtIndex:indexPath.row withAnimation:GMGridViewItemAnimationFade];
+            [_gmGridView insertObjectAtIndex:newIndexPath.row + 1 withAnimation:GMGridViewItemAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -216,7 +217,7 @@
 - (NSInteger)numberOfItemsInGMGridView:(GMGridView *)gridView
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
-    return [sectionInfo numberOfObjects]; // 1 more for adding photo interface.
+    return [sectionInfo numberOfObjects] + 1; // 1 more for adding photo interface.
 }
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
@@ -241,7 +242,7 @@
         cell.deleteButtonOffset = CGPointMake(-15, -15);
         
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-        [imgView setContentMode:UIViewContentModeScaleAspectFit];
+        [imgView setContentMode:UIViewContentModeCenter];
         
         [imgView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         cell.contentView = imgView;
@@ -251,10 +252,14 @@
 
     UIImageView *imgView = (UIImageView *) cell.contentView;
     
-    CampusPhoto *photo = (CampusPhoto *) [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
-    
-    [imgView setImage:[photo thumbnailImage]];
-    
+    if (index != 0) {
+        CampusPhoto *photo = (CampusPhoto *) [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index-1 inSection:0]];
+        
+        [imgView setImage:[photo thumbnailImage]];
+    } else {
+        [imgView setImage:[UIImage imageNamed:@"addphoto.png"]];
+        [imgView setHighlightedImage:[UIImage imageNamed:@"addphoto.png"]];
+    }
     
     [cell setHidden:NO];
     
@@ -264,7 +269,7 @@
 
 - (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index
 {
-    return YES; //index % 2 == 0;
+    return (index != 0); //index % 2 == 0;
 }
 
 //////////////////////////////////////////////////////////////
@@ -273,6 +278,31 @@
 
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)index {
     NSLog(@"Did tap at index %d", index);
+    if (index == 0) {
+        GMGridViewCell *cell = [gridView cellForItemAtIndex:index];
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        [pickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [pickerController setDelegate:self.visitViewController];
+        
+        if (INTERFACE_IS_PAD) {
+            self.visitViewController.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
+            [self.visitViewController.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+            
+            [self.visitViewController.masterPopoverController presentPopoverFromRect:cell.frame inView:gridView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            
+        } else {
+            [self presentViewController:pickerController animated:YES completion:^{}];
+        }
+    } else {
+        CampusPhoto *photo = (CampusPhoto *)[self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index-1 inSection:0]];
+        
+        PhotoData *data = [photo photoData];
+        
+        FTCampusImageViewController *imgViewController = [[FTCampusImageViewController alloc] init];
+        [imgViewController setImage:data];
+        [imgViewController setModalPresentationStyle:UIModalPresentationFullScreen];
+        [self presentViewController:imgViewController animated:YES completion:^{}];
+    }
 }
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView
@@ -297,7 +327,7 @@
     {
         //TODO: Delete Item from Data Source
         //[_currentData removeObjectAtIndex:_lastDeleteItemIndexAsked];
-        NSManagedObject *objectToBeDeleted = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:_lastDeleteItemIndexAsked inSection:0]];
+        NSManagedObject *objectToBeDeleted = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:_lastDeleteItemIndexAsked - 1 inSection:0]];
         [self.managedObjectContext deleteObject:objectToBeDeleted];
         NSError *err = nil;
         if (![self.managedObjectContext save:&err]) {
@@ -305,6 +335,7 @@
         }
         
         [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked withAnimation:GMGridViewItemAnimationFade];
+        [_gmGridView setEditing:NO animated:NO];
     }
 }
 

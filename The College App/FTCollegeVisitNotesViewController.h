@@ -14,6 +14,7 @@
 
 @interface FTCollegeVisitNotesViewController : UIViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) FTCollegeVisitViewController *visitViewController;
 

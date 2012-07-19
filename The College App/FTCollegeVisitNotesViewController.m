@@ -20,7 +20,7 @@
 
 @synthesize textView = _textView;
 @synthesize visitViewController = _visitViewController;
-
+@synthesize managedObjectContext;
 @synthesize visit = _visit;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

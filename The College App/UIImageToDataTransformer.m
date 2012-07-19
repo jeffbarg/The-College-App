@@ -49,7 +49,7 @@ Both Event and Photograph contain image data stored as a transformable attribute
  */
 
 #import "UIImageToDataTransformer.h"
-
+#import "UIImage+UIImage_StandardFeatures.h"
 
 @implementation UIImageToDataTransformer
 
@@ -62,7 +62,8 @@ Both Event and Photograph contain image data stored as a transformable attribute
 }
 
 - (id)transformedValue:(id)value {
-	return UIImagePNGRepresentation(value);
+    
+	return UIImagePNGRepresentation([((UIImage *)value) imageByRotatingImageFromImageOrientation]);
 }
 
 - (id)reverseTransformedValue:(id)value {

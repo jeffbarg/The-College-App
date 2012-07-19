@@ -23,6 +23,7 @@
 
 #import "Visit.h"
 #import "CampusPhoto.h"
+#import "PhotoData.h"
 
 #define kLatRadius 0.5
 #define kLonRadius 0.5
@@ -34,7 +35,7 @@
 
 #define HEADER_HEIGHT 30
 
-@interface FTCollegeVisitViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface FTCollegeVisitViewController () {
 }
 
 @property (nonatomic, strong) FTNearbyCollegesViewController * nearbyCollegesViewController;
@@ -148,8 +149,10 @@
     _ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] initWithStyle:UITableViewStylePlain];
     _notesViewController = [[FTCollegeVisitNotesViewController alloc] init];
     
+    [_photosViewController setVisitViewController:self];
     [_notesViewController setVisitViewController:self];
     
+    [_notesViewController setManagedObjectContext:self.managedObjectContext];
     [_photosViewController setManagedObjectContext:self.managedObjectContext];
     
     if (INTERFACE_IS_PAD) {
@@ -297,7 +300,8 @@
 }
 
 - (void) viewDidAppear:(BOOL)animated {
-    [self showNearbyCollegesSelector:self.titleButton];
+    [super viewDidAppear:animated];
+    [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
 }
 - (void)viewDidUnload
 {
@@ -394,9 +398,15 @@
     UIImage *thumb = processImage(campusImage);
     
     CampusPhoto *photoObject = [NSEntityDescription insertNewObjectForEntityForName:@"CampusPhoto" inManagedObjectContext:self.managedObjectContext];
+    
+    [photoObject setDateCreated:[NSDate date]];    
     [photoObject setThumbnailImage:thumb];
-    [photoObject setDateCreated:[NSDate date]];
     [photoObject setVisit:self.visit];
+    
+    PhotoData *data = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoData" inManagedObjectContext:self.managedObjectContext];
+    [data setImage:campusImage];
+    
+    [photoObject setPhotoData:data];
     
     NSError *err = nil;
     if (![self.managedObjectContext save:&err]) {
