@@ -14,8 +14,8 @@
     #import <CoreData/CoreData.h>
 #endif
 
-#define INTERFACE_IS_PAD     ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) 
-#define INTERFACE_IS_PHONE   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) 
+#define INTERFACE_IS_PAD     (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+#define INTERFACE_IS_PHONE   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) 
 #define INTERFACE_IS_PORTRAIT   (UIInterfaceOrientationIsPortrait( [[UIApplication sharedApplication] statusBarOrientation]))
 
 #define kViewBackgroundColor [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000]

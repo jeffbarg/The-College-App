@@ -23,5 +23,7 @@ typedef enum {
 
 - (UIImage*) imageByRotatingImageFromImageOrientation;
 
++ (UIImage*)imageWithImage:(UIImage*)sourceImage scaledToSize:(CGSize)newSize;
+
 
 @end

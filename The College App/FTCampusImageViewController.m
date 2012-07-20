@@ -52,8 +52,17 @@
     
     [imgView setContentMode:UIViewContentModeScaleAspectFit];
     
-    [imgView setImage:[self.image image]];
-    
+    NSOperationQueue *bgQueue = [[NSOperationQueue alloc] init];
+    [bgQueue addOperationWithBlock:^{
+        UIImage *img = [self.image image];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [imgView setImage:img];
+        }];
+    }];
+//    UIImage *img = [self.image image];
+//
+//    [imgView setImage:img];
+
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
     [scrollView addGestureRecognizer:tapGesture];
     

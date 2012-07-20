@@ -88,6 +88,9 @@
     
     
     [_refreshHeaderView setStartLoading:self.tableView];
+    
+    self.title = @"Nearby Colleges";
+    
 }
 
 - (void)viewDidUnload
@@ -324,7 +327,7 @@
         if (INTERFACE_IS_PAD) {
             [self.visitViewController.masterPopoverController dismissPopoverAnimated:YES];
         } else {
-            
+            [self dismissViewControllerAnimated:YES completion:^{}];
         }
      }
 }

@@ -88,6 +88,12 @@
 
 - (void)viewDidUnload
 {
+    _gmGridView = nil;
+    self.managedObjectContext = nil;
+    self.fetchedResultsController = nil;
+    self.visitViewController = nil;
+    self.visit = nil;
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

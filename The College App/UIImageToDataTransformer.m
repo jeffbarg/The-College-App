@@ -67,7 +67,10 @@ Both Event and Photograph contain image data stored as a transformable attribute
 }
 
 - (id)reverseTransformedValue:(id)value {
-	return [[UIImage alloc] initWithData:value];
+    CGFloat screenScale = [[UIScreen mainScreen] scale];
+	UIImage * img =  [[UIImage alloc] initWithData:value scale: screenScale];
+    
+    return img;
 }
 
 @end

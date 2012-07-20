@@ -260,7 +260,7 @@
     }
     
     [view.subtitleLabel setText:[NSString stringWithFormat:@" • %@ • %@", [school city], stateAbbreviation]];
-    
+        
     NSString *satScoreText = [NSString stringWithFormat:@"%i - %i", 
                               [[school readingSAT25] integerValue] + [[school writingSAT25] integerValue] + [[school mathSAT25] integerValue],
                               [[school readingSAT75] integerValue] + [[school writingSAT75] integerValue] + [[school mathSAT75] integerValue]];

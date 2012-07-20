@@ -13,7 +13,8 @@
 
 @interface PhotoData : NSManagedObject
 
-@property (nonatomic, retain) id image;
+@property (nonatomic, retain) UIImage * image;
+@property (nonatomic, retain) NSString *imageURL;
 @property (nonatomic, retain) CampusPhoto *campusPhoto;
 
 @end

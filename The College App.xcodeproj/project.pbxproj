@@ -37,6 +37,9 @@
 		7B35F90F15AE277B00EFFFE8 /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F90E15AE277A00EFFFE8 /* notes.png */; };
 		7B35F92115AE303F00EFFFE8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F91915AE303F00EFFFE8 /* Icon.png */; };
 		7B35F92315AE303F00EFFFE8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F91B15AE303F00EFFFE8 /* iTunesArtwork */; };
+		7B48486D15B939B200F4FE9F /* TestSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B48486C15B939B200F4FE9F /* TestSection.m */; };
+		7B48487015B939B300F4FE9F /* StandardizedTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B48486F15B939B300F4FE9F /* StandardizedTest.m */; };
+		7B48487315B93B8A00F4FE9F /* FTStandardizedTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B48487215B93B8A00F4FE9F /* FTStandardizedTestView.m */; };
 		7B51E36915A8CAF1002F2A2E /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36515A8CAF1002F2A2E /* cancel.png */; };
 		7B51E36A15A8CAF1002F2A2E /* cancelactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36615A8CAF1002F2A2E /* cancelactive.png */; };
 		7B51E36B15A8CAF1002F2A2E /* save.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36715A8CAF1002F2A2E /* save.png */; };
@@ -142,6 +145,7 @@
 		7B62674615A781D200A5879C /* FTExtracurricularCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B62670515A773DC00A5879C /* FTExtracurricularCellView.m */; };
 		7B6AF4A915B5C0AC00BE330F /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */; };
 		7B6AF4AD15B5C12100BE330F /* UIImageToDataTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */; };
+		7B732F0315B9CE0E00E5036D /* FTStandardizedTestHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B732F0215B9CE0E00E5036D /* FTStandardizedTestHeader.m */; };
 		7B75DEBE15AC83CC005A4233 /* collegedata.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEBD15AC83CC005A4233 /* collegedata.json */; };
 		7B75DECA15AC91DA005A4233 /* modaltab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEC915AC91DA005A4233 /* modaltab.png */; };
 		7B75DED615ACB0E5005A4233 /* shitty.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DED515ACB0E5005A4233 /* shitty.png */; };
@@ -230,6 +234,12 @@
 		7B35F90E15AE277A00EFFFE8 /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
 		7B35F91915AE303F00EFFFE8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		7B35F91B15AE303F00EFFFE8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		7B48486B15B939B200F4FE9F /* TestSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestSection.h; sourceTree = "<group>"; };
+		7B48486C15B939B200F4FE9F /* TestSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestSection.m; sourceTree = "<group>"; };
+		7B48486E15B939B200F4FE9F /* StandardizedTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardizedTest.h; sourceTree = "<group>"; };
+		7B48486F15B939B300F4FE9F /* StandardizedTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StandardizedTest.m; sourceTree = "<group>"; };
+		7B48487115B93B8A00F4FE9F /* FTStandardizedTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStandardizedTestView.h; sourceTree = "<group>"; };
+		7B48487215B93B8A00F4FE9F /* FTStandardizedTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStandardizedTestView.m; sourceTree = "<group>"; };
 		7B51E36515A8CAF1002F2A2E /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		7B51E36615A8CAF1002F2A2E /* cancelactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancelactive.png; sourceTree = "<group>"; };
 		7B51E36715A8CAF1002F2A2E /* save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = save.png; sourceTree = "<group>"; };
@@ -349,6 +359,8 @@
 		7B62673C15A779ED00A5879C /* Extracurricular.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Extracurricular.m; sourceTree = "<group>"; };
 		7B6AF4A715B5C0AC00BE330F /* UIImageToDataTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageToDataTransformer.h; sourceTree = "<group>"; };
 		7B6AF4A815B5C0AC00BE330F /* UIImageToDataTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageToDataTransformer.m; sourceTree = "<group>"; };
+		7B732F0115B9CE0E00E5036D /* FTStandardizedTestHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStandardizedTestHeader.h; sourceTree = "<group>"; };
+		7B732F0215B9CE0E00E5036D /* FTStandardizedTestHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStandardizedTestHeader.m; sourceTree = "<group>"; };
 		7B75DEBD15AC83CC005A4233 /* collegedata.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedata.json; sourceTree = "<group>"; };
 		7B75DEC915AC91DA005A4233 /* modaltab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = modaltab.png; sourceTree = "<group>"; };
 		7B75DED515ACB0E5005A4233 /* shitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shitty.png; sourceTree = "<group>"; };
@@ -618,6 +630,10 @@
 			children = (
 				7B7B327815B47B6300625FA6 /* FTStandardizedTestingViewController.h */,
 				7B7B327915B47B6300625FA6 /* FTStandardizedTestingViewController.m */,
+				7B732F0115B9CE0E00E5036D /* FTStandardizedTestHeader.h */,
+				7B732F0215B9CE0E00E5036D /* FTStandardizedTestHeader.m */,
+				7B48487115B93B8A00F4FE9F /* FTStandardizedTestView.h */,
+				7B48487215B93B8A00F4FE9F /* FTStandardizedTestView.m */,
 			);
 			name = "Standardized Testing View";
 			sourceTree = "<group>";
@@ -709,8 +725,8 @@
 				7B51E36615A8CAF1002F2A2E /* cancelactive.png */,
 				7B51E36715A8CAF1002F2A2E /* save.png */,
 				7B51E36815A8CAF1002F2A2E /* saveactive.png */,
-				7B6266D515A76B4500A5879C /* whitenavbar.png */,
 				7BCB88C915B4C7A3008BA15C /* blacknavbar.png */,
+				7B6266D515A76B4500A5879C /* whitenavbar.png */,
 			);
 			name = "Standard UI";
 			sourceTree = "<group>";
@@ -811,6 +827,10 @@
 			isa = PBXGroup;
 			children = (
 				7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */,
+				7B48486E15B939B200F4FE9F /* StandardizedTest.h */,
+				7B48486F15B939B300F4FE9F /* StandardizedTest.m */,
+				7B48486B15B939B200F4FE9F /* TestSection.h */,
+				7B48486C15B939B200F4FE9F /* TestSection.m */,
 				7BDDDA9415B764FC00941281 /* Visit.h */,
 				7BDDDA9515B764FC00941281 /* Visit.m */,
 				7B55D08F15B5E9B300947B2E /* CampusPhoto.h */,
@@ -1159,6 +1179,10 @@
 				7BDDDA9615B764FC00941281 /* Visit.m in Sources */,
 				7BDDDA9E15B77F4E00941281 /* FTCampusImageViewController.m in Sources */,
 				7BDDDACE15B7E69800941281 /* FTAmazonConstants.m in Sources */,
+				7B48486D15B939B200F4FE9F /* TestSection.m in Sources */,
+				7B48487015B939B300F4FE9F /* StandardizedTest.m in Sources */,
+				7B48487315B93B8A00F4FE9F /* FTStandardizedTestView.m in Sources */,
+				7B732F0315B9CE0E00E5036D /* FTStandardizedTestHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

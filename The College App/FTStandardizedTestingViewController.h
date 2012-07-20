@@ -10,4 +10,7 @@
 
 @interface FTStandardizedTestingViewController : UITableViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
 @end

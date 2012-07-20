@@ -91,6 +91,30 @@
     return self;
 }
 
+- (void)viewDidUnload
+{
+    //Reference DubDub'12 Memory Management - viewDidUnload no longer a good thing.
+    
+//    self.visit = nil;
+//    self.school = nil;
+//    self.masterPopoverController = nil;
+//    self.nearbyCollegesViewController = nil;
+//    self.notesViewController = nil;
+//    self.photosViewController = nil;
+//    
+//    self.photosView = nil;
+//    self.ratingsView = nil;
+//    self.notesView = nil;
+//    
+//    self.ratingsButton = nil;
+//    self.notesButton = nil;
+//    
+//    self.titleButton = nil;
+
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
 - (void)viewDidLoad
 {
 //    //GIVE THIS ITS OWN MANAGED CONTEXT -- NO IDEA IF THIS WILL WORK
@@ -261,7 +285,7 @@
         [tabBarController didMoveToParentViewController:self];
     }
     
-    [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
+        [self performSelector:@selector(showNearbyCollegesSelector:) withObject:self.titleButton afterDelay:0.4];
 }
 
 - (void) viewWillLayoutSubviews {
@@ -306,14 +330,7 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
 }
-- (void)viewDidUnload
-{
-    self.visit = nil;
-    
-    
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -414,15 +431,17 @@
     
     [photoObject setPhotoData:data];
     
+    //Dismiss Image Picker
+    if (INTERFACE_IS_PAD)
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    else [self dismissViewControllerAnimated:YES completion:^{}];
+    
     NSError *err = nil;
     if (![self.managedObjectContext save:&err]) {
         NSLog(@"%@", [err localizedDescription]);
     }
     
-    //Dismiss Image Picker
-    if (INTERFACE_IS_PAD)
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    else [self dismissViewControllerAnimated:YES completion:^{}];
+
     
 }
 

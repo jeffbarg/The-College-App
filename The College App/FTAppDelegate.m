@@ -13,6 +13,9 @@
 #import "InitialSlidingViewController.h"
 
 #import "College.h"
+#import "StandardizedTest.h"
+#import "TestSection.h"
+
 
 #import <AWSiOSSDK/AmazonLogger.h>
 
@@ -29,7 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAmazon];
-    [self initializeData];
+    //[self initializeData];
     [self configureAppearance];
     [self setupUUID];
     
@@ -156,8 +159,12 @@
 
 - (void) initializeData {
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"College"];
-    if ([self.managedObjectContext countForFetchRequest:fetchRequest error:nil] != 0) return;
+    for (int i = 0; i < 3; i ++) {
+        StandardizedTest *sat = [NSEntityDescription insertNewObjectForEntityForName:@"StandardizedTest" inManagedObjectContext:self.managedObjectContext];
+        [sat setSectionPriority:@350];
+        [sat setDateTaken:[NSDate date]];
+        [sat setType:@"ACT"];
+    }
     
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     

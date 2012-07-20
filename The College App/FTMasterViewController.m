@@ -10,6 +10,7 @@
 #import "FTExtracurriclarsViewController.h"
 #import "FTCollegeSearchViewController.h"
 #import "FTGradesViewController.h"
+#import "FTStandardizedTestingViewController.h"
 #import "FTCollegeVisitViewController.h"
 #import "FTCollegeVisitNotesViewController.h"
 #import "FTCollegeVisitRatingsViewController.h"
@@ -213,7 +214,10 @@
         if (indexPath.row == 0) {
             
         } else if (indexPath.row == 1) {
-
+            FTStandardizedTestingViewController *standardizedTestingController = [[FTStandardizedTestingViewController alloc] init];
+            [standardizedTestingController setManagedObjectContext:self.managedObjectContext];
+            
+            newViewController = (UIViewController *) standardizedTestingController;
         } else if (indexPath.row == 2) {
             FTExtracurricularsViewController *extracurricularViewController = [[FTExtracurricularsViewController alloc] init];
             [extracurricularViewController setManagedObjectContext:self.managedObjectContext];

@@ -5,9 +5,9 @@
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="thumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="UIImageToDataTransformer" syncable="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="UIImageToDataTransformer" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <relationship name="photoData" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoData" inverseName="campusPhoto" inverseEntity="PhotoData" syncable="YES"/>
+        <relationship name="photoData" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PhotoData" inverseName="campusPhoto" inverseEntity="PhotoData" syncable="YES"/>
         <relationship name="visit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="campusPhotos" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <entity name="CampusRating" syncable="YES">
@@ -78,8 +78,25 @@
         <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="PhotoData" representedClassName="PhotoData" syncable="YES">
-        <attribute name="image" optional="YES" attributeType="Transformable" valueTransformerName="UIImageToDataTransformer" syncable="YES"/>
+        <attribute name="image" optional="YES" transient="YES" attributeType="Transformable" valueTransformerName="UIImageToDataTransformer" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="campusPhoto" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CampusPhoto" inverseName="photoData" inverseEntity="CampusPhoto" syncable="YES"/>
+    </entity>
+    <entity name="StandardizedTest" representedClassName="StandardizedTest" syncable="YES">
+        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="dateTaken" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="hasComposite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="sectionPriority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="testSections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TestSection" inverseName="standardizedTest" inverseEntity="TestSection" syncable="YES"/>
+    </entity>
+    <entity name="TestSection" representedClassName="TestSection" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="maxScore" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="minScore" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sectionName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="standardizedTest" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="StandardizedTest" inverseName="testSections" inverseEntity="StandardizedTest" syncable="YES"/>
     </entity>
     <entity name="Visit" representedClassName="Visit" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -89,12 +106,14 @@
         <relationship name="college" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="College" inverseName="visits" inverseEntity="College" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CampusPhoto" positionX="-243" positionY="663" width="128" height="165"/>
+        <element name="CampusPhoto" positionX="-243" positionY="663" width="128" height="135"/>
         <element name="CampusRating" positionX="-378" positionY="657" width="128" height="90"/>
         <element name="College" positionX="160" positionY="192" width="128" height="585"/>
         <element name="Extracurricular" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Grade" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="PhotoData" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="PhotoData" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
+        <element name="StandardizedTest" positionX="153" positionY="405" width="128" height="135"/>
+        <element name="TestSection" positionX="394" positionY="342" width="128" height="135"/>
     </elements>
 </model>
