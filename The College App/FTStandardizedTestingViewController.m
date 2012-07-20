@@ -9,6 +9,7 @@
 #import "FTStandardizedTestingViewController.h"
 #import "FTStandardizedTestView.h"
 #import "FTStandardizedTestHeader.h"
+#import "FTStandardizedTestTableViewCell.h"
 
 #import "StandardizedTest.h"
 #import "TestSection.h"
@@ -202,12 +203,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    FTStandardizedTestTableViewCell *cell = (FTStandardizedTestTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        FTStandardizedTestView *testView = [[FTStandardizedTestView alloc] initWithFrame:CGRectMake(2 * MARGIN_X + 80.0, MARGIN_Y, self.view.frame.size.width - 140.0, self.tableView.rowHeight - 2 * MARGIN_Y)];
-        [cell.contentView addSubview:testView];
+        cell = [[FTStandardizedTestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
     }
     
     // Configure the cell...
@@ -235,7 +235,7 @@
     
     id <NSFetchedResultsSectionInfo> theSection = [[self.fetchedResultsController sections] objectAtIndex:section];
 
-    FTStandardizedTestHeader *testHeader = [[FTStandardizedTestHeader alloc] initWithFrame:CGRectMake(MARGIN_X - 4.0, MARGIN_Y, 88.0, 44.0)];
+    FTStandardizedTestHeader *testHeader = [[FTStandardizedTestHeader alloc] initWithFrame:CGRectMake(MARGIN_X - 4.0, MARGIN_Y + 1.0, 88.0, 44.0)];
     [testHeader.titleLabel setText:[theSection name]];
      
     [headerView setClipsToBounds:NO];

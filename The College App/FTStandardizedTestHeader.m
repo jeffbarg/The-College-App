@@ -38,7 +38,8 @@
         
         [self addSubview:self.titleLabel];
         
-        self.backgroundColor = kViewBackgroundColor;
+        self.backgroundColor = [UIColor clearColor];
+        self.opaque = NO;
     }
     return self;
 }
@@ -84,7 +85,7 @@
     UIBezierPath *fullPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0.5 + MARGIN_X, 0.5, self.bounds.size.width - 1.0 - 2 * MARGIN_X, self.bounds.size.height - 1.0 - MARGIN_Y) byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(5.0, 5.0)];
     
     CGContextSaveGState(ctx); {
-        CGContextSetShadow(ctx, CGSizeMake(0, 0), 3);
+        CGContextSetShadow(ctx, CGSizeMake(0, 0), 2);
         [borderColor setStroke];
         [fullPath setLineWidth:1.0];
         [fullPath stroke];

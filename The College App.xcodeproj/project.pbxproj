@@ -107,7 +107,7 @@
 		7B6266D215A764B100A5879C /* navtopcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266CF15A764B100A5879C /* navtopcell.png */; };
 		7B6266D315A764B100A5879C /* navcell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D015A764B100A5879C /* navcell.png */; };
 		7B6266D415A764B100A5879C /* navbottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D115A764B100A5879C /* navbottom.png */; };
-		7B6266D715A76B4500A5879C /* whitenavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D515A76B4500A5879C /* whitenavbar.png */; };
+		7B6266D715A76B4500A5879C /* whitenavbarGOOD.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B6266D515A76B4500A5879C /* whitenavbarGOOD.png */; };
 		7B6266F515A76BB200A5879C /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266DD15A76BB200A5879C /* NSObject+SBJson.m */; };
 		7B6266F615A76BB200A5879C /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E015A76BB200A5879C /* SBJsonParser.m */; };
 		7B6266F715A76BB200A5879C /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E215A76BB200A5879C /* SBJsonStreamParser.m */; };
@@ -165,6 +165,8 @@
 		7B97BD3415A7C2F900EF7906 /* FTAddGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B97BD3315A7C2F900EF7906 /* FTAddGradeViewController.m */; };
 		7B97BD3515A7C41F00EF7906 /* FTAddGradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B97BD3315A7C2F900EF7906 /* FTAddGradeViewController.m */; };
 		7B97BD3815A7C4B900EF7906 /* Grade.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B97BD3715A7C4B900EF7906 /* Grade.m */; };
+		7BA40C0515B9D3D4009E524D /* FTStandardizedTestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA40C0415B9D3D4009E524D /* FTStandardizedTestTableViewCell.m */; };
+		7BA40C0C15B9D96A009E524D /* whitenavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA40C0B15B9D96A009E524D /* whitenavbar.png */; };
 		7BB663AD15AF220200428A64 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB663AC15AF220200428A64 /* CoreLocation.framework */; };
 		7BB663B215AF237A00428A64 /* FTCollegeVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB663B115AF237A00428A64 /* FTCollegeVisitViewController.m */; };
 		7BB663BE15AF376A00428A64 /* collegedatajuly12.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663BD15AF376A00428A64 /* collegedatajuly12.json */; };
@@ -304,7 +306,7 @@
 		7B6266CF15A764B100A5879C /* navtopcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navtopcell.png; sourceTree = "<group>"; };
 		7B6266D015A764B100A5879C /* navcell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navcell.png; sourceTree = "<group>"; };
 		7B6266D115A764B100A5879C /* navbottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbottom.png; sourceTree = "<group>"; };
-		7B6266D515A76B4500A5879C /* whitenavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitenavbar.png; sourceTree = "<group>"; };
+		7B6266D515A76B4500A5879C /* whitenavbarGOOD.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitenavbarGOOD.png; sourceTree = "<group>"; };
 		7B6266DC15A76BB200A5879C /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		7B6266DD15A76BB200A5879C /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		7B6266DE15A76BB200A5879C /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -384,6 +386,9 @@
 		7B97BD3315A7C2F900EF7906 /* FTAddGradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAddGradeViewController.m; sourceTree = "<group>"; };
 		7B97BD3615A7C4B900EF7906 /* Grade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grade.h; sourceTree = "<group>"; };
 		7B97BD3715A7C4B900EF7906 /* Grade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grade.m; sourceTree = "<group>"; };
+		7BA40C0315B9D3D4009E524D /* FTStandardizedTestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStandardizedTestTableViewCell.h; sourceTree = "<group>"; };
+		7BA40C0415B9D3D4009E524D /* FTStandardizedTestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStandardizedTestTableViewCell.m; sourceTree = "<group>"; };
+		7BA40C0B15B9D96A009E524D /* whitenavbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitenavbar.png; sourceTree = "<group>"; };
 		7BB663AC15AF220200428A64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7BB663B015AF237A00428A64 /* FTCollegeVisitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitViewController.h; sourceTree = "<group>"; };
 		7BB663B115AF237A00428A64 /* FTCollegeVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitViewController.m; sourceTree = "<group>"; };
@@ -634,6 +639,8 @@
 				7B732F0215B9CE0E00E5036D /* FTStandardizedTestHeader.m */,
 				7B48487115B93B8A00F4FE9F /* FTStandardizedTestView.h */,
 				7B48487215B93B8A00F4FE9F /* FTStandardizedTestView.m */,
+				7BA40C0315B9D3D4009E524D /* FTStandardizedTestTableViewCell.h */,
+				7BA40C0415B9D3D4009E524D /* FTStandardizedTestTableViewCell.m */,
 			);
 			name = "Standardized Testing View";
 			sourceTree = "<group>";
@@ -726,7 +733,8 @@
 				7B51E36715A8CAF1002F2A2E /* save.png */,
 				7B51E36815A8CAF1002F2A2E /* saveactive.png */,
 				7BCB88C915B4C7A3008BA15C /* blacknavbar.png */,
-				7B6266D515A76B4500A5879C /* whitenavbar.png */,
+				7BA40C0B15B9D96A009E524D /* whitenavbar.png */,
+				7B6266D515A76B4500A5879C /* whitenavbarGOOD.png */,
 			);
 			name = "Standard UI";
 			sourceTree = "<group>";
@@ -1020,7 +1028,7 @@
 				7B6266D215A764B100A5879C /* navtopcell.png in Resources */,
 				7B6266D315A764B100A5879C /* navcell.png in Resources */,
 				7B6266D415A764B100A5879C /* navbottom.png in Resources */,
-				7B6266D715A76B4500A5879C /* whitenavbar.png in Resources */,
+				7B6266D715A76B4500A5879C /* whitenavbarGOOD.png in Resources */,
 				7B62672115A7760C00A5879C /* menu.png in Resources */,
 				7B62672315A7762800A5879C /* menu@2x.png in Resources */,
 				7B62673A15A7785100A5879C /* close_x.png in Resources */,
@@ -1075,6 +1083,7 @@
 				7BCB88A915B4A21F008BA15C /* FTCollegeInfoViewController~iphone.xib in Resources */,
 				7BCB88CA15B4C7A3008BA15C /* blacknavbar.png in Resources */,
 				7BDDDA9B15B778C900941281 /* addphoto.png in Resources */,
+				7BA40C0C15B9D96A009E524D /* whitenavbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1192,7 @@
 				7B48487015B939B300F4FE9F /* StandardizedTest.m in Sources */,
 				7B48487315B93B8A00F4FE9F /* FTStandardizedTestView.m in Sources */,
 				7B732F0315B9CE0E00E5036D /* FTStandardizedTestHeader.m in Sources */,
+				7BA40C0515B9D3D4009E524D /* FTStandardizedTestTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
