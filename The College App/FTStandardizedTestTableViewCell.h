@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class FTStandardizedTestView;
+@class FTStandardizedTestingViewController;
 
 @interface FTStandardizedTestTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) FTStandardizedTestView * testView;
+@property (nonatomic, weak)   FTStandardizedTestingViewController *viewController;
 
 @end

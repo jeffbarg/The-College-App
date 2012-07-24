@@ -75,7 +75,7 @@
 
     // Do any additional setup after loading the view.
     
-    [self.view setBackgroundColor:[UIColor colorWithWhite:0.925 alpha:1.000]];
+    [self.view setBackgroundColor:[UIColor colorWithHue:0.562 saturation:0.032 brightness:0.976 alpha:1.000]];
 
     if (INTERFACE_IS_PAD) {
         [self.view.layer setCornerRadius:5.0];

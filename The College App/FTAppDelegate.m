@@ -161,9 +161,20 @@
     
     for (int i = 0; i < 3; i ++) {
         StandardizedTest *sat = [NSEntityDescription insertNewObjectForEntityForName:@"StandardizedTest" inManagedObjectContext:self.managedObjectContext];
-        [sat setSectionPriority:@350];
+        [sat setSectionPriority:[NSNumber numberWithInt:2000]];
         [sat setDateTaken:[NSDate date]];
-        [sat setType:@"ACT"];
+        [sat setType:@"SAT"];
+        [sat setHasComposite:[NSNumber numberWithBool:NO]];
+        
+        for (int j = 0; j < 5; j++) {
+            TestSection *section = [NSEntityDescription insertNewObjectForEntityForName:@"TestSection" inManagedObjectContext:self.managedObjectContext];
+            [section setSectionName:@"Critical Swag"];
+            [section setScore:[NSNumber numberWithInt:36]];
+            [section setMinScore:[NSNumber numberWithInteger:200]];
+            [section setMaxScore:[NSNumber numberWithInteger:800]];
+            
+            [section setStandardizedTest:sat];
+        }
     }
     
     SBJsonParser *parser = [[SBJsonParser alloc] init];

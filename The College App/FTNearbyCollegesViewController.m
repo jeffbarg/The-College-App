@@ -79,8 +79,8 @@
 		
 	}
     
-    [_refreshHeaderView setBackgroundColor:[UIColor colorWithWhite:0.898 alpha:1.000]];
-    [self.tableView setBackgroundColor:[UIColor colorWithWhite:0.898 alpha:1.000]];
+    [_refreshHeaderView setBackgroundColor:[UIColor colorWithHue:0.562 saturation:0.032 brightness:0.986 alpha:1.000]];
+    [self.tableView setBackgroundColor:[UIColor colorWithHue:0.562 saturation:0.032 brightness:0.986 alpha:1.000]];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     //  update the last update date

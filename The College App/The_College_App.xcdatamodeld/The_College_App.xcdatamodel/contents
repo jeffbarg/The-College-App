@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1803" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11E53" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CampusPhoto" representedClassName="CampusPhoto" syncable="YES">
         <attribute name="caption" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -88,7 +88,7 @@
         <attribute name="hasComposite" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="sectionPriority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="testSections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TestSection" inverseName="standardizedTest" inverseEntity="TestSection" syncable="YES"/>
+        <relationship name="testSections" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TestSection" inverseName="standardizedTest" inverseEntity="TestSection" syncable="YES"/>
     </entity>
     <entity name="TestSection" representedClassName="TestSection" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -112,8 +112,8 @@
         <element name="Extracurricular" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Grade" positionX="160" positionY="192" width="128" height="135"/>
         <element name="PhotoData" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
         <element name="StandardizedTest" positionX="153" positionY="405" width="128" height="135"/>
         <element name="TestSection" positionX="394" positionY="342" width="128" height="135"/>
+        <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
     </elements>
 </model>

@@ -47,7 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor colorWithWhite:0.925 alpha:1.000]];
+    [self.view setBackgroundColor:[UIColor colorWithHue:0.562 saturation:0.032 brightness:0.976 alpha:1.000]];
 
     [self.view addSubview:self.textView];
     

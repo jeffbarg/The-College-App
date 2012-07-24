@@ -2,7 +2,7 @@
 //  TestSection.m
 //  The College App
 //
-//  Created by Jeff Barg on 7/20/12.
+//  Created by Jeffrey Barg on 7/23/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
@@ -12,11 +12,11 @@
 
 @implementation TestSection
 
-@dynamic sectionName;
-@dynamic minScore;
-@dynamic maxScore;
-@dynamic score;
 @dynamic index;
+@dynamic maxScore;
+@dynamic minScore;
+@dynamic score;
+@dynamic sectionName;
 @dynamic standardizedTest;
 
 @end

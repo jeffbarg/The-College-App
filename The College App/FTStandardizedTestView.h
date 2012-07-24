@@ -13,5 +13,8 @@
 @interface FTStandardizedTestView : UIView
 
 @property (nonatomic, strong) StandardizedTest *test;
+@property (nonatomic, strong) NSArray *buttonArray;
+
+- (CGRect) rectForIndex: (NSInteger) index;
 
 @end

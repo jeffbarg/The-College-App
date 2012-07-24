@@ -33,8 +33,8 @@
 {
     [super viewDidLoad];
 
-    self.tableView.backgroundColor = [UIColor colorWithWhite:0.925 alpha:1.000];
-    self.tableView.separatorColor = [UIColor brownColor];
+    self.tableView.backgroundColor = [UIColor colorWithHue:0.562 saturation:0.032 brightness:0.976 alpha:1.000];
+    self.tableView.separatorColor = [UIColor purpleColor];
 
     if (INTERFACE_IS_PAD) {
         [self.view.layer setCornerRadius:5.0];

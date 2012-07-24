@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
+#import "FTStandardizedTestingViewController.h"
 #import "FTStandardizedTestTableViewCell.h"
 #import "FTStandardizedTestView.h"
 
@@ -15,12 +16,15 @@
 @implementation FTStandardizedTestTableViewCell
 
 @synthesize testView = _testView;
+@synthesize viewController;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
+        self.exclusiveTouch = YES;
+        self.multipleTouchEnabled = NO;
         _testView = [[FTStandardizedTestView alloc] initWithFrame:CGRectZero];
         [_testView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [_testView setContentMode:UIViewContentModeRedraw];
@@ -40,4 +44,53 @@
     // Configure the view for the selected state
 }
 
+- (void) setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    [super setHighlighted:highlighted animated:animated];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    NSArray *buttonArray = self.testView.buttonArray;
+    for (UIButton *button in buttonArray) {
+        if (CGRectContainsPoint(button.frame, [touch locationInView:self.testView])) {
+            [button setHighlighted:YES];
+            [self.testView setNeedsDisplayInRect:button.frame];
+        }
+    }
+    [self.testView setNeedsDisplay];
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    NSArray *buttonArray = self.testView.buttonArray;
+    UIButton *selButton = nil;
+    for (UIButton *button in buttonArray) {
+        if (button.highlighted) {
+            selButton = button;
+        }
+        [button setSelected:NO];
+        [button setHighlighted:NO];
+    }
+    if (CGRectContainsPoint(selButton.frame, [touch locationInView:self.testView])) {
+        [selButton setSelected:YES];
+        [self.viewController presentEditPopoverFromButton:selButton fromTestView:self.testView];
+    }
+    
+    [self.testView setNeedsDisplay];
+}
+
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [touches anyObject];
+    
+    NSArray *buttonArray = self.testView.buttonArray;
+    for (UIButton *button in buttonArray) {
+        if (CGRectContainsPoint(button.frame, [touch locationInView:self.testView])) {
+            [button setHighlighted:NO];
+            [self.testView setNeedsDisplay];
+        }
+    }
+    [self.testView setNeedsDisplay];
+}
 @end

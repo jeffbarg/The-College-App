@@ -137,6 +137,7 @@
         [pController setPopoverContentSize:CGSizeMake(320.0, 349.0)];
         
         self.masterPopoverController = pController;
+        [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
         [pController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
         [pController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         

@@ -6,7 +6,7 @@
 //
 
 #import "KSCustomPopoverBackgroundView.h"
-
+#import "UIImage+UIImage_StandardFeatures.h"
 // Predefined arrow image width and height
 #define ARROW_WIDTH 34.0
 #define ARROW_HEIGHT 18.0
@@ -78,8 +78,8 @@
     if (self = [super initWithFrame:frame])
     {
         _topArrowImage = [UIImage imageNamed:@"toparrow.png"];
-        _leftArrowImage = [UIImage imageNamed:@"popover-black-left-arrow-image.png"];
-        _bottomArrowImage = [UIImage imageNamed:@"popover-black-bottom-arrow-image.png"];
+        _leftArrowImage = _topArrowImage;
+        _bottomArrowImage = [UIImage imageWithCGImage:_topArrowImage.CGImage scale:_topArrowImage.scale orientation:UIImageOrientationDown];
         _rightArrowImage = [UIImage imageNamed:@"popover-black-right-arrow-image.png"];
         
 //        UIImage *popoverBackgroundImage = [[UIImage imageNamed:@"popover-black-bcg-image.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(49, 46, 49, 45)];

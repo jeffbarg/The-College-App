@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class FTStandardizedTestView;
+
 @interface FTStandardizedTestingViewController : UITableViewController
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+
+- (void) presentEditPopoverFromButton:(UIButton *) button fromTestView:(FTStandardizedTestView *)testView;
 
 @end

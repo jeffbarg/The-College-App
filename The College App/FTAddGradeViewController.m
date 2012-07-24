@@ -90,6 +90,7 @@
                                                      name:UIKeyboardWillHideNotification object:nil];
     }
     
+
     //SET UP GRADE TO MODIFY
     
     _score = [NSNumber numberWithInteger:-1];
@@ -98,12 +99,10 @@
     
     
     //SET UP NAVIGATION BAR
-    
-    UIColor *borderColor = [UIColor colorWithHue:0.562 saturation:0.041 brightness:0.765 alpha:1.000];
-//    UIColor * yearButtonColor = [UIColor colorWithHue:0.548 saturation:0.045 brightness:0.608 alpha:1.000];
-    UIColor *gradeButtonColor = [UIColor colorWithHue:0.583 saturation:0.049 brightness:0.322 alpha:1.000];
-    UIColor *greenTextColor = [UIColor colorWithRed:0.000 green:0.651 blue:0.000 alpha:1.000];
 
+
+
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     if (!INTERFACE_IS_PAD) {
         UIBarButtonItem *cancelBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelEntry:)];
         self.navigationItem.leftBarButtonItem = cancelBarButtonItem;
@@ -118,11 +117,18 @@
     
     self.navigationItem.title = @"New Entry";
 
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view.
+    
+    UIColor *borderColor = [UIColor colorWithHue:0.562 saturation:0.041 brightness:0.765 alpha:1.000];
+    //    UIColor * yearButtonColor = [UIColor colorWithHue:0.548 saturation:0.045 brightness:0.608 alpha:1.000];
+    UIColor *gradeButtonColor = [UIColor colorWithHue:0.583 saturation:0.049 brightness:0.322 alpha:1.000];
+    UIColor *greenTextColor = [UIColor colorWithRed:0.000 green:0.651 blue:0.000 alpha:1.000];
+    
     
     _containerView = [[UIScrollView alloc] initWithFrame:CGRectZero];
     [_containerView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-
+    [_containerView setAlwaysBounceVertical:YES];
+    
     [self.view addSubview:_containerView];
     
     _headerView = [[UIView alloc] initWithFrame:CGRectZero];

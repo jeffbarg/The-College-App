@@ -32,10 +32,10 @@
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         _titleLabel.textColor = [UIColor colorWithWhite:0.337 alpha:1.000];
         _titleLabel.textAlignment = UITextAlignmentCenter;
-        _titleLabel.shadowColor = [UIColor whiteColor];
-        _titleLabel.shadowOffset = CGSizeMake(0, 1);
-        _titleLabel.backgroundColor = [UIColor clearColor];
+        _titleLabel.contentMode = UIViewContentModeRedraw;
         
+        _titleLabel.backgroundColor = [UIColor clearColor];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
         [self addSubview:self.titleLabel];
         
         self.backgroundColor = [UIColor clearColor];
@@ -45,7 +45,7 @@
 }
 
 - (void) layoutSubviews {
-    [self.titleLabel setFrame:CGRectMake(0.5 + MARGIN_X, 0.5, self.bounds.size.width - 1.0 - 2 * MARGIN_X, self.bounds.size.height - 1.0 - MARGIN_Y)];
+    [self.titleLabel setFrame:CGRectIntegral(CGRectMake(0.0 + MARGIN_X, 0.0, self.bounds.size.width - 2 * MARGIN_X, self.bounds.size.height - MARGIN_Y))];
 }
 
 - (CGGradientRef) backgroundGradient {
@@ -53,8 +53,8 @@
         
         //Draw gradient
         //// Gradient Declarations
-        UIColor *topColor = [UIColor colorWithWhite:0.910 alpha:1.000];
-        UIColor *bottomColor = [UIColor colorWithWhite:0.886 alpha:1.000];
+        UIColor *topColor = [UIColor colorWithRed:0.933 green:0.949 blue:0.953 alpha:1.000];
+        UIColor *bottomColor = [UIColor colorWithRed:0.867 green:0.890 blue:0.902 alpha:1.000];
         
         NSArray* gradientColors = [NSArray arrayWithObjects:
                                    (id)topColor.CGColor,

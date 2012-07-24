@@ -18,7 +18,12 @@
 #define INTERFACE_IS_PHONE   (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) 
 #define INTERFACE_IS_PORTRAIT   (UIInterfaceOrientationIsPortrait( [[UIApplication sharedApplication] statusBarOrientation]))
 
-#define kViewBackgroundColor  [UIColor colorWithRed:0.875 green:0.894 blue:0.902 alpha:1.000]
+#define kViewBackgroundColor  [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000]
+#define kAddViewBackgroundColor [UIColor colorWithRed:0.918 green:0.941 blue:0.957 alpha:1.000]
+#define kAddViewBorderColor [UIColor colorWithRed:0.733 green:0.753 blue:0.765 alpha:1.000]
+
+// Terrible Color:
+// [UIColor colorWithRed:0.875 green:0.894 blue:0.902 alpha:1.000]
 // Good Color:
 // [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000]
 
@@ -29,3 +34,5 @@
 #define yeah YES
 #define hellzyeah yeah
 #define yep yeah
+
+#define nahhz NO

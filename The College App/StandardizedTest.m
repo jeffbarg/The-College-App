@@ -2,7 +2,7 @@
 //  StandardizedTest.m
 //  The College App
 //
-//  Created by Jeff Barg on 7/20/12.
+//  Created by Jeffrey Barg on 7/23/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
@@ -12,11 +12,11 @@
 
 @implementation StandardizedTest
 
-@dynamic type;
-@dynamic hasComposite;
-@dynamic dateTaken;
 @dynamic dateCreated;
+@dynamic dateTaken;
+@dynamic hasComposite;
 @dynamic sectionPriority;
+@dynamic type;
 @dynamic testSections;
 
 @end

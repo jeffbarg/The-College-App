@@ -6,10 +6,14 @@
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
+#import "KSCustomPopoverBackgroundView.h"
+
 #import "FTStandardizedTestingViewController.h"
 #import "FTStandardizedTestView.h"
 #import "FTStandardizedTestHeader.h"
 #import "FTStandardizedTestTableViewCell.h"
+#import "FTAddStandardizedTestViewController.h"
+#import "FTEditTestSectionViewController.h"
 
 #import "StandardizedTest.h"
 #import "TestSection.h"
@@ -19,18 +23,22 @@
 
 @interface FTStandardizedTestingViewController () <NSFetchedResultsControllerDelegate>
 
+@property (nonatomic, strong) UIPopoverController *masterPopoverController;
+
 @end
 
 @implementation FTStandardizedTestingViewController
 
 @synthesize managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize masterPopoverController = _masterPopoverController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.title = @"Standardized Testing";
     }
     return self;
 }
@@ -49,7 +57,11 @@
     self.tableView.separatorStyle  = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundView  = nil;
     self.tableView.backgroundColor = kViewBackgroundColor;
+
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addStandardizedTest:)];
+    [addButton setStyle:UIBarButtonItemStylePlain];
     
+    [self.navigationItem setRightBarButtonItem:addButton];
 }
 
 - (void)viewDidUnload
@@ -61,11 +73,67 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
 
+#pragma mark - Buttons
 
+- (void) addStandardizedTest:(UIBarButtonItem *)barButtonItem {
+    
+    /* Check that:
+     - There is no current popover
+     - The popover is not visible
+     - The popover is not the same popover we're going to display
+     */
+    if (self.masterPopoverController != nil && [self.masterPopoverController isPopoverVisible] && [self.masterPopoverController.contentViewController class] != [FTAddStandardizedTestViewController class]) return;
+    
+    FTAddStandardizedTestViewController *viewController = [[FTAddStandardizedTestViewController alloc] initWithStyle:UITableViewStylePlain];
+    [viewController setManagedObjectContext:self.managedObjectContext];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
+    if (INTERFACE_IS_PAD) {
+        UIPopoverController *pController = [[UIPopoverController alloc] initWithContentViewController:navController];
+        //      [pController setPopoverContentSize:CGSizeMake(320.0, 484.0)];
+        [pController setPopoverContentSize:CGSizeMake(320.0, 349.0)];
+        
+        self.masterPopoverController = pController;
+        [pController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+        [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+
+        [pController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        
+    } else {
+        [navController.navigationBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];
+        [self presentModalViewController:navController animated:YES];
+    }
+}
+
+- (void) presentEditPopoverFromButton:(UIButton *) button fromTestView:(FTStandardizedTestView *)testView {
+    if (self.masterPopoverController != nil) {
+        [self.masterPopoverController dismissPopoverAnimated:NO];
+        self.masterPopoverController = nil;
+    }
+    FTEditTestSectionViewController *testSectionViewController = [[FTEditTestSectionViewController alloc] init];
+    [testSectionViewController setManagedObjectContext:self.managedObjectContext];
+    [testSectionViewController setButton:button];
+    NSInteger index = [testView.buttonArray indexOfObject:button];
+    [testSectionViewController setTestSection:[testView.test.testSections objectAtIndex:index]];
+    [testSectionViewController setTestView:testView];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:testSectionViewController];
+    [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
+    [testSectionViewController setPController:self.masterPopoverController];
+    
+    [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+
+    [self.masterPopoverController setPassthroughViews:self.tableView.visibleCells];
+    [self.masterPopoverController presentPopoverFromRect:[self.view convertRect:button.frame fromView:button.superview] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
+}
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -207,7 +275,7 @@
     
     if (cell == nil) {
         cell = [[FTStandardizedTestTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
+        [cell setViewController:self];
     }
     
     // Configure the cell...
@@ -222,8 +290,29 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    StandardizedTest *test = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [((FTStandardizedTestTableViewCell *) cell).testView setTest:test];
+    [((FTStandardizedTestTableViewCell *) cell) setViewController:self];
+
 }
 
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }   
+    else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
 
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
