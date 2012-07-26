@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B0FA10615B62651005C787B /* FTNearbyCollegeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B0FA10515B62651005C787B /* FTNearbyCollegeCell.m */; };
 		7B0FA10915B6311C005C787B /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7B10147B15B674A500D6A04E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A215B6247A00947B2E /* grayArrow.png */; };
 		7B10147C15B674A500D6A04E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A315B6247A00947B2E /* grayArrow@2x.png */; };
@@ -19,12 +18,9 @@
 		7B10148215B674A500D6A04E /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */; };
 		7B12408A15AF10DA006913C3 /* FTWhiteShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B12408915AF10DA006913C3 /* FTWhiteShadowView.m */; };
 		7B201CF815ACC68600D78D23 /* The_College_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */; };
-		7B2C582F15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C582E15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m */; };
-		7B2C583215B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C583115B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m */; };
 		7B2C583415B0B80500D3845B /* navcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583315B0B80500D3845B /* navcellactive.png */; };
 		7B2C583615B0B81600D3845B /* navtopcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583515B0B81600D3845B /* navtopcellactive.png */; };
 		7B2C583815B0B82A00D3845B /* navbottomactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583715B0B82A00D3845B /* navbottomactive.png */; };
-		7B2C583B15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */; };
 		7B2C584015B0BE5500D3845B /* gradesbottomcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C583F15B0BE5500D3845B /* gradesbottomcellactive.png */; };
 		7B2C584215B0BE5D00D3845B /* gradestopcellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C584115B0BE5D00D3845B /* gradestopcellactive.png */; };
 		7B2C584415B0BE6500D3845B /* gradecellactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2C584315B0BE6500D3845B /* gradecellactive.png */; };
@@ -75,7 +71,6 @@
 		7B51E5F315AB357B002F2A2E /* FTCollegeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */; };
 		7B55D08E15B5E9B200947B2E /* PhotoData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D08D15B5E9B200947B2E /* PhotoData.m */; };
 		7B55D09115B5E9B300947B2E /* CampusPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D09015B5E9B300947B2E /* CampusPhoto.m */; };
-		7B55D09C15B6210300947B2E /* FTNearbyCollegesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D09B15B6210200947B2E /* FTNearbyCollegesViewController.m */; };
 		7B55D0AC15B6247A00947B2E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A215B6247A00947B2E /* grayArrow.png */; };
 		7B55D0AD15B6247A00947B2E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A315B6247A00947B2E /* grayArrow@2x.png */; };
 		7B55D0AE15B6247A00947B2E /* blackArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A415B6247A00947B2E /* blackArrow.png */; };
@@ -160,7 +155,6 @@
 		7B75DECA15AC91DA005A4233 /* modaltab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DEC915AC91DA005A4233 /* modaltab.png */; };
 		7B75DED615ACB0E5005A4233 /* shitty.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B75DED515ACB0E5005A4233 /* shitty.png */; };
 		7B7B327A15B47B6300625FA6 /* FTStandardizedTestingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7B327915B47B6300625FA6 /* FTStandardizedTestingViewController.m */; };
-		7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B7B327C15B47C7700625FA6 /* FTRatingsCell.m */; };
 		7B7B327F15B485B400625FA6 /* iphonetab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7B327E15B485B400625FA6 /* iphonetab.png */; };
 		7B7B328215B48AF100625FA6 /* iphoneactivetab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B7B328115B48AF100625FA6 /* iphoneactivetab.png */; };
 		7B8EB9C515BA2F7E00DCD9E4 /* keylandscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B8EB9C415BA2F7E00DCD9E4 /* keylandscape.png */; };
@@ -184,7 +178,6 @@
 		7BA40C1D15B9E76B009E524D /* ELTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA40C1C15B9E76B009E524D /* ELTextFieldTableViewCell.m */; };
 		7BA40C2215B9ED88009E524D /* ELTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA40C1C15B9E76B009E524D /* ELTextFieldTableViewCell.m */; };
 		7BB663AD15AF220200428A64 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB663AC15AF220200428A64 /* CoreLocation.framework */; };
-		7BB663B215AF237A00428A64 /* FTCollegeVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB663B115AF237A00428A64 /* FTCollegeVisitViewController.m */; };
 		7BB663BE15AF376A00428A64 /* collegedatajuly12.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663BD15AF376A00428A64 /* collegedatajuly12.json */; };
 		7BB663C215AF39F300428A64 /* iconipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663C115AF39F300428A64 /* iconipad.png */; };
 		7BB663C515AF3A8100428A64 /* College.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB663C415AF3A8100428A64 /* College.m */; };
@@ -201,7 +194,6 @@
 		7BCB88CA15B4C7A3008BA15C /* blacknavbar.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCB88C915B4C7A3008BA15C /* blacknavbar.png */; };
 		7BDDDA9615B764FC00941281 /* Visit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDA9515B764FC00941281 /* Visit.m */; };
 		7BDDDA9B15B778C900941281 /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BDDDA9A15B778C900941281 /* addphoto.png */; };
-		7BDDDA9E15B77F4E00941281 /* FTCampusImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDA9D15B77F4D00941281 /* FTCampusImageViewController.m */; };
 		7BDDDAB915B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */; };
 		7BDDDABA15B7CDB000941281 /* UIImage+UIImage_StandardFeatures.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */; };
 		7BDDDABD15B7DB5B00941281 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BDDDABC15B7DB5B00941281 /* NSData+Base64.m */; };
@@ -210,6 +202,22 @@
 		7BE3A68D15B7F0D500739725 /* S3RequestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */; };
 		7BE3A68F15B7F35D00739725 /* S3RequestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */; };
 		7BF04A7115AF988B00DFBA2A /* iphoneicon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */; };
+		7BF9BFA115C1A552002D850B /* FTCampusImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9215C1A552002D850B /* FTCampusImageViewController.m */; };
+		7BF9BFA215C1A552002D850B /* FTCollegeVisitNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9415C1A552002D850B /* FTCollegeVisitNotesViewController.m */; };
+		7BF9BFA315C1A552002D850B /* FTCollegeVisitPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9615C1A552002D850B /* FTCollegeVisitPhotosViewController.m */; };
+		7BF9BFA415C1A552002D850B /* FTCollegeVisitRatingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9815C1A552002D850B /* FTCollegeVisitRatingsViewController.m */; };
+		7BF9BFA515C1A552002D850B /* FTCollegeVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9A15C1A552002D850B /* FTCollegeVisitViewController.m */; };
+		7BF9BFA615C1A552002D850B /* FTNearbyCollegeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9C15C1A552002D850B /* FTNearbyCollegeCell.m */; };
+		7BF9BFA715C1A552002D850B /* FTNearbyCollegesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9E15C1A552002D850B /* FTNearbyCollegesViewController.m */; };
+		7BF9BFA815C1A552002D850B /* FTRatingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BFA015C1A552002D850B /* FTRatingsCell.m */; };
+		7BF9BFA915C1A57D002D850B /* FTCampusImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9215C1A552002D850B /* FTCampusImageViewController.m */; };
+		7BF9BFAA15C1A57D002D850B /* FTCollegeVisitNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9415C1A552002D850B /* FTCollegeVisitNotesViewController.m */; };
+		7BF9BFAB15C1A57D002D850B /* FTCollegeVisitPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9615C1A552002D850B /* FTCollegeVisitPhotosViewController.m */; };
+		7BF9BFAC15C1A57D002D850B /* FTCollegeVisitRatingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9815C1A552002D850B /* FTCollegeVisitRatingsViewController.m */; };
+		7BF9BFAD15C1A57D002D850B /* FTCollegeVisitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9A15C1A552002D850B /* FTCollegeVisitViewController.m */; };
+		7BF9BFAE15C1A57D002D850B /* FTNearbyCollegeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9C15C1A552002D850B /* FTNearbyCollegeCell.m */; };
+		7BF9BFAF15C1A57D002D850B /* FTNearbyCollegesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BF9E15C1A552002D850B /* FTNearbyCollegesViewController.m */; };
+		7BF9BFB015C1A57D002D850B /* FTRatingsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9BFA015C1A552002D850B /* FTRatingsCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -223,20 +231,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7B0FA10415B62651005C787B /* FTNearbyCollegeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNearbyCollegeCell.h; sourceTree = "<group>"; };
-		7B0FA10515B62651005C787B /* FTNearbyCollegeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegeCell.m; sourceTree = "<group>"; };
 		7B12408815AF10DA006913C3 /* FTWhiteShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWhiteShadowView.h; sourceTree = "<group>"; };
 		7B12408915AF10DA006913C3 /* FTWhiteShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWhiteShadowView.m; sourceTree = "<group>"; };
 		7B201CF715ACC68600D78D23 /* The_College_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_College_App.xcdatamodel; sourceTree = "<group>"; };
-		7B2C582D15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitPhotosViewController.h; sourceTree = "<group>"; };
-		7B2C582E15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitPhotosViewController.m; sourceTree = "<group>"; };
-		7B2C583015B0AF2A00D3845B /* FTCollegeVisitNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitNotesViewController.h; sourceTree = "<group>"; };
-		7B2C583115B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitNotesViewController.m; sourceTree = "<group>"; };
 		7B2C583315B0B80500D3845B /* navcellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navcellactive.png; sourceTree = "<group>"; };
 		7B2C583515B0B81600D3845B /* navtopcellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navtopcellactive.png; sourceTree = "<group>"; };
 		7B2C583715B0B82A00D3845B /* navbottomactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navbottomactive.png; sourceTree = "<group>"; };
-		7B2C583915B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FTCollegeVisitRatingsViewController.h; path = ../FTCollegeVisitRatingsViewController.h; sourceTree = "<group>"; };
-		7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FTCollegeVisitRatingsViewController.m; path = ../FTCollegeVisitRatingsViewController.m; sourceTree = "<group>"; };
 		7B2C583F15B0BE5500D3845B /* gradesbottomcellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradesbottomcellactive.png; sourceTree = "<group>"; };
 		7B2C584115B0BE5D00D3845B /* gradestopcellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradestopcellactive.png; sourceTree = "<group>"; };
 		7B2C584315B0BE6500D3845B /* gradecellactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gradecellactive.png; sourceTree = "<group>"; };
@@ -279,8 +279,6 @@
 		7B55D08D15B5E9B200947B2E /* PhotoData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoData.m; sourceTree = "<group>"; };
 		7B55D08F15B5E9B300947B2E /* CampusPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CampusPhoto.h; sourceTree = "<group>"; };
 		7B55D09015B5E9B300947B2E /* CampusPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CampusPhoto.m; sourceTree = "<group>"; };
-		7B55D09A15B6210200947B2E /* FTNearbyCollegesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNearbyCollegesViewController.h; sourceTree = "<group>"; };
-		7B55D09B15B6210200947B2E /* FTNearbyCollegesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegesViewController.m; sourceTree = "<group>"; };
 		7B55D0A215B6247A00947B2E /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		7B55D0A315B6247A00947B2E /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		7B55D0A415B6247A00947B2E /* blackArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackArrow.png; sourceTree = "<group>"; };
@@ -394,8 +392,6 @@
 		7B75DED515ACB0E5005A4233 /* shitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shitty.png; sourceTree = "<group>"; };
 		7B7B327815B47B6300625FA6 /* FTStandardizedTestingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStandardizedTestingViewController.h; sourceTree = "<group>"; };
 		7B7B327915B47B6300625FA6 /* FTStandardizedTestingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStandardizedTestingViewController.m; sourceTree = "<group>"; };
-		7B7B327B15B47C7700625FA6 /* FTRatingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRatingsCell.h; sourceTree = "<group>"; };
-		7B7B327C15B47C7700625FA6 /* FTRatingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRatingsCell.m; sourceTree = "<group>"; };
 		7B7B327E15B485B400625FA6 /* iphonetab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphonetab.png; sourceTree = "<group>"; };
 		7B7B328115B48AF100625FA6 /* iphoneactivetab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneactivetab.png; sourceTree = "<group>"; };
 		7B8EB9C415BA2F7E00DCD9E4 /* keylandscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keylandscape.png; sourceTree = "<group>"; };
@@ -424,8 +420,6 @@
 		7BA40C1B15B9E76B009E524D /* ELTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		7BA40C1C15B9E76B009E524D /* ELTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		7BB663AC15AF220200428A64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		7BB663B015AF237A00428A64 /* FTCollegeVisitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitViewController.h; sourceTree = "<group>"; };
-		7BB663B115AF237A00428A64 /* FTCollegeVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitViewController.m; sourceTree = "<group>"; };
 		7BB663BD15AF376A00428A64 /* collegedatajuly12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedatajuly12.json; sourceTree = "<group>"; };
 		7BB663C115AF39F300428A64 /* iconipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconipad.png; sourceTree = "<group>"; };
 		7BB663C315AF3A8100428A64 /* College.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = College.h; sourceTree = "<group>"; };
@@ -446,8 +440,6 @@
 		7BDDDA9415B764FC00941281 /* Visit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visit.h; sourceTree = "<group>"; };
 		7BDDDA9515B764FC00941281 /* Visit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Visit.m; sourceTree = "<group>"; };
 		7BDDDA9A15B778C900941281 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
-		7BDDDA9C15B77F4D00941281 /* FTCampusImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCampusImageViewController.h; sourceTree = "<group>"; };
-		7BDDDA9D15B77F4D00941281 /* FTCampusImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCampusImageViewController.m; sourceTree = "<group>"; };
 		7BDDDAB715B7C9C700941281 /* UIImage+UIImage_StandardFeatures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_StandardFeatures.h"; sourceTree = "<group>"; };
 		7BDDDAB815B7C9C700941281 /* UIImage+UIImage_StandardFeatures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_StandardFeatures.m"; sourceTree = "<group>"; };
 		7BDDDABB15B7DB5A00941281 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -457,6 +449,22 @@
 		7BE3A68B15B7F0D500739725 /* S3RequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S3RequestDelegate.h; sourceTree = "<group>"; };
 		7BE3A68C15B7F0D500739725 /* S3RequestDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = S3RequestDelegate.m; sourceTree = "<group>"; };
 		7BF04A7015AF988B00DFBA2A /* iphoneicon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iphoneicon2x.png; sourceTree = "<group>"; };
+		7BF9BF9115C1A552002D850B /* FTCampusImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCampusImageViewController.h; sourceTree = "<group>"; };
+		7BF9BF9215C1A552002D850B /* FTCampusImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCampusImageViewController.m; sourceTree = "<group>"; };
+		7BF9BF9315C1A552002D850B /* FTCollegeVisitNotesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitNotesViewController.h; sourceTree = "<group>"; };
+		7BF9BF9415C1A552002D850B /* FTCollegeVisitNotesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitNotesViewController.m; sourceTree = "<group>"; };
+		7BF9BF9515C1A552002D850B /* FTCollegeVisitPhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitPhotosViewController.h; sourceTree = "<group>"; };
+		7BF9BF9615C1A552002D850B /* FTCollegeVisitPhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitPhotosViewController.m; sourceTree = "<group>"; };
+		7BF9BF9715C1A552002D850B /* FTCollegeVisitRatingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitRatingsViewController.h; sourceTree = "<group>"; };
+		7BF9BF9815C1A552002D850B /* FTCollegeVisitRatingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitRatingsViewController.m; sourceTree = "<group>"; };
+		7BF9BF9915C1A552002D850B /* FTCollegeVisitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeVisitViewController.h; sourceTree = "<group>"; };
+		7BF9BF9A15C1A552002D850B /* FTCollegeVisitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeVisitViewController.m; sourceTree = "<group>"; };
+		7BF9BF9B15C1A552002D850B /* FTNearbyCollegeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNearbyCollegeCell.h; sourceTree = "<group>"; };
+		7BF9BF9C15C1A552002D850B /* FTNearbyCollegeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegeCell.m; sourceTree = "<group>"; };
+		7BF9BF9D15C1A552002D850B /* FTNearbyCollegesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTNearbyCollegesViewController.h; sourceTree = "<group>"; };
+		7BF9BF9E15C1A552002D850B /* FTNearbyCollegesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegesViewController.m; sourceTree = "<group>"; };
+		7BF9BF9F15C1A552002D850B /* FTRatingsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRatingsCell.h; sourceTree = "<group>"; };
+		7BF9BFA015C1A552002D850B /* FTRatingsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTRatingsCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -489,17 +497,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7B0FA10815B62662005C787B /* Nearby Colleges View */ = {
-			isa = PBXGroup;
-			children = (
-				7B55D09A15B6210200947B2E /* FTNearbyCollegesViewController.h */,
-				7B55D09B15B6210200947B2E /* FTNearbyCollegesViewController.m */,
-				7B0FA10415B62651005C787B /* FTNearbyCollegeCell.h */,
-				7B0FA10515B62651005C787B /* FTNearbyCollegeCell.m */,
-			);
-			name = "Nearby Colleges View";
-			sourceTree = "<group>";
-		};
 		7B51E38015A9008E002F2A2E /* Glyphish */ = {
 			isa = PBXGroup;
 			children = (
@@ -969,19 +966,22 @@
 		7BB663AF15AF235E00428A64 /* College Visiting */ = {
 			isa = PBXGroup;
 			children = (
-				7B0FA10815B62662005C787B /* Nearby Colleges View */,
-				7BB663B015AF237A00428A64 /* FTCollegeVisitViewController.h */,
-				7BB663B115AF237A00428A64 /* FTCollegeVisitViewController.m */,
-				7B2C583915B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.h */,
-				7B2C583A15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m */,
-				7B7B327B15B47C7700625FA6 /* FTRatingsCell.h */,
-				7B7B327C15B47C7700625FA6 /* FTRatingsCell.m */,
-				7B2C582D15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.h */,
-				7B2C582E15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m */,
-				7B2C583015B0AF2A00D3845B /* FTCollegeVisitNotesViewController.h */,
-				7B2C583115B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m */,
-				7BDDDA9C15B77F4D00941281 /* FTCampusImageViewController.h */,
-				7BDDDA9D15B77F4D00941281 /* FTCampusImageViewController.m */,
+				7BF9BF9115C1A552002D850B /* FTCampusImageViewController.h */,
+				7BF9BF9215C1A552002D850B /* FTCampusImageViewController.m */,
+				7BF9BF9315C1A552002D850B /* FTCollegeVisitNotesViewController.h */,
+				7BF9BF9415C1A552002D850B /* FTCollegeVisitNotesViewController.m */,
+				7BF9BF9515C1A552002D850B /* FTCollegeVisitPhotosViewController.h */,
+				7BF9BF9615C1A552002D850B /* FTCollegeVisitPhotosViewController.m */,
+				7BF9BF9715C1A552002D850B /* FTCollegeVisitRatingsViewController.h */,
+				7BF9BF9815C1A552002D850B /* FTCollegeVisitRatingsViewController.m */,
+				7BF9BF9915C1A552002D850B /* FTCollegeVisitViewController.h */,
+				7BF9BF9A15C1A552002D850B /* FTCollegeVisitViewController.m */,
+				7BF9BF9B15C1A552002D850B /* FTNearbyCollegeCell.h */,
+				7BF9BF9C15C1A552002D850B /* FTNearbyCollegeCell.m */,
+				7BF9BF9D15C1A552002D850B /* FTNearbyCollegesViewController.h */,
+				7BF9BF9E15C1A552002D850B /* FTNearbyCollegesViewController.m */,
+				7BF9BF9F15C1A552002D850B /* FTRatingsCell.h */,
+				7BF9BFA015C1A552002D850B /* FTRatingsCell.m */,
 			);
 			name = "College Visiting";
 			sourceTree = "<group>";
@@ -1215,6 +1215,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BF9BFA915C1A57D002D850B /* FTCampusImageViewController.m in Sources */,
+				7BF9BFAA15C1A57D002D850B /* FTCollegeVisitNotesViewController.m in Sources */,
+				7BF9BFAB15C1A57D002D850B /* FTCollegeVisitPhotosViewController.m in Sources */,
+				7BF9BFAC15C1A57D002D850B /* FTCollegeVisitRatingsViewController.m in Sources */,
+				7BF9BFAD15C1A57D002D850B /* FTCollegeVisitViewController.m in Sources */,
+				7BF9BFAE15C1A57D002D850B /* FTNearbyCollegeCell.m in Sources */,
+				7BF9BFAF15C1A57D002D850B /* FTNearbyCollegesViewController.m in Sources */,
+				7BF9BFB015C1A57D002D850B /* FTRatingsCell.m in Sources */,
 				7BA40C2215B9ED88009E524D /* ELTextFieldTableViewCell.m in Sources */,
 				7BE3A68F15B7F35D00739725 /* S3RequestDelegate.m in Sources */,
 				7BDDDABF15B7DB7200941281 /* NSData+Base64.m in Sources */,
@@ -1258,21 +1266,13 @@
 				7B35F8FA15ADEE6900EFFFE8 /* FTCollegeInfoViewController.m in Sources */,
 				7B35F90115ADEFA400EFFFE8 /* FTRangeIndicator.m in Sources */,
 				7B12408A15AF10DA006913C3 /* FTWhiteShadowView.m in Sources */,
-				7BB663B215AF237A00428A64 /* FTCollegeVisitViewController.m in Sources */,
 				7BB663C515AF3A8100428A64 /* College.m in Sources */,
-				7B2C582F15B0AF1600D3845B /* FTCollegeVisitPhotosViewController.m in Sources */,
-				7B2C583215B0AF2A00D3845B /* FTCollegeVisitNotesViewController.m in Sources */,
-				7B2C583B15B0BC3D00D3845B /* FTCollegeVisitRatingsViewController.m in Sources */,
 				7B7B327A15B47B6300625FA6 /* FTStandardizedTestingViewController.m in Sources */,
-				7B7B327D15B47C7700625FA6 /* FTRatingsCell.m in Sources */,
 				7BCB88C515B4B7C5008BA15C /* FTNavigationCell.m in Sources */,
 				7BCB88C815B4BF44008BA15C /* FTNavigationHeader.m in Sources */,
 				7B55D08E15B5E9B200947B2E /* PhotoData.m in Sources */,
 				7B55D09115B5E9B300947B2E /* CampusPhoto.m in Sources */,
-				7B55D09C15B6210300947B2E /* FTNearbyCollegesViewController.m in Sources */,
-				7B0FA10615B62651005C787B /* FTNearbyCollegeCell.m in Sources */,
 				7BDDDA9615B764FC00941281 /* Visit.m in Sources */,
-				7BDDDA9E15B77F4E00941281 /* FTCampusImageViewController.m in Sources */,
 				7BDDDACE15B7E69800941281 /* FTAmazonConstants.m in Sources */,
 				7B48487315B93B8A00F4FE9F /* FTStandardizedTestView.m in Sources */,
 				7B732F0315B9CE0E00E5036D /* FTStandardizedTestHeader.m in Sources */,
@@ -1320,6 +1320,14 @@
 				7BDDDABD15B7DB5B00941281 /* NSData+Base64.m in Sources */,
 				7BE3A68D15B7F0D500739725 /* S3RequestDelegate.m in Sources */,
 				7BA40C1D15B9E76B009E524D /* ELTextFieldTableViewCell.m in Sources */,
+				7BF9BFA115C1A552002D850B /* FTCampusImageViewController.m in Sources */,
+				7BF9BFA215C1A552002D850B /* FTCollegeVisitNotesViewController.m in Sources */,
+				7BF9BFA315C1A552002D850B /* FTCollegeVisitPhotosViewController.m in Sources */,
+				7BF9BFA415C1A552002D850B /* FTCollegeVisitRatingsViewController.m in Sources */,
+				7BF9BFA515C1A552002D850B /* FTCollegeVisitViewController.m in Sources */,
+				7BF9BFA615C1A552002D850B /* FTNearbyCollegeCell.m in Sources */,
+				7BF9BFA715C1A552002D850B /* FTNearbyCollegesViewController.m in Sources */,
+				7BF9BFA815C1A552002D850B /* FTRatingsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
