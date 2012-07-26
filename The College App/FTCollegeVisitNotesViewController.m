@@ -12,7 +12,10 @@
 #define MARGIN_X 5
 #define MARGIN_Y 8
 
-@interface FTCollegeVisitNotesViewController () <UITextViewDelegate>
+@interface FTCollegeVisitNotesViewController () <UITextViewDelegate> {
+}
+
+@property (nonatomic, strong) UIBarButtonItem *currentBarButtonItem;
 
 @end
 
@@ -22,12 +25,15 @@
 @synthesize visitViewController = _visitViewController;
 @synthesize managedObjectContext;
 @synthesize visit = _visit;
+@synthesize currentBarButtonItem = _currentBarButtonItem;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Notes" image:[UIImage imageNamed:@"notes.png"] tag:2634];
+        
         self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
         UIColor *textColor = [UIColor colorWithWhite:0.125 alpha:1.000];
         
@@ -39,7 +45,7 @@
         [self.textView setAlwaysBounceVertical:hellzyeah];
         [self.textView setDelegate:self];
         
-        self.title = @"Notes";
+        [self.textView setDelegate:self];
     }
     return self;
 }
@@ -51,8 +57,9 @@
 
     [self.view addSubview:self.textView];
     
-    [self.textView setText:@"Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.Etiam porta sem mEtiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo.alesuada magna mollis euismod. Curabitur blandit tempus porttitor. Nulla vitae elit libero, a pharetra augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo."];
+    [self.textView setText:self.visit.notes];
     
+    self.currentBarButtonItem = self.visitViewController.navigationItem.rightBarButtonItem;
     
     UIBarButtonItem *dismissItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(returnToVisit:)];
     self.navigationItem.leftBarButtonItem = dismissItem;
@@ -73,10 +80,18 @@
         [self.textView setEditable:YES];
     } else {
         [self.textView setFont:[UIFont boldSystemFontOfSize:14.0]];
-        [self.view.layer setCornerRadius:5.0];
-        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
-        [self.view.layer setBorderWidth:1.0];
         [self.textView setEditable:NO];
+
+        if (INTERFACE_IS_PAD) {
+            [self.view.layer setCornerRadius:5.0];
+            [self.view.layer setBorderColor:[UIColor colorWithRed:0.651 green:0.725 blue:0.788 alpha:1.000].CGColor];
+            [self.view.layer setBorderWidth:1.0];
+            [self.textView setEditable:NO];
+            
+        } else {
+            [self.textView setEditable:YES];
+
+        }
     }    
 }
 
@@ -86,9 +101,35 @@
     [self.textView setFrame:CGRectMake(MARGIN_X, MARGIN_Y, self.view.frame.size.width - MARGIN_X * 2, self.view.frame.size.height - MARGIN_Y * 2)];   
 }
 
+- (void) dismissKeyboard:(UIBarButtonItem *)doneButton {
+    [self.textView resignFirstResponder];
+}
+- (void) textViewDidChangeSelection:(UITextView *)textView {
+    [self.visit setNotes:[textView text]];
+}
 
-- (void) returnToVisit:(UIBarButtonItem *)doneButton {
+-(void) textViewDidBeginEditing:(UITextView *)textView {
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissKeyboard:)];
     
+    [self.visitViewController.navigationItem setRightBarButtonItem:doneButton animated:YES];
+}
+
+- (void) textViewDidEndEditing:(UITextView *)textView {
+    [self.visitViewController.navigationItem setRightBarButtonItem:_currentBarButtonItem animated:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [self.visitViewController.navigationItem setRightBarButtonItem:_currentBarButtonItem animated:NO];
+    NSError *err = nil;
+    if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&err]) {
+        NSLog(@"%@", [err description]);
+    }   
+}
+- (void) returnToVisit:(UIBarButtonItem *)doneButton {
+    NSError *err = nil;
+    if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&err]) {
+        NSLog(@"%@", [err description]);
+    }
     
     [self dismissViewControllerAnimated:YES completion:^{
         if (self.visitViewController != nil)
@@ -96,6 +137,7 @@
     }];
     
 }
+
 
 - (void)viewDidUnload
 {

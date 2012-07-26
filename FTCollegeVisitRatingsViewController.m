@@ -25,6 +25,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Ratings" image:[UIImage imageNamed:@"ratings.png"] tag:234];
     }
     return self;
 }
@@ -33,12 +34,12 @@
 {
     [super viewDidLoad];
 
-    self.tableView.backgroundColor = [UIColor colorWithHue:0.562 saturation:0.032 brightness:0.976 alpha:1.000];
+    self.view.backgroundColor = [UIColor colorWithRed:0.945 green:0.965 blue:0.976 alpha:1.000];
     self.tableView.separatorColor = [UIColor purpleColor];
 
     if (INTERFACE_IS_PAD) {
         [self.view.layer setCornerRadius:5.0];
-        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
+        [self.view.layer setBorderColor:[UIColor colorWithRed:0.651 green:0.725 blue:0.788 alpha:1.000].CGColor];
         [self.view.layer setBorderWidth:1.0];
         
 //        [self.view.layer setShadowOffset:CGSizeMake(0, 1)];
@@ -87,7 +88,7 @@
         cell = [[FTRatingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CellIdentifier"];
     }
     
-    [cell.contentView setBackgroundColor:[UIColor colorWithWhite:0.925 alpha:1.000]];
+    [cell.contentView setBackgroundColor:[UIColor colorWithRed:0.945 green:0.965 blue:0.976 alpha:1.000]];
     // Configure the cell...
     cell.textLabel.text = @"Notes";
     cell.textLabel.font = [UIFont boldSystemFontOfSize:16.0];

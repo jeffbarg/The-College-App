@@ -251,15 +251,6 @@
                 [collegeVisitViewController setManagedObjectContext:self.managedObjectContext];
                 
                 newViewController = (UIViewController *)collegeVisitViewController;
-            } else {
-                UITabBarController *tabBarController = [[UITabBarController alloc] init];
-                FTCollegeVisitPhotosViewController * photosViewController   = [[FTCollegeVisitPhotosViewController alloc] init];
-                FTCollegeVisitRatingsViewController * ratingsViewController = [[FTCollegeVisitRatingsViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                FTCollegeVisitNotesViewController * notesViewController     = [[FTCollegeVisitNotesViewController alloc] init];
-                
-                [tabBarController setViewControllers:[NSArray arrayWithObjects:photosViewController, ratingsViewController, notesViewController, nil]];
-                
-                newViewController = tabBarController;
             }
         }
     }

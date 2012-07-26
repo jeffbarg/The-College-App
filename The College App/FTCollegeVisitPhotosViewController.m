@@ -37,6 +37,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+                self.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Photos" image:[UIImage imageNamed:@"photos.png"] tag:2344];
     }
     return self;
 }
@@ -75,11 +76,11 @@
 
     // Do any additional setup after loading the view.
     
-    [self.view setBackgroundColor:[UIColor colorWithHue:0.562 saturation:0.032 brightness:0.976 alpha:1.000]];
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.945 green:0.965 blue:0.976 alpha:1.000]];
 
     if (INTERFACE_IS_PAD) {
         [self.view.layer setCornerRadius:5.0];
-        [self.view.layer setBorderColor:[UIColor colorWithWhite:0.686 alpha:1.000].CGColor];
+        [self.view.layer setBorderColor:[UIColor colorWithRed:0.651 green:0.725 blue:0.788 alpha:1.000].CGColor];
         [self.view.layer setBorderWidth:1.0];
         
 

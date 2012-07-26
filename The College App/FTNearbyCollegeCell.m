@@ -31,7 +31,10 @@
 - (void) drawRect:(CGRect)rect {
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [[UIColor colorWithWhite:0.898 alpha:1.000] setFill];
+    
+    UIColor *fillColor = [UIColor colorWithHue:0.562 saturation:0.032 brightness:0.986 alpha:1.000];
+
+    [fillColor setFill];
     
     CGContextFillRect(ctx, self.bounds);
     

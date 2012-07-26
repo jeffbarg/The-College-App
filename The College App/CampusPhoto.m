@@ -67,29 +67,28 @@
     [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
 
         NSData *imageData = UIImageJPEGRepresentation(self.photoData.image, INTERFACE_IS_PAD? 1.0 : 0.9);
-            
-        AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
-            
-        NSString * FTDeviceUUID = [[NSUserDefaults standardUserDefaults] objectForKey:kUUIDKeyDefaults];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MM|dd|yyyy-hh:mma"];
-        [formatter setCalendar:[NSCalendar currentCalendar]];
-        
-        NSString *keyName    = [NSString stringWithFormat:@"%@/%@@%@", [self.visit.college.unitID description], FTDeviceUUID, [formatter stringFromDate:[NSDate date]]];
-
-        
-        // Put the file as an object in the bucket.
-        putObjectRequest          = [[S3PutObjectRequest alloc] initWithKey:keyName inBucket:PICTURE_BUCKET];
-        putObjectRequest.data = imageData;
-        putObjectRequest.contentEncoding = @"image/jpeg";
-        
-        putObjectRequest.expires = 1000.0 * 20.0;
-        
-        [putObjectRequest setDelegate:self.s3Delegate];
-
-        // When using delegates the return is nil.
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            AmazonS3Client *s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
+                
+            NSString * FTDeviceUUID = [[NSUserDefaults standardUserDefaults] objectForKey:kUUIDKeyDefaults];
+            
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MM|dd|yyyy-hh:mma"];
+            [formatter setCalendar:[NSCalendar currentCalendar]];
+            
+            NSString *keyName    = [NSString stringWithFormat:@"%@/%@@%@", [self.visit.college.unitID description], FTDeviceUUID, [formatter stringFromDate:[NSDate date]]];
+
+            
+            // Put the file as an object in the bucket.
+            putObjectRequest          = [[S3PutObjectRequest alloc] initWithKey:keyName inBucket:PICTURE_BUCKET];
+            putObjectRequest.data = imageData;
+            putObjectRequest.contentEncoding = @"image/jpeg";
+            
+            putObjectRequest.expires = 1000.0 * 20.0;
+            
+            [putObjectRequest setDelegate:self.s3Delegate];
+
+            // When using delegates the return is nil.
             [s3 putObject:putObjectRequest];
         }];
 
