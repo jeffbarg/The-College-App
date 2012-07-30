@@ -78,10 +78,10 @@
     if (self = [super initWithFrame:frame])
     {
         _topArrowImage = [UIImage imageNamed:@"toparrow.png"];
-        _leftArrowImage = _topArrowImage;
-        _bottomArrowImage = [UIImage imageWithCGImage:_topArrowImage.CGImage scale:_topArrowImage.scale orientation:UIImageOrientationDown];
-        _rightArrowImage = [UIImage imageNamed:@"popover-black-right-arrow-image.png"];
-        
+        _leftArrowImage = [UIImage imageNamed:@"leftarrow.png"];
+        _bottomArrowImage = [UIImage imageNamed:@"bottomarrow.png"];
+        _rightArrowImage = [UIImage imageNamed:@"rightarrow.png"];
+                             
 //        UIImage *popoverBackgroundImage = [[UIImage imageNamed:@"popover-black-bcg-image.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(49, 46, 49, 45)];
         UIImage *popoverBackgroundImage = [[UIImage imageNamed:@"popover.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(48.0, 12.0, 10.0, 12.0)];
         self.popoverBackgroundImageView = [[UIImageView alloc] initWithImage:popoverBackgroundImage];
