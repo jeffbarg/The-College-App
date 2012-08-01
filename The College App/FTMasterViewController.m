@@ -11,10 +11,7 @@
 #import "FTCollegeSearchViewController.h"
 #import "FTGradesViewController.h"
 #import "FTStandardizedTestingViewController.h"
-#import "FTCollegeVisitViewController.h"
-#import "FTCollegeVisitNotesViewController.h"
-#import "FTCollegeVisitRatingsViewController.h"
-#import "FTCollegeVisitPhotosViewController.h"
+#import "FTCollegeVisitingViewController.h"
 #import "ECSlidingViewController.h"
 #import "FTNavigationCell.h"
 #import "FTNavigationHeader.h"
@@ -247,7 +244,7 @@
     } else {
         if (indexPath.row == 0) {
             if (INTERFACE_IS_PAD || INTERFACE_IS_PHONE) {                
-                FTCollegeVisitViewController *collegeVisitViewController = [[FTCollegeVisitViewController alloc] init];
+                FTCollegeVisitingViewController *collegeVisitViewController = [[FTCollegeVisitingViewController alloc] init];
                 [collegeVisitViewController setManagedObjectContext:self.managedObjectContext];
                 
                 newViewController = (UIViewController *)collegeVisitViewController;

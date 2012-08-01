@@ -10,7 +10,6 @@
 #import "CampusPhoto.h"
 #import "College.h"
 
-
 @implementation Visit
 
 @dynamic dateCreated;
