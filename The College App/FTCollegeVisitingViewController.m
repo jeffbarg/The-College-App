@@ -90,6 +90,8 @@
             [viewController.view.layer setBorderWidth:1.0];
             [viewController.view.layer setCornerRadius:5.0];
             
+            [viewController.view setClipsToBounds:YES];
+            
             [self addChildViewController:viewController];
             [self.view addSubview:viewController.view];
             [viewController didMoveToParentViewController:self];

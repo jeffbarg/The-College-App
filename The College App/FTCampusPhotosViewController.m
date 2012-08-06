@@ -43,8 +43,8 @@
 - (void) loadView {
     [super loadView];
     
-    NSInteger spacing = INTERFACE_IS_PHONE ? 10 : 20;
-    NSInteger minInsets = 10.0;
+    NSInteger spacing = INTERFACE_IS_PHONE ? 10 : 16;
+    NSInteger minInsets = INTERFACE_IS_PHONE? 10.0: 7.0;
     
     GMGridView *gmGridView = [[GMGridView alloc] initWithFrame:self.view.bounds];
     gmGridView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -53,7 +53,7 @@
     
     _gmGridView.style = GMGridViewStyleSwap;
     _gmGridView.itemSpacing = spacing;
-    _gmGridView.minEdgeInsets = UIEdgeInsetsMake(minInsets, minInsets, minInsets, minInsets);
+    _gmGridView.minEdgeInsets = UIEdgeInsetsMake(10.0, minInsets, 10.0, minInsets);
     _gmGridView.centerGridHorizontally = YES;
     _gmGridView.actionDelegate = self;
     _gmGridView.dataSource = self;
