@@ -12,7 +12,7 @@
 
 #import "GMGridView.h"
 
-@interface FTCampusPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, GMGridViewDataSource, GMGridViewActionDelegate, GMGridViewSortingDelegate>
+@interface FTCampusPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, GMGridViewDataSource, GMGridViewActionDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext                *managedObjectContext;
 @property (nonatomic, strong) FTCollegeVisitingViewController       *visitViewController;

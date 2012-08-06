@@ -63,7 +63,10 @@ Both Event and Photograph contain image data stored as a transformable attribute
 
 - (id)transformedValue:(id)value {
     
-	return UIImagePNGRepresentation([((UIImage *)value) imageByRotatingImageFromImageOrientation]);
+    if ([value class] == [UIImage class])
+        return UIImagePNGRepresentation([((UIImage *)value) imageByRotatingImageFromImageOrientation]);
+    else 
+        return value;
 }
 
 - (id)reverseTransformedValue:(id)value {

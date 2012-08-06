@@ -33,6 +33,8 @@
 @property (nonatomic, strong) UIButton *photosButton;
 @property (nonatomic, strong) UIButton *ratingsButton;
 
+@property (nonatomic, strong) UITapGestureRecognizer *notesGestureRecognizer;
+
 @end
 
 @implementation FTCollegeVisitingViewController
@@ -44,6 +46,8 @@
 @synthesize photosButton;
 @synthesize notesButton;
 @synthesize ratingsButton;
+
+@synthesize notesGestureRecognizer;
 
 @synthesize school;
 
@@ -141,9 +145,16 @@
         [button setBackgroundImage:[[UIImage imageNamed:@"visitsectionheader.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted];
     }
 
+    notesGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bringFocusToNotepad)];
+    if (INTERFACE_IS_PAD)
+        [self.notesViewController.view addGestureRecognizer:notesGestureRecognizer];
+    
+    
 }
 
 - (void) viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
     if (INTERFACE_IS_PAD) {
         UIView * photosView = self.photosViewController.view;
         UIView * notesView = self.notesViewController.view;
@@ -152,15 +163,16 @@
         //Let's hope to god I don't have to rewrite this.  just change defines.
         [photosView setFrame:CGRectMake(MARGIN_X,  MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER, self.view.frame.size.width - 320 - 3 * MARGIN_X, self.view.frame.size.height - (2 * MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER))];
 
-        [ratingsView setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2*  MARGIN_Y) / 2.0)];
-
-        [notesView setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, CGRectGetMaxY(ratingsView.frame) + 2 * MARGIN_HEADER + HEADER_HEIGHT, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2 * MARGIN_Y) / 2.0)];
+        [ratingsView setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, MARGIN_Y + HEADER_HEIGHT + MARGIN_HEADER, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2*  MARGIN_Y) / 2.0)]; 
 
         [self.photosButton setFrame:CGRectMake(MARGIN_X, MARGIN_Y, CGRectGetWidth(photosView.frame), HEADER_HEIGHT)];
         [self.ratingsButton setFrame:CGRectMake(CGRectGetMaxX(photosView.frame) + MARGIN_X, MARGIN_Y, CGRectGetWidth(ratingsView.frame), HEADER_HEIGHT)];
-        [self.notesButton setFrame:CGRectMake(CGRectGetMaxX(photosView.frame) + MARGIN_X, MARGIN_HEADER + CGRectGetMaxY(ratingsView.frame), CGRectGetWidth(ratingsView.frame), HEADER_HEIGHT)];    
 
-
+        if (self.notesViewController.parentViewController == self) {
+            [notesView setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, CGRectGetMaxY(ratingsView.frame) + 2 * MARGIN_HEADER + HEADER_HEIGHT, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2 * MARGIN_Y) / 2.0)];
+            [self.notesButton setFrame:CGRectMake(CGRectGetMaxX(photosView.frame) + MARGIN_X, MARGIN_HEADER + CGRectGetMaxY(ratingsView.frame), CGRectGetWidth(ratingsView.frame), HEADER_HEIGHT)];   
+        }
+        
         if (self.school != nil) {
             [photosView setFrame:CGRectOffset(photosView.frame, -CGRectGetMaxX(photosView.frame) - 20, 0)];        
             [self.photosButton setFrame:CGRectOffset(self.photosButton.frame, -CGRectGetMaxX(self.photosButton.frame), 0)];        
@@ -190,5 +202,58 @@
 	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
+#pragma mark - Buttons
+
+- (void) bringFocusToNotepad {
+    [self.notesViewController.view removeGestureRecognizer:self.notesGestureRecognizer];
+    
+    [UIView animateWithDuration:0.4 animations:^{
+        [self.notesViewController.view setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, self.view.frame.size.height, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2 * MARGIN_Y) / 2.0)];
+        [self.notesButton setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, self.view.frame.size.height, 320, HEADER_HEIGHT)];   
+
+    } completion:^ (BOOL completed) {
+        [self.notesViewController willMoveToParentViewController:nil];
+        [self.notesViewController removeFromParentViewController];
+        [self.notesViewController.view removeFromSuperview];
+        
+        [self.notesViewController.view.layer setBorderColor:nil];
+        [self.notesViewController.view.layer setBorderWidth:0.0];
+        [self.notesViewController.view.layer setCornerRadius:0.0];
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:self.notesViewController];
+        [navController setModalPresentationStyle:UIModalPresentationPageSheet];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(returnFromNotepad)];
+        self.notesViewController.navigationItem.leftBarButtonItem = doneButton;
+        
+        [self presentViewController:navController animated:YES completion:^{}];
+    }];
+    
+
+}
+
+- (void) returnFromNotepad {
+    
+    [self.notesViewController dismissViewControllerAnimated:YES completion:^{
+        [self.notesViewController.view addGestureRecognizer:self.notesGestureRecognizer];
+        
+        [self.notesViewController.view.layer setBorderColor:[UIColor colorWithHue:0.574 saturation:0.037 brightness:0.766 alpha:1.000].CGColor];
+        [self.notesViewController.view.layer setBorderWidth:1.0];
+        [self.notesViewController.view.layer setCornerRadius:5.0];
+        
+        [self addChildViewController:self.notesViewController];
+        [self.view addSubview:self.notesViewController.view];
+        [self.notesViewController didMoveToParentViewController:self];
+        
+        [self.notesButton setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, self.view.frame.size.height, 320, HEADER_HEIGHT)];   
+        [self.notesViewController.view setFrame:CGRectMake(self.view.frame.size.width - 320 - MARGIN_X, self.view.frame.size.height + HEADER_HEIGHT + MARGIN_HEADER, 320, (self.view.frame.size.height - 2 * HEADER_HEIGHT - 3 * MARGIN_HEADER - 2 * MARGIN_Y) / 2.0)];
+        
+        [UIView animateWithDuration:0.4 animations:^{
+            [self viewWillLayoutSubviews];
+        }];
+
+        
+    }];
+}
 
 @end

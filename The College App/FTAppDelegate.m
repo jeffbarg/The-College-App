@@ -32,7 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAmazon];
-    //[self initializeData];
+    [self initializeData];
     [self configureAppearance];
     [self setupUUID];
     
