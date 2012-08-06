@@ -23,8 +23,6 @@
 
 @interface FTStandardizedTestingViewController () <NSFetchedResultsControllerDelegate>
 
-@property (nonatomic, strong) UIPopoverController *masterPopoverController;
-
 @end
 
 @implementation FTStandardizedTestingViewController

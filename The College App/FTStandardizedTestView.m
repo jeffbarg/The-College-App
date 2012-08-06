@@ -32,6 +32,7 @@
 @synthesize test = _test;
 @synthesize buttonArray = _buttonArray;
 
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -176,7 +177,7 @@
                 else if (i == sections-1)
                     roundedCorners = UIRectCornerTopRight | UIRectCornerBottomRight;
                 
-                UIBezierPath *highlightPath = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(button.frame, 1.0,1.0) byRoundingCorners:0 cornerRadii:CGSizeMake(8.0, 8.0)];
+                UIBezierPath *highlightPath = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(button.frame, 1.0,1.0) byRoundingCorners:roundedCorners cornerRadii:CGSizeMake(4.0, 4.0)];
                 
                 [highlightPath addClip];
                 CGContextDrawLinearGradient(ctx, [self backgroundGradient], CGPointMake(0.0, self.bounds.size.height), CGPointMake(0.0, 0.0), 0);

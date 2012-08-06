@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+@property (nonatomic, strong) UIPopoverController *masterPopoverController;
+
 - (void) presentEditPopoverFromButton:(UIButton *) button fromTestView:(FTStandardizedTestView *)testView;
 
 @end

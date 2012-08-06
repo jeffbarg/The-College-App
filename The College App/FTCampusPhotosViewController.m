@@ -11,6 +11,7 @@
 #import "KSCustomPopoverBackgroundView.h"
 
 #import "CampusPhoto.h"
+#import "PhotoData.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -129,6 +130,12 @@
     NSOperationQueue *bgQueue = [[NSOperationQueue alloc] init];
     [bgQueue addOperationWithBlock:^{
         
+        NSData *data = UIImageJPEGRepresentation(image, 1.0);
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            PhotoData * photoData = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoData" inManagedObjectContext:self.managedObjectContext];
+            [photoData setImage:data];
+            [photoData setCampusPhoto:photo];
+        }];
     }];
     
     
@@ -220,7 +227,6 @@ UIImage * processImage(UIImage *image, CGRect ctxFrame) {
     
     //Cleanup
     
-    CGColorSpaceRelease(colorSpace);
     UIGraphicsEndImageContext();
     
     return retVal;

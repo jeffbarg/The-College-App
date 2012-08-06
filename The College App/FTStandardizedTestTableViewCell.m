@@ -76,6 +76,9 @@
     if (CGRectContainsPoint(selButton.frame, [touch locationInView:self.testView])) {
         [selButton setSelected:YES];
         [self.viewController presentEditPopoverFromButton:selButton fromTestView:self.testView];
+    } else {
+        if (self.viewController.masterPopoverController && [self.viewController.masterPopoverController isPopoverVisible])
+            [self.viewController.masterPopoverController dismissPopoverAnimated:YES];
     }
     
     [self.testView setNeedsDisplay];
