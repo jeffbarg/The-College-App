@@ -224,9 +224,12 @@
         [navController setModalPresentationStyle:UIModalPresentationPageSheet];
         
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(returnFromNotepad)];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"notesdone.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        [doneButton setBackgroundImage:[UIImage imageNamed:@"notesdoneactive.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+        
         self.notesViewController.navigationItem.leftBarButtonItem = doneButton;
         
-        [navController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"notesnav.png"]]];
+        [navController.navigationBar setBackgroundImage:[UIImage imageNamed:@"notesnav.png"] forBarMetrics:UIBarMetricsDefault];
         
         [self presentViewController:navController animated:YES completion:^{}];
     }];

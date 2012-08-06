@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) FTCollegeVisitingViewController *visitViewController;
 
+@property (nonatomic, strong) UITextView *textView;
+
 @end
