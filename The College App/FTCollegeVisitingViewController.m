@@ -231,6 +231,12 @@
         
         [navController.navigationBar setBackgroundImage:[UIImage imageNamed:@"notesnav.png"] forBarMetrics:UIBarMetricsDefault];
         
+        [navController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                         [UIColor whiteColor], UITextAttributeTextColor,
+                                                                         [UIColor blackColor], UITextAttributeTextShadowColor,
+                                                                         [NSValue valueWithUIOffset:UIOffsetMake(0, -1)], UITextAttributeTextShadowOffset,
+                                                                         nil]];
+        
         [self presentViewController:navController animated:YES completion:^{}];
     }];
     

@@ -35,6 +35,8 @@
     [super viewDidLoad];
     
     [self.view addSubview:textView];
+    
+    self.title = @"Notes";
 	// Do any additional setup after loading the view.
 }
 
