@@ -101,6 +101,8 @@
         if (_masterPopoverController && [self.masterPopoverController isPopoverVisible])
             [self.masterPopoverController dismissPopoverAnimated:NO];
         
+        [pickerController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        
         _masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:pickerController];
         [_masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
         

@@ -8,7 +8,9 @@
 
 #import "FTCampusNotesViewController.h"
 
-@interface FTCampusNotesViewController ()
+@interface FTCampusNotesViewController () {
+    CGSize keyboardSize;
+}
 
 @end
 
@@ -26,6 +28,8 @@
         // Custom initialization
         textView = [[UITextView alloc] initWithFrame:CGRectZero];
         [textView setBackgroundColor:[UIColor clearColor]];
+
+        [self.textView setAutoresizingMask:UIViewAutoresizingNone];
     }
     return self;
 }
@@ -47,9 +51,9 @@
         [self.textView setEditable:YES];
         
         NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
-        [notifCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        [notifCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-        [notifCenter addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+        [notifCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
+        [notifCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardDidHideNotification object:nil];
+        [notifCenter addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardDidChangeFrameNotification object:nil];
         
         if (INTERFACE_IS_PAD) {
             [self.textView setFont:[UIFont boldSystemFontOfSize:20.0]];
@@ -68,8 +72,14 @@
 }
 
 - (void) viewWillLayoutSubviews {
-
-    [self.textView setFrame:self.view.bounds];
+    [super viewWillLayoutSubviews];
+    
+    if (![self.textView isFirstResponder])
+        [self.textView setFrame:CGRectInset(self.view.bounds,4,4)];
+    else {
+        [self.textView setFrame:CGRectInset(CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardSize.height),4,4)];
+        NSLog(@"%@", NSStringFromCGRect(self.textView.frame));
+    }
 }
 
 - (void)viewDidUnload
@@ -85,23 +95,21 @@
 
 - (void) keyboardWillShow:(NSNotification *)aNotification {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-
-    [self.textView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height)];
+    CGSize kbSize = [[info objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue].size;
+    keyboardSize = kbSize;
 }
 
 - (void) keyboardWillHide:(NSNotification *)aNotification {
-    
-
+    keyboardSize = CGSizeZero;
 }
 
 - (void) keyboardWillChangeFrame:(NSNotification *)aNotification {
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    CGSize kbSize = [[info objectForKey:UIKeyboardBoundsUserInfoKey] CGRectValue].size;
+
+    keyboardSize = kbSize;
     
-    
-    [self.textView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - kbSize.height)];
-    
+    [self viewWillLayoutSubviews];
 }
 @end

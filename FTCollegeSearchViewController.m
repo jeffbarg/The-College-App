@@ -15,7 +15,8 @@
 #import "FTRangeIndicator.h"
 #import "ECSlidingViewController.h"
 
-@interface FTCollegeSearchViewController () {
+@interface FTCollegeSearchViewController () <UISearchBarDelegate> {
+    
     NSInteger _lastDeleteItemIndexAsked;   
     __gm_weak GMGridView *_gmGridView;   
 }
@@ -29,6 +30,7 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize searchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,12 +74,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"College List";
+
     self.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
     // Do any additional setup after loading the view.
 
     _gmGridView.mainSuperView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 250.0, 44.0)];
+    searchBar.delegate = self;
+    
+    
+    [searchBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"]];
+    
+
+    UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
+
+    [self.navigationItem setRightBarButtonItem:searchItem];
 }
 
 - (void)viewDidUnload
@@ -91,6 +103,30 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void) searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", searchText];
+    if (![searchText isEqualToString:@""])
+        [_fetchedResultsController.fetchRequest setPredicate:predicate];
+    else 
+        [_fetchedResultsController.fetchRequest setPredicate:nil];
+
+    NSError *error = nil;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        // Handle error
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+
+    [_gmGridView reloadData];
+}
+
+- (void) searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self.searchBar resignFirstResponder];
 }
 
 #pragma mark - Fetched results controller
@@ -125,7 +161,8 @@
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"COLLEGE_CACHE"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     [self.fetchedResultsController setDelegate:self];
@@ -393,29 +430,6 @@
 {
 
     
-}
-#pragma mark - Split view
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-    barButtonItem.image = [UIImage imageNamed:@"menu.png"];//NSLocalizedString(@"Master", @"Master");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    [popoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
-    self.masterPopoverController = popoverController;
-}
-
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    if (self.masterPopoverController != nil && [self.masterPopoverController isPopoverVisible])
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    self.masterPopoverController = nil;
-}
-
--(BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation 
-{ 
-    return YES; 
 }
 
 @end

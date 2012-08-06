@@ -152,6 +152,15 @@
         [self.notesViewController.view addGestureRecognizer:notesGestureRecognizer];
     
     
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, INTERFACE_IS_PAD? 320.0 : 260.0, 30.0)];
+    UIButton * titleButton = [[UIButton alloc] initWithFrame:titleView.bounds];
+    [titleButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
+    
+    self.navigationItem.titleView = titleView;
+    
+    [titleView addSubview:titleButton];
+    
+    
 }
 
 - (void) viewWillLayoutSubviews {
