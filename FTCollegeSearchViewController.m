@@ -80,7 +80,7 @@
 
     _gmGridView.mainSuperView = [UIApplication sharedApplication].keyWindow.rootViewController.view;
     
-    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 250.0, 44.0)];
+    searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 265.0, 44.0)];
     searchBar.delegate = self;
     
     
