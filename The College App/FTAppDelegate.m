@@ -26,8 +26,9 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize navigationController = _navigationController;
-@synthesize splitViewController = _splitViewController;
 @synthesize slidingViewController = _slidingViewController;
+
+@synthesize masterViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,7 +40,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     
-    FTMasterViewController *masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStylePlain];
+    masterViewController = [[FTMasterViewController alloc] initWithStyle:UITableViewStylePlain];
+    
     UINavigationController *masterNavigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
     
     FTCollegeSearchViewController *detailViewController = [[FTCollegeSearchViewController alloc] init];
@@ -67,7 +69,11 @@
     [self.slidingViewController setAnchorRightRevealAmount:INTERFACE_IS_PAD?280:260];
     self.slidingViewController.underLeftWidthLayout = ECFullWidth;
     
+    NSNotificationCenter *notifCenter = [NSNotificationCenter defaultCenter];
+    [notifCenter addObserver:self selector:@selector(didShowMenu) name:ECSlidingViewTopDidAnchorRight object:nil];
+    [notifCenter addObserver:self selector:@selector(didDismissMenu) name:ECSlidingViewTopDidReset object:nil];
     
+     
     detailViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:masterViewController action:@selector(slideLeft)];
     
     detailNavigationController.view.backgroundColor = kViewBackgroundColor;
@@ -87,6 +93,17 @@
     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:[[UIImage imageNamed:@"backselect.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 14.0, 0.0, 5.0)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void) didShowMenu {
+    [self.slidingViewController.topViewController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [masterViewController.detailViewController.navigationController.navigationBar removeGestureRecognizer:self.slidingViewController.panGesture];
+
+}
+
+- (void) didDismissMenu {
+    [self.slidingViewController.topViewController.view removeGestureRecognizer:self.slidingViewController.panGesture];
+    [masterViewController.detailViewController.navigationController.navigationBar addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

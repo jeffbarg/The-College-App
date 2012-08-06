@@ -226,6 +226,8 @@
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(returnFromNotepad)];
         self.notesViewController.navigationItem.leftBarButtonItem = doneButton;
         
+        [navController.navigationBar setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"notesnav.png"]]];
+        
         [self presentViewController:navController animated:YES completion:^{}];
     }];
     

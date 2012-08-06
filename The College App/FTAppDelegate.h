@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 
+@class FTMasterViewController;
+
 @interface FTAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -23,7 +25,7 @@
 - (void) configureAppearance;
 
 @property (nonatomic, strong) UINavigationController *navigationController;
-@property (nonatomic, strong) UISplitViewController *splitViewController;
 @property (nonatomic, strong) ECSlidingViewController *slidingViewController;
+@property (nonatomic, strong) FTMasterViewController *masterViewController;
 
 @end

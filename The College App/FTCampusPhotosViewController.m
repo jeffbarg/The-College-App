@@ -135,6 +135,11 @@
             PhotoData * photoData = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoData" inManagedObjectContext:self.managedObjectContext];
             [photoData setImage:data];
             [photoData setCampusPhoto:photo];
+            
+            NSError *err = nil;
+            if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&err]) {
+                NSLog(@"%@", [err description]);
+            }
         }];
     }];
     
@@ -396,7 +401,7 @@ UIImage * processImage(UIImage *image, CGRect ctxFrame) {
 
 - (BOOL)GMGridView:(GMGridView *)gridView canDeleteItemAtIndex:(NSInteger)index
 {
-    return YES; //index % 2 == 0;
+    return index != 0; //index % 2 == 0;
 }
 
 //////////////////////////////////////////////////////////////

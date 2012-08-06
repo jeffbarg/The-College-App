@@ -21,7 +21,7 @@
 
 }
 - (CGGradientRef) backgroundGradient;
-- (CGGradientRef) selecdtedBackgroundGradient;
+- (CGGradientRef) selectedBackgroundGradient;
 
 
 @end
