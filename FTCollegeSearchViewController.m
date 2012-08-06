@@ -68,6 +68,9 @@
     _gmGridView.dataSource = self;
     _gmGridView.allowsHorizontalReordering = YES;
     
+    _gmGridView.bounces = hellzyeah;
+    _gmGridView.alwaysBounceVertical = yeah;
+    
     [self.view addSubview:gmGridView];
 }
 
@@ -75,6 +78,8 @@
 {
     [super viewDidLoad];
 
+    self.title = @"College Search";
+    
     self.view.backgroundColor = [UIColor colorWithHue:0.574 saturation:0.037 brightness:0.957 alpha:1.000];
     // Do any additional setup after loading the view.
 
