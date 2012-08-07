@@ -74,6 +74,11 @@
 
 	// Do any additional setup after loading the view.
     
+    CGRect contentRect = self.view.frame;
+    self.view.frame = self.view.bounds;
+    ((UIScrollView *) self.view).contentSize = contentRect.size;
+    
+    self.view.backgroundColor = kViewBackgroundColor;
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton:)];
     self.navigationItem.leftBarButtonItem = doneButton;
@@ -92,9 +97,9 @@
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
     self.tabBarItem = tabBarItem;
     
-    [self setupWhiteViews];
+    //[self setupWhiteViews];
     [self setupStandardizedTesting];
-    [self setupMap];
+    //[self setupMap];
     
     // Create formatter
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
@@ -140,23 +145,14 @@
 
 - (void) setupMap {
     if (INTERFACE_IS_PAD) {
-        CGRect mapFrame = self.mapView.superview.frame;
-        UIView *supersuperview = self.mapView.superview.superview;
-        [self.mapView removeFromSuperview];
-        [supersuperview addSubview:self.mapView];
-        [self.mapView setFrame:mapFrame];
-        
-        [self.mapView.layer setCornerRadius:5.0];
-        
-        
         [self.mapView setMapType:MKMapTypeHybrid];
     } else {
         [self.mapView setMapType:MKMapTypeStandard];
     }
     
-    [self.mapView.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.mapView.layer setShadowOffset:CGSizeMake(0, 1)];
-    [self.mapView.layer setShadowOpacity:1.0];
+//    [self.mapView.layer setShadowColor:[UIColor blackColor].CGColor];
+//    [self.mapView.layer setShadowOffset:CGSizeMake(0, 1)];
+//    [self.mapView.layer setShadowOpacity:1.0];
     
     CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
     
@@ -263,6 +259,9 @@
     [self.standardizedTestingContainerView addSubview:writingLabel];
     [self.standardizedTestingContainerView addSubview:actIndicator];
     [self.standardizedTestingContainerView addSubview:actLabel];
+    
+    [self.standardizedTestingContainerView setNeedsDisplay];
+    [self.standardizedTestingContainerView setBackgroundColor:[UIColor whiteColor]];
 }
 
 
