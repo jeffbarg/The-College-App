@@ -13,9 +13,9 @@
  * permissions and limitations under the License.
  */
 
-#import <AWSiOSSDK/AmazonServiceResponse.h>
-#import "CampusPhoto.h"
 
+#import "CampusPhoto.h"
+#import <AWSiOSSDK/AmazonServiceResponse.h>
 
 @interface S3RequestDelegate:NSObject<AmazonServiceRequestDelegate>
 {

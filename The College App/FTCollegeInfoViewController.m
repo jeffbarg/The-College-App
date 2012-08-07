@@ -92,14 +92,90 @@
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
     self.tabBarItem = tabBarItem;
     
+    [self setupWhiteViews];
+    [self setupStandardizedTesting];
+    [self setupMap];
+    
+    // Create formatter
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    [self.applicationFeeLabel setText:[NSString stringWithFormat:@"$%@", [self.school applicationFee]]];
+    [self.tuitionLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school totalPriceOutState]]]];
+    
+
+
+    for (UIButton *urlButton in self.urlButtons) {
+        [urlButton setContentEdgeInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
+        [urlButton.titleLabel setNumberOfLines:0];
+        [urlButton.titleLabel setTextAlignment:UITextAlignmentCenter];
+        [urlButton setTitleColor:[UIColor colorWithWhite:91.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    }
+    
+    [self.openInMapsButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
+    [self.containerView setContentSize:CGSizeMake(540.0, 1115.0)];
+    
 
     
+}
+
+#pragma mark - Setup Functions
+
+- (void) setupWhiteViews {
+    for (UIView *whiteView in self.whiteViews) {
+        
+        CGRect whiteFrame = whiteView.frame;
+        whiteFrame = CGRectInset(whiteFrame, -4.0, -4.0);
+        whiteFrame.size.height += 1.0;
+        
+        
+        [whiteView setFrame:whiteFrame];
+        
+        [whiteView setBackgroundColor:[UIColor whiteColor]];
+        [whiteView setOpaque:YES];
+        
+    }
+}
+
+- (void) setupMap {
+    if (INTERFACE_IS_PAD) {
+        CGRect mapFrame = self.mapView.superview.frame;
+        UIView *supersuperview = self.mapView.superview.superview;
+        [self.mapView removeFromSuperview];
+        [supersuperview addSubview:self.mapView];
+        [self.mapView setFrame:mapFrame];
+        
+        [self.mapView.layer setCornerRadius:5.0];
+        
+        
+        [self.mapView setMapType:MKMapTypeHybrid];
+    } else {
+        [self.mapView setMapType:MKMapTypeStandard];
+    }
     
+    [self.mapView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [self.mapView.layer setShadowOffset:CGSizeMake(0, 1)];
+    [self.mapView.layer setShadowOpacity:1.0];
+    
+    CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
+    
+    [self.mapView setRegion:MKCoordinateRegionMake(schoolLocation, MKCoordinateSpanMake(0.01, 0.01)) animated:YES];
+    MKPointAnnotation *schoolAnnotation = [[MKPointAnnotation alloc] init];
+    [schoolAnnotation setCoordinate:schoolLocation];
+    [schoolAnnotation setTitle:self.school.name];
+    [schoolAnnotation setSubtitle:[NSString stringWithFormat:@"%@, %@ %@", self.school.streetAddress, self.school.stateAbbreviation, self.school.zipcode]];
+    
+    [self.mapView addAnnotation:schoolAnnotation];
+    [self.mapView selectAnnotation:schoolAnnotation animated:YES];
+}
+
+- (void) setupStandardizedTesting {
     UIColor *textColor = [UIColor colorWithWhite:84.0/255.0 alpha:1.000];
     
     UILabel *mathLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 20.0, 460.0, 20.0)];
     [mathLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [mathLabel setBackgroundColor:[UIColor whiteColor]];
     [mathLabel setOpaque:YES];
     [mathLabel setText:@"SAT Mathematics Middle 50%"];
@@ -119,7 +195,7 @@
     
     UILabel *readingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 100.0, 460.0, 20.0)];
     [readingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [readingLabel setBackgroundColor:[UIColor whiteColor]];
     [readingLabel setOpaque:YES];
     [readingLabel setText:@"SAT Reading Middle 50%"];
@@ -130,7 +206,7 @@
     
     FTRangeIndicator *readingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 120.0, 460.0, 60.0)];
     [readingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [readingIndicator setMaxValue:[[self.school readingSAT75] floatValue]];
     [readingIndicator setMinValue:[[self.school readingSAT25] floatValue]];
     [readingIndicator setLowerBound:200.0];
@@ -141,7 +217,7 @@
     
     UILabel *writingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 180.0, 460.0, 20.0)];
     [writingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [writingLabel setBackgroundColor:[UIColor whiteColor]];
     [writingLabel setOpaque:YES];
     [writingLabel setText:@"SAT Writing Middle 50%"];
@@ -151,27 +227,27 @@
     
     FTRangeIndicator *writingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 200.0, 460.0, 60.0)];
     [writingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [writingIndicator setMaxValue:[[self.school writingSAT75] floatValue]];
     [writingIndicator setMinValue:[[self.school writingSAT25] floatValue]];
     [writingIndicator setLowerBound:200.0];
     [writingIndicator setUpperBound:800.0];
     
     [writingIndicator setValue: 760.0];
-        
+    
     UILabel *actLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 260.0, 460.0, 20.0)];
     [actLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [actLabel setBackgroundColor:[UIColor whiteColor]];
     [actLabel setOpaque:YES];
     [actLabel setText:@"ACT Composite Middle 50%"];
     [actLabel setTextAlignment:UITextAlignmentLeft];
     [actLabel setTextColor:textColor];
     [actLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
-
+    
     FTRangeIndicator *actIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 280.0, 460.0, 60.0)];
     [actIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
-
+    
     [actIndicator setMaxValue:[[self.school compositeACT75] floatValue]];
     [actIndicator setMinValue:[[self.school compositeACT25] floatValue]];
     [actIndicator setLowerBound:10.0];
@@ -187,76 +263,8 @@
     [self.standardizedTestingContainerView addSubview:writingLabel];
     [self.standardizedTestingContainerView addSubview:actIndicator];
     [self.standardizedTestingContainerView addSubview:actLabel];
-
-    if (INTERFACE_IS_PAD) {
-        CGRect mapFrame = self.mapView.superview.frame;
-        UIView *supersuperview = self.mapView.superview.superview;
-        [self.mapView removeFromSuperview];
-        [supersuperview addSubview:self.mapView];
-        [self.mapView setFrame:mapFrame];
-        
-        [self.mapView.layer setCornerRadius:5.0];
-
-        
-        [self.mapView setMapType:MKMapTypeHybrid];
-    } else {
-        [self.mapView setMapType:MKMapTypeStandard];
-    }
-    
-    [self.mapView.layer setShadowColor:[UIColor blackColor].CGColor];
-    [self.mapView.layer setShadowOffset:CGSizeMake(0, 1)];
-    [self.mapView.layer setShadowOpacity:1.0];
-    
-    CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
-    
-    [self.mapView setRegion:MKCoordinateRegionMake(schoolLocation, MKCoordinateSpanMake(0.01, 0.01)) animated:YES];
-    MKPointAnnotation *schoolAnnotation = [[MKPointAnnotation alloc] init];
-    [schoolAnnotation setCoordinate:schoolLocation];
-    [schoolAnnotation setTitle:self.school.name];
-    [schoolAnnotation setSubtitle:[NSString stringWithFormat:@"%@, %@ %@", self.school.streetAddress, self.school.stateAbbreviation, self.school.zipcode]];
-
-    [self.mapView addAnnotation:schoolAnnotation];
-    [self.mapView selectAnnotation:schoolAnnotation animated:YES];
-
-    // Create formatter
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
-    [self.applicationFeeLabel setText:[NSString stringWithFormat:@"$%@", [self.school applicationFee]]];
-    [self.tuitionLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school totalPriceOutState]]]];
-    
-    for (UIView *whiteView in self.whiteViews) {
-//        [whiteView.layer setCornerRadius:5.0];
-//        [whiteView.layer setShadowOffset:CGSizeMake(0, 1)];
-//        [whiteView.layer setShadowColor:[UIColor colorWithWhite:0.4 alpha:1.0].CGColor];
-//        [whiteView.layer setShadowOpacity:1.0];
-        
-        CGRect whiteFrame = whiteView.frame;
-        whiteFrame = CGRectInset(whiteFrame, -4.0, -4.0);
-        whiteFrame.size.height += 1.0;
-        
-        
-        [whiteView setFrame:whiteFrame];
-        
-        [whiteView setBackgroundColor:[UIColor whiteColor]];
-        [whiteView setOpaque:YES];
-        
-    }
-
-    for (UIButton *urlButton in self.urlButtons) {
-        [urlButton setContentEdgeInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
-        [urlButton.titleLabel setNumberOfLines:0];
-        [urlButton.titleLabel setTextAlignment:UITextAlignmentCenter];
-        [urlButton setTitleColor:[UIColor colorWithWhite:91.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    }
-    
-    [self.openInMapsButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
-    [self.containerView setContentSize:CGSizeMake(540.0, 1115.0)];
-    
-
-    
 }
+
 
 #pragma mark - Buttons
 
