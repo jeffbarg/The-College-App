@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4AB3830915D1BCFD00F27A70 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AB3830815D1BCFD00F27A70 /* AWSiOSSDK.framework */; };
 		7B0FA10915B6311C005C787B /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7B10147B15B674A500D6A04E /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A215B6247A00947B2E /* grayArrow.png */; };
 		7B10147C15B674A500D6A04E /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A315B6247A00947B2E /* grayArrow@2x.png */; };
@@ -78,7 +79,6 @@
 		7B55D0B215B6247A00947B2E /* whiteArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A815B6247A00947B2E /* whiteArrow.png */; };
 		7B55D0B315B6247A00947B2E /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */; };
 		7B55D0B415B6247A00947B2E /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */; };
-		7B5837BD15B7E7F100AE9837 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B5837BC15B7E7F100AE9837 /* AWSiOSSDK.framework */; };
 		7B62667C15A75DDF00A5879C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667B15A75DDF00A5879C /* UIKit.framework */; };
 		7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667D15A75DDF00A5879C /* Foundation.framework */; };
 		7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B62667F15A75DDF00A5879C /* CoreGraphics.framework */; };
@@ -228,6 +228,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4AB3830815D1BCFD00F27A70 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
 		7B12408815AF10DA006913C3 /* FTWhiteShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTWhiteShadowView.h; sourceTree = "<group>"; };
 		7B12408915AF10DA006913C3 /* FTWhiteShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTWhiteShadowView.m; sourceTree = "<group>"; };
 		7B201CF715ACC68600D78D23 /* The_College_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_College_App.xcdatamodel; sourceTree = "<group>"; };
@@ -282,7 +283,6 @@
 		7B55D0A915B6247A00947B2E /* whiteArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "whiteArrow@2x.png"; sourceTree = "<group>"; };
 		7B55D0AA15B6247A00947B2E /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		7B55D0AB15B6247A00947B2E /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		7B5837BC15B7E7F100AE9837 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
 		7B62667715A75DDF00A5879C /* The College App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The College App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B62667B15A75DDF00A5879C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		7B62667D15A75DDF00A5879C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -477,7 +477,7 @@
 				7B62667E15A75DDF00A5879C /* Foundation.framework in Frameworks */,
 				7B62668015A75DDF00A5879C /* CoreGraphics.framework in Frameworks */,
 				7B62668215A75DDF00A5879C /* CoreData.framework in Frameworks */,
-				7B5837BD15B7E7F100AE9837 /* AWSiOSSDK.framework in Frameworks */,
+				4AB3830915D1BCFD00F27A70 /* AWSiOSSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,7 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				7BB663C115AF39F300428A64 /* iconipad.png */,
-				7B5837BC15B7E7F100AE9837 /* AWSiOSSDK.framework */,
+				4AB3830815D1BCFD00F27A70 /* AWSiOSSDK.framework */,
 				7BB663AC15AF220200428A64 /* CoreLocation.framework */,
 				7B35F90815AE274F00EFFFE8 /* MapKit.framework */,
 				7B6266BB15A75F1500A5879C /* QuartzCore.framework */,
