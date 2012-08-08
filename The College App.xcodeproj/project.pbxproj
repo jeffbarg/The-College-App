@@ -181,6 +181,9 @@
 		7BA40C1D15B9E76B009E524D /* ELTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA40C1C15B9E76B009E524D /* ELTextFieldTableViewCell.m */; };
 		7BA40C2215B9ED88009E524D /* ELTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA40C1C15B9E76B009E524D /* ELTextFieldTableViewCell.m */; };
 		7BB0CAFE15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB0CAFD15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib */; };
+		7BB0CB0115D2C3B00028B732 /* FTInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0CB0015D2C3B00028B732 /* FTInfoScrollView.m */; };
+		7BB0CB0315D2D9FB0028B732 /* flippyactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB0CB0215D2D9FB0028B732 /* flippyactive.png */; };
+		7BB0CB0515D2DA000028B732 /* flippy.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB0CB0415D2DA000028B732 /* flippy.png */; };
 		7BB663AD15AF220200428A64 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BB663AC15AF220200428A64 /* CoreLocation.framework */; };
 		7BB663BE15AF376A00428A64 /* collegedatajuly12.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663BD15AF376A00428A64 /* collegedatajuly12.json */; };
 		7BB663C215AF39F300428A64 /* iconipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663C115AF39F300428A64 /* iconipad.png */; };
@@ -420,6 +423,10 @@
 		7BA40C1B15B9E76B009E524D /* ELTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELTextFieldTableViewCell.h; sourceTree = "<group>"; };
 		7BA40C1C15B9E76B009E524D /* ELTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELTextFieldTableViewCell.m; sourceTree = "<group>"; };
 		7BB0CAFD15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~ipad.xib"; sourceTree = "<group>"; };
+		7BB0CAFF15D2C3B00028B732 /* FTInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTInfoScrollView.h; sourceTree = "<group>"; };
+		7BB0CB0015D2C3B00028B732 /* FTInfoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTInfoScrollView.m; sourceTree = "<group>"; };
+		7BB0CB0215D2D9FB0028B732 /* flippyactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flippyactive.png; sourceTree = "<group>"; };
+		7BB0CB0415D2DA000028B732 /* flippy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flippy.png; sourceTree = "<group>"; };
 		7BB663AC15AF220200428A64 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		7BB663BD15AF376A00428A64 /* collegedatajuly12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedatajuly12.json; sourceTree = "<group>"; };
 		7BB663C115AF39F300428A64 /* iconipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconipad.png; sourceTree = "<group>"; };
@@ -517,6 +524,8 @@
 		7B51E5E415AB2945002F2A2E /* College Search / View */ = {
 			isa = PBXGroup;
 			children = (
+				7BB0CB0415D2DA000028B732 /* flippy.png */,
+				7BB0CB0215D2D9FB0028B732 /* flippyactive.png */,
 				7B35F90415AE0ACB00EFFFE8 /* activetab.png */,
 				7B35F90E15AE277A00EFFFE8 /* notes.png */,
 				7B35F90C15AE276E00EFFFE8 /* photos.png */,
@@ -695,6 +704,8 @@
 				7BB8172B15D083C70062FDD1 /* FTCollegeInfoViewController~iphone.xib */,
 				7B35F8FF15ADEFA400EFFFE8 /* FTRangeIndicator.h */,
 				7B35F90015ADEFA400EFFFE8 /* FTRangeIndicator.m */,
+				7BB0CAFF15D2C3B00028B732 /* FTInfoScrollView.h */,
+				7BB0CB0015D2C3B00028B732 /* FTInfoScrollView.m */,
 				7B12408815AF10DA006913C3 /* FTWhiteShadowView.h */,
 				7B12408915AF10DA006913C3 /* FTWhiteShadowView.m */,
 			);
@@ -1183,6 +1194,8 @@
 				7BCAA3E515D02ACC00F12FC0 /* notesdone.png in Resources */,
 				7BB8172C15D083C70062FDD1 /* FTCollegeInfoViewController~iphone.xib in Resources */,
 				7BB0CAFE15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib in Resources */,
+				7BB0CB0315D2D9FB0028B732 /* flippyactive.png in Resources */,
+				7BB0CB0515D2DA000028B732 /* flippy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1293,6 +1306,7 @@
 				7BFE3F6015C848A400FE7FE2 /* CampusPhoto.m in Sources */,
 				7BFE3F6315C84B7900FE7FE2 /* PhotoData.m in Sources */,
 				7BB8173015D2A4A30062FDD1 /* FTCampusImageViewController.m in Sources */,
+				7BB0CB0115D2C3B00028B732 /* FTInfoScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

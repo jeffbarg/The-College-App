@@ -353,16 +353,16 @@
     UINavigationController *infoNavController = [[UINavigationController alloc] initWithRootViewController:infoViewController];
     [infoNavController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
 
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"modaltab.png"]];
-    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"activetab.png"]];
-
-    [tabBarController setViewControllers:[NSArray arrayWithObjects:infoNavController, nil]];
-    [tabBarController setSelectedViewController:infoNavController];
+//    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+//    [tabBarController.tabBar setBackgroundImage:[UIImage imageNamed:@"modaltab.png"]];
+//    [tabBarController.tabBar setSelectionIndicatorImage:[UIImage imageNamed:@"activetab.png"]];
+//
+//    [tabBarController setViewControllers:[NSArray arrayWithObjects:infoNavController, nil]];
+//    [tabBarController setSelectedViewController:infoNavController];
     
-    [tabBarController setModalPresentationStyle:UIModalPresentationFullScreen];
+    [infoNavController setModalPresentationStyle:UIModalPresentationFullScreen];
     
-    [self presentModalViewController:tabBarController animated:YES];
+    [self presentModalViewController:infoNavController animated:YES];
     NSLog(@"%@", [school name]);
 
 }

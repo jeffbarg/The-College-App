@@ -14,9 +14,13 @@
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-#define X_MARGIN 22
+#define X_MARGIN 27
 
-@interface FTCollegeInfoViewController ()
+#define SCROLLVIEW_THRESHOLD 135.0
+
+#define roundViewColor [UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000]
+
+@interface FTCollegeInfoViewController () <UIScrollViewDelegate>
 
 @property(strong) IBOutletCollection(UIView) NSArray *whiteViews;
 @property(strong) IBOutletCollection(UIButton) NSArray *urlButtons;
@@ -36,9 +40,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *tuitionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 
+@property (nonatomic, strong) UIButton *showMapButton;
+
 @end
 
 @implementation FTCollegeInfoViewController
+
 @synthesize whiteViews = _whiteViews;
 @synthesize urlButtons = _urlButtons;
 @synthesize standardizedTestingContainerView = _standardizedTestingContainerView;
@@ -57,6 +64,8 @@
 @synthesize school = _school;
 @synthesize managedObjectContext = _managedObjectContext;
 
+@synthesize showMapButton = _showMapButton;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -74,10 +83,7 @@
 
 	// Do any additional setup after loading the view.
     
-    CGRect contentRect = self.view.frame;
-    self.view.frame = self.view.bounds;
-    ((UIScrollView *) self.view).contentSize = contentRect.size;
-    
+
     self.view.backgroundColor = kViewBackgroundColor;
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton:)];
@@ -97,9 +103,30 @@
     UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
     self.tabBarItem = tabBarItem;
     
-    //[self setupWhiteViews];
+    
+
+    _containerView.contentInset = UIEdgeInsetsMake(260.0, 0.0, 0.0, 0.0);
+    [self.view addSubview:_containerView];
+
+    CGRect contentRect = _containerView.bounds;
+    _containerView.frame = self.view.bounds;
+    _containerView.contentSize = contentRect.size;
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentRect.size.width, contentRect.size.height*2)];
+    [_containerView.layer setShadowOpacity:0.75];
+    [_containerView.layer setShadowColor:[UIColor blackColor].CGColor];
+    [_containerView.layer setShadowRadius:20.0];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, contentRect.size.width, 40.0)];
+    [_containerView.layer setShadowPath:bezierPath.CGPath];
+    
+    [bgView setBackgroundColor:kViewBackgroundColor];
+    [bgView setClipsToBounds:YES];
+    [_containerView insertSubview:bgView atIndex:0];
+    [_containerView setDelegate:self];
+    
+    [self setupWhiteViews];
     [self setupStandardizedTesting];
-    //[self setupMap];
+    [self setupMap];
+    
     
     // Create formatter
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
@@ -119,12 +146,16 @@
     }
     
     [self.openInMapsButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
-    [self.containerView setContentSize:CGSizeMake(540.0, 1115.0)];
     
 
     
 }
 
+- (void) viewWillLayoutSubviews {
+    [self viewWillLayoutSubviews];
+    
+    
+}
 #pragma mark - Setup Functions
 
 - (void) setupWhiteViews {
@@ -137,7 +168,7 @@
         
         [whiteView setFrame:whiteFrame];
         
-        [whiteView setBackgroundColor:[UIColor whiteColor]];
+        [whiteView setBackgroundColor:roundViewColor];
         [whiteView setOpaque:YES];
         
     }
@@ -156,7 +187,7 @@
     
     CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
     
-    [self.mapView setRegion:MKCoordinateRegionMake(schoolLocation, MKCoordinateSpanMake(0.01, 0.01)) animated:YES];
+    [self.mapView setRegion:MKCoordinateRegionMake(schoolLocation, MKCoordinateSpanMake(0.04, 0.04)) animated:YES];
     MKPointAnnotation *schoolAnnotation = [[MKPointAnnotation alloc] init];
     [schoolAnnotation setCoordinate:schoolLocation];
     [schoolAnnotation setTitle:self.school.name];
@@ -164,15 +195,26 @@
     
     [self.mapView addAnnotation:schoolAnnotation];
     [self.mapView selectAnnotation:schoolAnnotation animated:YES];
+    
+    _showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66.0, 66.0)];
+    [_showMapButton setBackgroundImage:[UIImage imageNamed:@"flippy.png"] forState:UIControlStateNormal];
+    [_showMapButton setBackgroundImage:[UIImage imageNamed:@"flippyactive.png"] forState:UIControlStateHighlighted];
+    CGAffineTransform flip = CGAffineTransformMakeRotation(degreesToRadians(180));
+    [_showMapButton setTransform:flip];
+    [_containerView addSubview:_showMapButton];
+    [_showMapButton setCenter:CGPointMake(self.containerView.frame.size.width / 2.0, - 40.0)];
+    [_showMapButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
+    
+    [_showMapButton addTarget:self action:@selector(displayMap:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void) setupStandardizedTesting {
     UIColor *textColor = [UIColor colorWithWhite:84.0/255.0 alpha:1.000];
     
-    UILabel *mathLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 20.0, 460.0, 20.0)];
+    UILabel *mathLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 20.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
     [mathLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
-    [mathLabel setBackgroundColor:[UIColor whiteColor]];
+    [mathLabel setBackgroundColor:roundViewColor];
     [mathLabel setOpaque:YES];
     [mathLabel setText:@"SAT Mathematics Middle 50%"];
     [mathLabel setTextAlignment:UITextAlignmentLeft];
@@ -180,7 +222,7 @@
     [mathLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
     
     
-    FTRangeIndicator *mathIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 40.0, 460.0, 60.0)];
+    FTRangeIndicator *mathIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 40.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
     [mathIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     [mathIndicator setMaxValue:[[self.school mathSAT75] floatValue]];
     [mathIndicator setMinValue:[[self.school mathSAT25] floatValue]];
@@ -189,10 +231,10 @@
     
     [mathIndicator setValue: 800.0];
     
-    UILabel *readingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 100.0, 460.0, 20.0)];
+    UILabel *readingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 100.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
     [readingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
-    [readingLabel setBackgroundColor:[UIColor whiteColor]];
+    [readingLabel setBackgroundColor:roundViewColor];
     [readingLabel setOpaque:YES];
     [readingLabel setText:@"SAT Reading Middle 50%"];
     [readingLabel setTextAlignment:UITextAlignmentLeft];
@@ -200,7 +242,7 @@
     [readingLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
     
     
-    FTRangeIndicator *readingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 120.0, 460.0, 60.0)];
+    FTRangeIndicator *readingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 120.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
     [readingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
     [readingIndicator setMaxValue:[[self.school readingSAT75] floatValue]];
@@ -211,17 +253,17 @@
     [readingIndicator setValue: 760.0];
     
     
-    UILabel *writingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 180.0, 460.0, 20.0)];
+    UILabel *writingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 180.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
     [writingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
-    [writingLabel setBackgroundColor:[UIColor whiteColor]];
+    [writingLabel setBackgroundColor:roundViewColor];
     [writingLabel setOpaque:YES];
     [writingLabel setText:@"SAT Writing Middle 50%"];
     [writingLabel setTextAlignment:UITextAlignmentLeft];
     [writingLabel setTextColor:textColor];
     [writingLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
     
-    FTRangeIndicator *writingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 200.0, 460.0, 60.0)];
+    FTRangeIndicator *writingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 200.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
     [writingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
     [writingIndicator setMaxValue:[[self.school writingSAT75] floatValue]];
@@ -231,17 +273,17 @@
     
     [writingIndicator setValue: 760.0];
     
-    UILabel *actLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 260.0, 460.0, 20.0)];
+    UILabel *actLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 260.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
     [actLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
-    [actLabel setBackgroundColor:[UIColor whiteColor]];
+    [actLabel setBackgroundColor:roundViewColor];
     [actLabel setOpaque:YES];
     [actLabel setText:@"ACT Composite Middle 50%"];
     [actLabel setTextAlignment:UITextAlignmentLeft];
     [actLabel setTextColor:textColor];
     [actLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
     
-    FTRangeIndicator *actIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 280.0, 460.0, 60.0)];
+    FTRangeIndicator *actIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 280.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
     [actIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
     
     [actIndicator setMaxValue:[[self.school compositeACT75] floatValue]];
@@ -261,9 +303,78 @@
     [self.standardizedTestingContainerView addSubview:actLabel];
     
     [self.standardizedTestingContainerView setNeedsDisplay];
-    [self.standardizedTestingContainerView setBackgroundColor:[UIColor whiteColor]];
+    [self.standardizedTestingContainerView setBackgroundColor:roundViewColor];
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGAffineTransform flip = CGAffineTransformMakeRotation(degreesToRadians(180));
+    CGFloat offset = scrollView.contentOffset.y;
+    
+    if (scrollView.frame.origin.y != 0) return;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        if (offset < -260.0 - SCROLLVIEW_THRESHOLD) {
+            self.showMapButton.transform = CGAffineTransformIdentity;
+        } else {
+            self.showMapButton.transform = flip;
+        }
+    }];
+}   
+
+- (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    CGFloat offset = scrollView.contentOffset.y;
+    if (offset < -260.0 - SCROLLVIEW_THRESHOLD) {
+        
+
+        
+        [UIView animateWithDuration:0.5  animations:^{
+            [self displayMap:self.showMapButton];
+        }];
+    }
+}
+
+- (void) displayMap:(UIButton *) button {
+    if (self.containerView.frame.origin.y != 0) {
+        
+        CGRect buttonRect = self.showMapButton.frame;
+        [self.showMapButton removeFromSuperview];
+        [self.containerView addSubview:self.showMapButton];
+        [self.showMapButton setFrame:[self.containerView convertRect:buttonRect fromView:self.view]];
+        
+        [UIView animateWithDuration:0.5  animations:^{
+
+            self.containerView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+            
+            [self.showMapButton setCenter:CGPointMake(self.view.frame.size.width / 2.0, -40.0)];
+
+        }];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.showMapButton.transform = CGAffineTransformMakeRotation(degreesToRadians(180));
+        }];
+        
+    } else {
+        
+        CGRect buttonRect = self.showMapButton.frame;
+        [self.showMapButton removeFromSuperview];
+        [self.view addSubview:self.showMapButton];
+        [self.showMapButton setFrame:[self.containerView convertRect:buttonRect toView:self.view]];
+        
+        [UIView animateWithDuration:0.5  animations:^{
+        
+            self.containerView.frame = CGRectMake(0, self.view.frame.size.height, self.containerView.frame.size.width, self.containerView.frame.size.height);
+
+            
+            [self.showMapButton setCenter:CGPointMake(self.view.frame.size.width / 2.0, self.view.frame.size.height - 40.0)];
+        }];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.showMapButton.transform = CGAffineTransformIdentity;
+        }];
+    }
+}
 
 #pragma mark - Buttons
 
