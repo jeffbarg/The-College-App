@@ -371,10 +371,14 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
     [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
     
-    self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
-    [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
-    [self.masterPopoverController setPopoverContentSize:CGSizeMake(320.0, 349.0)];
-    [self.masterPopoverController presentPopoverFromRect:cell.frame inView:cell.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    if (INTERFACE_IS_PAD) {
+        self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
+        [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+        [self.masterPopoverController setPopoverContentSize:CGSizeMake(320.0, 349.0)];
+        [self.masterPopoverController presentPopoverFromRect:cell.frame inView:cell.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self presentViewController:navController animated:YES completion:^{}];
+    }
 }
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView

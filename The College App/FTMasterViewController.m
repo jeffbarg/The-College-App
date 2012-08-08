@@ -278,9 +278,9 @@
         newViewController.navigationItem.leftBarButtonItem = self.backItem;
         
         newViewController.view.backgroundColor = kViewBackgroundColor;
-        viewNavigationController.view.layer.shadowOpacity = 0.75f;
-        viewNavigationController.view.layer.shadowRadius = 10.0f;
-        viewNavigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
+//        viewNavigationController.view.layer.shadowOpacity = 0.75f;
+//        viewNavigationController.view.layer.shadowRadius = 10.0f;
+//        viewNavigationController.view.layer.shadowColor = [UIColor blackColor].CGColor;
         [viewNavigationController.view addGestureRecognizer:self.slidingViewController.panGesture];   
     }];
     

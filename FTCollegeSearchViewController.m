@@ -360,7 +360,7 @@
     [tabBarController setViewControllers:[NSArray arrayWithObjects:infoNavController, nil]];
     [tabBarController setSelectedViewController:infoNavController];
     
-    [tabBarController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [tabBarController setModalPresentationStyle:UIModalPresentationFullScreen];
     
     [self presentModalViewController:tabBarController animated:YES];
     NSLog(@"%@", [school name]);

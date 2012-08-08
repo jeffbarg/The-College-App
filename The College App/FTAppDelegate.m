@@ -59,7 +59,6 @@
 
     masterViewController.managedObjectContext = self.managedObjectContext;
     
-    
 
     
     [self.window makeKeyAndVisible];
@@ -76,6 +75,8 @@
      
     detailViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:masterViewController action:@selector(slideLeft)];
     
+    [detailNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
+
     detailNavigationController.view.backgroundColor = kViewBackgroundColor;
     detailNavigationController.view.layer.shadowOpacity = 0.75f;
     detailNavigationController.view.layer.shadowRadius = 10.0f;
