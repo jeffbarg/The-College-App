@@ -162,20 +162,9 @@
 
 - (void) viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    
-    if (_containerView.frame.origin.y == 0) {
-//        [self.containerView setFrame:CGRectMake(0,0,self.view.frame.size.width, SCROLLVIEW_HEIGHT)];
-        [self.containerView setContentSize:CGSizeMake(self.view.frame.size.width, SCROLLVIEW_HEIGHT)];
-        
 
-    } else {
-   
-    }
+    [self.containerView setContentSize:CGSizeMake(self.view.frame.size.width, SCROLLVIEW_HEIGHT)];
     
-    NSLog(@"%@", NSStringFromCGRect(self.mapView.frame));
-    
-    CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
-    [self.mapView setCenterCoordinate:schoolLocation];
 }
 
 #pragma mark - Setup Functions
