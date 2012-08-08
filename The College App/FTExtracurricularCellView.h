@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class Extracurricular;
+@class FTExtracurricularsViewController;
 
 @interface FTExtracurricularCellView : UIView
 
@@ -16,6 +17,8 @@
 @property (nonatomic, strong) Extracurricular *activity;
 
 @property (nonatomic, weak) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic, weak) FTExtracurricularsViewController *viewController;
 
 - (void) updateCellIndex:(NSInteger) index animated:(BOOL) animated;
 - (void) redisplayInformation;

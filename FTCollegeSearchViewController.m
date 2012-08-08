@@ -88,13 +88,21 @@
     searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 265.0, 44.0)];
     searchBar.delegate = self;
     
-    
     [searchBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"]];
     
 
     UIBarButtonItem *searchItem = [[UIBarButtonItem alloc] initWithCustomView:searchBar];
 
     [self.navigationItem setRightBarButtonItem:searchItem];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidUnload
@@ -436,5 +444,40 @@
 
     
 }
+
+#pragma mark -
+#pragma mark Keyboard Notifications
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    
+    CGFloat height = INTERFACE_IS_PORTRAIT? kbSize.height : kbSize.width;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, height, 0.0);
+    
+    _gmGridView.contentInset = contentInsets;
+    _gmGridView.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    //    CGRect aRect = self.view.frame;
+    //    aRect.size.height -= kbSize.height;
+    //    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+    //        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height);
+    //        [scrollView setContentOffset:scrollPoint animated:YES];
+    //    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _gmGridView.contentInset = contentInsets;
+    _gmGridView.scrollIndicatorInsets = contentInsets;
+}
+
 
 @end

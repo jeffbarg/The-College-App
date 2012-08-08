@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
+#import "FTExtracurriclarsViewController.h"
 #import "FTExtracurricularCellView.h"
+
 #import "Extracurricular.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -44,6 +46,8 @@
 @synthesize managedObjectContext;
 
 @synthesize activity = _activity;
+
+@synthesize viewController;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -123,17 +127,17 @@
 
         [self.containerView addSubview:self.cellIndexView];
         
-        NSMutableArray *mButtonArray = [[NSMutableArray alloc] initWithCapacity:4];
-        
-        for (int i = 0; i < 4; i ++) {
-            UIButton *gradeIndicatorButton = [[UIButton alloc] initWithFrame:CGRectZero];
-            [gradeIndicatorButton setShowsTouchWhenHighlighted:YES];
-            [gradeIndicatorButton addTarget:self action:@selector(pressGradeIndicator:) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:gradeIndicatorButton];
-            [mButtonArray addObject:gradeIndicatorButton];
-        }
-        
-        self.gradeIndicatorButtons = [[NSArray alloc] initWithArray:mButtonArray];
+//        NSMutableArray *mButtonArray = [[NSMutableArray alloc] initWithCapacity:4];
+//        
+//        for (int i = 0; i < 4; i ++) {
+//            UIButton *gradeIndicatorButton = [[UIButton alloc] initWithFrame:CGRectZero];
+//            [gradeIndicatorButton setShowsTouchWhenHighlighted:YES];
+//            [gradeIndicatorButton addTarget:self action:@selector(pressGradeIndicator:) forControlEvents:UIControlEventTouchUpInside];
+//            [self addSubview:gradeIndicatorButton];
+//            [mButtonArray addObject:gradeIndicatorButton];
+//        }
+//        
+//        self.gradeIndicatorButtons = [[NSArray alloc] initWithArray:mButtonArray];
     
     }
     
@@ -141,6 +145,8 @@
 }
 
 - (void) pressGradeIndicator:(UIButton *)gradeIndicatorButton {
+    [self.viewController setDidPressCellButton:YES];
+    
     int index = [self.gradeIndicatorButtons indexOfObject:gradeIndicatorButton];
     
     NSInteger gradeToChange = 1<<index;

@@ -36,9 +36,6 @@
 @property (nonatomic, strong) UITextField *hoursPerWeekTextField;
 @property (nonatomic, strong) UITextField *weeksPerYearTextField;
 
-@property (nonatomic, strong) Extracurricular * activity;
-
-
 @end
 
 @implementation FTAddExtracurricularViewController
@@ -66,6 +63,8 @@
 @synthesize managedObjectContext = _managedObjectContext;
 
 @synthesize activity = _activity;
+
+@synthesize isEditController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -109,6 +108,12 @@
         self.navigationItem.leftBarButtonItem = cancelBarButtonItem;
         [cancelBarButtonItem setBackgroundImage:[[UIImage imageNamed:@"cancel.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
         [cancelBarButtonItem setBackgroundImage:[[UIImage imageNamed:@"cancelactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    } else if (self.isEditController) {
+        UIBarButtonItem *cancelBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStyleDone target:self action:@selector(deleteEntry:)];
+        
+        self.navigationItem.leftBarButtonItem = cancelBarButtonItem;
+        [cancelBarButtonItem setBackgroundImage:[[UIImage imageNamed:@"delete.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+        [cancelBarButtonItem setBackgroundImage:[[UIImage imageNamed:@"deleteactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     }
     
     UIBarButtonItem *saveBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveEntry:)];
@@ -117,7 +122,7 @@
     [saveBarButtonItem setBackgroundImage:[[UIImage imageNamed:@"saveactive.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     
     
-    self.navigationItem.title = @"New Entry";
+    self.navigationItem.title = self.isEditController? @"Edit Entry" : @"New Entry";
     
     //VIEW CONTENT
     
@@ -196,11 +201,18 @@
     [_hoursPerWeekLabel setBackgroundColor:[UIColor clearColor]];
     [_hoursPerWeekLabel setText:@"Hours Per Week"];
     
+    _hoursPerWeekTextField = [[UITextField alloc] initWithFrame:CGRectZero];
+    [_hoursPerWeekTextField setPlaceholder:@"Hours"];
+    [_hoursPerWeekTextField setKeyboardType:UIKeyboardTypePhonePad];
+    [_hoursPerWeekTextField setContentVerticalAlignment:UIControlContentVerticalAlignmentCenter];
+    [_hoursPerWeekTextField setTextAlignment:UITextAlignmentRight];
+    
     _hoursPerWeekContainer = [[UIView alloc] initWithFrame:CGRectZero];
     [_hoursPerWeekContainer.layer setBorderColor:borderColor.CGColor];
     [_hoursPerWeekContainer.layer setBorderWidth:1.0];
     
     [_hoursPerWeekContainer addSubview:_hoursPerWeekLabel];
+    [_hoursPerWeekContainer addSubview:_hoursPerWeekTextField];
     [_containerView addSubview:_hoursPerWeekContainer];
     
     
@@ -240,6 +252,7 @@
 
     [_hoursPerWeekContainer setFrame:CGRectMake(-1.0, 194.0 - 1.0, self.view.frame.size.width + 2.0, 60.0)];
     [_hoursPerWeekLabel setFrame:CGRectMake(10.0, 0.0, 150.0, 60.0)];
+    [_hoursPerWeekTextField setFrame:CGRectMake(self.view.frame.size.width - 10.0 - 150.0, 0.0, 150, 60.0)];
 
     [_weeksPerYearContainer setFrame:CGRectMake(-1.0, CGRectGetMaxY(_hoursPerWeekContainer.frame) - 1.0, self.view.frame.size.width + 2.0, 60.0)];
     [_weeksPerYearLabel setFrame:CGRectMake(10.0, 0.0, 150.0, 60.0)];
@@ -280,9 +293,14 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void) deleteEntry:(UIBarButtonItem *) barButtonItem {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void) saveEntry:(UIBarButtonItem *) barButtonItem { 
     
-    self.activity = [NSEntityDescription insertNewObjectForEntityForName:@"Extracurricular" inManagedObjectContext:self.managedObjectContext];
+    if (!self.activity)
+        self.activity = [NSEntityDescription insertNewObjectForEntityForName:@"Extracurricular" inManagedObjectContext:self.managedObjectContext];
     
     
     [self.activity setGradesInvolved:_gradesInvolved];

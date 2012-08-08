@@ -36,6 +36,8 @@
 
 @synthesize fetchedResultsController = _fetchedResultsController;
 
+@synthesize didPressCellButton;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -215,6 +217,9 @@
         case NSFetchedResultsChangeInsert:
 //            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             [_gmGridView insertObjectAtIndex:newIndexPath.row animated:YES];
+            if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible])
+                [self.masterPopoverController dismissPopoverAnimated:YES];
+            
             break;
             
         case NSFetchedResultsChangeDelete:
@@ -325,6 +330,7 @@
     Extracurricular *object = (Extracurricular *)[self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
     
     FTExtracurricularCellView *view = (FTExtracurricularCellView *) cell.contentView;
+    [view setViewController:self];
     [view updateCellIndex:index animated:NO];
     [view setActivity:object];
     [view setNeedsDisplay];
@@ -345,6 +351,30 @@
 
 - (void)GMGridView:(GMGridView *)gridView didTapOnItemAtIndex:(NSInteger)index {
     NSLog(@"Did tap at index %d", index);
+    
+    if (self.didPressCellButton) {
+        self.didPressCellButton = FALSE;
+        return;
+    }
+    
+    GMGridViewCell *cell = [gridView cellForItemAtIndex:index];
+    if (self.masterPopoverController && [self.masterPopoverController isPopoverVisible])
+        [self.masterPopoverController dismissPopoverAnimated:NO];
+    
+    Extracurricular *object = (Extracurricular *)[self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    
+    FTAddExtracurricularViewController *editController = [[FTAddExtracurricularViewController alloc] init];
+    [editController setIsEditController:YES];
+    [editController setManagedObjectContext:self.managedObjectContext];
+    [editController setActivity:object];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:editController];
+    [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    
+    self.masterPopoverController = [[UIPopoverController alloc] initWithContentViewController:navController];
+    [self.masterPopoverController setPopoverBackgroundViewClass:[KSCustomPopoverBackgroundView class]];
+    [self.masterPopoverController setPopoverContentSize:CGSizeMake(320.0, 349.0)];
+    [self.masterPopoverController presentPopoverFromRect:cell.frame inView:cell.superview permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)GMGridViewDidTapOnEmptySpace:(GMGridView *)gridView

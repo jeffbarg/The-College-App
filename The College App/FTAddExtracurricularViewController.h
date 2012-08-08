@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class Extracurricular;
+
 @interface FTAddExtracurricularViewController : UIViewController
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
+@property (nonatomic) BOOL isEditController;
+
+@property (nonatomic, strong) Extracurricular * activity;
 
 @end
