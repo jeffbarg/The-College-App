@@ -27,7 +27,7 @@
     // Drawing code
     
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    [[UIColor colorWithRed:0.824 green:0.847 blue:0.859 alpha:1.000] setFill];
+    [kViewBackgroundColor setFill];
     CGContextFillRect(ctx, self.bounds);
     
     CGRect pathRect = self.bounds;
@@ -40,16 +40,21 @@
     UIColor* shadow = [[UIColor blackColor] colorWithAlphaComponent:0.5];
     CGSize shadowOffset = CGSizeMake(0, 1);
     CGFloat shadowBlurRadius = 4;
-    
-    
+
     
     CGContextSaveGState(ctx);
     CGContextSetShadowWithColor(ctx, shadowOffset, shadowBlurRadius, shadow.CGColor);
-    [[UIColor whiteColor] setFill];
+    [[UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000] setFill];
     [roundedRectanglePath fill];
     CGContextRestoreGState(ctx);
     
-
+    for (int i = 1; i < (self.tag % 10); i ++) {
+        [[UIColor colorWithRed:0.863 green:0.871 blue:0.875 alpha:1.000] setFill];
+        CGContextFillRect(ctx, CGRectMake(5.0, 4.0 + 64 * i, self.frame.size.width - 10.0, 1));
+        
+        [[UIColor colorWithWhite:1.000 alpha:1.000] setFill];
+        CGContextFillRect(ctx, CGRectMake(5.0, 5.0 + 64 * i, self.frame.size.width - 10.0, 1));
+    }
 }
 
 
