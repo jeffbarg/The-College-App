@@ -24,6 +24,7 @@
     if (self) {
         // Initialization code
         self.opaque = NO;
+        self.contentMode = UIViewContentModeRedraw;
     }
     return self;
 }

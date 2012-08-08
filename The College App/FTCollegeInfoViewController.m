@@ -18,6 +18,8 @@
 
 #define SCROLLVIEW_THRESHOLD 135.0
 
+#define SCROLLVIEW_HEIGHT 1166.0
+
 #define roundViewColor [UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000]
 
 @interface FTCollegeInfoViewController () <UIScrollViewDelegate>
@@ -37,8 +39,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *regularDeadlineLabel;
 @property (weak, nonatomic) IBOutlet UIButton *applicationWebsiteLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *tuitionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *numberOfStudentsLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *acceptanceRateContainerView;
+@property (weak, nonatomic) IBOutlet UIView *maleFemalRateContainerView;
+
 
 @property (nonatomic, strong) UIButton *showMapButton;
 
@@ -58,8 +65,10 @@
 @synthesize earlyDeadlineLabel = _earlyDeadlineLabel;
 @synthesize regularDeadlineLabel = _regularDeadlineLabel;
 @synthesize applicationWebsiteLabel = _applicationWebsiteLabel;
-@synthesize tuitionLabel = _tuitionLabel;
 @synthesize totalPriceLabel = _totalPriceLabel;
+@synthesize numberOfStudentsLabel = _numberOfStudentsLabel;
+@synthesize maleFemalRateContainerView = _maleFemalRateContainerView;
+@synthesize acceptanceRateContainerView = _acceptanceRateContainerView;
 
 @synthesize school = _school;
 @synthesize managedObjectContext = _managedObjectContext;
@@ -78,7 +87,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"%@", self.school);
     self.title = [self.school name];
 
 	// Do any additional setup after loading the view.
@@ -104,6 +112,7 @@
     self.tabBarItem = tabBarItem;
     
     
+
 
     _containerView.contentInset = UIEdgeInsetsMake(260.0, 0.0, 0.0, 0.0);
     [self.view addSubview:_containerView];
@@ -133,7 +142,7 @@
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     
     [self.applicationFeeLabel setText:[NSString stringWithFormat:@"$%@", [self.school applicationFee]]];
-    [self.tuitionLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school totalPriceOutState]]]];
     
 
@@ -152,10 +161,23 @@
 }
 
 - (void) viewWillLayoutSubviews {
-    [self viewWillLayoutSubviews];
+    [super viewWillLayoutSubviews];
     
+    if (_containerView.frame.origin.y == 0) {
+//        [self.containerView setFrame:CGRectMake(0,0,self.view.frame.size.width, SCROLLVIEW_HEIGHT)];
+        [self.containerView setContentSize:CGSizeMake(self.view.frame.size.width, SCROLLVIEW_HEIGHT)];
+        
+
+    } else {
+   
+    }
     
+    NSLog(@"%@", NSStringFromCGRect(self.mapView.frame));
+    
+    CLLocationCoordinate2D schoolLocation = CLLocationCoordinate2DMake([[self.school lat] doubleValue], [[self.school lon] doubleValue]);
+    [self.mapView setCenterCoordinate:schoolLocation];
 }
+
 #pragma mark - Setup Functions
 
 - (void) setupWhiteViews {
@@ -212,7 +234,7 @@
     UIColor *textColor = [UIColor colorWithWhite:84.0/255.0 alpha:1.000];
     
     UILabel *mathLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 20.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
-    [mathLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [mathLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     
     [mathLabel setBackgroundColor:roundViewColor];
     [mathLabel setOpaque:YES];
@@ -223,7 +245,7 @@
     
     
     FTRangeIndicator *mathIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 40.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
-    [mathIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [mathIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     [mathIndicator setMaxValue:[[self.school mathSAT75] floatValue]];
     [mathIndicator setMinValue:[[self.school mathSAT25] floatValue]];
     [mathIndicator setLowerBound:200.0];
@@ -232,7 +254,7 @@
     [mathIndicator setValue: 800.0];
     
     UILabel *readingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 100.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
-    [readingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [readingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     
     [readingLabel setBackgroundColor:roundViewColor];
     [readingLabel setOpaque:YES];
@@ -243,7 +265,7 @@
     
     
     FTRangeIndicator *readingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 120.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
-    [readingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [readingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     
     [readingIndicator setMaxValue:[[self.school readingSAT75] floatValue]];
     [readingIndicator setMinValue:[[self.school readingSAT25] floatValue]];
@@ -254,7 +276,7 @@
     
     
     UILabel *writingLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 180.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
-    [writingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [writingLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     
     [writingLabel setBackgroundColor:roundViewColor];
     [writingLabel setOpaque:YES];
@@ -264,7 +286,8 @@
     [writingLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
     
     FTRangeIndicator *writingIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 200.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
-    [writingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [writingIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
+
     
     [writingIndicator setMaxValue:[[self.school writingSAT75] floatValue]];
     [writingIndicator setMinValue:[[self.school writingSAT25] floatValue]];
@@ -274,7 +297,7 @@
     [writingIndicator setValue: 760.0];
     
     UILabel *actLabel = [[UILabel alloc] initWithFrame:CGRectMake(X_MARGIN, 260.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 20.0)];
-    [actLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [actLabel setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     
     [actLabel setBackgroundColor:roundViewColor];
     [actLabel setOpaque:YES];
@@ -284,7 +307,7 @@
     [actLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
     
     FTRangeIndicator *actIndicator = [[FTRangeIndicator alloc] initWithFrame:CGRectMake(X_MARGIN, 280.0, self.standardizedTestingContainerView.frame.size.width - 2 * X_MARGIN, 60.0)];
-    [actIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin];
+    [actIndicator setAutoresizingMask:UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth];
     
     [actIndicator setMaxValue:[[self.school compositeACT75] floatValue]];
     [actIndicator setMinValue:[[self.school compositeACT25] floatValue]];
@@ -338,6 +361,8 @@
 - (void) displayMap:(UIButton *) button {
     if (self.containerView.frame.origin.y != 0) {
         
+        [_showMapButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin];
+
         CGRect buttonRect = self.showMapButton.frame;
         [self.showMapButton removeFromSuperview];
         [self.containerView addSubview:self.showMapButton];
@@ -345,11 +370,15 @@
         
         [UIView animateWithDuration:0.5  animations:^{
 
+            [self.mapView setFrame:CGRectMake(0, -450.0, self.mapView.frame.size.width, self.mapView.frame.size.height)];
+                                              
             self.containerView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
             
             [self.showMapButton setCenter:CGPointMake(self.view.frame.size.width / 2.0, -40.0)];
+            
 
         }];
+        
         
         [UIView animateWithDuration:0.2 animations:^{
             self.showMapButton.transform = CGAffineTransformMakeRotation(degreesToRadians(180));
@@ -357,13 +386,17 @@
         
     } else {
         
+        [_showMapButton setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin];
+
         CGRect buttonRect = self.showMapButton.frame;
         [self.showMapButton removeFromSuperview];
         [self.view addSubview:self.showMapButton];
         [self.showMapButton setFrame:[self.containerView convertRect:buttonRect toView:self.view]];
         
         [UIView animateWithDuration:0.5  animations:^{
-        
+                        
+            [self.mapView setCenter:self.view.center];
+
             self.containerView.frame = CGRectMake(0, self.view.frame.size.height, self.containerView.frame.size.width, self.containerView.frame.size.height);
 
             
@@ -429,20 +462,6 @@
 
 - (void)viewDidUnload
 {
-    [self setTuitionLabel:nil];
-    [self setTotalPriceLabel:nil];
-
-    [self setOpenInMapsButton:nil];
-    [self setMapView:nil];
-    [self setLocationLabel:nil];
-    [self setWhiteViews:nil];
-    [self setUrlButtons:nil];
-    [self setApplicationFeeLabel:nil];
-    [self setEarlyDeadlineLabel:nil];
-    [self setRegularDeadlineLabel:nil];
-    [self setApplicationWebsiteLabel:nil];
-    [self setContainerView:nil];
-    [self setStandardizedTestingContainerView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
