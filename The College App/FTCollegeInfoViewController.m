@@ -184,7 +184,7 @@
 
 - (void) setupWikiArticle {
  	// Do any additional setup after loading the view.
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Harvard"] cachePolicy:NSURLCacheStorageAllowedInMemoryOnly timeoutInterval:10.0];
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Harvard"] cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30.0];
     
     [self.wikipediaEntryView loadRequest:req];
     [self.wikipediaEntryView setDelegate:self];
@@ -224,7 +224,7 @@
     }
     
     
-    FTPercentageMarker *acceptancePercentView = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 17.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
+    FTPercentageMarker *acceptancePercentView = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 7.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
 //    [acceptancePercentView setPercent:[[self.school admissionsTotal] doubleValue] / [[self.school applicantsTotal] doubleValue];
 
     [acceptancePercentView setPercent:0.09];

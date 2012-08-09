@@ -120,9 +120,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    if (section == 0) return 5;
-    else if (section == 1) return 2;
-    else return 1;
+    if (section == 0) return 2;
+    else if (section == 1) return 1;
+    else return 3;
     
 }
 
@@ -136,31 +136,23 @@
     }
     
     //Configure Cell
-    if (indexPath.section == 0) {
+    if (indexPath.section == 2) {
         
         if (indexPath.row == 0) {
-            [cell.textLabel setText:@"Awards and Accomplishments"];
-            [cell.imageView setImage:[UIImage imageNamed:@"achievements.png"]];
-        }
-        if (indexPath.row == 1) {
             [cell.textLabel setText:@"Standardized Testing"];
             [cell.imageView setImage:[UIImage imageNamed:@"standardized.png"]];
         }
-        if (indexPath.row == 2) {
+        if (indexPath.row == 1) {
             [cell.textLabel setText:@"Extracurriculars"];
             [cell.imageView setImage:[UIImage imageNamed:@"extracurriculars.png"]];
         }
-        if (indexPath.row == 3) {
+        if (indexPath.row == 2) {
             [cell.textLabel setText:@"Grades"];
             [cell.imageView setImage:[UIImage imageNamed:@"grades.png"]];
         }
-        if (indexPath.row == 4) {
-            [cell.textLabel setText:@"Essay"];
-            [cell.imageView setImage:[UIImage imageNamed:@"essays.png"]];
-        }
         
     }
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         
         if (indexPath.row == 0) {
             [cell.textLabel setText:@"College Search"];
@@ -173,7 +165,7 @@
         
     }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             [cell.textLabel setText:@"Colleges Near Me"];
             [cell.imageView setImage:[UIImage imageNamed:@"nearme.png"]];
@@ -195,9 +187,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    if (section == 0) return @"My Profile";
-    else if (section == 1) return @"Colleges";
-    else return @"College Visits";
+    if (section == 0) return @"Colleges";
+    else if (section == 1) return @"College Visits";
+    else return @"My Profile";
 }
 
 
@@ -207,21 +199,19 @@
 {
     UIViewController *newViewController = nil;
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == 2) {
         if (indexPath.row == 0) {
-            
-        } else if (indexPath.row == 1) {
             FTStandardizedTestingViewController *standardizedTestingController = [[FTStandardizedTestingViewController alloc] init];
             [standardizedTestingController setManagedObjectContext:self.managedObjectContext];
             
             newViewController = (UIViewController *) standardizedTestingController;
-        } else if (indexPath.row == 2) {
+        } else if (indexPath.row == 1) {
             FTExtracurricularsViewController *extracurricularViewController = [[FTExtracurricularsViewController alloc] init];
             [extracurricularViewController setManagedObjectContext:self.managedObjectContext];
             
             newViewController = (UIViewController *) extracurricularViewController;
             
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 2) {
             FTGradesViewController *gradesViewController = [[FTGradesViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [gradesViewController setManagedObjectContext:self.managedObjectContext];
             [gradesViewController.tableView setBackgroundColor:kViewBackgroundColor];
@@ -230,7 +220,7 @@
         } else {
             
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == 0) {
         FTCollegeSearchViewController *collegeListViewController = [[FTCollegeSearchViewController alloc] init];
         [collegeListViewController setManagedObjectContext:self.managedObjectContext];
 

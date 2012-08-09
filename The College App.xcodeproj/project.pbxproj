@@ -36,6 +36,18 @@
 		7B2F706D15D455DA0051F324 /* FTNearbyCollegesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F706615D455B60051F324 /* FTNearbyCollegesViewController.m */; };
 		7B2F707015D45FF30051F324 /* FTPercentageMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F706F15D45FF20051F324 /* FTPercentageMarker.m */; };
 		7B2F707115D45FF30051F324 /* FTPercentageMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F706F15D45FF20051F324 /* FTPercentageMarker.m */; };
+		7B2F707815D46FA80051F324 /* extracurriculars.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707215D46FA80051F324 /* extracurriculars.png */; };
+		7B2F707915D46FA80051F324 /* extracurriculars.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707215D46FA80051F324 /* extracurriculars.png */; };
+		7B2F707A15D46FA80051F324 /* extracurriculars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707315D46FA80051F324 /* extracurriculars@2x.png */; };
+		7B2F707B15D46FA80051F324 /* extracurriculars@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707315D46FA80051F324 /* extracurriculars@2x.png */; };
+		7B2F707C15D46FA80051F324 /* grades.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707415D46FA80051F324 /* grades.png */; };
+		7B2F707D15D46FA80051F324 /* grades.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707415D46FA80051F324 /* grades.png */; };
+		7B2F707E15D46FA80051F324 /* grades@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707515D46FA80051F324 /* grades@2x.png */; };
+		7B2F707F15D46FA80051F324 /* grades@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707515D46FA80051F324 /* grades@2x.png */; };
+		7B2F708015D46FA80051F324 /* standardized.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707615D46FA80051F324 /* standardized.png */; };
+		7B2F708115D46FA80051F324 /* standardized.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707615D46FA80051F324 /* standardized.png */; };
+		7B2F708215D46FA80051F324 /* standardized@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707715D46FA80051F324 /* standardized@2x.png */; };
+		7B2F708315D46FA80051F324 /* standardized@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B2F707715D46FA80051F324 /* standardized@2x.png */; };
 		7B35F8FA15ADEE6900EFFFE8 /* FTCollegeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B35F8F915ADEE6900EFFFE8 /* FTCollegeInfoViewController.m */; };
 		7B35F90115ADEFA400EFFFE8 /* FTRangeIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B35F90015ADEFA400EFFFE8 /* FTRangeIndicator.m */; };
 		7B35F90515AE0ACB00EFFFE8 /* activetab.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F90415AE0ACB00EFFFE8 /* activetab.png */; };
@@ -62,10 +74,7 @@
 		7B51E38A15A9009F002F2A2E /* collegelist.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38215A9009F002F2A2E /* collegelist.png */; };
 		7B51E38B15A9009F002F2A2E /* collegesearch.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38315A9009F002F2A2E /* collegesearch.png */; };
 		7B51E38C15A9009F002F2A2E /* essays.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38415A9009F002F2A2E /* essays.png */; };
-		7B51E38D15A9009F002F2A2E /* extracurriculars.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38515A9009F002F2A2E /* extracurriculars.png */; };
-		7B51E38E15A9009F002F2A2E /* grades.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38615A9009F002F2A2E /* grades.png */; };
 		7B51E38F15A9009F002F2A2E /* nearme.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38715A9009F002F2A2E /* nearme.png */; };
-		7B51E39015A9009F002F2A2E /* standardized.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E38815A9009F002F2A2E /* standardized.png */; };
 		7B51E5A015AA4C46002F2A2E /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266DD15A76BB200A5879C /* NSObject+SBJson.m */; };
 		7B51E5A115AA4C46002F2A2E /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E015A76BB200A5879C /* SBJsonParser.m */; };
 		7B51E5A215AA4C46002F2A2E /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6266E215A76BB200A5879C /* SBJsonStreamParser.m */; };
@@ -265,6 +274,12 @@
 		7B2F706A15D455CE0051F324 /* FTNearbyCollegeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTNearbyCollegeCell.m; sourceTree = "<group>"; };
 		7B2F706E15D45FF20051F324 /* FTPercentageMarker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPercentageMarker.h; sourceTree = "<group>"; };
 		7B2F706F15D45FF20051F324 /* FTPercentageMarker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPercentageMarker.m; sourceTree = "<group>"; };
+		7B2F707215D46FA80051F324 /* extracurriculars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extracurriculars.png; sourceTree = "<group>"; };
+		7B2F707315D46FA80051F324 /* extracurriculars@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "extracurriculars@2x.png"; sourceTree = "<group>"; };
+		7B2F707415D46FA80051F324 /* grades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grades.png; sourceTree = "<group>"; };
+		7B2F707515D46FA80051F324 /* grades@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grades@2x.png"; sourceTree = "<group>"; };
+		7B2F707615D46FA80051F324 /* standardized.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standardized.png; sourceTree = "<group>"; };
+		7B2F707715D46FA80051F324 /* standardized@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "standardized@2x.png"; sourceTree = "<group>"; };
 		7B35F8F815ADEE6800EFFFE8 /* FTCollegeInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeInfoViewController.h; sourceTree = "<group>"; };
 		7B35F8F915ADEE6900EFFFE8 /* FTCollegeInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeInfoViewController.m; sourceTree = "<group>"; };
 		7B35F8FF15ADEFA400EFFFE8 /* FTRangeIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTRangeIndicator.h; sourceTree = "<group>"; };
@@ -292,10 +307,7 @@
 		7B51E38215A9009F002F2A2E /* collegelist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collegelist.png; sourceTree = "<group>"; };
 		7B51E38315A9009F002F2A2E /* collegesearch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collegesearch.png; sourceTree = "<group>"; };
 		7B51E38415A9009F002F2A2E /* essays.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = essays.png; sourceTree = "<group>"; };
-		7B51E38515A9009F002F2A2E /* extracurriculars.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extracurriculars.png; sourceTree = "<group>"; };
-		7B51E38615A9009F002F2A2E /* grades.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grades.png; sourceTree = "<group>"; };
 		7B51E38715A9009F002F2A2E /* nearme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nearme.png; sourceTree = "<group>"; };
-		7B51E38815A9009F002F2A2E /* standardized.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standardized.png; sourceTree = "<group>"; };
 		7B51E5E615AB2A92002F2A2E /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
 		7B51E5E815AB2A99002F2A2E /* web.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = web.png; sourceTree = "<group>"; };
 		7B51E5EA15AB2AAE002F2A2E /* view.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = view.png; sourceTree = "<group>"; };
@@ -546,10 +558,7 @@
 				7B51E38215A9009F002F2A2E /* collegelist.png */,
 				7B51E38315A9009F002F2A2E /* collegesearch.png */,
 				7B51E38415A9009F002F2A2E /* essays.png */,
-				7B51E38515A9009F002F2A2E /* extracurriculars.png */,
-				7B51E38615A9009F002F2A2E /* grades.png */,
 				7B51E38715A9009F002F2A2E /* nearme.png */,
-				7B51E38815A9009F002F2A2E /* standardized.png */,
 			);
 			name = Glyphish;
 			sourceTree = "<group>";
@@ -794,6 +803,12 @@
 		7B6266CB15A7616C00A5879C /* Master Navigation View */ = {
 			isa = PBXGroup;
 			children = (
+				7B2F707215D46FA80051F324 /* extracurriculars.png */,
+				7B2F707315D46FA80051F324 /* extracurriculars@2x.png */,
+				7B2F707415D46FA80051F324 /* grades.png */,
+				7B2F707515D46FA80051F324 /* grades@2x.png */,
+				7B2F707615D46FA80051F324 /* standardized.png */,
+				7B2F707715D46FA80051F324 /* standardized@2x.png */,
 				7B51E38015A9008E002F2A2E /* Glyphish */,
 				7B62672015A7760C00A5879C /* menu.png */,
 				7B62672215A7762800A5879C /* menu@2x.png */,
@@ -1187,10 +1202,7 @@
 				7B51E38A15A9009F002F2A2E /* collegelist.png in Resources */,
 				7B51E38B15A9009F002F2A2E /* collegesearch.png in Resources */,
 				7B51E38C15A9009F002F2A2E /* essays.png in Resources */,
-				7B51E38D15A9009F002F2A2E /* extracurriculars.png in Resources */,
-				7B51E38E15A9009F002F2A2E /* grades.png in Resources */,
 				7B51E38F15A9009F002F2A2E /* nearme.png in Resources */,
-				7B51E39015A9009F002F2A2E /* standardized.png in Resources */,
 				7B51E5E715AB2A92002F2A2E /* more.png in Resources */,
 				7B51E5E915AB2A99002F2A2E /* web.png in Resources */,
 				7B51E5EB15AB2AAE002F2A2E /* view.png in Resources */,
@@ -1242,6 +1254,12 @@
 				7B2F705D15D449800051F324 /* infotitle.png in Resources */,
 				7B2F706015D449890051F324 /* infotitleactive.png in Resources */,
 				7B2F706215D452A30051F324 /* FTCollegeInfoViewController~iphone.xib in Resources */,
+				7B2F707815D46FA80051F324 /* extracurriculars.png in Resources */,
+				7B2F707A15D46FA80051F324 /* extracurriculars@2x.png in Resources */,
+				7B2F707C15D46FA80051F324 /* grades.png in Resources */,
+				7B2F707E15D46FA80051F324 /* grades@2x.png in Resources */,
+				7B2F708015D46FA80051F324 /* standardized.png in Resources */,
+				7B2F708215D46FA80051F324 /* standardized@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1262,6 +1280,12 @@
 				7B55D0B115B6247A00947B2E /* blueArrow@2x.png in Resources */,
 				7B55D0B215B6247A00947B2E /* whiteArrow.png in Resources */,
 				7B55D0B315B6247A00947B2E /* whiteArrow@2x.png in Resources */,
+				7B2F707915D46FA80051F324 /* extracurriculars.png in Resources */,
+				7B2F707B15D46FA80051F324 /* extracurriculars@2x.png in Resources */,
+				7B2F707D15D46FA80051F324 /* grades.png in Resources */,
+				7B2F707F15D46FA80051F324 /* grades@2x.png in Resources */,
+				7B2F708115D46FA80051F324 /* standardized.png in Resources */,
+				7B2F708315D46FA80051F324 /* standardized@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

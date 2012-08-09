@@ -181,7 +181,7 @@
     [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
     [titleButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [titleButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)];
-
+    [titleButton addTarget:self action:@selector(showNearbyCollegesSelector:) forControlEvents:UIControlEventTouchUpInside];
     
     self.navigationItem.titleView = titleView;
     
@@ -241,6 +241,10 @@
 }
 
 #pragma mark - Buttons
+
+- (void) showCollegeInfo {
+    
+}
 
 - (void) showNearbyCollegesSelector:(UIButton *) _titleButton {
     

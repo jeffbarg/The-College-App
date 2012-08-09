@@ -33,7 +33,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAmazon];
-    [self initializeData];
+    //[self initializeData];
     [self configureAppearance];
     [self setupUUID];
     
@@ -187,15 +187,30 @@
         [sat setType:@"SAT"];
         [sat setHasComposite:[NSNumber numberWithBool:NO]];
         
-        for (int j = 0; j < 5; j++) {
+
             TestSection *section = [NSEntityDescription insertNewObjectForEntityForName:@"TestSection" inManagedObjectContext:self.managedObjectContext];
-            [section setSectionName:@"Critical Swag"];
-            [section setScore:[NSNumber numberWithInt:36]];
+            [section setSectionName:@"Math"];
+            [section setScore:[NSNumber numberWithInt:760]];
             [section setMinScore:[NSNumber numberWithInteger:200]];
             [section setMaxScore:[NSNumber numberWithInteger:800]];
             
             [section setStandardizedTest:sat];
-        }
+
+        section = [NSEntityDescription insertNewObjectForEntityForName:@"TestSection" inManagedObjectContext:self.managedObjectContext];
+        [section setSectionName:@"Critical Reading"];
+        [section setScore:[NSNumber numberWithInt:710]];
+        [section setMinScore:[NSNumber numberWithInteger:200]];
+        [section setMaxScore:[NSNumber numberWithInteger:800]];
+        
+        [section setStandardizedTest:sat];
+        
+        TestSection *section3 = [NSEntityDescription insertNewObjectForEntityForName:@"TestSection" inManagedObjectContext:self.managedObjectContext];
+        [section3 setSectionName:@"Writing"];
+        [section3 setScore:[NSNumber numberWithInt:720]];
+        [section3 setMinScore:[NSNumber numberWithInteger:200]];
+        [section3 setMaxScore:[NSNumber numberWithInteger:800]];
+        
+        [section3 setStandardizedTest:sat];
     }
     
     SBJsonParser *parser = [[SBJsonParser alloc] init];
