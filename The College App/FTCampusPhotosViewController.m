@@ -31,6 +31,8 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize masterPopoverController = _masterPopoverController;
 
+@synthesize visit;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];

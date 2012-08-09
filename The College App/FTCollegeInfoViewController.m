@@ -10,19 +10,26 @@
 #import "College.h"
 
 #import "FTRangeIndicator.h"
+#import "FTPercentageMarker.h"
 
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 #define X_MARGIN 27
 
-#define SCROLLVIEW_THRESHOLD 135.0
+#define SCROLLVIEW_THRESHOLD 115.0
 
 #define SCROLLVIEW_HEIGHT 1166.0
 
+#define MAP_HIDDEN_HEIGHT (INTERFACE_IS_PAD?-450.0:-200.0)
+
+#define SCROLLVIEW_PEEKAMOUNT (INTERFACE_IS_PAD?240.0:160.0)
+
 #define roundViewColor [UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000]
 
-@interface FTCollegeInfoViewController () <UIScrollViewDelegate>
+@interface FTCollegeInfoViewController () <UIScrollViewDelegate, UIWebViewDelegate> {
+    BOOL _wikiLoaded;
+}
 
 @property(strong) IBOutletCollection(UIView) NSArray *whiteViews;
 @property(strong) IBOutletCollection(UIButton) NSArray *urlButtons;
@@ -33,6 +40,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *openInMapsButton;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *collegeNameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *applicationFeeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *earlyDeadlineLabel;
@@ -46,8 +55,10 @@
 @property (weak, nonatomic) IBOutlet UIView *acceptanceRateContainerView;
 @property (weak, nonatomic) IBOutlet UIView *maleFemalRateContainerView;
 
+@property (weak, nonatomic) IBOutlet UIWebView *wikipediaEntryView;
 
 @property (nonatomic, strong) UIButton *showMapButton;
+@property (nonatomic, strong) UIActivityIndicatorView * spinner;
 
 @end
 
@@ -67,6 +78,7 @@
 @synthesize applicationWebsiteLabel = _applicationWebsiteLabel;
 @synthesize totalPriceLabel = _totalPriceLabel;
 @synthesize numberOfStudentsLabel = _numberOfStudentsLabel;
+@synthesize collegeNameLabel = _collegeNameLabel;
 @synthesize maleFemalRateContainerView = _maleFemalRateContainerView;
 @synthesize acceptanceRateContainerView = _acceptanceRateContainerView;
 
@@ -74,6 +86,9 @@
 @synthesize managedObjectContext = _managedObjectContext;
 
 @synthesize showMapButton = _showMapButton;
+
+@synthesize wikipediaEntryView = _wikipediaEntryView;
+@synthesize spinner = _spinner;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,10 +103,7 @@
 {
     [super viewDidLoad];
     self.title = [self.school name];
-
-	// Do any additional setup after loading the view.
     
-
     self.view.backgroundColor = kViewBackgroundColor;
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton:)];
@@ -114,7 +126,7 @@
     
 
 
-    _containerView.contentInset = UIEdgeInsetsMake(260.0, 0.0, 0.0, 0.0);
+    _containerView.contentInset = UIEdgeInsetsMake(SCROLLVIEW_PEEKAMOUNT, 0.0, 0.0, 0.0);
     [self.view addSubview:_containerView];
 
     CGRect contentRect = _containerView.bounds;
@@ -133,30 +145,15 @@
     [_containerView setDelegate:self];
     
     [self setupWhiteViews];
+    [self setupWikiArticle];
     [self setupStandardizedTesting];
     [self setupMap];
-    
-    
-    // Create formatter
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
-    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    
-    [self.applicationFeeLabel setText:[NSString stringWithFormat:@"$%@", [self.school applicationFee]]];
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school totalPriceOutState]]]];
+    [self setupLabels];
     
 
-
-    for (UIButton *urlButton in self.urlButtons) {
-        [urlButton setContentEdgeInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
-        [urlButton.titleLabel setNumberOfLines:0];
-        [urlButton.titleLabel setTextAlignment:UITextAlignmentCenter];
-        [urlButton setTitleColor:[UIColor colorWithWhite:91.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    }
-    
     [self.openInMapsButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
     
-
+    self.wikipediaEntryView.backgroundColor = [UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000];
     
 }
 
@@ -185,13 +182,59 @@
     }
 }
 
-- (void) setupMap {
-    if (INTERFACE_IS_PAD) {
-        [self.mapView setMapType:MKMapTypeHybrid];
-    } else {
-        [self.mapView setMapType:MKMapTypeStandard];
+- (void) setupWikiArticle {
+ 	// Do any additional setup after loading the view.
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Harvard"] cachePolicy:NSURLCacheStorageAllowedInMemoryOnly timeoutInterval:10.0];
+    
+    [self.wikipediaEntryView loadRequest:req];
+    [self.wikipediaEntryView setDelegate:self];
+    
+    UIImageView * falloffImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.wikipediaEntryView.frame.origin.x, CGRectGetMaxY(self.wikipediaEntryView.frame) - 56.0, self.wikipediaEntryView.frame.size.width - 200.0, 56.0)];
+    
+    [falloffImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [falloffImageView setImage:[[UIImage imageNamed:@"wikifalloff.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)]];
+    [self.wikipediaEntryView.superview insertSubview:falloffImageView aboveSubview:self.wikipediaEntryView];
+    
+    [self.wikipediaEntryView setHidden:YES];
+    
+    _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.spinner setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin];
+    
+    [self.wikipediaEntryView.superview insertSubview:self.spinner aboveSubview:self.wikipediaEntryView];
+    [self.spinner setCenter:self.wikipediaEntryView.center];
+    [self.spinner startAnimating];   
+}
+
+- (void) setupLabels {
+    // Create formatter
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    [self.applicationFeeLabel setText:[NSString stringWithFormat:@"$%@", [self.school applicationFee]]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school tuitionAndFees]]]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"$%@", [formatter stringFromNumber:[self.school totalPriceOutState]]]];
+    [self.numberOfStudentsLabel setText:[NSString stringWithFormat:@"%@", [formatter stringFromNumber:[self.school enrolledTotal]]]];
+    [self.collegeNameLabel setText:[self.school name]];
+    
+    for (UIButton *urlButton in self.urlButtons) {
+        [urlButton setContentEdgeInsets:UIEdgeInsetsMake(10.0, 10.0, 10.0, 10.0)];
+        [urlButton.titleLabel setNumberOfLines:0];
+        [urlButton.titleLabel setTextAlignment:UITextAlignmentCenter];
+        [urlButton setTitleColor:[UIColor colorWithWhite:91.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     }
     
+    
+    FTPercentageMarker *acceptancePercentView = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 17.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
+//    [acceptancePercentView setPercent:[[self.school admissionsTotal] doubleValue] / [[self.school applicantsTotal] doubleValue];
+
+    [acceptancePercentView setPercent:0.09];
+    
+    [self.acceptanceRateContainerView addSubview:acceptancePercentView];
+    
+}
+
+- (void) setupMap {
+
 //    [self.mapView.layer setShadowColor:[UIColor blackColor].CGColor];
 //    [self.mapView.layer setShadowOffset:CGSizeMake(0, 1)];
 //    [self.mapView.layer setShadowOpacity:1.0];
@@ -327,7 +370,7 @@
     if (scrollView.frame.origin.y != 0) return;
     
     [UIView animateWithDuration:0.2 animations:^{
-        if (offset < -260.0 - SCROLLVIEW_THRESHOLD) {
+        if (offset < -SCROLLVIEW_PEEKAMOUNT - SCROLLVIEW_THRESHOLD) {
             self.showMapButton.transform = CGAffineTransformIdentity;
         } else {
             self.showMapButton.transform = flip;
@@ -337,7 +380,7 @@
 
 - (void) scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     CGFloat offset = scrollView.contentOffset.y;
-    if (offset < -260.0 - SCROLLVIEW_THRESHOLD) {
+    if (offset < -SCROLLVIEW_PEEKAMOUNT - SCROLLVIEW_THRESHOLD) {
         
 
         
@@ -359,7 +402,7 @@
         
         [UIView animateWithDuration:0.5  animations:^{
 
-            [self.mapView setFrame:CGRectMake(0, -450.0, self.mapView.frame.size.width, self.mapView.frame.size.height)];
+            [self.mapView setFrame:CGRectMake(0, MAP_HIDDEN_HEIGHT, self.mapView.frame.size.width, self.mapView.frame.size.height)];
                                               
             self.containerView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
             
@@ -398,6 +441,36 @@
     }
 }
 
+#pragma mark - UIWebViewDelegate
+
+- (void) webViewDidFinishLoad:(UIWebView *)webView {
+    if (!_wikiLoaded) {
+        webView.backgroundColor = [UIColor clearColor];
+        webView.opaque = FALSE;
+        
+        NSString *js = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"extractwiki" withExtension:@"js"] encoding:NSUTF8StringEncoding error:nil];
+            
+        NSString *newStr = [webView stringByEvaluatingJavaScriptFromString:js];
+    
+        [webView loadHTMLString:newStr baseURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Harvard"]];                
+    } else {
+         [self.spinner removeFromSuperview];   
+         webView.hidden = FALSE;
+    }
+    
+    _wikiLoaded = TRUE;
+}
+
+- (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [[[UIAlertView alloc] initWithTitle:@"Error!" message:[error description] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    [self.spinner removeFromSuperview];
+}
+
+- (void) webViewDidStartLoad:(UIWebView *)webView {
+    
+}
+
+
 #pragma mark - Buttons
 
 - (IBAction)applicationWebsite:(id)sender {
@@ -412,6 +485,12 @@
 
 - (IBAction)missionStatementWebsite:(id)sender {
     NSString *internetAddress = [self.school missionStatementInternetAddress];
+    if ([internetAddress length] <= 4) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Mission Statement" message:[self.school missionStatement] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
     if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
         internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
     }
@@ -432,6 +511,19 @@
 
 - (IBAction)financialAidWebsite:(id)sender {
     NSString *internetAddress = [self.school financialAidInternetAddress];
+    if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
+        internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
+    }
+    NSURL *url = [NSURL URLWithString:internetAddress];
+    
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+- (IBAction)wikipediaArticle:(id)sender {
+    NSString *internetAddress = @"http://en.wikipedia.org/wiki/Harvard";
+    if ([internetAddress length] <= 4)
+        return;
+    
     if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
         internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
     }

@@ -10,11 +10,15 @@
 
 #import "FTCollegeVisitingViewController.h"
 
+#import "Visit.h"
+
 @interface FTCampusNotesViewController : UIViewController
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) FTCollegeVisitingViewController *visitViewController;
 
 @property (nonatomic, strong) UITextView *textView;
+
+@property (nonatomic, strong) Visit *visit;
 
 @end

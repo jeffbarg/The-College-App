@@ -24,6 +24,13 @@ d.style.padding = "0px";
 d.style.lineHeight = "20px";
 d.style.overflow = "hidden";
 
+var images = document.getElementsByClassName("image");
+var img = images[0];
+img.style.float = "right";
+img.style.float.maxHeight = "200px";
+img.style.float.maxWidth = "200px";
+d.appendChild(img);
+
 for (var i = 0; i < 3 && i < b.length; i++) {
     var n = b[0];
     n.style.backgroundColor = "rgba(0,0,0,0)";

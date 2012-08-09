@@ -75,8 +75,11 @@
      
     detailViewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] landscapeImagePhone:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStyleDone target:masterViewController action:@selector(slideLeft)];
     
-    [detailNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
-
+    if (INTERFACE_IS_PAD)
+        [detailNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"whitenavbar.png"] forBarMetrics:UIBarMetricsDefault];
+    else {
+        [detailNavigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];
+    }
     detailNavigationController.view.backgroundColor = kViewBackgroundColor;
     detailNavigationController.view.layer.shadowOpacity = 0.75f;
     detailNavigationController.view.layer.shadowRadius = 10.0f;
@@ -227,6 +230,13 @@
         [school setTotalPriceInState:extractIntegerFromDict(@"drvic2011.cinson:VL-Total price for in-state students living on campus 2011-12", dict)];
         [school setTotalPriceOutState:extractIntegerFromDict(@"drvic2011.cotson:VL-Total price for out-of-state students living on campus 2011-12", dict)];
 
+        [school setEnrolledMen:extractIntegerFromDict(@"ic2011.enrlm:VL-Enrolled  men", dict)];
+        [school setEnrolledWomen:extractIntegerFromDict(@"ic2011.enrlw:VL-Enrolled  women", dict)];
+        [school setEnrolledTotal:extractIntegerFromDict(@"ic2011.enrlt:VL-Enrolled total", dict)];
+        
+        [school setApplicantsTotal:extractIntegerFromDict(@"ic2011.applcn:VL-Applicants total", dict)];
+        [school setAdmissionsTotal:extractIntegerFromDict(@"ic2011.admssn:VL-Admissions total", dict)];
+        
         [school setAdmissionsInternetAddress:extractStringFromDict(@"hd2011.adminurl:VL-Admissions office web address", dict)];
         [school setInternetAddress:extractStringFromDict(@"hd2011.webaddr:VL-Institution^s internet website address", dict)];
         [school setFinancialAidInternetAddress:extractStringFromDict(@"hd2011.faidurl:VL-Financial aid office web address", dict)];
