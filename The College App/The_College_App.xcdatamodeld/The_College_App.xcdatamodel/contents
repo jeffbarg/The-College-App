@@ -7,13 +7,13 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="thumbnailImage" optional="YES" attributeType="Transformable" valueTransformerName="UIImageToDataTransformer" storedInTruthFile="YES" syncable="YES"/>
         <attribute name="uploaded" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="college" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="College" inverseName="photos" inverseEntity="College" syncable="YES"/>
         <relationship name="photoData" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="PhotoData" inverseName="campusPhoto" inverseEntity="PhotoData" syncable="YES"/>
-        <relationship name="visit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="campusPhotos" inverseEntity="Visit" syncable="YES"/>
     </entity>
     <entity name="CampusRating" syncable="YES">
         <attribute name="prompt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="visit" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Visit" inverseName="campusRatings" inverseEntity="Visit" syncable="YES"/>
+        <relationship name="college" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="College" inverseName="ratings" inverseEntity="College" syncable="YES"/>
     </entity>
     <entity name="College" representedClassName="College" syncable="YES">
         <attribute name="admissionsInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,6 +22,8 @@
         <attribute name="applicationFee" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="calendarSystem" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="color2" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="combinedSATAverage" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="compositeACT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="compositeACT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -40,6 +42,7 @@
         <attribute name="missionStatementInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nameAlias" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="onlineApplicationInternetAddress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="openAdmissionPolicy" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="phoneNumber" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -54,10 +57,12 @@
         <attribute name="tuitionAndFees" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="undergraduatePopulation" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="unitID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="wikipediaArticle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="writingSAT25" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="writingSAT75" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="zipcode" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="visits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Visit" inverseName="college" inverseEntity="Visit" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CampusPhoto" inverseName="college" inverseEntity="CampusPhoto" syncable="YES"/>
+        <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CampusRating" inverseName="college" inverseEntity="CampusRating" syncable="YES"/>
     </entity>
     <entity name="Extracurricular" representedClassName="Extracurricular" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -97,13 +102,6 @@
         <attribute name="sectionName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="standardizedTest" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="StandardizedTest" inverseName="testSections" inverseEntity="StandardizedTest" syncable="YES"/>
     </entity>
-    <entity name="Visit" representedClassName="Visit" syncable="YES">
-        <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="campusPhotos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CampusPhoto" inverseName="visit" inverseEntity="CampusPhoto" syncable="YES"/>
-        <relationship name="campusRatings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CampusRating" inverseName="visit" inverseEntity="CampusRating" syncable="YES"/>
-        <relationship name="college" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="College" inverseName="visits" inverseEntity="College" syncable="YES"/>
-    </entity>
     <elements>
         <element name="CampusPhoto" positionX="-243" positionY="663" width="128" height="135"/>
         <element name="CampusRating" positionX="-378" positionY="657" width="128" height="90"/>
@@ -113,6 +111,5 @@
         <element name="PhotoData" positionX="160" positionY="192" width="128" height="75"/>
         <element name="StandardizedTest" positionX="153" positionY="405" width="128" height="135"/>
         <element name="TestSection" positionX="394" positionY="342" width="128" height="135"/>
-        <element name="Visit" positionX="-306" positionY="333" width="128" height="120"/>
     </elements>
 </model>

@@ -10,7 +10,7 @@
 
 #import "FTCollegeVisitingViewController.h"
 
-#import "Visit.h"
+#import "College.h"
 
 @interface FTCampusNotesViewController : UIViewController
 
@@ -19,6 +19,6 @@
 
 @property (nonatomic, strong) UITextView *textView;
 
-@property (nonatomic, strong) Visit *visit;
+@property (nonatomic, strong) College *school;
 
 @end

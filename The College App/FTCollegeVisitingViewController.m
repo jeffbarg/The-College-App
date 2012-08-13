@@ -17,7 +17,6 @@
 #import "KSCustomPopoverBackgroundView.h"
 
 #import "College.h"
-#import "Visit.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -271,6 +270,10 @@
     }
 }
 
+- (void) dismissViewController {
+    [self dismissViewControllerAnimated:YES completion:^{}];
+}
+
 - (void) bringFocusToNotepad {
     [self.notesViewController.view removeGestureRecognizer:self.notesGestureRecognizer];
     
@@ -342,9 +345,9 @@
     if (_school == nil) {
         _school = school;
         
-        self.photosViewController.visit = self.visit;
-        self.notesViewController.visit = self.visit;
-        self.ratingsViewController.visit = self.visit;
+        self.photosViewController.school = self.school;
+        self.notesViewController.school = self.school;
+        self.ratingsViewController.school = self.school;
         
         [UIView animateWithDuration:0.6 animations:^{
             [self viewWillLayoutSubviews];
@@ -356,9 +359,9 @@
         } completion:^(BOOL completed) {
             self.school = school;
             
-            self.photosViewController.visit = self.visit;
-            self.notesViewController.visit = self.visit;
-            self.ratingsViewController.visit = self.visit;
+            self.photosViewController.school = self.school;
+            self.notesViewController.school = self.school;
+            self.ratingsViewController.school = self.school;
             
             [UIView animateWithDuration:0.5 animations:^{
                 [self viewWillLayoutSubviews];
@@ -369,63 +372,63 @@
     [self.titleButton setTitle:school.name forState:UIControlStateNormal];
 }
 
-- (Visit *) visit {
-    if (_visit != nil) {
-        return _visit;
-    } 
-    
-    if (self.school == nil) return nil;
-    
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
-    
-    [components setHour:-[components hour]];
-    [components setMinute:-[components minute]];
-    [components setSecond:-[components second]];
-    NSDate *startDay = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0]; //This variable should now be pointing at a date object that is the start of today (midnight);
-    
-    
-    [components setHour:24];
-    [components setMinute:0];
-    [components setSecond:0];
-    NSDate *endDay = [cal dateByAddingComponents:components toDate: startDay options:0];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(dateCreated >= %@) AND (dateCreated <= %@) AND college = %@", startDay, endDay, self.school];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Visit"];
-    [fetchRequest setPredicate:predicate];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
-    
-    NSError *err = nil;
-    NSArray *possibleVisits = [self.managedObjectContext executeFetchRequest:fetchRequest error:&err];
-    if (err != nil) {
-        NSLog(@"%@", [err localizedDescription]);
-    }
-    
-    if ([possibleVisits count] == 0) {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Visit" inManagedObjectContext:self.managedObjectContext];
-        _visit = [[Visit alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
-        _visit.college = self.school;
-        _visit.dateCreated = [NSDate date];
-        
-    } else {
-        _visit = (Visit *)[possibleVisits lastObject];
-    }
-    
-    return _visit;
-}
-
-- (void) setVisit:(Visit *)visit {
-    //Check if old visit is worth saving -- else delete.
-    Visit *oldVisit = _visit;
-    _visit = visit;
-    
-    if (oldVisit == nil) return;
-    
-    if ([oldVisit notes] == nil && [oldVisit campusPhotos] == nil && [oldVisit campusRatings] == nil) {
-        [self.managedObjectContext deleteObject:oldVisit];
-    } 
-}
+//- (Visit *) visit {
+//    if (_visit != nil) {
+//        return _visit;
+//    } 
+//    
+//    if (self.school == nil) return nil;
+//    
+//    NSCalendar *cal = [NSCalendar currentCalendar];
+//    NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:[[NSDate alloc] init]];
+//    
+//    [components setHour:-[components hour]];
+//    [components setMinute:-[components minute]];
+//    [components setSecond:-[components second]];
+//    NSDate *startDay = [cal dateByAddingComponents:components toDate:[[NSDate alloc] init] options:0]; //This variable should now be pointing at a date object that is the start of today (midnight);
+//    
+//    
+//    [components setHour:24];
+//    [components setMinute:0];
+//    [components setSecond:0];
+//    NSDate *endDay = [cal dateByAddingComponents:components toDate: startDay options:0];
+//    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(dateCreated >= %@) AND (dateCreated <= %@) AND college = %@", startDay, endDay, self.school];
+//    
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Visit"];
+//    [fetchRequest setPredicate:predicate];
+//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateCreated" ascending:YES];
+//    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+//    
+//    NSError *err = nil;
+//    NSArray *possibleVisits = [self.managedObjectContext executeFetchRequest:fetchRequest error:&err];
+//    if (err != nil) {
+//        NSLog(@"%@", [err localizedDescription]);
+//    }
+//    
+//    if ([possibleVisits count] == 0) {
+//        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Visit" inManagedObjectContext:self.managedObjectContext];
+//        _visit = [[Visit alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:self.managedObjectContext];
+//        _visit.college = self.school;
+//        _visit.dateCreated = [NSDate date];
+//        
+//    } else {
+//        _visit = (Visit *)[possibleVisits lastObject];
+//    }
+//    
+//    return _visit;
+//}
+//
+//- (void) setVisit:(Visit *)visit {
+//    //Check if old visit is worth saving -- else delete.
+//    Visit *oldVisit = _visit;
+//    _visit = visit;
+//    
+//    if (oldVisit == nil) return;
+//    
+//    if ([oldVisit notes] == nil && [oldVisit campusPhotos] == nil && [oldVisit campusRatings] == nil) {
+//        [self.managedObjectContext deleteObject:oldVisit];
+//    } 
+//}
 
 @end

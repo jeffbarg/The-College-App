@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class FTRangeIndicator;
+@class College;
 
 @interface FTCollegeCellView : UIView
 
@@ -17,6 +18,6 @@
 @property (nonatomic, strong) UILabel       * satScore;
 @property (nonatomic, retain) UILabel       * actScore;
 
-@property (nonatomic, strong) UIImageView   * locationIndicatorView;
+@property (nonatomic, strong) College * school;
 
 @end

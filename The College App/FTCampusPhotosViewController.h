@@ -10,15 +10,16 @@
 
 #import "FTCollegeVisitingViewController.h"
 
-#import "GMGridView.h"
+#import "College.h"
 
-#import "Visit.h"
+#import "GMGridView.h"
 
 @interface FTCampusPhotosViewController : UIViewController <NSFetchedResultsControllerDelegate, GMGridViewDataSource, GMGridViewActionDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext                *managedObjectContext;
 @property (nonatomic, strong) FTCollegeVisitingViewController       *visitViewController;
 @property (nonatomic, strong) NSFetchedResultsController            *fetchedResultsController;
-@property (nonatomic, strong) Visit *visit;
+
+@property (nonatomic, strong) College *school;
 
 @end

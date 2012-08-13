@@ -265,7 +265,7 @@
 
 - (CGSize)GMGridView:(GMGridView *)gridView sizeForItemsInInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    return CGSizeMake(300.0, 132.0);
+    return CGSizeMake(300.0, 166.0);
     //return INTERFACE_IS_PHONE ? CGSizeMake(284.0, 204.0f) : CGSizeMake(304.0, 204.0);
 }
 
@@ -309,7 +309,7 @@
         stateAbbreviation = [stateDict objectForKey:stateAbbreviation];
     }
     
-    [view.subtitleLabel setText:[NSString stringWithFormat:@" • %@ • %@", [school city], stateAbbreviation]];
+    [view.subtitleLabel setText:[NSString stringWithFormat:@"%@ • %@", [[school city] uppercaseString], stateAbbreviation]];
         
     NSString *satScoreText = [NSString stringWithFormat:@"%i - %i", 
                               [[school readingSAT25] integerValue] + [[school writingSAT25] integerValue] + [[school mathSAT25] integerValue],
@@ -323,8 +323,8 @@
     
     [view.actScore setText:actScoreText];
     
-    [view.locationIndicatorView setImage:[UIImage imageNamed:@"shitty.png"]];
-
+    [view setSchool:school];
+    
     [cell setHidden:NO];
     
     return cell;

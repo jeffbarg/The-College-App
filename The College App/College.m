@@ -2,11 +2,12 @@
 //  College.m
 //  The College App
 //
-//  Created by Jeffrey Barg on 7/12/12.
+//  Created by Jeffrey Barg on 8/13/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
 #import "College.h"
+#import "CampusPhoto.h"
 
 
 @implementation College
@@ -27,6 +28,8 @@
 @dynamic hasROTC;
 @dynamic institutionControl;
 @dynamic internetAddress;
+@dynamic lat;
+@dynamic lon;
 @dynamic mathSAT25;
 @dynamic mathSAT75;
 @dynamic missionStatement;
@@ -46,14 +49,15 @@
 @dynamic totalPriceOutState;
 @dynamic tuitionAndFees;
 @dynamic undergraduatePopulation;
+@dynamic unitID;
 @dynamic writingSAT25;
 @dynamic writingSAT75;
 @dynamic zipcode;
-@dynamic lat;
-@dynamic lon;
-@dynamic unitID;
+@dynamic notes;
+@dynamic wikipediaArticle;
+@dynamic color1;
+@dynamic color2;
+@dynamic photos;
+@dynamic ratings;
 
-//- (NSString *) description {
-//    return [NSString stringWithFormat:@"%@: %@", self.name, self.streetAddress];
-//}
 @end

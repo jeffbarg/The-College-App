@@ -8,7 +8,6 @@
 
 #import "CampusPhoto.h"
 #import "PhotoData.h"
-#import "Visit.h"
 
 
 @implementation CampusPhoto
@@ -20,6 +19,5 @@
 @dynamic thumbnailImage;
 @dynamic uploaded;
 @dynamic photoData;
-@dynamic visit;
 
 @end

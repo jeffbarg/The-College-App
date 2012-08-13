@@ -133,10 +133,10 @@
     _containerView.frame = self.view.bounds;
     _containerView.contentSize = contentRect.size;
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, contentRect.size.width, contentRect.size.height*2)];
-    [_containerView.layer setShadowOpacity:0.75];
+    [_containerView.layer setShadowOpacity:0.5];
     [_containerView.layer setShadowColor:[UIColor blackColor].CGColor];
-    [_containerView.layer setShadowRadius:20.0];
-    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, contentRect.size.width, 40.0)];
+    [_containerView.layer setShadowRadius:10.0];
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, contentRect.size.width, 20.0)];
     [_containerView.layer setShadowPath:bezierPath.CGPath];
     
     [bgView setBackgroundColor:kViewBackgroundColor];
@@ -184,7 +184,7 @@
 
 - (void) setupWikiArticle {
  	// Do any additional setup after loading the view.
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Harvard"] cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30.0];
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Wesleyan_University"] cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30.0];
     
     [self.wikipediaEntryView loadRequest:req];
     [self.wikipediaEntryView setDelegate:self];
@@ -225,9 +225,9 @@
     
     
     FTPercentageMarker *acceptancePercentView = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 7.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
-//    [acceptancePercentView setPercent:[[self.school admissionsTotal] doubleValue] / [[self.school applicantsTotal] doubleValue];
+    [acceptancePercentView setPercent:[[self.school admissionsTotal] doubleValue] / [[self.school applicantsTotal] doubleValue]];
 
-    [acceptancePercentView setPercent:0.09];
+//    [acceptancePercentView setPercent:0.09];
     
     [self.acceptanceRateContainerView addSubview:acceptancePercentView];
     
@@ -452,7 +452,7 @@
             
         NSString *newStr = [webView stringByEvaluatingJavaScriptFromString:js];
     
-        [webView loadHTMLString:newStr baseURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Harvard"]];                
+        [webView loadHTMLString:newStr baseURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Wesleyan_University"]];                
     } else {
          [self.spinner removeFromSuperview];   
          webView.hidden = FALSE;

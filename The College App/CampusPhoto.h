@@ -20,6 +20,5 @@
 @property (nonatomic, retain) id thumbnailImage;
 @property (nonatomic, retain) NSNumber * uploaded;
 @property (nonatomic, retain) PhotoData *photoData;
-@property (nonatomic, retain) Visit *visit;
 
 @end

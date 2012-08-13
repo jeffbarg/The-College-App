@@ -31,7 +31,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize masterPopoverController = _masterPopoverController;
 
-@synthesize visit;
+@synthesize school;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

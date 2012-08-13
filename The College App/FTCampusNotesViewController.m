@@ -21,7 +21,7 @@
 
 @synthesize textView;
 
-@synthesize visit;
+@synthesize school;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
