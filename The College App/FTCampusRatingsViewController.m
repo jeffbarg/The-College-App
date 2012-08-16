@@ -8,6 +8,8 @@
 
 #import "FTCampusRatingsViewController.h"
 
+#import "FTRatingsCell.h"
+
 @interface FTCampusRatingsViewController ()
 
 @end
@@ -31,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.rowHeight = 96.0;
 	// Do any additional setup after loading the view.
 }
 
@@ -45,16 +48,24 @@
 	return (INTERFACE_IS_PAD || !(interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown));
 }
 
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 8;
+}
+
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString * CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    FTRatingsCell *cell = (FTRatingsCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[FTRatingsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
     }
     
-    [cell.textLabel setText:@"Ratings! ★★★★★"];
+    [cell.ratingsTextLabel setText:@"Ratings! ★★★★★"];
     
     return cell;
 }

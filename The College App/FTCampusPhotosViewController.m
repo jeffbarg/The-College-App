@@ -31,7 +31,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize masterPopoverController = _masterPopoverController;
 
-@synthesize school;
+@synthesize school = _school;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -140,6 +140,10 @@
             [photoData setImage:data];
             [photoData setCampusPhoto:photo];
             
+            if (self.school) {
+                [photo setCollege:self.school];
+            }
+            
             NSError *err = nil;
             if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&err]) {
                 NSLog(@"%@", [err description]);
@@ -241,6 +245,24 @@ UIImage * processImage(UIImage *image, CGRect ctxFrame) {
     return retVal;
 }
 
+#pragma mark - Custom Setters
+
+- (void) setSchool:(College *)school {
+    _school = school;
+    
+    NSPredicate *combinedPredicate = [NSPredicate predicateWithFormat:@"college == %@", school];
+    [self.fetchedResultsController.fetchRequest setPredicate:combinedPredicate];
+    
+    NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	    abort();
+	}
+    
+    [_gmGridView reloadData];
+}
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -264,12 +286,8 @@ UIImage * processImage(UIImage *image, CGRect ctxFrame) {
     NSArray *sortDescriptors = [NSArray arrayWithObjects:sortDescriptor, nil];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    //Edit the Filter Predicates
-    
-    //    NSPredicate *combinedPredicate = [NSPredicate predicateWithFormat:@"inCollegeList == %@", self.isCollegeList];
-    //    [fetchRequest setPredicate:combinedPredicate];
-    
+
+
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     
@@ -443,6 +461,11 @@ UIImage * processImage(UIImage *image, CGRect ctxFrame) {
         //[_currentData removeObjectAtIndex:_lastDeleteItemIndexAsked];
         
         [_gmGridView removeObjectAtIndex:_lastDeleteItemIndexAsked withAnimation:GMGridViewItemAnimationFade];
+        
+        NSError *err = nil;
+        if ([self.managedObjectContext hasChanges] && ![self.managedObjectContext save:&err]) {
+            NSLog(@"%@", [err description]);
+        }
     }
 }
 

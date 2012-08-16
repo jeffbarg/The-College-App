@@ -11,9 +11,14 @@
 #import "FTCampusNotesViewController.h"
 #import "FTCampusPhotosViewController.h"
 #import "FTCampusRatingsViewController.h"
-#import "FTNearbyCollegesViewController.h"
-#import "GMGridView.h"
 
+#import "FTCollegeInfoViewController.h"
+
+#import "FTSegmentedControllerViewController.h"
+#import "FTNearbyCollegesViewController.h"
+#import "FTSearchNearbySchoolsViewController.h"
+
+#import "GMGridView.h"
 #import "KSCustomPopoverBackgroundView.h"
 
 #import "College.h"
@@ -33,6 +38,10 @@
 @property (nonatomic, strong) FTCampusPhotosViewController  * photosViewController;
 @property (nonatomic, strong) FTCampusRatingsViewController * ratingsViewController;
 
+@property (nonatomic, strong) FTCollegeInfoViewController   * infoViewController;
+
+@property (nonatomic, strong) UITabBarController *iPhoneTabController;
+
 @property (nonatomic, strong) UIButton *notesButton;
 @property (nonatomic, strong) UIButton *photosButton;
 @property (nonatomic, strong) UIButton *ratingsButton;
@@ -49,6 +58,10 @@
 @synthesize photosViewController;
 @synthesize ratingsViewController;
 
+@synthesize infoViewController;
+
+@synthesize iPhoneTabController;
+
 @synthesize photosButton;
 @synthesize notesButton;
 @synthesize ratingsButton;
@@ -58,7 +71,6 @@
 @synthesize notesGestureRecognizer;
 
 @synthesize school = _school;
-@synthesize visit = _visit;
 
 @synthesize masterPopoverController;
 
@@ -107,27 +119,31 @@
             [self.view addSubview:viewController.view];
             [viewController didMoveToParentViewController:self];
         } else {
-            UITabBarController *tabbarController = [[UITabBarController alloc] init];
+            iPhoneTabController = [[UITabBarController alloc] init];
             
-            [tabbarController setViewControllers:[NSArray arrayWithObjects:photosViewController, ratingsViewController, notesViewController, nil]];
+            infoViewController = [[FTCollegeInfoViewController alloc] initWithNibName:@"FTCollegeInfoViewController" bundle:[NSBundle mainBundle]];
+            [infoViewController setSchool:nil];
+            [infoViewController setManagedObjectContext:self.managedObjectContext];
             
-            [tabbarController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
-            [tabbarController.tabBar setBackgroundImage:[UIImage imageNamed:@"iphonetab.png"]];
+            [iPhoneTabController setViewControllers:[NSArray arrayWithObjects:photosViewController, ratingsViewController, notesViewController, infoViewController, nil]];
             
-            UIGraphicsBeginImageContextWithOptions(CGSizeMake(floorf(self.view.frame.size.width / 3.0) + 2, 50.0), YES, 0.0);
-            [[[UIImage imageNamed:@"iphoneactivetab.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(24.0, 13.0, 24.0, 13.0)] drawInRect:CGRectMake(0, 0, floorf(self.view.frame.size.width / 3.0) + 2, 50.0)];
+            [iPhoneTabController.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+            [iPhoneTabController.tabBar setBackgroundImage:[UIImage imageNamed:@"iphonetab.png"]];
+            
+            UIGraphicsBeginImageContextWithOptions(CGSizeMake(floorf(self.view.frame.size.width / 4.0) + 2, 50.0), YES, 0.0);
+            [[[UIImage imageNamed:@"iphoneactivetab.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(24.0, 13.0, 24.0, 13.0)] drawInRect:CGRectMake(0, 0, floorf(self.view.frame.size.width / 4.0) + 4, 50.0)];
             UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
             UIGraphicsEndImageContext();
             
-            [tabbarController.tabBar setSelectionIndicatorImage:img];
+            [iPhoneTabController.tabBar setSelectionIndicatorImage:img];
             
             
-            [self addChildViewController:tabbarController];
-            [self.view addSubview:tabbarController.view];
+            [self addChildViewController:iPhoneTabController];
+            [self.view addSubview:iPhoneTabController.view];
             
-            [tabbarController didMoveToParentViewController:self];
+            [iPhoneTabController didMoveToParentViewController:self];
             
-            [tabbarController.view setFrame:self.view.bounds];
+            [iPhoneTabController.view setFrame:self.view.bounds];
         }
     }
     
@@ -163,7 +179,7 @@
         [self.notesViewController.view addGestureRecognizer:notesGestureRecognizer];
     
     
-    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, INTERFACE_IS_PAD? 360.0 : 260.0, 30.0)];
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, INTERFACE_IS_PAD? 340.0 : 260.0, 30.0)];
     titleButton = [[UIButton alloc] initWithFrame:titleView.bounds];
     
     if (INTERFACE_IS_PAD) {
@@ -176,9 +192,18 @@
     }
     [titleButton setTitle:@"" forState:UIControlStateNormal];
     [titleButton.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
-    [titleButton.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
-    [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [titleButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    if (INTERFACE_IS_PAD) {
+        [titleButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [titleButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [titleButton.titleLabel setShadowOffset:CGSizeMake(0.0, 1.0)];
+
+    } else {
+        [titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [titleButton setTitleShadowColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [titleButton.titleLabel setShadowOffset:CGSizeMake(0.0, -1.0)];
+
+    }
     [titleButton setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 15.0, 0.0, 15.0)];
     [titleButton addTarget:self action:@selector(showNearbyCollegesSelector:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -249,12 +274,24 @@
     
     if (self.masterPopoverController != nil && [self.masterPopoverController isPopoverVisible] && [self.masterPopoverController.contentViewController class] != [FTNearbyCollegesViewController class]) return;
     
+
     FTNearbyCollegesViewController *nearbySchoolsViewController = [[FTNearbyCollegesViewController alloc] initWithStyle:UITableViewStylePlain];
     [nearbySchoolsViewController setManagedObjectContext:self.managedObjectContext];
     [nearbySchoolsViewController setVisitViewController:self];
     
+    FTSearchNearbySchoolsViewController *searchViewController  = [[FTSearchNearbySchoolsViewController alloc] initWithStyle:UITableViewStylePlain];
+    [searchViewController setManagedObjectContext:self.managedObjectContext];
+    [searchViewController setVisitViewController:self];
+   
+    FTSegmentedControllerViewController *segmentViewController = [[FTSegmentedControllerViewController alloc] init];
+    [segmentViewController setViewControllers:[NSArray arrayWithObjects:nearbySchoolsViewController, searchViewController, nil]];
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:segmentViewController];
+    
     if (INTERFACE_IS_PAD) {
-        UIPopoverController *pController = [[UIPopoverController alloc] initWithContentViewController:nearbySchoolsViewController];
+        [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        
+        UIPopoverController *pController = [[UIPopoverController alloc] initWithContentViewController:navController];
         
         self.masterPopoverController = pController;
         
@@ -263,10 +300,8 @@
         [self.masterPopoverController presentPopoverFromRect:[titleButton.superview convertRect:titleButton.frame toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         
     } else {
-        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:nearbySchoolsViewController];
         [self presentViewController:navController animated:YES completion:^{}];
-        
-        [nearbySchoolsViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)]];
+        [segmentViewController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(dismissViewController)]];
     }
 }
 
@@ -341,7 +376,7 @@
 
 - (void) setSchool:(College *)school {
     if (school == _school) return;
-    self.visit = nil;
+    
     if (_school == nil) {
         _school = school;
         
@@ -349,9 +384,18 @@
         self.notesViewController.school = self.school;
         self.ratingsViewController.school = self.school;
         
+        if (INTERFACE_IS_PHONE) {
+            infoViewController = [[FTCollegeInfoViewController alloc] initWithNibName:@"FTCollegeInfoViewController" bundle:[NSBundle mainBundle]];
+            [infoViewController setManagedObjectContext:self.managedObjectContext];
+            [infoViewController setSchool:self.school];
+            
+            [self.iPhoneTabController setViewControllers:[NSArray arrayWithObjects:self.photosViewController, self.ratingsViewController, self.notesViewController, infoViewController, nil]];
+        }
+            
         [UIView animateWithDuration:0.6 animations:^{
             [self viewWillLayoutSubviews];
         }];
+            
     } else {
         _school = nil;
         [UIView animateWithDuration:0.4 animations:^{
@@ -363,7 +407,15 @@
             self.notesViewController.school = self.school;
             self.ratingsViewController.school = self.school;
             
-            [UIView animateWithDuration:0.5 animations:^{
+            if (INTERFACE_IS_PHONE) {
+                infoViewController = [[FTCollegeInfoViewController alloc] initWithNibName:@"FTCollegeInfoViewController" bundle:[NSBundle mainBundle]];
+                [infoViewController setManagedObjectContext:self.managedObjectContext];
+                [infoViewController setSchool:self.school];
+                
+                [self.iPhoneTabController setViewControllers:[NSArray arrayWithObjects:self.photosViewController, self.ratingsViewController, self.notesViewController, infoViewController, nil]];
+            }   
+            
+            [UIView animateWithDuration:0.4 animations:^{
                 [self viewWillLayoutSubviews];
             }];
         }];

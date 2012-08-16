@@ -12,23 +12,34 @@
 #import "FTRangeIndicator.h"
 #import "FTPercentageMarker.h"
 
+#import "DDXML.h"
+
 #import <MapKit/MapKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 #define X_MARGIN 27
 
-#define SCROLLVIEW_THRESHOLD 115.0
+#define SCROLLVIEW_THRESHOLD (INTERFACE_IS_PAD?115.0:55.0)
 
-#define SCROLLVIEW_HEIGHT 1166.0
+#define SCROLLVIEW_HEIGHT (INTERFACE_IS_PAD?1166.0:1433.0)
+
 
 #define MAP_HIDDEN_HEIGHT (INTERFACE_IS_PAD?-450.0:-200.0)
 
 #define SCROLLVIEW_PEEKAMOUNT (INTERFACE_IS_PAD?240.0:160.0)
 
-#define roundViewColor [UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000]
+#define roundViewColor (INTERFACE_IS_PAD?[UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000]:kViewBackgroundColor)
 
-@interface FTCollegeInfoViewController () <UIScrollViewDelegate, UIWebViewDelegate> {
+@interface FTCollegeInfoViewController () <UIScrollViewDelegate, UIWebViewDelegate, NSXMLParserDelegate> {
     BOOL _wikiLoaded;
+    
+    BOOL _isCapturingXML;
+    BOOL _isBlockingXML;
+    
+    BOOL _seekingImage;
+    BOOL _foundImage;
+    NSInteger _paragraphsParsed;
+    NSMutableArray *xmlElements;
 }
 
 @property(strong) IBOutletCollection(UIView) NSArray *whiteViews;
@@ -60,6 +71,11 @@
 @property (nonatomic, strong) UIButton *showMapButton;
 @property (nonatomic, strong) UIActivityIndicatorView * spinner;
 
+@property (nonatomic, strong) NSXMLParser *wikiParser;
+@property (nonatomic, strong) DDXMLElement *formattedWiki;
+
+@property (nonatomic, strong) NSInputStream *wikiInputStream;
+
 @end
 
 @implementation FTCollegeInfoViewController
@@ -90,11 +106,18 @@
 @synthesize wikipediaEntryView = _wikipediaEntryView;
 @synthesize spinner = _spinner;
 
+@synthesize wikiParser = _wikiParser;
+@synthesize wikiInputStream = _wikiInputStream;
+
+@synthesize formattedWiki;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
+        self.tabBarItem = tabBarItem;
     }
     return self;
 }
@@ -103,11 +126,23 @@
 {
     [super viewDidLoad];
     self.title = [self.school name];
+    self.tabBarItem.title = @"Info";
     
     self.view.backgroundColor = kViewBackgroundColor;
 
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButton:)];
     self.navigationItem.leftBarButtonItem = doneButton;
+    
+    UIButton *starButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 34.0, 44.0)];
+
+    [starButton setImage:[UIImage imageNamed:@"collegelistnotadded.png"] forState:UIControlStateNormal];
+    [starButton setImage:[UIImage imageNamed:@"collegelistaddedalt.png"] forState:UIControlStateHighlighted];    
+    
+    UIBarButtonItem *starButtonItem = [[UIBarButtonItem alloc] initWithCustomView:starButton];
+    
+    [starButtonItem setBackgroundImage:nil forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    self.navigationItem.rightBarButtonItem = starButtonItem;
+    
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                                      [UIColor colorWithWhite:0.2 alpha:1.0], UITextAttributeTextColor,
                                                                      [UIColor whiteColor], UITextAttributeTextShadowColor,
@@ -120,8 +155,7 @@
                                                        [NSValue valueWithUIOffset:UIOffsetMake(0, 1)], UITextAttributeTextShadowOffset,
                                                        nil] forState:UIControlStateSelected];
     
-    UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Info" image:[UIImage imageNamed:@"info.png"] tag:50];
-    self.tabBarItem = tabBarItem;
+
     
     
 
@@ -144,16 +178,18 @@
     [_containerView insertSubview:bgView atIndex:0];
     [_containerView setDelegate:self];
     
-    [self setupWhiteViews];
+    if (INTERFACE_IS_PAD)
+        [self setupWhiteViews];
+    
     [self setupWikiArticle];
     [self setupStandardizedTesting];
     [self setupMap];
     [self setupLabels];
     
-
+    
     [self.openInMapsButton setBackgroundImage:[[UIImage imageNamed:@"aphonors.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)] forState:UIControlStateNormal];
     
-    self.wikipediaEntryView.backgroundColor = [UIColor colorWithRed:0.961 green:0.969 blue:0.973 alpha:1.000];
+    self.wikipediaEntryView.backgroundColor = roundViewColor;
     
 }
 
@@ -184,18 +220,43 @@
 
 - (void) setupWikiArticle {
  	// Do any additional setup after loading the view.
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Wesleyan_University"] cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30.0];
+//    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Wesleyan_University"] cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30.0];
     
-    [self.wikipediaEntryView loadRequest:req];
+    NSURL *wikiURL = [NSURL URLWithString:@"http://en.wikipedia.org/wiki/Yale"];
+    //_wikiInputStream = [[NSInputStream alloc] initWithURL:wikiURL];
+
     [self.wikipediaEntryView setDelegate:self];
+
+    [[[NSOperationQueue alloc] init] addOperationWithBlock:^{
+        NSError *err = nil;
+        NSData *data = [NSData dataWithContentsOfURL:wikiURL options:NSDataReadingMappedIfSafe error:&err];
+        if (err != nil)
+            NSLog(@"%@", [err description]);
+        
+
+        //Parse XML
+        
+        self.wikiParser = [[NSXMLParser alloc] initWithData:data];
+        [self.wikiParser setDelegate:self];
+        
+        //This might not thread right...
+        [self.wikiParser parse];            
+        
+        NSLog(@"%@", [self.formattedWiki XMLString]);
+    }];
+
     
-    UIImageView * falloffImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.wikipediaEntryView.frame.origin.x, CGRectGetMaxY(self.wikipediaEntryView.frame) - 56.0, self.wikipediaEntryView.frame.size.width - 200.0, 56.0)];
+    
+    UIImageView * falloffImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.wikipediaEntryView.frame.origin.x, CGRectGetMaxY(self.wikipediaEntryView.frame) - 56.0, self.wikipediaEntryView.frame.size.width, 56.0)];
     
     [falloffImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [falloffImageView setImage:[[UIImage imageNamed:@"wikifalloff.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)]];
     [self.wikipediaEntryView.superview insertSubview:falloffImageView aboveSubview:self.wikipediaEntryView];
     
     [self.wikipediaEntryView setHidden:YES];
+    self.wikipediaEntryView.backgroundColor = roundViewColor;
+    self.wikipediaEntryView.opaque = FALSE;
+    
     
     _spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self.spinner setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin];
@@ -226,10 +287,22 @@
     
     FTPercentageMarker *acceptancePercentView = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 7.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
     [acceptancePercentView setPercent:[[self.school admissionsTotal] doubleValue] / [[self.school applicantsTotal] doubleValue]];
-
-//    [acceptancePercentView setPercent:0.09];
+    [acceptancePercentView setLeftColor:[UIColor colorWithHue:0.270 saturation:0.726 brightness:0.573 alpha:1.000]];
+    [acceptancePercentView setRightColor:[UIColor colorWithHue:0.000 saturation:0.000 brightness:0.275 alpha:1.000]];
+    [acceptancePercentView setCenterText:[NSString stringWithFormat:@"%i%%", (NSInteger)(acceptancePercentView.percent*100.0)]];
     
     [self.acceptanceRateContainerView addSubview:acceptancePercentView];
+    
+    
+    FTPercentageMarker *maleFemaleRatio = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 7.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
+    [maleFemaleRatio setPercent:[[self.school enrolledMen] doubleValue] / [[self.school enrolledTotal] doubleValue]];
+    [maleFemaleRatio setLeftColor:[UIColor colorWithRed:0.192 green:0.341 blue:1.000 alpha:1.000]];
+    [maleFemaleRatio setRightColor:[UIColor colorWithRed:0.886 green:0.114 blue:1.000 alpha:1.000]];
+    [maleFemaleRatio setLeftText:[NSString stringWithFormat:@"%i%%", (NSInteger)(maleFemaleRatio.percent*100.0)]];
+    [maleFemaleRatio setRightText:[NSString stringWithFormat:@"%i%%", 100 - (NSInteger)(maleFemaleRatio.percent*100.0)]];
+      
+    [self.maleFemalRateContainerView addSubview:maleFemaleRatio];
+    
     
 }
 
@@ -248,7 +321,7 @@
     [schoolAnnotation setSubtitle:[NSString stringWithFormat:@"%@, %@ %@", self.school.streetAddress, self.school.stateAbbreviation, self.school.zipcode]];
     
     [self.mapView addAnnotation:schoolAnnotation];
-    [self.mapView selectAnnotation:schoolAnnotation animated:YES];
+    //[self.mapView selectAnnotation:schoolAnnotation animated:YES];
     
     _showMapButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 66.0, 66.0)];
     [_showMapButton setBackgroundImage:[UIImage imageNamed:@"flippy.png"] forState:UIControlStateNormal];
@@ -444,9 +517,9 @@
 #pragma mark - UIWebViewDelegate
 
 - (void) webViewDidFinishLoad:(UIWebView *)webView {
+
+    
     if (!_wikiLoaded) {
-        webView.backgroundColor = [UIColor clearColor];
-        webView.opaque = FALSE;
         
         NSString *js = [NSString stringWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"extractwiki" withExtension:@"js"] encoding:NSUTF8StringEncoding error:nil];
             
@@ -501,6 +574,9 @@
 
 - (IBAction)collegeWebsite:(id)sender {
     NSString *internetAddress = [self.school internetAddress];
+    if ([internetAddress length] <= 4)
+        return;
+    
     if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
         internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
     }
@@ -511,6 +587,8 @@
 
 - (IBAction)financialAidWebsite:(id)sender {
     NSString *internetAddress = [self.school financialAidInternetAddress];
+    if ([internetAddress length] <= 4)
+        return;
     if (![[internetAddress substringToIndex:4] isEqualToString:@"http"]) {
         internetAddress = [NSString stringWithFormat:@"http://%@", internetAddress];
     }
@@ -551,6 +629,119 @@
 {
 	return YES;
 }
+
+#pragma mark - NSXML Parsing Delegate
+
+- (void) parserDidStartDocument:(NSXMLParser *)parser {
+    _paragraphsParsed = 0;
+    _seekingImage = FALSE;
+    _foundImage = INTERFACE_IS_PHONE;
+    
+    self.formattedWiki = [[DDXMLElement alloc] initWithName:@"div"];
+    
+    NSString *ipadStyles = @"background-color:rgba(0,0,0,0);  padding:0px; margin:0px;  height:220px; overflow:hidden; line-height:20px; font-family:\"Paletino\", serif;";
+    NSString *iPhoneStyles = @"background-color:rgba(0,0,0,0);  padding:0px; margin:0px;  height:276px; overflow:hidden; line-height:20px; font-family:\"Paletino\", serif;";
+    DDXMLNode * style = [DDXMLNode attributeWithName:@"style" stringValue:INTERFACE_IS_PAD?ipadStyles:iPhoneStyles];
+    
+    
+    [self.formattedWiki addAttribute:style];
+    
+    xmlElements = [[NSMutableArray alloc] init];
+    
+//    [xmlElements addObject:self.formattedWiki];
+}
+
+- (void) parserDidEndDocument:(NSXMLParser *)parser {
+    _wikiLoaded = YES;
+    
+    DDXMLElement *body = [DDXMLElement elementWithName:@"body"];
+    
+    NSString *ipadStyles = @"padding:0px; margin:auto;";
+    DDXMLNode * style = [DDXMLNode attributeWithName:@"style" stringValue:ipadStyles];
+    [body addAttribute:style];
+    
+    [body addChild:self.formattedWiki];
+    NSString *htmlValue = [body XMLString];
+    NSLog(@"%@", htmlValue);
+    [self.wikipediaEntryView loadHTMLString:htmlValue baseURL:[NSURL URLWithString:@"http://en.wikipedia.org/wiki/Brown_University"]];
+}
+
+
+- (void) parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
+    
+    if (!_foundImage && [[attributeDict objectForKey:@"class"] isEqualToString:@"image"]) {
+        _seekingImage = TRUE;
+    }
+    if (_seekingImage && [elementName isEqualToString:@"img"]) {
+        DDXMLElement *img = [DDXMLElement elementWithName:@"img"];
+        DDXMLNode * style = [DDXMLNode attributeWithName:@"style" stringValue:
+                             @"max-height:200px; max-width:200px; height:auto; width:auto; float:right; position:relative; top:10px; right:0px;"];
+        DDXMLNode * src = [DDXMLNode attributeWithName:@"src" stringValue:[attributeDict objectForKey:@"src"]];
+        
+        [img addAttribute:style];
+        [img addAttribute:src];
+
+        [self.formattedWiki addChild:img];
+        
+        _seekingImage = FALSE;
+        _foundImage = TRUE;
+    }
+    
+        
+    DDXMLElement *el = [[DDXMLElement alloc] initWithName:elementName stringValue:@""];
+    
+    if ([elementName isEqualToString:@"span"] || [elementName isEqualToString:@"sup"] || [elementName isEqualToString:@"table"]) {
+        
+    } else {
+
+        
+        if ([elementName isEqualToString:@"p"]) {
+            BOOL _shouldAdd = TRUE;
+            
+            for (DDXMLElement *iterEl in xmlElements) {
+                if ([[iterEl name] isEqualToString:@"span"] || [[iterEl name] isEqualToString:@"sup"] || [[iterEl name] isEqualToString:@"table"]) {
+                    _shouldAdd = FALSE;
+                }
+            }   
+            
+            if (_shouldAdd)
+                [self.formattedWiki addChild:el];
+        }
+        else if ([xmlElements count] > 0)
+            [((DDXMLElement *)[xmlElements lastObject]) addChild:el];
+        else 
+            [xmlElements addObject:el];
+    }
+    
+    [xmlElements addObject:el];
+    
+    
+}
+
+- (void) parser:(NSXMLParser *)parser foundCharacters:(NSString *) characters {
+
+    DDXMLElement *el = (DDXMLElement *)[xmlElements lastObject];
+    [el setStringValue:[NSString stringWithFormat:@"%@%@", el.stringValue, characters]];
+
+}
+
+- (void) parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {
+    [xmlElements removeLastObject];
+   
+    
+    if ([elementName isEqualToString:@"p"]) {
+        _paragraphsParsed ++;
+        if (_paragraphsParsed >= 5) {
+            [parser abortParsing];
+            [self parserDidEndDocument:parser];
+        }
+    }
+
+
+}
+
+
+
 
 
 @end

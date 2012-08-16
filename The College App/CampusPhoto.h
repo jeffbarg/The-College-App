@@ -2,14 +2,14 @@
 //  CampusPhoto.h
 //  The College App
 //
-//  Created by Jeffrey Barg on 7/31/12.
+//  Created by Jeffrey Barg on 8/15/12.
 //  Copyright (c) 2012 Fructose Tech, LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class PhotoData, Visit;
+@class College, PhotoData;
 
 @interface CampusPhoto : NSManagedObject
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) id thumbnailImage;
 @property (nonatomic, retain) NSNumber * uploaded;
+@property (nonatomic, retain) College *college;
 @property (nonatomic, retain) PhotoData *photoData;
 
 @end

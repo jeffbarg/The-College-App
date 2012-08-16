@@ -7,6 +7,9 @@
 
 #import "KSCustomPopoverBackgroundView.h"
 #import "UIImage+UIImage_StandardFeatures.h"
+
+#import <QuartzCore/QuartzCore.h>
+
 // Predefined arrow image width and height
 #define ARROW_WIDTH 34.0
 #define ARROW_HEIGHT 18.0
@@ -89,6 +92,12 @@
         
         self.arrowImageView = [[UIImageView alloc] init];
         [self addSubview:self.arrowImageView];
+        
+        [self.layer setShadowColor:[UIColor blackColor].CGColor];
+        [self.layer setShadowOffset:CGSizeMake(0.0, 5.0)];
+        [self.layer setShadowRadius:20.0];
+        [self.layer setShadowOpacity:0.5];
+         
     }
     
     return self;

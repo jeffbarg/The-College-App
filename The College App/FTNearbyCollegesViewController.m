@@ -43,6 +43,7 @@
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
+        self.title = @"Nearby";
     }
     return self;
 }
@@ -89,7 +90,6 @@
     
     [_refreshHeaderView setStartLoading:self.tableView];
     
-    self.title = @"Nearby Colleges";
     
 }
 
@@ -344,7 +344,6 @@
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
 	
 	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-	
 }
 
 

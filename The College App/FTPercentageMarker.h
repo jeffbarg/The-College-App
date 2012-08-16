@@ -11,7 +11,10 @@
 @interface FTPercentageMarker : UIView
 
 @property (nonatomic) CGFloat percent;
+@property (nonatomic, strong) NSString * centerText;
 @property (nonatomic, strong) NSString * leftText;
 @property (nonatomic, strong) NSString * rightText;
+@property (nonatomic, strong) UIColor *leftColor;
+@property (nonatomic, strong) UIColor *rightColor;
 
 @end

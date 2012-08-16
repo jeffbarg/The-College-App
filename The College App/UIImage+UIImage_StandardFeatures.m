@@ -226,7 +226,6 @@
     CGColorSpaceRef colorspace = CGImageGetColorSpace(imgRef);
     context = CGBitmapContextCreate (bitmapData,bounds.size.width,bounds.size.height,8,bitmapBytesPerRow,
                                      colorspace,kCGImageAlphaPremultipliedLast);
-    CGColorSpaceRelease(colorspace);
     
     if (context == NULL)
         // error creating context

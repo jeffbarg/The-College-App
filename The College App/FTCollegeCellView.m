@@ -15,7 +15,7 @@
 #define LEFTBAR_MARGIN 30
 
 #define HOLE_RADIUS 4.0
-#define NUM_HOLES 4
+#define NUM_HOLES 0
 #define HOLE_TOP_MARGIN 15.0
 
 @interface FTCollegeCellView () {
@@ -41,7 +41,7 @@
         // Initialization code
         
         self.opaque = NO;
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = kViewBackgroundColor;
         
         UIColor *greenColor = [UIColor colorWithRed:0.157 green:0.490 blue:0.000 alpha:1.000];
         
@@ -93,7 +93,7 @@
     
     [self.titleLabel setFrame:CGRectMake(X_MARGIN + LEFTBAR_MARGIN, Y_MARGIN, self.bounds.size.width - 2 * X_MARGIN - LEFTBAR_MARGIN, 20.0)];
         
-    [self.subtitleLabel setFrame:CGRectMake(0, 0, self.bounds.size.height - 20.0, LEFTBAR_MARGIN)];
+    [self.subtitleLabel setFrame:CGRectMake(0, 0, self.bounds.size.height - 20.0, LEFTBAR_MARGIN - 10.0)];
     [self.subtitleLabel setTransform:CGAffineTransformMakeRotation(degreesToRadians(-90))];
     [self.subtitleLabel setCenter:CGPointMake(1.0 + LEFTBAR_MARGIN / 2.0, self.bounds.size.height / 2.0)];
     
@@ -151,6 +151,9 @@
         sidebarColor = [UIColor colorWithHue:0.563 saturation:0.929 brightness:0.494 alpha:1.000];
     }
         
+    [self.subtitleLabel setBackgroundColor:sidebarColor];
+    
+    
     [sidebarColor setFill];
     [leftSidebarPath fill];
     

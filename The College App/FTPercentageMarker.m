@@ -13,6 +13,9 @@
 @synthesize percent;
 @synthesize leftText;
 @synthesize rightText;
+@synthesize leftColor;
+@synthesize rightColor;
+@synthesize centerText;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -36,18 +39,33 @@
     [path fill];
     
     CGFloat radius = self.bounds.size.height / 2.0;
-    UIBezierPath  *bezierPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(radius, radius)];
-    [bezierPath addClip];
-        
+    UIBezierPath  *bezierPath = [UIBezierPath bezierPathWithRoundedRect:CGRectInset(self.bounds,0.5,0.5) byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(radius, radius)];
+            
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    [[UIColor colorWithHue:0.270 saturation:0.726 brightness:0.573 alpha:1.000] setFill];
-    CGContextFillRect(ctx, CGRectMake(0, 0, self.percent * self.bounds.size.width, self.bounds.size.height));
-    [[UIColor colorWithHue:0.000 saturation:0.000 brightness:0.275 alpha:1.000] setFill];
-    CGContextFillRect(ctx, CGRectMake(self.percent * self.bounds.size.width, 0, self.bounds.size.width - self.percent * self.bounds.size.width, self.bounds.size.height));
-    
-    [[UIColor whiteColor] setFill];
-    [@"9%" drawInRect:CGRectInset(self.bounds, 0,6) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+    CGContextSaveGState(ctx); {
+            
+        [bezierPath addClip];
+
+        [rightColor setFill];
+        CGContextFillRect(ctx, self.bounds);
+        
+        [leftColor setFill];
+        CGContextFillRect(ctx, CGRectMake(0, 0, self.percent * self.bounds.size.width, self.bounds.size.height));
+
+        
+        [[UIColor whiteColor] setFill];
+        [self.centerText drawInRect:CGRectIntegral(CGRectInset(self.bounds, 0,6)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        
+        [self.leftText drawInRect:CGRectIntegral(CGRectInset(CGRectMake(0, 0, self.frame.size.width / 2.0, self.frame.size.height), 0,6)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        
+        [self.rightText drawInRect:CGRectIntegral(CGRectInset(CGRectMake(self.frame.size.width / 2.0, 0, self.frame.size.width / 2.0, self.frame.size.height), 0,6)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+
+    } CGContextRestoreGState(ctx);
+
+    [[UIColor colorWithWhite:0.5 alpha:1.0] setStroke];
+    [bezierPath setLineWidth:1.0];
+    [bezierPath stroke];
 }
 
 

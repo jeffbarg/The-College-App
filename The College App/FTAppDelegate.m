@@ -17,8 +17,6 @@
 #import "TestSection.h"
 
 
-#import <AWSiOSSDK/AmazonLogger.h>
-
 @implementation FTAppDelegate
 
 @synthesize window = _window;
@@ -33,7 +31,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [self setupAmazon];
-    //[self initializeData];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"FIRST_TIME"] == nil)
+        [self initializeData];
     [self configureAppearance];
     [self setupUUID];
     
@@ -156,11 +155,7 @@
 
 - (void) setupAmazon {
     // Logging Control - Do NOT use logging for non-development builds.
-#ifdef DEBUG
-    [AmazonLogger verboseLogging];
-#else
-    [AmazonLogger turnLoggingOff];
-#endif
+
 }
 
 - (void) setupUUID {
@@ -173,12 +168,15 @@
         NSString * newUUID =  (__bridge_transfer NSString *)string;
         
         [defaults setValue:newUUID forKey:kUUIDKeyDefaults];
-        
+
         [defaults synchronize];
     }
 }
 
 - (void) initializeData {
+    NSUserDefaults * defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:@"OVER" forKey:@"FIRST_TIME"];
+    [defaults synchronize];
     
     for (int i = 0; i < 3; i ++) {
         StandardizedTest *sat = [NSEntityDescription insertNewObjectForEntityForName:@"StandardizedTest" inManagedObjectContext:self.managedObjectContext];
