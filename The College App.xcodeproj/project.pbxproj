@@ -54,10 +54,6 @@
 		7B35F90915AE274F00EFFFE8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B35F90815AE274F00EFFFE8 /* MapKit.framework */; };
 		7B35F90D15AE276E00EFFFE8 /* photos.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F90C15AE276E00EFFFE8 /* photos.png */; };
 		7B35F90F15AE277B00EFFFE8 /* notes.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B35F90E15AE277A00EFFFE8 /* notes.png */; };
-		7B3A16AA15DB0FEE005F5FF7 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A16A915DB0FEE005F5FF7 /* Icon~ipad.png */; };
-		7B3A16B215DB17C1005F5FF7 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A16B115DB17C0005F5FF7 /* Icon~ipad@2x.png */; };
-		7B3A16B415DB17CF005F5FF7 /* Icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A16B315DB17CF005F5FF7 /* Icon~iphone.png */; };
-		7B3A16B615DB17D4005F5FF7 /* Icon~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B3A16B515DB17D4005F5FF7 /* Icon~iphone@2x.png */; };
 		7B48487315B93B8A00F4FE9F /* FTStandardizedTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B48487215B93B8A00F4FE9F /* FTStandardizedTestView.m */; };
 		7B4B6FF915D42F8200E7E7F4 /* wikifalloff.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B4B6FF815D42F8200E7E7F4 /* wikifalloff.png */; };
 		7B51E36915A8CAF1002F2A2E /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B51E36515A8CAF1002F2A2E /* cancel.png */; };
@@ -233,6 +229,11 @@
 		7BA8D38715DDA55100C2C3C8 /* collegelistaddedalt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D38615DDA55100C2C3C8 /* collegelistaddedalt@2x.png */; };
 		7BA8D38915DDA55F00C2C3C8 /* collegelistnotadded.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D38815DDA55F00C2C3C8 /* collegelistnotadded.png */; };
 		7BA8D38B15DDA56D00C2C3C8 /* collegelistnotadded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D38A15DDA56D00C2C3C8 /* collegelistnotadded@2x.png */; };
+		7BA8D38D15DDFE8800C2C3C8 /* iphonetab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D38C15DDFE8800C2C3C8 /* iphonetab@2x.png */; };
+		7BA8D38F15DE094E00C2C3C8 /* Icon~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D38E15DE094E00C2C3C8 /* Icon~iphone.png */; };
+		7BA8D39115DE095700C2C3C8 /* Icon~iphone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D39015DE095700C2C3C8 /* Icon~iphone@2x.png */; };
+		7BA8D39315DE096300C2C3C8 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D39215DE096300C2C3C8 /* Icon~ipad.png */; };
+		7BA8D39515DE096C00C2C3C8 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BA8D39415DE096C00C2C3C8 /* Icon~ipad@2x.png */; };
 		7BB0CAFE15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7BB0CAFD15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib */; };
 		7BB0CB0115D2C3B00028B732 /* FTInfoScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB0CB0015D2C3B00028B732 /* FTInfoScrollView.m */; };
 		7BB0CB0315D2D9FB0028B732 /* flippyactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BB0CB0215D2D9FB0028B732 /* flippyactive.png */; };
@@ -241,6 +242,8 @@
 		7BB663BE15AF376A00428A64 /* collegedatajuly12.json in Resources */ = {isa = PBXBuildFile; fileRef = 7BB663BD15AF376A00428A64 /* collegedatajuly12.json */; };
 		7BB8173015D2A4A30062FDD1 /* FTCampusImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8172F15D2A4A30062FDD1 /* FTCampusImageViewController.m */; };
 		7BB8173115D2A4A30062FDD1 /* FTCampusImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8172F15D2A4A30062FDD1 /* FTCampusImageViewController.m */; };
+		7BBE7CD315E1A2ED008D43AA /* FTCollegeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE7CD215E1A2ED008D43AA /* FTCollegeListViewController.m */; };
+		7BBE7CD715E1A335008D43AA /* CollegeList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BBE7CD615E1A335008D43AA /* CollegeList.m */; };
 		7BCAA3DF15D0284A00F12FC0 /* notesnav.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCAA3DE15D0284A00F12FC0 /* notesnav.png */; };
 		7BCAA3E315D0295F00F12FC0 /* notesdoneactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCAA3E215D0295F00F12FC0 /* notesdoneactive.png */; };
 		7BCAA3E515D02ACC00F12FC0 /* notesdone.png in Resources */ = {isa = PBXBuildFile; fileRef = 7BCAA3E415D02ACC00F12FC0 /* notesdone.png */; };
@@ -324,10 +327,6 @@
 		7B35F90815AE274F00EFFFE8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		7B35F90C15AE276E00EFFFE8 /* photos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photos.png; sourceTree = "<group>"; };
 		7B35F90E15AE277A00EFFFE8 /* notes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notes.png; sourceTree = "<group>"; };
-		7B3A16A915DB0FEE005F5FF7 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon~ipad.png"; path = "../Icon~ipad.png"; sourceTree = "<group>"; };
-		7B3A16B115DB17C0005F5FF7 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon~ipad@2x.png"; path = "../Icon~ipad@2x.png"; sourceTree = "<group>"; };
-		7B3A16B315DB17CF005F5FF7 /* Icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon~iphone.png"; path = "../Icon~iphone.png"; sourceTree = "<group>"; };
-		7B3A16B515DB17D4005F5FF7 /* Icon~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon~iphone@2x.png"; path = "../Icon~iphone@2x.png"; sourceTree = "<group>"; };
 		7B48487115B93B8A00F4FE9F /* FTStandardizedTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTStandardizedTestView.h; sourceTree = "<group>"; };
 		7B48487215B93B8A00F4FE9F /* FTStandardizedTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTStandardizedTestView.m; sourceTree = "<group>"; };
 		7B4B6FF815D42F8200E7E7F4 /* wikifalloff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wikifalloff.png; sourceTree = "<group>"; };
@@ -529,6 +528,11 @@
 		7BA8D38615DDA55100C2C3C8 /* collegelistaddedalt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collegelistaddedalt@2x.png"; sourceTree = "<group>"; };
 		7BA8D38815DDA55F00C2C3C8 /* collegelistnotadded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collegelistnotadded.png; sourceTree = "<group>"; };
 		7BA8D38A15DDA56D00C2C3C8 /* collegelistnotadded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collegelistnotadded@2x.png"; sourceTree = "<group>"; };
+		7BA8D38C15DDFE8800C2C3C8 /* iphonetab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iphonetab@2x.png"; sourceTree = "<group>"; };
+		7BA8D38E15DE094E00C2C3C8 /* Icon~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iphone.png"; sourceTree = "<group>"; };
+		7BA8D39015DE095700C2C3C8 /* Icon~iphone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~iphone@2x.png"; sourceTree = "<group>"; };
+		7BA8D39215DE096300C2C3C8 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
+		7BA8D39415DE096C00C2C3C8 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad@2x.png"; sourceTree = "<group>"; };
 		7BB0CAFD15D2B7EE0028B732 /* FTCollegeInfoViewController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "FTCollegeInfoViewController~ipad.xib"; sourceTree = "<group>"; };
 		7BB0CAFF15D2C3B00028B732 /* FTInfoScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTInfoScrollView.h; sourceTree = "<group>"; };
 		7BB0CB0015D2C3B00028B732 /* FTInfoScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTInfoScrollView.m; sourceTree = "<group>"; };
@@ -538,6 +542,10 @@
 		7BB663BD15AF376A00428A64 /* collegedatajuly12.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = collegedatajuly12.json; sourceTree = "<group>"; };
 		7BB8172E15D2A4A30062FDD1 /* FTCampusImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCampusImageViewController.h; sourceTree = "<group>"; };
 		7BB8172F15D2A4A30062FDD1 /* FTCampusImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCampusImageViewController.m; sourceTree = "<group>"; };
+		7BBE7CD115E1A2ED008D43AA /* FTCollegeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTCollegeListViewController.h; sourceTree = "<group>"; };
+		7BBE7CD215E1A2ED008D43AA /* FTCollegeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTCollegeListViewController.m; sourceTree = "<group>"; };
+		7BBE7CD515E1A335008D43AA /* CollegeList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollegeList.h; sourceTree = "<group>"; };
+		7BBE7CD615E1A335008D43AA /* CollegeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollegeList.m; sourceTree = "<group>"; };
 		7BCAA3DE15D0284A00F12FC0 /* notesnav.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notesnav.png; sourceTree = "<group>"; };
 		7BCAA3E215D0295F00F12FC0 /* notesdoneactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notesdoneactive.png; sourceTree = "<group>"; };
 		7BCAA3E415D02ACC00F12FC0 /* notesdone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notesdone.png; sourceTree = "<group>"; };
@@ -823,6 +831,8 @@
 			children = (
 				7B6266CC15A7635F00A5879C /* FTCollegeSearchViewController.h */,
 				7B6266CD15A7635F00A5879C /* FTCollegeSearchViewController.m */,
+				7BBE7CD115E1A2ED008D43AA /* FTCollegeListViewController.h */,
+				7BBE7CD215E1A2ED008D43AA /* FTCollegeListViewController.m */,
 				7B51E5F115AB357B002F2A2E /* FTCollegeCellView.h */,
 				7B51E5F215AB357B002F2A2E /* FTCollegeCellView.m */,
 				7B35F8F815ADEE6800EFFFE8 /* FTCollegeInfoViewController.h */,
@@ -877,10 +887,10 @@
 		7B6266C315A75F6700A5879C /* Icons */ = {
 			isa = PBXGroup;
 			children = (
-				7B3A16B515DB17D4005F5FF7 /* Icon~iphone@2x.png */,
-				7B3A16B315DB17CF005F5FF7 /* Icon~iphone.png */,
-				7B3A16B115DB17C0005F5FF7 /* Icon~ipad@2x.png */,
-				7B3A16A915DB0FEE005F5FF7 /* Icon~ipad.png */,
+				7BA8D38E15DE094E00C2C3C8 /* Icon~iphone.png */,
+				7BA8D39015DE095700C2C3C8 /* Icon~iphone@2x.png */,
+				7BA8D39215DE096300C2C3C8 /* Icon~ipad.png */,
+				7BA8D39415DE096C00C2C3C8 /* Icon~ipad@2x.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -919,6 +929,7 @@
 				7B8EB9C415BA2F7E00DCD9E4 /* keylandscape.png */,
 				7B7B328115B48AF100625FA6 /* iphoneactivetab.png */,
 				7B7B327E15B485B400625FA6 /* iphonetab.png */,
+				7BA8D38C15DDFE8800C2C3C8 /* iphonetab@2x.png */,
 				7B51E37E15A8F4C8002F2A2E /* backselect.png */,
 				7B51E37A15A8EF43002F2A2E /* backbutton.png */,
 				7B51E36515A8CAF1002F2A2E /* cancel.png */,
@@ -1038,6 +1049,8 @@
 			isa = PBXGroup;
 			children = (
 				7B201CF615ACC68600D78D23 /* The_College_App.xcdatamodeld */,
+				7BBE7CD515E1A335008D43AA /* CollegeList.h */,
+				7BBE7CD615E1A335008D43AA /* CollegeList.m */,
 				7B89626115DC56770086858C /* CampusPhoto.h */,
 				7B89626215DC56770086858C /* CampusPhoto.m */,
 				7BD64C9815D98E2E00BE5187 /* College.h */,
@@ -1404,10 +1417,6 @@
 				7B2F707E15D46FA80051F324 /* grades@2x.png in Resources */,
 				7B2F708015D46FA80051F324 /* standardized.png in Resources */,
 				7B2F708215D46FA80051F324 /* standardized@2x.png in Resources */,
-				7B3A16AA15DB0FEE005F5FF7 /* Icon~ipad.png in Resources */,
-				7B3A16B215DB17C1005F5FF7 /* Icon~ipad@2x.png in Resources */,
-				7B3A16B415DB17CF005F5FF7 /* Icon~iphone.png in Resources */,
-				7B3A16B615DB17D4005F5FF7 /* Icon~iphone@2x.png in Resources */,
 				7B89623315DB214E0086858C /* rounddelete@2x.png in Resources */,
 				7B89623615DB21A30086858C /* rounddeleteactive.png in Resources */,
 				7B89623815DB21AB0086858C /* rounddeleteactive@2x.png in Resources */,
@@ -1435,6 +1444,11 @@
 				7BA8D38715DDA55100C2C3C8 /* collegelistaddedalt@2x.png in Resources */,
 				7BA8D38915DDA55F00C2C3C8 /* collegelistnotadded.png in Resources */,
 				7BA8D38B15DDA56D00C2C3C8 /* collegelistnotadded@2x.png in Resources */,
+				7BA8D38D15DDFE8800C2C3C8 /* iphonetab@2x.png in Resources */,
+				7BA8D38F15DE094E00C2C3C8 /* Icon~iphone.png in Resources */,
+				7BA8D39115DE095700C2C3C8 /* Icon~iphone@2x.png in Resources */,
+				7BA8D39315DE096300C2C3C8 /* Icon~ipad.png in Resources */,
+				7BA8D39515DE096C00C2C3C8 /* Icon~ipad@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1558,6 +1572,8 @@
 				7B89624415DC2D350086858C /* FTSearchNearbySchoolsViewController.m in Sources */,
 				7B89626315DC56770086858C /* CampusPhoto.m in Sources */,
 				7B89626615DC5E070086858C /* FTRatingsCell.m in Sources */,
+				7BBE7CD315E1A2ED008D43AA /* FTCollegeListViewController.m in Sources */,
+				7BBE7CD715E1A335008D43AA /* CollegeList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

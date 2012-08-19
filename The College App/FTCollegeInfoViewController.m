@@ -296,8 +296,8 @@
     
     FTPercentageMarker *maleFemaleRatio = [[FTPercentageMarker alloc] initWithFrame:CGRectMake(20.0, 64.0 + 7.0, self.acceptanceRateContainerView.frame.size.width - 40.0, 30.0)];
     [maleFemaleRatio setPercent:[[self.school enrolledMen] doubleValue] / [[self.school enrolledTotal] doubleValue]];
-    [maleFemaleRatio setLeftColor:[UIColor colorWithRed:0.192 green:0.341 blue:1.000 alpha:1.000]];
-    [maleFemaleRatio setRightColor:[UIColor colorWithRed:0.886 green:0.114 blue:1.000 alpha:1.000]];
+    [maleFemaleRatio setLeftColor:[UIColor colorWithRed:0.024 green:0.329 blue:0.647 alpha:1.000]];
+    [maleFemaleRatio setRightColor:[UIColor colorWithRed:0.514 green:0.792 blue:1.000 alpha:1.000]];
     [maleFemaleRatio setLeftText:[NSString stringWithFormat:@"%i%%", (NSInteger)(maleFemaleRatio.percent*100.0)]];
     [maleFemaleRatio setRightText:[NSString stringWithFormat:@"%i%%", 100 - (NSInteger)(maleFemaleRatio.percent*100.0)]];
       

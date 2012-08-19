@@ -9,15 +9,20 @@
 #import "FTAddStandardizedTestViewController.h"
 #import "ELTextFieldTableViewCell.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 @interface FTAddStandardizedTestViewController () {
     NSInteger _selectedIndex;
 }
+
+@property (nonatomic, strong) NSArray *testButtons;
 
 @end
 
 @implementation FTAddStandardizedTestViewController
 
 @synthesize managedObjectContext;
+@synthesize testButtons;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -57,6 +62,29 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UIColor *gradeButtonColor = [UIColor colorWithHue:0.583 saturation:0.049 brightness:0.322 alpha:1.000];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 60.0)];
+    
+    NSMutableArray *mButtonArray = [[NSMutableArray alloc] initWithCapacity:4];
+    for (int i = 0; i < 4; i ++) {
+        UIButton *button = [[UIButton alloc] initWithFrame:CGRectZero];
+        [button setTitle:[NSString stringWithFormat:@"%i", i + 9] forState:UIControlStateNormal]; // 9 Through 12
+        [button setTitleColor:gradeButtonColor forState:UIControlStateNormal];
+        [button.titleLabel setFont:[UIFont boldSystemFontOfSize:16.0]];
+        [button setShowsTouchWhenHighlighted:YES];
+        
+        [button.layer setBorderColor:kAddViewBorderColor.CGColor];
+        [button.layer setBorderWidth:1.0];
+        
+        [button addTarget:self action:@selector(selectYear:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerView addSubview:button];
+        [mButtonArray addObject:button];
+    }
+    
+    self.testButtons = [[NSArray alloc] initWithArray:mButtonArray];
 }
 
 - (void)didReceiveMemoryWarning

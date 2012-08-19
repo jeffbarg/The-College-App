@@ -57,13 +57,13 @@
         [[UIColor whiteColor] setFill];
         [self.centerText drawInRect:CGRectIntegral(CGRectInset(self.bounds, 0,6)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
         
-        [self.leftText drawInRect:CGRectIntegral(CGRectInset(CGRectMake(0, 0, self.frame.size.width / 2.0, self.frame.size.height), 0,6)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        [self.leftText drawInRect:CGRectIntegral(CGRectInset(CGRectMake(0, 0, self.frame.size.width * self.percent, self.frame.size.height), 0,5)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
         
-        [self.rightText drawInRect:CGRectIntegral(CGRectInset(CGRectMake(self.frame.size.width / 2.0, 0, self.frame.size.width / 2.0, self.frame.size.height), 0,6)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
+        [self.rightText drawInRect:CGRectIntegral(CGRectInset(CGRectMake(self.frame.size.width * self.percent, 0, self.frame.size.width - self.frame.size.width * self.percent, self.frame.size.height), 0,5)) withFont:[UIFont boldSystemFontOfSize:16.0] lineBreakMode:UILineBreakModeClip alignment:UITextAlignmentCenter];
 
     } CGContextRestoreGState(ctx);
 
-    [[UIColor colorWithWhite:0.5 alpha:1.0] setStroke];
+    [[UIColor colorWithWhite:0.60 alpha:1.0] setStroke];
     [bezierPath setLineWidth:1.0];
     [bezierPath stroke];
 }

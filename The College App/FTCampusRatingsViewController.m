@@ -26,6 +26,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Ratings" image:[UIImage imageNamed:@"ratings.png"] tag:511];
+        self.tabBarItem = tabBarItem;
     }
     return self;
 }

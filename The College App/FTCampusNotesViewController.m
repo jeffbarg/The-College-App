@@ -33,7 +33,8 @@
 
         [self.textView setAutoresizingMask:UIViewAutoresizingNone];
         
-        
+        UITabBarItem *tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Notes" image:[UIImage imageNamed:@"notes.png"] tag:511];
+        self.tabBarItem = tabBarItem;
     }
     return self;
 }

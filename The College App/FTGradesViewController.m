@@ -158,6 +158,8 @@
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
     
     if (INTERFACE_IS_PAD) {
+        [navController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        
         UIPopoverController *pController = [[UIPopoverController alloc] initWithContentViewController:navController];
         [pController setPopoverContentSize:CGSizeMake(320.0, 484.0)];
         
@@ -166,7 +168,7 @@
         [pController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         
     } else {
-        [navController.navigationBar setBackgroundImage:[UIImage imageNamed:@"blacknavbar.png"] forBarMetrics:UIBarMetricsDefault];
+
         [self presentModalViewController:navController animated:YES];
     }
 }

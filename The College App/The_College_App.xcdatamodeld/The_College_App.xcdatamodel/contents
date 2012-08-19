@@ -65,8 +65,8 @@
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CampusPhoto" inverseName="college" inverseEntity="CampusPhoto" syncable="YES"/>
         <relationship name="ratings" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CampusRating" inverseName="college" inverseEntity="CampusRating" syncable="YES"/>
     </entity>
-    <entity name="CollegeList" syncable="YES">
-        <relationship name="colleges" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="College" inverseName="collegeList" inverseEntity="College" syncable="YES"/>
+    <entity name="CollegeList" representedClassName="CollegeList" syncable="YES">
+        <relationship name="colleges" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="College" inverseName="collegeList" inverseEntity="College" syncable="YES"/>
     </entity>
     <entity name="Extracurricular" representedClassName="Extracurricular" syncable="YES">
         <attribute name="dateCreated" optional="YES" attributeType="Date" syncable="YES"/>
@@ -110,11 +110,11 @@
         <element name="CampusPhoto" positionX="-243" positionY="663" width="128" height="135"/>
         <element name="CampusRating" positionX="-378" positionY="657" width="128" height="90"/>
         <element name="College" positionX="160" positionY="192" width="128" height="765"/>
+        <element name="CollegeList" positionX="160" positionY="192" width="128" height="60"/>
         <element name="Extracurricular" positionX="160" positionY="192" width="128" height="165"/>
         <element name="Grade" positionX="160" positionY="192" width="128" height="135"/>
         <element name="PhotoData" positionX="160" positionY="192" width="128" height="75"/>
         <element name="StandardizedTest" positionX="153" positionY="405" width="128" height="135"/>
         <element name="TestSection" positionX="394" positionY="342" width="128" height="135"/>
-        <element name="CollegeList" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>

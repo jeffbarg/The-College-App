@@ -69,22 +69,24 @@
 }
 
 - (void) setEditing:(BOOL)editing animated:(BOOL)animated {
-    if (editing) {
-        deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(self.testView.frame.origin.x, CGRectGetMinY(self.testView.frame) + CGRectGetHeight(self.testView.frame)/2.0 - 13.0, 25, 26.0)];
-        [deleteButton setBackgroundImage:[UIImage imageNamed:@"rounddelete.png"] forState:UIControlStateNormal];
-        [self addSubview: deleteButton];
-        
-        
-        [UIView animateWithDuration:0.4 animations:^{
-            [self.testView setFrame:CGRectMake(2 * MARGIN_X + 80.0 + SIDE_PEEK, MARGIN_Y, self.frame.size.width - 140.0, self.frame.size.height - 2 * MARGIN_Y)];
-        }];
-    } else {
-        [UIView animateWithDuration:0.4 animations:^{
-            [self.testView setFrame:CGRectMake(2 * MARGIN_X + 80.0, MARGIN_Y, self.frame.size.width - 140.0, self.frame.size.height - 2 * MARGIN_Y)];
-        } completion:^(BOOL finished) {
-            [self.deleteButton removeFromSuperview];
-        }];
-    }
+    [super setEditing:editing animated:YES];
+    
+//    if (editing) {
+//        deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(self.testView.frame.origin.x, CGRectGetMinY(self.testView.frame) + CGRectGetHeight(self.testView.frame)/2.0 - 13.0, 25, 26.0)];
+//        [deleteButton setBackgroundImage:[UIImage imageNamed:@"rounddelete.png"] forState:UIControlStateNormal];
+//        [self addSubview: deleteButton];
+//        
+//        
+//        [UIView animateWithDuration:0.4 animations:^{
+//            [self.testView setFrame:CGRectMake(2 * MARGIN_X + 80.0 + SIDE_PEEK, MARGIN_Y, self.frame.size.width - 140.0, self.frame.size.height - 2 * MARGIN_Y)];
+//        }];
+//    } else {
+//        [UIView animateWithDuration:0.4 animations:^{
+//            [self.testView setFrame:CGRectMake(2 * MARGIN_X + 80.0, MARGIN_Y, self.frame.size.width - 140.0, self.frame.size.height - 2 * MARGIN_Y)];
+//        } completion:^(BOOL finished) {
+//            [self.deleteButton removeFromSuperview];
+//        }];
+//    }
 }
 
 - (void) didAddSubview:(UIView *)subview {
